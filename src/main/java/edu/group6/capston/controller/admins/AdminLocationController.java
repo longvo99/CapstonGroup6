@@ -10,4 +10,9 @@ public class AdminLocationController {
 	public String Index() {
 		return "admin.location.index";
 	}
+	
+	@RequestMapping(value ="/location1")
+	public String Location() {
+		return "admin.location.index";
+	}
 }
