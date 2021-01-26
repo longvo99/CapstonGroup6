@@ -1,0 +1,7 @@
+.error {
+	color: #5a5c69;
+	position: relative;
+	line-height: 1;
+	font-size: inherit !important;;
+	width: 100% !important;
+}

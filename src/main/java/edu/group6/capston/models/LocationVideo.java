@@ -1,19 +1,38 @@
 package edu.group6.capston.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+@Entity
+@Table(name = "LocationVideo")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Entity
-@Table(name = "LocationVideo")
 public class LocationVideo {
+	@Id
+	@Column
 	private int locationVideoId;
+	@Column
 	private String lVideoPath;
-	private String lVideoAlt;
+	@Column
+	private String lVideoAtl;
+	public String getlVideoPath() {
+		return lVideoPath;
+	}
+	public void setlVideoPath(String lVideoPath) {
+		this.lVideoPath = lVideoPath;
+	}
+	public String getlVideoAtl() {
+		return lVideoAtl;
+	}
+	public void setlVideoAtl(String lVideoAtl) {
+		this.lVideoAtl = lVideoAtl;
+	}
 }

@@ -79,10 +79,11 @@
 
 
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
-			<version>5.2.6.RELEASE</version>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>mssql-jdbc</artifactId>
+			<version>6.2.2.jre8</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
@@ -115,7 +116,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>5.4.2.Final</version>
+			<version>5.3.7.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>

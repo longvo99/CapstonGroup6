@@ -4,15 +4,14 @@
       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 	<!-- admin -->
-	<definition name="templates.admin" template="/WEB-INF/templates/admin/partials/master.jsp">
-		<put-attribute name="admin-footer" value="/WEB-INF/templates/admin/partials/_footer.jsp" />
-		<put-attribute name="admin-navbar" value="/WEB-INF/templates/admin/partials/_navbar.jsp" />
-		<put-attribute name="admin-sidebar" value="/WEB-INF/templates/admin/partials/_sidebar.jsp" />
-		<put-attribute name="admin-purchase-banner" value="/WEB-INF/templates/admin/partials/purchase-banner.jsp" />
+	<definition name="templates.admin" template="/WEB-INF/templates/admin/inc/master.jsp">
+		<put-attribute name="admin-footer" value="/WEB-INF/templates/admin/inc/footer.jsp" />
+		<put-attribute name="admin-topbar" value="/WEB-INF/templates/admin/inc/topbar.jsp" />
+		<put-attribute name="admin-sidebar" value="/WEB-INF/templates/admin/inc/sidebar.jsp" />
 	</definition>
 	 
-	<definition name="admin.location.index" extends="templates.admin">
-		<put-attribute name="admin-content" value="/WEB-INF/views/admin/index/index.jsp" />
+	<definition name="admin.user.index" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/user/index.jsp" />
 	</definition>
 	<!--
 	<definition name="public.cat" extends="templates.public">
