@@ -17,9 +17,9 @@
   <link href="${pageContext.request.contextPath}/resources/admin/assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
   <script src="${pageContext.request.contextPath}/resources/admin/assets/vendor/jquery/jquery.min.js"></script>
   <!-- JVALIDATE -->
-  <script src="<%=request.getContextPath()%>/lib/js/jquery.validate.min.js"></script>
+  <script src="${pageContext.request.contextPath}/lib/js/jquery.validate.min.js"></script>
   <!-- CKEDITOR -->
-  <script src="<%=request.getContextPath()%>/lib/ckeditor/ckeditor.js"></script>
+  <script src="${pageContext.request.contextPath}/lib/ckeditor/ckeditor.js"></script>
   <style type="text/css">
 		#form .form-group label span.error {color: red; font-size: 20px;} 
 		#form .form-group label span.label {
@@ -36,7 +36,7 @@
   <div id="wrapper">
     <!-- Sidebar -->
     <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<%=request.getContextPath() %>/admin">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${pageContext.request.contextPath}/admin">
         <div class="sidebar-brand-icon">
           <img src="${pageContext.request.contextPath}/resources/admin/assets/img/logo/logo3.png" width="50px">
         </div>
@@ -44,7 +44,7 @@
       </a>
       <hr class="sidebar-divider my-0">
       <li class="nav-item active">
-        <a class="nav-link" href="<%=request.getContextPath() %>/admin">
+        <a class="nav-link" href="${pageContext.request.contextPath}/admin">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Trang chủ</span></a>
       </li>
@@ -56,14 +56,15 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
           aria-expanded="true" aria-controls="collapseBootstrap">
           <i class="far fa-fw fa-window-maximize"></i>
-          <span>Quản lý bài viết</span>
+          <span>Quản lý Locations</span>
         </a>
         <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Quản lý bài viết</h6>
-            <a class="collapse-item" href="<%=request.getContextPath() %>/admin/cat/index">Danh mục</a>
-            <a class="collapse-item" href="<%=request.getContextPath() %>/admin/news/index">Tin tức</a>
-            <a class="collapse-item" href="dropdowns.html">Bình luận</a>
+            <h6 class="collapse-header">Quản lý Locations</h6>
+            <a class="collapse-item" href="<%=request.getContextPath() %>/admin/location/index">Location</a>
+            <a class="collapse-item" href="<%=request.getContextPath() %>/admin/news/index">Location Types</a>
+            <a class="collapse-item" href="dropdowns.html">Location Categories</a>
+            <a class="collapse-item" href="dropdowns.html">Location Videos</a>
           </div>
         </div>
       </li>
@@ -74,7 +75,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<%=request.getContextPath()%>/admin/contact/index">
+        <a class="nav-link" href="${pageContext.request.contextPath}/admin/contact/index">
           <i class="fas fa-fw fa-palette"></i>
           <span>Quản lý liên hệ</span>
         </a>
@@ -92,7 +93,7 @@
         <div id="collapsePage" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Quản lý thông tin</h6>
-            <a class="collapse-item" href="<%=request.getContextPath()%>/admin/info/index">Thông tin</a>
+            <a class="collapse-item" href="${pageContext.request.contextPath}/admin/info/index">Thông tin</a>
             <a class="collapse-item" href="register.html">Kỹ năng</a>
             <a class="collapse-item" href="404.html">Dự án</a>
             <a class="collapse-item" href="blank.html">Chặng đường</a>

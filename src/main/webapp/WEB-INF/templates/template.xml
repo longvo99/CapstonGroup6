@@ -13,6 +13,16 @@
 	<definition name="admin.user.index" extends="templates.admin">
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/user/index.jsp" />
 	</definition>
+	<!-- ADMIN LOCATIONS  -->
+	<definition name="admin.location.index" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/location/index.jsp" />
+	</definition>
+	<definition name="admin.location.add" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/location/add.jsp" />
+	</definition>
+	<definition name="admin.location.edit" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/location/edit.jsp" />
+	</definition>
 	<!--
 	<definition name="public.cat" extends="templates.public">
 		<put-attribute name="content" value="/WEB-INF/views/public/cat.jsp" />
