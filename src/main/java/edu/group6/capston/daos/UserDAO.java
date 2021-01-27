@@ -26,7 +26,7 @@ public class UserDAO{
 
 	public List<LocationVideo> findAll() {
 		Session session = this.sessionFactory.openSession();
-		List<LocationVideo> list = (List<LocationVideo>) session.createQuery("from LocationVideo").list();
+		List<LocationVideo> list = session.createQuery("FROM LocationVideo", LocationVideo.class).getResultList();
 		List<LocationVideo> result = list;
 		return result;
 	}

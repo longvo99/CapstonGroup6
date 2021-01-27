@@ -20,19 +20,8 @@ public class LocationVideo {
 	@Column
 	private int locationVideoId;
 	@Column
-	private String lVideoPath;
+	private String locationVideoPath;
 	@Column
-	private String lVideoAtl;
-	public String getlVideoPath() {
-		return lVideoPath;
-	}
-	public void setlVideoPath(String lVideoPath) {
-		this.lVideoPath = lVideoPath;
-	}
-	public String getlVideoAtl() {
-		return lVideoAtl;
-	}
-	public void setlVideoAtl(String lVideoAtl) {
-		this.lVideoAtl = lVideoAtl;
-	}
+	private String locationVideoAtl;
+	
 }

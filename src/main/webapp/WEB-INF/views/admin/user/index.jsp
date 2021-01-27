@@ -37,8 +37,8 @@
 						<c:set var="urlDel" value="${contentPath}/del/${user.locationVideoId}" />
 						<tr class="odd gradeX">
 							<td>${user.locationVideoId}</td>
-							<td>${user.lVideoPath}</td>
-							<td>${user.lVideoAtl}</td>
+							<td>${user.locationVideoPath}</td>
+							<td>${user.locationVideoAtl}</td>
 							<td class="center text-center">
 								<a href="${urlEdit}" title="Sửa" class="btn btn-primary"><span class="glyphicon glyphicon-pencil "></span> Sửa</a>
                                    <a href="${urlDel}" title="Xóa" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Xóa</a>
