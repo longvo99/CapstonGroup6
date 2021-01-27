@@ -1,5 +1,6 @@
 package edu.group6.capston.controller.admins;
 
+<<<<<<< HEAD
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,10 +12,17 @@ import edu.group6.capston.services.LocationService;
 import edu.group6.capston.utils.GlobalsConstant;
 import edu.group6.capston.utils.PaginationUtil;
 
+=======
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+>>>>>>> c6976bf55988db4b634060c5430a5db014b8b548
 @Controller
 @RequestMapping("admin/location")
 public class AdminLocationController {
 	
+<<<<<<< HEAD
 	@Autowired
 	private LocationService locationService;
 	
@@ -60,4 +68,20 @@ public class AdminLocationController {
 		return "admin.location.detele";
 	}
 	
+=======
+	
+	@RequestMapping(value ="/index")
+	public String Index(Model model) {
+		return "admin.location.index";
+	}
+	@RequestMapping(value ="/edit")
+	public String edit() {
+		return "admin.location.edit";
+	}
+	@RequestMapping(value ="/add")
+	public String add() {
+		return "admin.location.add";
+	}
+	
+>>>>>>> c6976bf55988db4b634060c5430a5db014b8b548
 }
