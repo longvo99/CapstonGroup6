@@ -124,10 +124,7 @@
             </div>
           </div>
           <!--Row-->
-			
           <!-- Documentation Link -->
-          
-
         </div>
         <!---Container Fluid-->
       </div>
