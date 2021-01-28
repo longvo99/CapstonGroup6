@@ -52,7 +52,7 @@ public class LocationServiceImpl implements LocationService {
 
 	@Override
 	public int totalRow() {
-		return LocationDAO.totalRow();
+		return 1;
 	}
 
 }

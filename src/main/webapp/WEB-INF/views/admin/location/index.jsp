@@ -22,42 +22,35 @@
                   </div>
                 </div>
                 <div class="table-responsive p-3">
+                <c:if test="${not empty locationList}">
                   <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                     <thead class="thead-light">
                       <tr>
                         <th>ID</th>
                         <th>Name</th>
                         <th>Category</th>
-                        <th>Chức năng</th>
+                        <th class="center text-center">Chức năng</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <%-- <c:forEach items="${userList}" var="user">
-						<c:set var="urlEdit" value="${contentPath}/edit/${user.locationVideoId}" />
-						<c:set var="urlDel" value="${contentPath}/del/${user.locationVideoId}" />
-						<tr class="odd gradeX">
-							<td>${user.locationVideoId}</td>
-							<td>${user.locationVideoPath}</td>
-							<td>${user.locationVideoAtl}</td>
-							<td class="center text-center">
-								<a href="${urlEdit}" title="Sửa" class="btn btn-primary"><span class="glyphicon glyphicon-pencil "></span> Edit</a>
-                                   <a href="${urlDel}" title="Xóa" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</a>
-							</td>
-						</tr>
-					  </c:forEach> --%>
+					  <c:forEach items="${locationList}" var="location">
 					  	<tr class="odd gradeX">
-							<td>a</td>
-							<td>b</td>
-							<td>c</td>
+							<td>${location.locationId}</td>
+							<td>${location.locationName}</td>
+							<td>${location.categoryId}</td>
 							<td class="center text-center">
 								<a href="" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-sm btn-success"><i class="fa fa-edit"> Detail </i></a>
 								<a href="" class="btn btn-sm btn-primary"><i class="fa fa-edit"> Edit </i></a>
                                 <a href=""  class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa không');"><i class="fas fa-trash"> Xóa </i></a>
 							</td>
 						</tr>
-						<!-- <tr>
+					  </c:forEach>
+					</c:if>
+					<c:if test="${empty locationList}">
+						<tr>
 							<td colspan="4" align="center">Chưa có người dùng nào!</td>
-						</tr> -->
+						</tr>
+					</c:if>
 						<!-- Modal Center -->
 			          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
 			            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

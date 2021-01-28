@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import edu.group6.capston.services.LocationService;
-import edu.group6.capston.utils.GlobalsConstant;
 import edu.group6.capston.utils.PaginationUtil;
 
 @Controller
@@ -19,7 +18,6 @@ public class AdminLocationController {
 	
 	@RequestMapping(value = { "/index/{page}", "/index" })
 	public String Index(Model model, @PathVariable(required = false, name = "page") Integer page) {
-		model.addAttribute("locationList" , locationService.findAll());
 		// current page, if page = null set page = 1
 		if (page == null) {
 			page = 1;
@@ -27,10 +25,8 @@ public class AdminLocationController {
 		// get offset: offset = (currentPage - 1) * row_count
 		int offset = PaginationUtil.getOffset(page);
 		// pageinate
-		int totalRow = locationService.totalRow();
-		int totalPage = (int) Math.ceil((float) totalRow / GlobalsConstant.LIMIT_PAGE);
-		model.addAttribute("totalPage", totalPage);
-		model.addAttribute("listLand", locationService.findAll(offset, GlobalsConstant.LIMIT_PAGE));
+		model.addAttribute("locationList", locationService.findAll());
+		//model.addAttribute("locationList", locationService.findAll());
 		model.addAttribute("page", page);
 		return "admin.location.index";
 	}

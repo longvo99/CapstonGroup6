@@ -8,6 +8,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import edu.group6.capston.models.Location;
 import edu.group6.capston.models.LocationVideo;
 
 @Repository
@@ -26,8 +27,8 @@ public class UserDAO{
 
 	public List<LocationVideo> findAll() {
 		Session session = this.sessionFactory.openSession();
-		List<LocationVideo> list = session.createQuery("FROM LocationVideo", LocationVideo.class).getResultList();
-		List<LocationVideo> result = list;
+		List<LocationVideo> result = session.createQuery("FROM LocationVideo", LocationVideo.class).getResultList();
+		System.out.println("size" + result.size());
 		return result;
 	}
 }

@@ -2,6 +2,7 @@ package edu.group6.capston.daos;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -15,9 +16,9 @@ public class LocationDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-
+	
 	public boolean save(Location location) {
-		try (Session session = this.sessionFactory.openSession()) {
+		try (Session session = this.sessionFactory.openSession();) {
 			Transaction tx = session.beginTransaction();
 			session.persist(location);
 			tx.commit();
@@ -29,7 +30,7 @@ public class LocationDAO {
 	}
 
 	public boolean update(Location location) {
-		try (Session session = this.sessionFactory.openSession()) {
+		try (Session session = this.sessionFactory.openSession();) {
 			Transaction tx = session.beginTransaction();
 			session.update(location);
 			tx.commit();
@@ -42,8 +43,8 @@ public class LocationDAO {
 
 	public List<Location> findAll() {
 		Session session = this.sessionFactory.openSession();
-		List<Location> result = session.createQuery("FROM Location", Location.class).getResultList();
-		return result;
+		Criteria criteria = session.createCriteria(Location.class);
+		return criteria.list();
 	}
 
 	public Location findById(int id) {
@@ -64,13 +65,11 @@ public class LocationDAO {
 	}
 
 	public List<Location> findAll(int offset, int limit) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public int totalRow() {
-		// TODO Auto-generated method stub
-		return 0;
+		Session session = this.sessionFactory.openSession();
+		Criteria criteria = session.createCriteria(Location.class);
+		criteria.setFirstResult(offset);
+		criteria.setMaxResults(limit);
+		return criteria.list();
 	}
 
 }

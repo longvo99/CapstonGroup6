@@ -7,6 +7,6 @@ public class GlobalsConstant {
 	public static String MESSAGE = "msg";
 	public static String ERROR_USERNAME = "errorUsername";
 	public static String ERROR_NAME = "errorName";
-	public static int LIMIT_PAGE = 3;
+	public static int LIMIT_PAGE = 2;
 	public static String DIR_UPLOAD = "WEB-INF/uploads";
 }
