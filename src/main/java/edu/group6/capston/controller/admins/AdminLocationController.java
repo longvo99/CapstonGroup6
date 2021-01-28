@@ -16,18 +16,9 @@ public class AdminLocationController {
 	@Autowired
 	private LocationService locationService;
 	
-	@RequestMapping(value = { "/index/{page}", "/index" })
-	public String Index(Model model, @PathVariable(required = false, name = "page") Integer page) {
-		// current page, if page = null set page = 1
-		if (page == null) {
-			page = 1;
-		}
-		// get offset: offset = (currentPage - 1) * row_count
-		int offset = PaginationUtil.getOffset(page);
-		// pageinate
+	@RequestMapping("/index")
+	public String Index(Model model) {
 		model.addAttribute("locationList", locationService.findAll());
-		//model.addAttribute("locationList", locationService.findAll());
-		model.addAttribute("page", page);
 		return "admin.location.index";
 	}
 	
