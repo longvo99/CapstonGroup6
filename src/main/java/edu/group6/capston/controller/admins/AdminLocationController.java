@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import edu.group6.capston.services.LocationService;
-import edu.group6.capston.utils.PaginationUtil;
 
 @Controller
 @RequestMapping("admin/location")
