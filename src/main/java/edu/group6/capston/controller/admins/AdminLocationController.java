@@ -17,7 +17,7 @@ public class AdminLocationController {
 	
 	@GetMapping("/index")
 	public String Index(Model model) {
-		//model.addAttribute("locationList", locationService.findAll());
+		model.addAttribute("locationList", locationService.findAll());
 		return "admin.location.index";
 	}
 	
