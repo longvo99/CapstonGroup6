@@ -3,6 +3,8 @@ package edu.group6.capston.models;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -14,7 +16,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Location {
+public class Location{
+	/**
+	 * 
+	 */
 	@Id
 	@Column
 	private int locationId;
@@ -28,10 +33,12 @@ public class Location {
 	private String closeTime;
 	@Column
 	private int reviewCount;
-	@Column
-	private int locationCategoryId;
-	@Column
-	private int locationTypeId;
+	@ManyToOne
+	@JoinColumn(name = "LocationCategoryId")
+	private LocationCategories locationCategories;
+	@ManyToOne
+	@JoinColumn(name = "locationTypeId")
+	private LocationTypies locationTypies;
 	@Column
 	private String ward;
 	@Column

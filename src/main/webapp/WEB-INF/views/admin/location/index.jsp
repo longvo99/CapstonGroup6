@@ -18,7 +18,7 @@
               <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <div class="col-sm-10">
-                  	<a href="${pageContext.request.contextPath}/admin/user/add" class="btn btn-success btn-md"><i class="fa fa-plus-square"> Thêm </i></a>
+                  	<a href="${pageContext.request.contextPath}/admin/location/add" class="btn btn-success btn-md"><i class="fa fa-plus-square"> Thêm </i></a>
                   </div>
                 </div>
                 <div class="table-responsive p-3">
@@ -37,20 +37,13 @@
 					  	<tr class="odd gradeX">
 							<td>${location.locationId}</td>
 							<td>${location.locationName}</td>
-							<td>${location.categoryId}</td>
+							<td>${location.locationCategoryName}</td>
 							<td class="center text-center">
 								<a href="" data-toggle="modal" data-target="#exampleModalCenter${location.locationId}" class="btn btn-sm btn-success"><i class="fa fa-edit"> Detail </i></a>
-								<a href="" class="btn btn-sm btn-primary"><i class="fa fa-edit"> Edit </i></a>
-                                <a href=""  class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa không');"><i class="fas fa-trash"> Xóa </i></a>
+								<a href="${pageContext.request.contextPath}/admin/location/edit" class="btn btn-sm btn-primary"><i class="fa fa-edit"> Edit </i></a>
+                                <a href="${pageContext.request.contextPath}/admin/location/delete"  class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa không');"><i class="fas fa-trash"> Xóa </i></a>
 							</td>
 						</tr>
-					  </c:forEach>
-					</c:if>
-					<c:if test="${empty locationList}">
-						<tr>
-							<td colspan="4" align="center">Chưa có người dùng nào!</td>
-						</tr>
-					</c:if>
 						<!-- Modal Center -->
 			          <div class="modal fade" id="exampleModalCenter${location.locationId}" tabindex="-1" role="dialog"
 			            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -70,7 +63,7 @@
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="address">Address</label>
-					                      <input class="form-control mb-3" type="text" value="" id="${location.address}" name="address">
+					                      <input class="form-control mb-3" type="text" value="${location.address}" id="address" name="address">
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="opentime">Open Time</label>
@@ -78,19 +71,19 @@
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="closetime">Close Time</label>
-					                      <input class="form-control mb-3" type="text" value="" id="${location.closeTime}" name="closetime">
+					                      <input class="form-control mb-3" type="text" value="${location.closeTime}" id="closetime" name="closetime">
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="locationcategory">Location Category</label>
-					                      <input class="form-control mb-3" type="text" value="" id="${location.locationName}" name="locationcategory">
+					                      <input class="form-control mb-3" type="text" value="${location.locationCategoryName}" id="locationcategory" name="locationcategory">
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="locationtype">Location Type</label>
-					                      <input class="form-control mb-3" type="text" value="" id="${location.locationTypeId}" name="locationtype">
+					                      <input class="form-control mb-3" type="text" value="${location.locationTypeName}" id="locationtype" name="locationtype">
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="ward">Ward</label>
-					                      <input class="form-control mb-3" type="text" value="" id="${location.ward}" name="ward">
+					                      <input class="form-control mb-3" type="text" value="${location.ward}" id="ward" name="ward">
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="district">District</label>
@@ -110,8 +103,15 @@
 			            </div>
 			          </div>
 			          <!-- Modal Center -->
+			          </c:forEach>
                     </tbody>
                   </table>
+                  </c:if>
+                  <c:if test="${empty locationList}">
+						<tr>
+							<td colspan="4" align="center">Chưa có người dùng nào!</td>
+						</tr>
+				  </c:if>
                 </div>
               </div>
             </div>

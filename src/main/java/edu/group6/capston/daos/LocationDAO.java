@@ -2,13 +2,18 @@ package edu.group6.capston.daos;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Root;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import edu.group6.capston.dtos.LocationDTO;
 import edu.group6.capston.models.Location;
 
 @Repository
@@ -41,10 +46,41 @@ public class LocationDAO {
 		}
 	}
 
-	public List<Location> findAll() {
+	public List<LocationDTO> findAll() {
+		List<LocationDTO> locationList = null;
 		Session session = this.sessionFactory.openSession();
-		Criteria criteria = session.createCriteria(Location.class);
-		return criteria.list();
+		Transaction transaction = session.beginTransaction();
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<LocationDTO> query = builder.createQuery(LocationDTO.class);
+		Root<Location> root = query.from(Location.class);
+		System.out.println("aaâa");
+		root.join("locationCategories", JoinType.INNER);
+		root.join("locationTypies", JoinType.INNER);
+		System.out.println("bbbb");
+		query.select(builder.construct(LocationDTO.class,
+			root.get("locationId"),
+			root.get("locationName"),
+			root.get("address"),
+			root.get("openTime"),
+			root.get("closeTime"),
+			root.get("reviewCount"),
+			root.get("locationCategories").get("locationCategoryId"),
+			root.get("locationCategories").get("locationCategoryName"),
+			root.get("locationTypies").get("locationTypeName"),
+			root.get("ward"),
+			root.get("district"),
+			root.get("city"),
+			root.get("country"),
+			root.get("categoryId"),
+			root.get("discountId"),
+			root.get("locationVideoId"),
+			root.get("productId"),
+			root.get("ratingId")
+		));
+		locationList = session.createQuery(query).getResultList();
+		transaction.commit();
+		session.close();
+		return locationList;
 	}
 
 	public Location findById(int id) {
@@ -63,13 +99,4 @@ public class LocationDAO {
 			return false;
 		}
 	}
-
-	public List<Location> findAll(int offset, int limit) {
-		Session session = this.sessionFactory.openSession();
-		Criteria criteria = session.createCriteria(Location.class);
-		criteria.setFirstResult(offset);
-		criteria.setMaxResults(limit);
-		return criteria.list();
-	}
-
 }

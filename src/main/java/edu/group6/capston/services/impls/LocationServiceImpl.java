@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.group6.capston.daos.LocationDAO;
+import edu.group6.capston.dtos.LocationDTO;
 import edu.group6.capston.models.Location;
 import edu.group6.capston.services.LocationService;
 
@@ -15,7 +16,7 @@ public class LocationServiceImpl implements LocationService {
 	private LocationDAO LocationDAO;
 	
 	@Override
-	public List<Location> findAll() {
+	public List<LocationDTO> findAll() {
 		return LocationDAO.findAll();
 	}
 
@@ -43,16 +44,6 @@ public class LocationServiceImpl implements LocationService {
 	@Override
 	public Location findUserId(int id) {
 		return LocationDAO.findById(id);
-	}
-
-	@Override
-	public List<Location> findAll(int offset, int limit) {
-		return LocationDAO.findAll(offset, limit);
-	}
-
-	@Override
-	public int totalRow() {
-		return 1;
 	}
 
 }

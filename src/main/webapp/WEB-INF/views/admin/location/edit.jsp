@@ -13,27 +13,6 @@
               <li class="breadcrumb-item active" aria-current="page">Forms</li>
             </ol>
           </div>
-		<%-- <%
-        	String name = "";
-        	String preview = "";
-        	String detail = "";
-        	String picture = "";
-        	int catId = 0;
-            	if(request.getAttribute("objNews") != null){
-	        		News objNews = (News) request.getAttribute("objNews");
-	        		name = objNews.getName();
-       	   			preview = objNews.getPreview();
-       	    		detail = objNews.getDetail();
-       	    		picture = objNews.getPicture();
-       	    		catId = objNews.getCat().getId();
-	             }
-               	if(request.getParameter("msg") != null){
-               		int code = Integer.parseInt(request.getParameter("msg"));
-               		switch(code){
-               			case 0: out.print(CodeMessageUtil.displayMessage2(out, "Có lỗi khi sửa")); break;
-               		}
-                }
-        %> --%>
           <div class="row">
             <div class="col-lg-12">
               <!-- Form Basic -->

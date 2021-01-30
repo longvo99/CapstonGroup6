@@ -33,10 +33,10 @@ public class AdminLocationController {
 		return "admin.location.add";
 	}
 	
-	@RequestMapping(value ="/update")
-	public String Update(Model model) {
+	@RequestMapping(value ="/edit")
+	public String Edit(Model model) {
 		model.addAttribute("locationList" , locationService.findAll());
-		return "admin.location.update";
+		return "admin.location.edit";
 	}
 	
 	@RequestMapping(value ="/detele")
