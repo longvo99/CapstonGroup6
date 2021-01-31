@@ -23,8 +23,10 @@ public class LocationDAO {
 	private SessionFactory sessionFactory;
 	
 	public boolean save(Location location) {
-		try (Session session = this.sessionFactory.openSession();) {
-			Transaction tx = session.beginTransaction();
+		Session session = this.sessionFactory.openSession();
+		Transaction tx = null;
+		try{
+			tx = session.beginTransaction();
 			session.persist(location);
 			tx.commit();
 			session.close();
@@ -53,10 +55,8 @@ public class LocationDAO {
 		CriteriaBuilder builder = session.getCriteriaBuilder();
 		CriteriaQuery<LocationDTO> query = builder.createQuery(LocationDTO.class);
 		Root<Location> root = query.from(Location.class);
-		System.out.println("aaâa");
 		root.join("locationCategories", JoinType.INNER);
 		root.join("locationTypies", JoinType.INNER);
-		System.out.println("bbbb");
 		query.select(builder.construct(LocationDTO.class,
 			root.get("locationId"),
 			root.get("locationName"),
@@ -89,8 +89,10 @@ public class LocationDAO {
 	}
 
 	public boolean delete(Location location) {
-		try (Session session = this.sessionFactory.openSession()) {
-			Transaction tx = session.beginTransaction();
+		Session session = this.sessionFactory.openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
 			session.delete(location);
 			tx.commit();
 			session.close();

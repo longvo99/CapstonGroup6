@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.group6.capston.daos.UserDAO;
-import edu.group6.capston.models.LocationVideo;
+import edu.group6.capston.dtos.UserDTO;
 import edu.group6.capston.services.UserService;
 
 @Service
@@ -15,7 +15,7 @@ public class UserServiceImpl implements UserService {
 	private UserDAO UserDAO;
 	
 	@Override
-	public List<LocationVideo> findAll() {
+	public List<UserDTO> findAll() {
 		return UserDAO.findAll();
 	}
 	/*
