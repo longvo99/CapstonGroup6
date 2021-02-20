@@ -13,6 +13,27 @@
               <li class="breadcrumb-item active" aria-current="page">Forms</li>
             </ol>
           </div>
+		<%-- <%
+        	String name = "";
+        	String preview = "";
+        	String detail = "";
+        	String picture = "";
+        	int catId = 0;
+            	if(request.getAttribute("objNews") != null){
+	        		News objNews = (News) request.getAttribute("objNews");
+	        		name = objNews.getName();
+       	   			preview = objNews.getPreview();
+       	    		detail = objNews.getDetail();
+       	    		picture = objNews.getPicture();
+       	    		catId = objNews.getCat().getId();
+	             }
+               	if(request.getParameter("msg") != null){
+               		int code = Integer.parseInt(request.getParameter("msg"));
+               		switch(code){
+               			case 0: out.print(CodeMessageUtil.displayMessage2(out, "Có lỗi khi sửa")); break;
+               		}
+                }
+        %> --%>
           <div class="row">
             <div class="col-lg-12">
               <!-- Form Basic -->
@@ -20,11 +41,11 @@
                 <div class="card-body">
                   <form role="form" method="post" enctype="multipart/form-data" id="form">
                   	<div class="form-group">
-                      <label for="name">Tài khoản</label>
+                      <label for="name">Location Name</label>
                       <input class="form-control mb-3" type="text" value="" id="name" name="name">
                     </div>
                     <div class="form-group">
-                      <label for="address">Địa chỉ</label>
+                      <label for="address">Address</label>
                       <input class="form-control mb-3" type="text" value="" id="address" name="address">
                     </div>
                     <div class="form-group">

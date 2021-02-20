@@ -9,9 +9,15 @@
 		<put-attribute name="admin-topbar" value="/WEB-INF/templates/admin/inc/topbar.jsp" />
 		<put-attribute name="admin-sidebar" value="/WEB-INF/templates/admin/inc/sidebar.jsp" />
 	</definition>
-	 
+	<!-- ADMIN USER  -->
 	<definition name="admin.user.index" extends="templates.admin">
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/user/index.jsp" />
+	</definition>
+	<definition name="admin.user.edit" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/user/edit.jsp" />
+	</definition>
+	<definition name="admin.user.add" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/user/add.jsp" />
 	</definition>
 	<!-- ADMIN LOCATIONS  -->
 	<definition name="admin.location.index" extends="templates.admin">
@@ -22,6 +28,13 @@
 	</definition>
 	<definition name="admin.location.edit" extends="templates.admin">
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/location/edit.jsp" />
+	</definition>
+	<!-- ADMIN LOCATIONTYPES  -->
+	<definition name="admin.locationType.index" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/locationType/index.jsp" />
+	</definition>
+	<definition name="admin.locationType.add" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/locationType/add.jsp" />
 	</definition>
 	<!--
 	<definition name="public.cat" extends="templates.public">

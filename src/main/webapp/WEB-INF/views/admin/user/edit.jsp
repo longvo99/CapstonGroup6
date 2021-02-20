@@ -7,7 +7,7 @@
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="m-0 font-weight-bold text-primarys">Add location</h1>
+            <h1 class="m-0 font-weight-bold text-primarys">Edit location</h1>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="./">Home</a></li>
               <li class="breadcrumb-item active" aria-current="page">Forms</li>
@@ -20,20 +20,20 @@
                 <div class="card-body">
                   <form role="form" method="post" enctype="multipart/form-data" id="form">
                   	<div class="form-group">
-                      <label for="name">Tài khoản</label>
-                      <input class="form-control mb-3" type="text" value="" id="name" name="name">
+                      <label for="name">Location Name</label>
+                      <input class="form-control mb-3" type="text" value="${location.locationName}" id="name" name="name">
                     </div>
                     <div class="form-group">
-                      <label for="address">Địa chỉ</label>
-                      <input class="form-control mb-3" type="text" value="" id="address" name="address">
+                      <label for="address">Address</label>
+                      <input class="form-control mb-3" type="text" value="${location.address}" id="address" name="address">
                     </div>
                     <div class="form-group">
                       <label for="opentime">Open Time</label>
-                      <input class="form-control mb-3" type="time" value="" id="opentime" name="opentime">
+                      <input class="form-control mb-3" type="time" value="${location.address}" id="opentime" name="opentime">
                     </div>
                     <div class="form-group">
                       <label for="closetime">Close Time</label>
-                      <input class="form-control mb-3" type="time" value="" id="closetime" name="closetime">
+                      <input class="form-control mb-3" type="time" value="${location.address}" id="closetime" name="closetime">
                     </div>
                     <div class="form-group">
                       <label for="locationcategory">Location Category</label>

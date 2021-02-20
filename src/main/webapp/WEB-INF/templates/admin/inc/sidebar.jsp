@@ -62,9 +62,9 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Quản lý Locations</h6>
             <a class="collapse-item" href="<%=request.getContextPath() %>/admin/location/index">Location</a>
-            <a class="collapse-item" href="<%=request.getContextPath() %>/admin/news/index">Location Types</a>
-            <a class="collapse-item" href="dropdowns.html">Location Categories</a>
-            <a class="collapse-item" href="dropdowns.html">Location Videos</a>
+            <a class="collapse-item" href="<%=request.getContextPath() %>/admin/locationType/index">Location Types</a>
+            <a class="collapse-item" href="<%=request.getContextPath() %>/admin/locationCategory/index">Location Categories</a>
+            <a class="collapse-item" href="<%=request.getContextPath() %>/admin/locationVideo/index">Location Videos</a>
           </div>
         </div>
       </li>

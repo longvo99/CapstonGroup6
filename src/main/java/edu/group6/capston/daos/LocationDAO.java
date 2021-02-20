@@ -22,7 +22,7 @@ public class LocationDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	public boolean save(Location location) {
+	public boolean save(LocationDTO location) {
 		Session session = this.sessionFactory.openSession();
 		Transaction tx = null;
 		try{
@@ -66,6 +66,7 @@ public class LocationDAO {
 			root.get("reviewCount"),
 			root.get("locationCategories").get("locationCategoryId"),
 			root.get("locationCategories").get("locationCategoryName"),
+			root.get("locationTypies").get("locationTypeId"),
 			root.get("locationTypies").get("locationTypeName"),
 			root.get("ward"),
 			root.get("district"),

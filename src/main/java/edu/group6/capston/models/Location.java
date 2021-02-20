@@ -17,9 +17,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class Location{
-	/**
-	 * 
-	 */
 	@Id
 	@Column
 	private int locationId;
@@ -38,7 +35,7 @@ public class Location{
 	private LocationCategories locationCategories;
 	@ManyToOne
 	@JoinColumn(name = "locationTypeId")
-	private LocationTypies locationTypies;
+	private LocationTypes locationTypies;
 	@Column
 	private String ward;
 	@Column

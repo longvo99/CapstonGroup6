@@ -7,7 +7,7 @@ import edu.group6.capston.models.Location;;
 
 public interface LocationService {
 	List<LocationDTO> findAll();
-	boolean save(Location location);
+	boolean save(LocationDTO location);
 	boolean update(Location location);
 	boolean delete(Location location);
 	Location findUserId(int id);
