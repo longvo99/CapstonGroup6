@@ -1,6 +1,8 @@
 package edu.group6.capston.controller.admins;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,7 +23,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.group6.capston.dtos.LocationDTO;
+import edu.group6.capston.models.LocationCategories;
+import edu.group6.capston.models.LocationTypes;
+import edu.group6.capston.services.LocationCategoriesService;
 import edu.group6.capston.services.LocationService;
+import edu.group6.capston.services.LocationTypeService;
 import edu.group6.capston.utils.GlobalsConstant;
 import edu.group6.capston.utils.UploadFile;
 
@@ -33,6 +40,10 @@ public class AdminLocationController {
 	
 	@Autowired
 	private LocationService locationService;
+	@Autowired
+	private LocationCategoriesService locationCategoriesService;
+	@Autowired
+	private LocationTypeService locationTypesService;
 	
 	@GetMapping("/index")
 	public String Index(Model model) {
@@ -46,8 +57,22 @@ public class AdminLocationController {
 		return "admin.detail.detail";
 	}
 	
-	@RequestMapping(value ="/add")
-	public String Add() {
+	@GetMapping("add")
+	public String add(ModelMap modelMap) {
+		List<LocationCategories> locationCategoriesList = locationCategoriesService.findAll();
+		List<LocationTypes> locationTypesList = locationTypesService.findAll();
+		List<LocationCategories> locationCategoriesList1 = new ArrayList<LocationCategories>();
+		List<LocationCategories> locationCategoriesList2 = new ArrayList<LocationCategories>();
+		for (LocationCategories locationCategories : locationCategoriesList) {
+			if(locationCategories.getParentId() == locationCategories.getLocationCategoryId()){
+				locationCategoriesList1.add(locationCategories);
+			} else {
+				locationCategoriesList2.add(locationCategories);
+			}
+		}
+		modelMap.addAttribute("locationCategoriesList1", locationCategoriesList1);
+		modelMap.addAttribute("locationCategoriesList2", locationCategoriesList2);
+		modelMap.addAttribute("locationTypesList", locationTypesList);
 		return "admin.location.add";
 	}
 	
