@@ -9,5 +9,4 @@ public interface LocationTypeService {
 	boolean save(LocationTypes locationType);
 	boolean update(LocationTypes locationType);
 	boolean delete(Integer id);
-	LocationTypes findUserId(int id);
 }

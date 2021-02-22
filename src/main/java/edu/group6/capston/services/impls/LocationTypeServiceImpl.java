@@ -40,10 +40,4 @@ public class LocationTypeServiceImpl implements LocationTypeService {
 			return true;
 		return false;
 	}
-
-	@Override
-	public LocationTypes findUserId(int id) {
-		return locationTypeDAO.findById(id);
-	}
-
 }
