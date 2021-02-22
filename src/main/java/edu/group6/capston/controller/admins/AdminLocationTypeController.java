@@ -1,8 +1,10 @@
 package edu.group6.capston.controller.admins;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +64,7 @@ public class AdminLocationTypeController {
 	
 	@PostMapping(value ="/edit")
 	public String Edit(@Valid @ModelAttribute("location") LocationTypes locationTypes, BindingResult br, RedirectAttributes rd,
-			HttpServletRequest request, Model model) {
+			HttpServletRequest request, Model model) throws UnsupportedEncodingException {
 		if (br.hasErrors()) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
 			return "admin.locationType.index";
