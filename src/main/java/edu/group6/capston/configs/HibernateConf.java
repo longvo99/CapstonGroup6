@@ -32,17 +32,6 @@ public class HibernateConf {
 		return sessionFactory;
 	}
 
-	/*
-	 * @Bean public DataSource dataSource() { DriverManagerDataSource dataSource =
-	 * new DriverManagerDataSource();
-	 * dataSource.setDriverClassName(environment.getRequiredProperty(
-	 * "jdbc.driverClassName"));
-	 * dataSource.setUrl(environment.getRequiredProperty("jdbc.url"));
-	 * dataSource.setUsername(environment.getRequiredProperty("jdbc.username"));
-	 * dataSource.setPassword(environment.getRequiredProperty("jdbc.password"));
-	 * return dataSource; }
-	 */
-
 	@Bean
 	public DataSource dataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
@@ -69,13 +58,5 @@ public class HibernateConf {
 		transactionManager.setSessionFactory(sessionFactory().getObject());
 		return transactionManager;
 	}
-
-	/*
-	 * private final Properties hibernateProperties() { Properties
-	 * hibernateProperties = new Properties();
-	 * hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
-	 * hibernateProperties.setProperty("hibernate.dialect",
-	 * "org.hibernate.dialect.H2Dialect"); return hibernateProperties; }
-	 */
 
 }
