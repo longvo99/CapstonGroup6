@@ -13,6 +13,7 @@
               <li class="breadcrumb-item active" aria-current="page">Forms</li>
             </ol>
           </div>
+
           <div class="row">
             <div class="col-lg-12">
               <!-- Form Basic -->
@@ -20,11 +21,11 @@
                 <div class="card-body">
                   <form role="form" method="post" enctype="multipart/form-data" id="form">
                   	<div class="form-group">
-                      <label for="name">Tài khoản</label>
+                      <label for="name">Location Name</label>
                       <input class="form-control mb-3" type="text" value="" id="name" name="name">
                     </div>
                     <div class="form-group">
-                      <label for="address">Địa chỉ</label>
+                      <label for="address">Address</label>
                       <input class="form-control mb-3" type="text" value="" id="address" name="address">
                     </div>
                     <div class="form-group">
@@ -38,22 +39,27 @@
                     <div class="form-group">
                       <label for="locationcategory">Location Category</label>
                       <select class="form-control" id="locationcategory" name="locationcategory">
-						<%-- <%
-                        	if(request.getAttribute("listCat") != null){
-                         		ArrayList<Category> listCat= (ArrayList<Category>) request.getAttribute("listCat");
-                          		if(listCat.size() >0 ){
-                          			for(Category objCat : listCat){
-                      	%>    
-                       	<% if(objCat.getId() == catId){ %>  
-                        	<option selected="selected" value="<%=objCat.getId()%>"><%=objCat.getName() %></option>
-                        <%} else { %>  
-                        	<option value="<%=objCat.getId()%>"><%=objCat.getName() %></option>
-						<%}}}} %> --%>
+	                      <c:if test="${not empty locationCategoriesList1}">
+	                      	<c:forEach items="${locationCategoriesList1}" var="cat1">
+	                      	<optgroup label="${cat1.locationCategoryName}">
+							        <c:forEach items="${locationCategoriesList2}" var="cat2">
+							        <c:if test="${cat2.parentId eq cat1.locationCategoryId}">
+								        <option>${cat2.locationCategoryName}</option>
+								    </c:if>
+								    </c:forEach>
+							</optgroup>    
+							 </c:forEach>
+						  </c:if>
                       </select>
                     </div>
                     <div class="form-group">
                       <label for="locationtype">Location Type</label>
                       <select class="form-control" id="locationtype" name="locationtype">
+                      <c:if test="${not empty locationTypesList}">
+                      	<c:forEach items="${locationTypesList}" var="type">
+							<option value="${type.locationTypeId}">${type.locationTypeName}</option>
+						 </c:forEach>
+					  </c:if>
                       </select>
                     </div>
                     <div class="form-group">
@@ -73,19 +79,12 @@
                     </div>
                     <div class="form-group">
                       <label for="country">Country</label>
-                      <select class="form-control" id=""country"" name=""country"">
+                      <select class="form-control" id="country" name="country">
                       </select>
                     </div>
                     <div class="form-group">
 	                  <label for="picture">Hình ảnh</label>
 	                  <input type="file" name="picture" />
-	                  <%-- <% if(!"".equals(picture)) { %>
-	                      <br/>
-	                      <img width="200px" height="200px" alt="Ảnh"
-	                      src="<%=request.getContextPath()%>/templates/admin/img/<%=picture %>">
-                      <%} else { %>
-                     	 <p style="color: red">Không có hình ảnh!</p>
-                      <%} %> --%>
                     </div>
                     <button type="submit" class="btn btn-primary" name="submit">Sửa</button>
                   </form>
