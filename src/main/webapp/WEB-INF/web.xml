@@ -8,11 +8,7 @@
 		<error-code>400</error-code>
 		<location>/anews/index</location>
 	</error-page> -->
-<<<<<<< Updated upstream
 	<filter>
-=======
-	<!-- <filter>
->>>>>>> Stashed changes
         <filter-name>encoding-filter</filter-name>
         <filter-class>
             org.springframework.web.filter.CharacterEncodingFilter
@@ -30,7 +26,6 @@
     <filter-mapping>
         <filter-name>encoding-filter</filter-name>
         <url-pattern>/*</url-pattern>
-<<<<<<< Updated upstream
     </filter-mapping>
     
     <jsp-config>
@@ -39,14 +34,4 @@
 		<page-encoding>UTF-8</page-encoding>
 	</jsp-property-group>
 </jsp-config>	
-=======
-    </filter-mapping> -->
-    
-    <!-- <jsp-config>
-        <jsp-property-group>
-            <url-pattern>*.jsp</url-pattern>
-            <page-encoding>UTF-8</page-encoding>
-        </jsp-property-group>
-    </jsp-config>	 -->
->>>>>>> Stashed changes
 </web-app>
