@@ -7,7 +7,7 @@
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="./">Home</a></li>
               <li class="breadcrumb-item">Tables</li>
-              <li class="breadcrumb-item active" aria-current="page">DataTables</li>
+              <li class="breadcrumb-item active" aria-current="page">DataTables</li>	
             </ol>
           </div>
           <!-- Row -->
@@ -40,7 +40,7 @@
 							<td>${location.locationCategoryName}</td>
 							<td class="center text-center">
 								<a href="" data-toggle="modal" data-target="#exampleModalCenter${location.locationId}" class="btn btn-sm btn-success"><i class="fa fa-edit"> Detail </i></a>
-								<a href="${pageContext.request.contextPath}/admin/location/edit" class="btn btn-sm btn-primary"><i class="fa fa-edit"> Edit </i></a>
+								<a href="" data-toggle="modal" data-target="#exampleModalCenter${location.locationId}" class="btn btn-sm btn-primary"><i class="fa fa-edit"> Edit </i></a>
                                 <a href="${pageContext.request.contextPath}/admin/location/delete"  class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa không');"><i class="fas fa-trash"> Xóa </i></a>
 							</td>
 						</tr>
@@ -57,9 +57,14 @@
 			                </div>
 			                <div class="modal-body">
 			                	<div class="comment-form">
+				                	<form action="${pageContext.request.contextPath}/admin/location/edit" method="POST">
+										<div class="form-group">
+					                      <label for="name">Location ID</label>
+					                      <input class="form-control mb-3" type="text" value="${location.locationId}" id="locationId" name="locationId">
+					                    </div>
 										<div class="form-group">
 					                      <label for="name">Location Name</label>
-					                      <input class="form-control mb-3" type="text" value="${location.locationName}" id="name" name="name">
+					                      <input class="form-control mb-3" type="text" value="${location.locationName}" id="locationName" name="locationName">
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="address">Address</label>
@@ -97,6 +102,7 @@
 					                      <label for="country">Country</label>
 					                      <input class="form-control mb-3" type="text" value="${location.country}" id="country" name="country">
 					                    </div>
+									</form>
 								</div>
 			                </div>
 			              </div>
