@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/templates/tags/taglib.jsp" %>
-	<script type="text/javascript" src="http://example.com/jquery.min.js"></script>
-	<script type="text/javascript" src="http://example.com/image-uploader.min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="https://www.codehim.com/demo/jquery-image-uploader-preview-and-delete/dist/image-uploader.min.js"></script>
 	<div id="content-wrapper" class="d-flex flex-column">
       <div id="content">
         <%-- <%@ include file="/templates/admin/inc/topbar.jsp" %> --%>
@@ -21,7 +21,7 @@
               <!-- Form Basic -->
               <div class="card mb-4">
                 <div class="card-body">
-                  <form role="form" method="post" enctype="multipart/form-data" id="form">
+                  <form role="form" method="post"  name="form-example-1" id="form-example-1" enctype="multipart/form-data">
                   	<div class="form-group">
                       <label for="name">Location Name</label>
                       <input class="form-control mb-3" type="text" value="" id="name" name="name">
@@ -84,20 +84,18 @@
                       <select class="form-control" id="country" name="country">
                       </select>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
 	                  <label for="picture">Hình ảnh</label>
 	                  <input type="file" name="picture" />
-                    </div>
-                    <div class="input-images">
-	                    <div class="input-field">
-					        <label class="active">Photos</label>
-					        <div class="input-images-1" style="padding-top: .5rem;"></div>
-					    </div>
+                    </div> -->
+                    <div class="input-field">
+				        <label class="active">Photos</label>
+				        <div class="input-images-1" style="padding-top: .5rem;"></div>
 				    </div>
 				    <script type="text/javascript">
 				    	$('.input-images-1').imageUploader();
 				    </script>
-                    <button type="submit" class="btn btn-primary" name="submit">Sửa</button>
+                    <button type="submit" class="btn btn-primary" name="submit">Thêm mới</button>
                   </form>
                 </div>
               </div>
