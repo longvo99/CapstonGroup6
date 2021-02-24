@@ -28,7 +28,7 @@ public class LocationServiceImpl implements LocationService {
 	}
 
 	@Override
-	public boolean update(Location location) {
+	public boolean update(LocationDTO location) {
 		if(LocationDAO.update(location))
 			return true;
 		return false;

@@ -36,8 +36,8 @@ public class LocationDAO {
 		}
 	}
 
-	public boolean update(Location location) {
-		try (Session session = this.sessionFactory.openSession();) {
+	public boolean update(LocationDTO location) {
+		try (Session session = this.sessionFactory.openSession()) {
 			Transaction tx = session.beginTransaction();
 			session.update(location);
 			tx.commit();

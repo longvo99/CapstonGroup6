@@ -4,7 +4,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import edu.group6.capston.dtos.LocationDTO;
 import edu.group6.capston.models.LocationTypes;
 import edu.group6.capston.services.LocationTypeService;
 import edu.group6.capston.utils.GlobalsConstant;
@@ -88,7 +86,6 @@ public class AdminLocationTypeController {
 		}
 		rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("success", null, Locale.getDefault()));
 		rd.addFlashAttribute("success", true);
-		System.out.println("aaas");
 		return "redirect:/admin/locationType/index";
 	}
 }
