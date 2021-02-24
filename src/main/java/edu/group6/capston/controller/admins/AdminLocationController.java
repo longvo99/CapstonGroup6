@@ -19,7 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.group6.capston.dtos.LocationDTO;
+import edu.group6.capston.services.LocationCategoriesService;
 import edu.group6.capston.services.LocationService;
+import edu.group6.capston.services.LocationTypeService;
 import edu.group6.capston.utils.GlobalsConstant;
 
 @Controller
@@ -32,6 +34,12 @@ public class AdminLocationController {
 	@Autowired
 	private LocationService locationService;
 	
+	@Autowired
+	private LocationCategoriesService locationCategoresService;
+	
+	@Autowired
+	private LocationTypeService locationTypeService;
+	
 	@GetMapping("/index")
 	public String Index(Model model) {
 		model.addAttribute("locationList", locationService.findAll());
@@ -39,7 +47,11 @@ public class AdminLocationController {
 	}
 	
 	@RequestMapping(value ="/add")
-	public String Add() {
+	public String Add(Model model) {
+		model.addAttribute("locationCategoriesList1", locationCategoresService.findAll());
+		model.addAttribute("locationCategoriesList2", locationCategoresService.findAll());
+		model.addAttribute("locationTypeList", locationTypeService.findAll());
+		
 		return "admin.location.add";
 	}
 	
