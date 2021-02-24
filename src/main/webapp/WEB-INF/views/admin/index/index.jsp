@@ -6,7 +6,7 @@
 		<div class="row page-title-header">
 			<div class="col-12">
 				<div class="page-header">
-					<h4 class="page-title">Post management staff</h4>
+					<h4 class="page-title">Employee Management/Post management staff</h4>
 					<!-- <div class="quick-link-wrapper w-100 d-md-flex flex-md-wrap">
 						<ul class="quick-links">
 							<li><a href="#">ICE Market data</a></li>
@@ -575,52 +575,285 @@
                       </table>
                     </div> --%>
 		<!--  <a class="d-block mt-3" href="#">Show all</a> -->
-		<div>
-			<table border="1">
-				<tr>
-					<th>Name</th>
-					<td>Nguyen Van A</td>
-				</tr>
-				<tr>
-					<th>Description</th>
-					<td>HAhahahahahahhaa</td>
-				</tr>
-				<tr>
-					<th>Address</th>
-					<td>33abc</td>
-				</tr>
-			</table>
-			<button>Edit</button>
-			<table border="1">
-				<tr>
-					<th>Name</th>
-					<td>Nguyen Van A</td>
-				</tr>
-				<tr>
-					<th>Description</th>
-					<td>HAhahahahahahhaa</td>
-				</tr>
-				<tr>
-					<th>Address</th>
-					<td>33abc</td>
-				</tr>
-			</table>
-			<button>Edit</button>
-			<table border="1">
-				<tr>
-					<th>Name</th>
-					<td>Nguyen Van A</td>
-				</tr>
-				<tr>
-					<th>Description</th>
-					<td>HAhahahahahahhaa</td>
-				</tr>
-				<tr>
-					<th>Address</th>
-					<td>33abc</td>
-				</tr>
-			</table>
-			<button>Edit</button>
+		<div class="row">
+			<div>
+				<table border="1">
+					<tr>
+						<th>Name</th>
+						<td>Nguyen Van A</td>
+					</tr>
+					<tr>
+						<th>Description</th>
+						<td>HAhahahahahahhaa</td>
+					</tr>
+					<tr>
+						<th>Address</th>
+						<td>33abc</td>
+					</tr>
+				</table>
+				<button>Edit</button>
+			</div>
+			<div>
+				<table border="1">
+					<tr>
+						<th>Name</th>
+						<td>Nguyen Van A</td>
+					</tr>
+					<tr>
+						<th>Description</th>
+						<td>HAhahahahahahhaa</td>
+					</tr>
+					<tr>
+						<th>Address</th>
+						<td>33abc</td>
+					</tr>
+				</table>
+				<button>Edit</button>
+			</div>
+			<div>
+				<table border="1">
+					<tr>
+						<th>Name</th>
+						<td>Nguyen Van C</td>
+					</tr>
+					<tr>
+						<th>Description</th>
+						<td>HAhahahahahahhaa</td>
+					</tr>
+					<tr>
+						<th>Address</th>
+						<td>33abc</td>
+					</tr>
+				</table>
+				<button>Edit</button>
+			</div>
+			<div>
+				<table border="1">
+					<tr>
+						<th>Name</th>
+						<td>Nguyen Van C</td>
+					</tr>
+					<tr>
+						<th>Description</th>
+						<td>HAhahahahahahhaa</td>
+					</tr>
+					<tr>
+						<th>Address</th>
+						<td>33abc</td>
+					</tr>
+				</table>
+				<button>Edit</button>
+			</div>
+		</div>
+		<div class="row">
+			<div>
+				<table border="1">
+					<tr>
+						<th>Name</th>
+						<td>Nguyen Van A</td>
+					</tr>
+					<tr>
+						<th>Description</th>
+						<td>HAhahahahahahhaa</td>
+					</tr>
+					<tr>
+						<th>Address</th>
+						<td>33abc</td>
+					</tr>
+				</table>
+				<button>Edit</button>
+			</div>
+			<div>
+				<table border="1">
+					<tr>
+						<th>Name</th>
+						<td>Nguyen Van A</td>
+					</tr>
+					<tr>
+						<th>Description</th>
+						<td>HAhahahahahahhaa</td>
+					</tr>
+					<tr>
+						<th>Address</th>
+						<td>33abc</td>
+					</tr>
+				</table>
+				<button>Edit</button>
+			</div>
+			<div>
+				<table border="1">
+					<tr>
+						<th>Name</th>
+						<td>Nguyen Van C</td>
+					</tr>
+					<tr>
+						<th>Description</th>
+						<td>HAhahahahahahhaa</td>
+					</tr>
+					<tr>
+						<th>Address</th>
+						<td>33abc</td>
+					</tr>
+				</table>
+				<button>Edit</button>
+			</div>
+			<div>
+				<table border="1">
+					<tr>
+						<th>Name</th>
+						<td>Nguyen Van C</td>
+					</tr>
+					<tr>
+						<th>Description</th>
+						<td>HAhahahahahahhaa</td>
+					</tr>
+					<tr>
+						<th>Address</th>
+						<td>33abc</td>
+					</tr>
+				</table>
+				<button>Edit</button>
+			</div>
+		</div>
+		<div class="row">
+			<div>
+				<table border="1">
+					<tr>
+						<th>Name</th>
+						<td>Nguyen Van A</td>
+					</tr>
+					<tr>
+						<th>Description</th>
+						<td>HAhahahahahahhaa</td>
+					</tr>
+					<tr>
+						<th>Address</th>
+						<td>33abc</td>
+					</tr>
+				</table>
+				<button>Edit</button>
+			</div>
+			<div>
+				<table border="1">
+					<tr>
+						<th>Name</th>
+						<td>Nguyen Van A</td>
+					</tr>
+					<tr>
+						<th>Description</th>
+						<td>HAhahahahahahhaa</td>
+					</tr>
+					<tr>
+						<th>Address</th>
+						<td>33abc</td>
+					</tr>
+				</table>
+				<button>Edit</button>
+			</div>
+			<div>
+				<table border="1">
+					<tr>
+						<th>Name</th>
+						<td>Nguyen Van C</td>
+					</tr>
+					<tr>
+						<th>Description</th>
+						<td>HAhahahahahahhaa</td>
+					</tr>
+					<tr>
+						<th>Address</th>
+						<td>33abc</td>
+					</tr>
+				</table>
+				<button>Edit</button>
+			</div>
+			<div>
+				<table border="1">
+					<tr>
+						<th>Name</th>
+						<td>Nguyen Van C</td>
+					</tr>
+					<tr>
+						<th>Description</th>
+						<td>HAhahahahahahhaa</td>
+					</tr>
+					<tr>
+						<th>Address</th>
+						<td>33abc</td>
+					</tr>
+				</table>
+				<button>Edit</button>
+			</div>
+		</div>
+		<div class="row">
+			<div>
+				<table border="1">
+					<tr>
+						<th>Name</th>
+						<td>Nguyen Van A</td>
+					</tr>
+					<tr>
+						<th>Description</th>
+						<td>HAhahahahahahhaa</td>
+					</tr>
+					<tr>
+						<th>Address</th>
+						<td>33abc</td>
+					</tr>
+				</table>
+				<button>Edit</button>
+			</div>
+			<div>
+				<table border="1">
+					<tr>
+						<th>Name</th>
+						<td>Nguyen Van A</td>
+					</tr>
+					<tr>
+						<th>Description</th>
+						<td>HAhahahahahahhaa</td>
+					</tr>
+					<tr>
+						<th>Address</th>
+						<td>33abc</td>
+					</tr>
+				</table>
+				<button>Edit</button>
+			</div>
+			<div>
+				<table border="1">
+					<tr>
+						<th>Name</th>
+						<td>Nguyen Van C</td>
+					</tr>
+					<tr>
+						<th>Description</th>
+						<td>HAhahahahahahhaa</td>
+					</tr>
+					<tr>
+						<th>Address</th>
+						<td>33abc</td>
+					</tr>
+				</table>
+				<button>Edit</button>
+			</div>
+			<div>
+				<table border="1">
+					<tr>
+						<th>Name</th>
+						<td>Nguyen Van C</td>
+					</tr>
+					<tr>
+						<th>Description</th>
+						<td>HAhahahahahahhaa</td>
+					</tr>
+					<tr>
+						<th>Address</th>
+						<td>33abc</td>
+					</tr>
+				</table>
+				<button>Edit</button>
+			</div>
 		</div>
 	</div>
 </div>
