@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/templates/tags/taglib.jsp" %>
+	<script type="text/javascript" src="http://example.com/jquery.min.js"></script>
+	<script type="text/javascript" src="http://example.com/image-uploader.min.js"></script>
 	<div id="content-wrapper" class="d-flex flex-column">
       <div id="content">
         <%-- <%@ include file="/templates/admin/inc/topbar.jsp" %> --%>
@@ -55,8 +57,8 @@
                     <div class="form-group">
                       <label for="locationtype">Location Type</label>
                       <select class="form-control" id="locationtype" name="locationtype">
-                      <c:if test="${not empty locationTypesList}">
-                      	<c:forEach items="${locationTypesList}" var="type">
+                      <c:if test="${not empty locationTypeList}">
+                      	<c:forEach items="${locationTypeList}" var="type">
 							<option value="${type.locationTypeId}">${type.locationTypeName}</option>
 						 </c:forEach>
 					  </c:if>
@@ -86,6 +88,15 @@
 	                  <label for="picture">Hình ảnh</label>
 	                  <input type="file" name="picture" />
                     </div>
+                    <div class="input-images">
+	                    <div class="input-field">
+					        <label class="active">Photos</label>
+					        <div class="input-images-1" style="padding-top: .5rem;"></div>
+					    </div>
+				    </div>
+				    <script type="text/javascript">
+				    	$('.input-images-1').imageUploader();
+				    </script>
                     <button type="submit" class="btn btn-primary" name="submit">Sửa</button>
                   </form>
                 </div>
