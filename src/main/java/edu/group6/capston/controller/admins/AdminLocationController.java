@@ -54,7 +54,6 @@ public class AdminLocationController {
 	@GetMapping("add")
 	public String add(ModelMap modelMap) {
 		List<LocationCategories> locationCategoriesList = locationCategoriesService.findAll();
-		List<LocationTypes> locationTypesList = locationTypeService.findAll();
 		List<LocationCategories> locationCategoriesList1 = new ArrayList<LocationCategories>();
 		List<LocationCategories> locationCategoriesList2 = new ArrayList<LocationCategories>();
 		for (LocationCategories locationCategories : locationCategoriesList) {
@@ -66,7 +65,7 @@ public class AdminLocationController {
 		}
 		modelMap.addAttribute("locationCategoriesList1", locationCategoriesList1);
 		modelMap.addAttribute("locationCategoriesList2", locationCategoriesList2);
-		modelMap.addAttribute("locationTypesList", locationTypesList);
+		modelMap.addAttribute("locationTypeList", locationTypeService.findAll());
 		return "admin.location.add";
 	}
 	
