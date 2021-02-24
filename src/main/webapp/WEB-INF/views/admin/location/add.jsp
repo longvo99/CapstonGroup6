@@ -90,10 +90,10 @@
                     </div> -->
                     <div class="input-field">
 				        <label class="active">Photos</label>
-				        <div class="input-images-1" style="padding-top: .5rem;"></div>
+				        <div class="input-images" style="padding-top: .5rem;"></div>
 				    </div>
 				    <script type="text/javascript">
-				    	$('.input-images-1').imageUploader();
+				    	$('.input-images').imageUploader();
 				    </script>
                     <button type="submit" class="btn btn-primary" name="submit">Thêm mới</button>
                   </form>
