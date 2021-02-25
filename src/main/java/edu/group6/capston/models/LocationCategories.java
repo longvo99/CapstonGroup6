@@ -31,4 +31,30 @@ public class LocationCategories{
 	private int parentId;
 	@Column(nullable = true)
 	private String categoryName;
+	public int getLocationCategoryId() {
+		return locationCategoryId;
+	}
+	public void setLocationCategoryId(int locationCategoryId) {
+		this.locationCategoryId = locationCategoryId;
+	}
+	public String getLocationCategoryName() {
+		return locationCategoryName;
+	}
+	public void setLocationCategoryName(String locationCategoryName) {
+		this.locationCategoryName = locationCategoryName;
+	}
+	public int getParentId() {
+		return parentId;
+	}
+	public void setParentId(int parentId) {
+		this.parentId = parentId;
+	}
+	public String getCategoryName() {
+		return categoryName;
+	}
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+	
+	
 }

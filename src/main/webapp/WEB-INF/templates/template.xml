@@ -63,6 +63,13 @@
 	<definition name="admin.locationType.add" extends="templates.admin">
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/locationType/add.jsp" />
 	</definition>
+	<!-- ADMIN DISCOUNTS  -->
+	<definition name="admin.discount.index" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/discount/index.jsp" />
+	</definition>
+	<definition name="admin.discount.add" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/discount/add.jsp" />
+	</definition>
 	<!--
 	<definition name="public.cat" extends="templates.public">
 		<put-attribute name="content" value="/WEB-INF/views/public/cat.jsp" />

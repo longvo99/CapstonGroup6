@@ -9,11 +9,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Entity
+@Table(name = "Discounts")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Entity
-@Table(name = "Discounts")
 public class Discounts {
 	@Id
 	@Column(name="discountId")
