@@ -3,6 +3,8 @@
 <%@include file="/WEB-INF/templates/tags/taglib.jsp" %>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="https://www.codehim.com/demo/jquery-image-uploader-preview-and-delete/dist/image-uploader.min.js"></script>
+	<script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/admin/assets/js/dropdown.js"></script>
 	<div id="content-wrapper" class="d-flex flex-column">
       <div id="content">
         <%-- <%@ include file="/templates/admin/inc/topbar.jsp" %> --%>
@@ -65,23 +67,28 @@
                       </select>
                     </div>
                     <div class="form-group">
-                      <label for="ward">Ward</label>
-                      <select class="form-control" id="ward" name="ward">
-                      </select>
-                    </div>
-                    <div class="form-group">
-                      <label for="district">District</label>
-                      <select class="form-control" id="district" name="district">
-                      </select>
-                    </div>
-                    <div class="form-group">
                       <label for="city">City</label>
-                      <select class="form-control" id="city" name="city">
-                      </select>
+                      <!-- <select class="form-control" id="city" name="city"> -->
+                      <select onchange="set_country(this,country,city_state)" id="region">
+					      <option value="" selected="selected">SELECT REGION</option>
+					  </select>
+                    </div>
+                     <div class="form-group">
+                      <label for="district">District</label>
+                      <!-- <select class="form-control" id="district" name="district">
+                      </select> -->
+                      <select name="country" disabled="disabled" onchange="set_city_state(this,city_state)"></select>
+                    </div>
+                    <div class="form-group">
+                      <label for="ward">Ward</label>
+                      <!-- <select class="form-control" id="ward" name="ward">
+                      </select> -->
+                      <select name="city_state" disabled="disabled" onchange="print_city_state(country,this)"></select>
                     </div>
                     <div class="form-group">
                       <label for="country">Country</label>
                       <select class="form-control" id="country" name="country">
+                      	<option>Việt Nam</option>
                       </select>
                     </div>
                     <!-- <div class="form-group">

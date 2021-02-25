@@ -23,7 +23,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.group6.capston.dtos.LocationDTO;
 import edu.group6.capston.models.LocationCategories;
-import edu.group6.capston.models.LocationTypes;
 import edu.group6.capston.services.LocationCategoriesService;
 import edu.group6.capston.services.LocationService;
 import edu.group6.capston.services.LocationTypeService;

@@ -17,8 +17,8 @@
   <link href="${pageContext.request.contextPath}/resources/admin/assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
   <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link type="text/css" rel="stylesheet" href="https://www.codehim.com/demo/jquery-image-uploader-preview-and-delete/dist/image-uploader.min.css">
-  <script src="${pageContext.request.contextPath}/resources/admin/assets/vendor/jquery/jquery.min.js"></script>
-  <!-- JVALIDATE -->
+  <script src="${pageContext.request.contextPath}/resources/admin/assets/vendor/jquery/jquery.min.js"></script> 
+ <!-- JVALIDATE -->
   <script src="${pageContext.request.contextPath}/lib/js/jquery.validate.min.js"></script>
   <!-- CKEDITOR -->
   <script src="${pageContext.request.contextPath}/lib/ckeditor/ckeditor.js"></script>
@@ -31,7 +31,10 @@
 		} 
 	</style>
 	<link href="${pageContext.request.contextPath}/resources/admin/assets/css/custom.css" rel="stylesheet" />
-	
+	<link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+	<!-- test dropdown -->
+	<!-- <meta name="apple-mobile-web-app-title" content="CodePen"> -->
+	<link rel='stylesheet' href='https://cdn.jsdelivr.net/foundation/6.1.1/foundation.min.css'>
 </head>
 
 <body id="page-top">
