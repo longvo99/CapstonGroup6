@@ -36,7 +36,7 @@
                 </div>
                 
                 <div class="table-responsive p-3">
-                <c:if test="${not empty locationTypeList}">
+                <c:if test="${not empty discountList}">
                   <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                     <thead class="thead-light">
                       <tr>
