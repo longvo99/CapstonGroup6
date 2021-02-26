@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import edu.group6.capston.models.LocationTypes;
 import edu.group6.capston.models.Roles;
-import edu.group6.capston.services.LocationTypeService;
 import edu.group6.capston.services.RoleService;
 import edu.group6.capston.utils.GlobalsConstant;
 
