@@ -36,6 +36,7 @@
 		<put-attribute name="public-content" value="/WEB-INF/views/public/cart.jsp" />
 		<put-attribute name="public-sidebar" value="" />
 	</definition>
+	
 	<!-- ADMIN USER  -->
 	<definition name="admin.user.index" extends="templates.admin">
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/user/index.jsp" />
@@ -63,12 +64,30 @@
 	<definition name="admin.locationType.add" extends="templates.admin">
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/locationType/add.jsp" />
 	</definition>
+<!-- <<<<<<< Updated upstream -->
 	<!-- ADMIN DISCOUNTS  -->
 	<definition name="admin.discount.index" extends="templates.admin">
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/discount/index.jsp" />
 	</definition>
 	<definition name="admin.discount.add" extends="templates.admin">
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/discount/add.jsp" />
+	</definition>
+	<!-- ADMIN ROLE MANAGEMENT  -->
+	<definition name="admin.role.index" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/role/index.jsp" />
+	</definition>
+	<definition name="admin.role.add" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/role/add.jsp" />
+	</definition>
+	<definition name="admin.role.edit" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/role/index.jsp" />
+	</definition>
+	<definition name="admin.role.delete" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/role/delete.jsp" />
+	</definition>
+	<definition name="admin.role.list" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/role/list.jsp" />
+<!-- >>>>>>> Stashed changes -->
 	</definition>
 	<!--
 	<definition name="public.cat" extends="templates.public">
@@ -178,4 +197,5 @@
 	</definition>
 	End Template Page error
 	-->
+	
 </tiles-definitions>
