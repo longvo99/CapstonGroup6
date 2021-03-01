@@ -3,7 +3,6 @@
 <%@include file="/WEB-INF/templates/tags/taglib.jsp" %>
 	<div id="content-wrapper" class="d-flex flex-column">
       <div id="content">
-        <%-- <%@ include file="/templates/admin/inc/topbar.jsp" %> --%>
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -25,10 +24,10 @@
                 <div class="card-body">
                   <form role="form" method="post" id="form">
                   	<div class="form-group">
-                      <label for="name">LocationType Name</label>
-                      <input class="form-control mb-3" type="text" value="${locationTypes.locationTypeName}" id="locationTypeName" name="locationTypeName">
+                      <label for="name">Tên chức vụ</label>
+                      <input class="form-control mb-3" type="text" value="${role.roleName}" id="roleName" name="roleName">
                     </div>
-                    <button type="submit" class="btn btn-primary" name="submit">Sửa</button>
+                    <button type="submit" class="btn btn-primary" name="submit">Thêm mới</button>
                   </form>
                 </div>
               </div>

@@ -42,7 +42,7 @@
 							<td>${user.phone}</td>
 							<td class="center text-center">
 								<a href="" data-toggle="modal" data-target="#exampleModalCenter${user.userId}" class="btn btn-sm btn-success"><i class="fa fa-edit"> Detail </i></a>
-								<a href="${urlEdit}" title="Sửa" class="btn btn-primary"><span class="glyphicon glyphicon-pencil "></span> Sửa</a>
+								<a href="" data-toggle="modal" data-target="#exampleModalCenter${user.userId}" class="btn btn-sm btn-primary"><i class="fa fa-edit">Edit</i></a>
                                 <a href="${urlDel}" title="Xóa" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Xóa</a>
 							</td>
 						</tr>

@@ -25,10 +25,42 @@
                 <div class="card-body">
                   <form role="form" method="post" id="form">
                   	<div class="form-group">
-                      <label for="name">LocationType Name</label>
-                      <input class="form-control mb-3" type="text" value="${locationTypes.locationTypeName}" id="locationTypeName" name="locationTypeName">
+                      <label for="name">ID</label>
+                      <input class="form-control mb-3" type="text" value="${discount.discountId}" id="discountId" name="discountId">
                     </div>
-                    <button type="submit" class="btn btn-primary" name="submit">Sửa</button>
+					<div class="form-group">
+                      <label for="name">Tiêu đề giảm giá</label>
+                      <input class="form-control mb-3" type="text" value="${discount.discountTitle}" id="discountTitle" name="discountTitle">
+                    </div>
+                    <div class="form-group">
+                      <label for="name">Mã giảm giá</label>
+                      <input class="form-control mb-3" type="text" value="${discount.codeDiscount}" id="codeDiscount" name="codeDiscount">
+                    </div>
+                    <div class="form-group">
+                      <label for="name">Mức giảm giá</label>
+                      <input class="form-control mb-3" type="text" value="${discount.rateDiscount}" id="rateDiscount" name="rateDiscount">
+                    </div>
+                    <div class="form-group">
+                      <label for="name">Mô tả</label>
+                      <input class="form-control mb-3" type="text" value="${discount.description}" id="description" name="description">
+                    </div>
+                    <div class="form-group">
+                      <label for="name">Ngày bắt đầu</label>
+                      <input class="form-control mb-3" type="text" value="${discount.startDate}" id="startDate" name="startDate">
+                    </div>
+                    <div class="form-group">
+                      <label for="name">Ngày kết thúc</label>
+                      <input class="form-control mb-3" type="text" value="${discount.endDate}" id="endDate" name="endDate">
+                    </div>
+                    <div class="form-group">
+                      <label for="name">Đơn hàng tối thiểu</label>
+                      <input class="form-control mb-3" type="text" value="${discount.minimumOrder}" id="minimumOrder" name="minimumOrder">
+                    </div>
+                    <div class="form-group">
+                      <label for="name">Hình ảnh</label>
+                      <input class="form-control mb-3" type="text" value="${discount.discountVideoId}" id="discountVideoId" name="discountVideoId">
+                    </div>
+                    <button type="submit" class="btn btn-primary" name="submit">Thêm mới</button>
                   </form>
                 </div>
               </div>

@@ -50,6 +50,11 @@ public class AdminLocationController {
 		return "admin.location.index";
 	}
 	
+	@GetMapping("/test")
+	public String test() {
+		return "admin.location.test";
+	}
+	
 	@GetMapping("add")
 	public String add(ModelMap modelMap) {
 		List<LocationCategories> locationCategoriesList = locationCategoriesService.findAll();
