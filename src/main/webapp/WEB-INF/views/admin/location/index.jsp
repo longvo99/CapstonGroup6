@@ -3,7 +3,7 @@
 <%@include file="/WEB-INF/templates/tags/taglib.jsp" %>
 	<div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h2 class="m-0 font-weight-bold text-primary">Quản lý locations</h2>
+            <h2 class="m-0 font-weight-bold text-primary">Quản lý địa điểm</h2>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="./">Home</a></li>
               <li class="breadcrumb-item">Tables</li>
@@ -115,7 +115,7 @@
                   </c:if>
                   <c:if test="${empty locationList}">
 						<tr>
-							<td colspan="4" align="center">Chưa có người dùng nào!</td>
+							<td colspan="4" align="center">Chưa có địa điểm nào!</td>
 						</tr>
 				  </c:if>
                 </div>

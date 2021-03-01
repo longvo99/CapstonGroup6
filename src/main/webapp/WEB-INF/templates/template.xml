@@ -47,6 +47,9 @@
 	<definition name="admin.user.add" extends="templates.admin">
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/user/add.jsp" />
 	</definition>
+	
+	<definition name="admin.location.test" template="/WEB-INF/views/admin/location/test.jsp">
+	</definition>
 	<!-- ADMIN LOCATIONS  -->
 	<definition name="admin.location.index" extends="templates.admin">
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/location/index.jsp" />
