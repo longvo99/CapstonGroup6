@@ -21,7 +21,7 @@ public class LocationServiceImpl implements LocationService {
 	}
 
 	@Override
-	public boolean save(LocationDTO location) {
+	public boolean save(Location location) {
 		if(LocationDAO.save(location))
 			return true;
 		return false;

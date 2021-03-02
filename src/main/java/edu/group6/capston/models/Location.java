@@ -52,8 +52,6 @@ public class Location{
 	@Column
 	private int discountId;
 	@Column
-	private int locationVideoId;
-	@Column
 	private int productId;
 	@Column
 	private int ratingId;

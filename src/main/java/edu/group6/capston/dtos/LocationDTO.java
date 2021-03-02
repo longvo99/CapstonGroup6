@@ -1,5 +1,9 @@
 package edu.group6.capston.dtos;
 
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,18 +17,18 @@ public class LocationDTO {
 	private String address;
 	private String openTime;
 	private String closeTime;
-	private int reviewCount;
-	private int locationCategoryId;
+	private Integer reviewCount;
+	private Integer locationCategoryId;
 	private String locationCategoryName;
-	private int locationTypeId;
+	private Integer locationTypeId;
 	private String locationTypeName;
 	private String ward;
 	private String district;
 	private String city;
 	private String country;
-	private int categoryId;
-	private int discountId;
-	private int locationVideoId;
-	private int productId;
-	private int ratingId;
+	private Integer categoryId;
+	private Integer discountId;
+	private Integer productId;
+	private Integer ratingId;
+	
 }

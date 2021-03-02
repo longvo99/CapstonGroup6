@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/templates/tags/taglib.jsp" %>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="https://www.codehim.com/demo/jquery-image-uploader-preview-and-delete/dist/image-uploader.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/admin/assets/js/image-uploader.min.js"></script>
 	<div id="content-wrapper" class="d-flex flex-column">
       <div id="content">
         <%-- <%@ include file="/templates/admin/inc/topbar.jsp" %> --%>
@@ -15,7 +15,20 @@
               <li class="breadcrumb-item active" aria-current="page">Forms</li>
             </ol>
           </div>
-
+		  <span id="result">
+	      	<c:if test="${not empty msg}">
+               	<c:if test="${success eq true}">
+					<div class="alert alert-success">
+						<strong>${msg}</strong>
+					</div>
+				</c:if>
+				<c:if test="${error eq true}">
+					<div class="alert alert-danger">
+						<strong>${msg}</strong>
+					</div>
+				</c:if>
+			</c:if>
+	      </span>
           <div class="row">
             <div class="col-lg-12">
               <!-- Form Basic -->
@@ -24,7 +37,7 @@
                   <form role="form" method="post"  name="form-example-1" id="form-example-1" enctype="multipart/form-data">
                   	<div class="form-group">
                       <label for="name">Location Name</label>
-                      <input class="form-control mb-3" type="text" value="" id="name" name="name">
+                      <input class="form-control mb-3" type="text" value="" id="locationName" name="locationName">
                     </div>
                     <div class="form-group">
                       <label for="address">Address</label>
@@ -32,21 +45,21 @@
                     </div>
                     <div class="form-group">
                       <label for="opentime">Open Time</label>
-                      <input class="form-control mb-3" type="time" value="" id="opentime" name="opentime">
+                      <input class="form-control mb-3" type="time" value="" id="openTime" name="openTime">
                     </div>
                     <div class="form-group">
                       <label for="closetime">Close Time</label>
-                      <input class="form-control mb-3" type="time" value="" id="closetime" name="closetime">
+                      <input class="form-control mb-3" type="time" value="" id="closeTime" name="closeTime">
                     </div>
                     <div class="form-group">
                       <label for="locationcategory">Location Category</label>
-                      <select class="form-control" id="locationcategory" name="locationcategory">
+                      <select class="form-control" id="locationcategory" name="locationCategories.locationCategoryId">
 	                      <c:if test="${not empty locationCategoriesList1}">
 	                      	<c:forEach items="${locationCategoriesList1}" var="cat1">
 	                      	<optgroup label="${cat1.locationCategoryName}">
 							        <c:forEach items="${locationCategoriesList2}" var="cat2">
 							        <c:if test="${cat2.parentId eq cat1.locationCategoryId}">
-								        <option>${cat2.locationCategoryName}</option>
+								        <option value="${cat1.locationCategoryId}">${cat2.locationCategoryName}</option>
 								    </c:if>
 								    </c:forEach>
 							</optgroup>    
@@ -56,7 +69,7 @@
                     </div>
                     <div class="form-group">
                       <label for="locationtype">Location Type</label>
-                      <select class="form-control" id="locationtype" name="locationtype">
+                      <select class="form-control" id="locationType" name="locationTypies.locationTypeId">
                       <c:if test="${not empty locationTypeList}">
                       	<c:forEach items="${locationTypeList}" var="type">
 							<option value="${type.locationTypeId}">${type.locationTypeName}</option>
@@ -65,33 +78,42 @@
                       </select>
                     </div>
                     <div class="form-group">
-					   <select name="country" id="country" class="form-control input-lg">
-					    <option value="">Select country</option>
-					   </select>
-					</div>
-					<div class="form-group">
-					   <select name="state" id="state" class="form-control input-lg">
-					    <option value="">Select state</option>
-					   </select>
-					</div>
-					<div class="form-group">
+                      <label for="country">Nước</label>
+                      <select class="form-control" name="country">
+                      	<option value="Việt Nam">Việt Nam</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                    	<label for="country">Tỉnh/thành</label>
 					   <select name="city" id="city" class="form-control input-lg">
-					    <option value="">Select city</option>
+					    <option value="">Select tỉnh/thành</option>
+					   </select>
+					</div>
+					<div class="form-group">
+						<label for="country">Quận huyện</label>
+					   <select name="district" id="district" class="form-control input-lg">
+					    <option value="">Select</option>
+					   </select>
+					</div>
+					<div class="form-group">
+						<label for="country">Xã/phường</label>
+					   <select name="ward" id="ward" class="form-control input-lg">
+					    <option value="">Select</option>
 					   </select>
 					</div>
 					<script>
 					$(document).ready(function(){
 
-						 load_json_data('country');
+						 load_json_data('city');
 
 						 function load_json_data(id, parent_id)
 						 {
 						  var html_code = '';
-						  $.getJSON('${pageContext.request.contextPath}/resources/admin/assets/js/country_state_city.json', function(data){
+						  $.getJSON('${pageContext.request.contextPath}/resources/admin/assets/js/city_district_ward.json', function(data){
 
-						   html_code += '<option value="">Select '+id+'</option>';
+						   html_code += '<option value="">Select</option>';
 						   $.each(data, function(key, value){
-						    if(id == 'country')
+						    if(id == 'city')
 						    {
 						     if(value.parent_id == '0')
 						     {
@@ -108,38 +130,34 @@
 						   });
 						   $('#'+id).html(html_code);
 						  });
+
 						 }
-						 $(document).on('change', '#country', function(){
-						  var country_id = $(this).val();
-						  if(country_id != '')
+
+						 $(document).on('change', '#city', function(){
+						  var city_id = $(this).val();
+						  if(city_id != '')
 						  {
-						   load_json_data('state', country_id);
+						   load_json_data('district', city_id);
 						  }
 						  else
 						  {
-						   $('#state').html('<option value="">Select state</option>');
-						   $('#city').html('<option value="">Select city</option>');
+						   $('#district').html('<option value="">Select</option>');
+						   $('#ward').html('<option value="">Select</option>');
 						  }
 						 });
-						 $(document).on('change', '#state', function(){
-						  var state_id = $(this).val();
-						  if(state_id != '')
+						 $(document).on('change', '#district', function(){
+						  var district_id = $(this).val();
+						  if(district_id != '')
 						  {
-						   load_json_data('city', state_id);
+						   load_json_data('ward', district_id);
 						  }
 						  else
 						  {
-						   $('#city').html('<option value="">Select city</option>');
+						   $('#ward').html('<option value="">Select</option>');
 						  }
 						 });
 						});
 					</script>
-                    <div class="form-group">
-                      <label for="country">Country</label>
-                      <select class="form-control" id="country" name="country">
-                      	<option>Việt Nam</option>
-                      </select>
-                    </div>
                     <!-- <div class="form-group">
 	                  <label for="picture">Hình ảnh</label>
 	                  <input type="file" name="picture" />
@@ -153,8 +171,6 @@
 				    </script>
                     <button type="submit" class="btn btn-primary" name="submit">Thêm mới</button>
                   </form>
-                  <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
-                  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/admin/assets/js/dropdown.js"></script>
                 </div>
               </div>
           <!--Row-->

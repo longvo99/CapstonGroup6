@@ -22,5 +22,5 @@ public class BeanConfig {
 		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
 		return resolver;
 	}
-
+	
 }
