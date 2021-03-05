@@ -34,74 +34,86 @@
 	<link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
 	<!-- test dropdown -->
 	<!-- <meta name="apple-mobile-web-app-title" content="CodePen"> -->
-
+	<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link type="text/css" rel="stylesheet" href="https://www.codehim.com/demo/jquery-image-uploader-preview-and-delete/dist/image-uploader.min.css">
 </head>
 
 <body id="page-top">
   <div id="wrapper">
     <!-- Sidebar -->
     <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${pageContext.request.contextPath}/admin">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${pageContext.request.contextPath}/admin/index">
         <div class="sidebar-brand-icon">
           <img src="${pageContext.request.contextPath}/resources/admin/assets/img/logo/logo3.png" width="50px">
         </div>
-        <div class="sidebar-brand-text mx-3">THANH HẢI</div>
+        <div class="sidebar-brand-text mx-3">LHTMP</div>
       </a>
       <hr class="sidebar-divider my-0">
       <li class="nav-item active">
-        <a class="nav-link" href="${pageContext.request.contextPath}/admin">
+        <a class="nav-link" href="${pageContext.request.contextPath}/admin/index">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Trang chủ</span></a>
       </li>
       <hr class="sidebar-divider">
       <div class="sidebar-heading">
-        Features
+        ĐẶC TRƯNG
       </div>
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
           aria-expanded="true" aria-controls="collapseBootstrap">
           <i class="far fa-fw fa-window-maximize"></i>
-          <span>Quản lý Locations</span>
+          <span>Quản lý địa điểm</span>
         </a>
         <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Quản lý Locations</h6>
-            <a class="collapse-item" href="<%=request.getContextPath() %>/admin/location/index">Location</a>
-            <a class="collapse-item" href="<%=request.getContextPath() %>/admin/locationType/index">Location Types</a>
-            <a class="collapse-item" href="<%=request.getContextPath() %>/admin/locationCategory/index">Location Categories</a>
-            <a class="collapse-item" href="<%=request.getContextPath() %>/admin/locationVideo/index">Location Videos</a>
+            <a class="collapse-item" href="${pageContext.request.contextPath}/admin/location/index">Địa điểm</a>
+            <a class="collapse-item" href="${pageContext.request.contextPath}/admin/locationType/index">Loại hình địa điểm</a>
+            <a class="collapse-item" href="${pageContext.request.contextPath}/admin/locationCategory/index">Location Categories</a>
           </div>
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<%=request.getContextPath() %>/admin/user/index">
+        <a class="nav-link" href="${pageContext.request.contextPath}/admin/order/index">
           <i class="fab fa-fw fa-wpforms"></i>
-          <span>Quản lý người dùng</span>
+          <span>Quản lý đặt hàng</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="${pageContext.request.contextPath}/admin/discount/index">
+          <i class="fab fa-fw fa-wpforms"></i>
+          <span>Quản lý giảm giá</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="${pageContext.request.contextPath}/admin/contact/index">
-          <i class="fas fa-fw fa-palette"></i>
+          <i class="fab fa-fw fa-wpforms"></i>
           <span>Quản lý liên hệ</span>
         </a>
       </li>
       <hr class="sidebar-divider">
       <div class="sidebar-heading">
-        Infomation
+        Thông tin
       </div>
        <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage" aria-expanded="true"
           aria-controls="collapsePage">
           <i class="fas fa-fw fa-columns"></i>
-          <span>Quản lý thông tin</span>
+          <span>Quản lý Thông tin</span>
         </a>
         <div id="collapsePage" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Quản lý thông tin</h6>
-            <a class="collapse-item" href="${pageContext.request.contextPath}/admin/info/index">Thông tin</a>
-            <a class="collapse-item" href="register.html">Kỹ năng</a>
-            <a class="collapse-item" href="404.html">Dự án</a>
-            <a class="collapse-item" href="blank.html">Chặng đường</a>
+            <h6 class="collapse-header">Quản lý nhân sự</h6>
+            <a class="collapse-item" href="${pageContext.request.contextPath}/admin/user/index">Khách hàng</a>
+            <a class="collapse-item" href="${pageContext.request.contextPath}/admin/customer/index">Nhân viên</a>
+            <a class="collapse-item" href="${pageContext.request.contextPath}/admin/role/index">Chức vụ</a>
+          </div>
+        </div>
+        <div id="collapsePage" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Quản lý sản phẩm</h6>
+            <a class="collapse-item" href="${pageContext.request.contextPath}/admin/user/index">Loại sản phẩm</a>
+            <a class="collapse-item" href="${pageContext.request.contextPath}/admin/customer/index">Sản phẩm</a>
           </div>
         </div>
       </li>

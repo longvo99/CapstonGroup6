@@ -1,6 +1,5 @@
 package edu.group6.capston.controller.admins;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +55,7 @@ public class AdminLocationController {
 	@GetMapping("/index")
 	public String Index(Model model) {
 		model.addAttribute("locationList", locationService.findAll());
+		model.addAttribute("locationVideoList", locationVideoService.findAll());
 		return "admin.location.index";
 	}
 
@@ -92,18 +92,15 @@ public class AdminLocationController {
 			model.addAttribute("location", location);
 			return "admin.location.add";
 		}
+		System.out.println("abc " + UploadFile.getDirPath(request));
 		List<MultipartFile> files = imageUpload.getImages();
 		if (locationService.save(location)) {
 			if (null != files && files.size() > 0) {
 				for (MultipartFile multipartFile : files) {
-					String fileName = multipartFile.getOriginalFilename();
-					File imageFile = new File(request.getServletContext().getRealPath("/WEB-INF/resources/admin/image/uploads"), UploadFile.rename(fileName));
-					LocationVideo locationVideo = new LocationVideo(UploadFile.rename(fileName), location.getLocationId());
-					locationVideoService.save(locationVideo);
-					try {
-						multipartFile.transferTo(imageFile);
-					} catch (IOException e) {
-						e.printStackTrace();
+					String fileName = UploadFile.upload(multipartFile, request);
+					if (!"".equals(fileName)) {
+						LocationVideo locationVideo = new LocationVideo(fileName, location.getLocationId());
+						locationVideoService.save(locationVideo);
 					}
 				}
 			}
@@ -115,7 +112,6 @@ public class AdminLocationController {
 		rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
 		rd.addFlashAttribute("error", true);
 		model.addAttribute("location", location);
-		System.out.println("4");
 		return "admin.location.add";
 	}
 

@@ -41,6 +41,11 @@ public class LocationVideoServiceImpl implements LocationVideoService {
 		return false;
 	}
 
+	@Override
+	public List<LocationVideo> findByIdLocation(int locationId) {
+		return locationVideoDAO.findByIdLocation(locationId);
+	}
+
 	/*
 	 * @Override public LocationVideo findUserId(int id) {
 	 * if(locationVideoDAO.findUserId(id)) return true; return false; }

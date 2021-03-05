@@ -10,4 +10,5 @@ public interface LocationVideoService {
 	boolean update(LocationVideo LocationVideo);
 	//LocationVideo findUserId(int id);
 	boolean delete(Integer id);
+	List<LocationVideo> findByIdLocation(int locationId);
 }

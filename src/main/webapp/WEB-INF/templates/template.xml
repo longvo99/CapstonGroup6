@@ -37,6 +37,11 @@
 		<put-attribute name="public-sidebar" value="" />
 	</definition>
 	
+	<!-- PAGE ADMIN INDEX  -->
+	<definition name="admin.index" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/index/index.jsp" />
+	</definition>
+	
 	<!-- ADMIN USER  -->
 	<definition name="admin.user.index" extends="templates.admin">
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/user/index.jsp" />
@@ -48,8 +53,6 @@
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/user/add.jsp" />
 	</definition>
 	
-	<definition name="admin.location.test" template="/WEB-INF/views/admin/location/test.jsp">
-	</definition>
 	<!-- ADMIN LOCATIONS  -->
 	<definition name="admin.location.index" extends="templates.admin">
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/location/index.jsp" />
@@ -59,6 +62,9 @@
 	</definition>
 	<definition name="admin.location.edit" extends="templates.admin">
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/location/edit.jsp" />
+	</definition>
+	<definition name="admin.location.image" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/location/image.jsp" />
 	</definition>
 	<!-- ADMIN LOCATIONTYPES  -->
 	<definition name="admin.locationType.index" extends="templates.admin">

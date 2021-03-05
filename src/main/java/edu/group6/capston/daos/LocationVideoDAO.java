@@ -64,6 +64,12 @@ public class LocationVideoDAO {
 		}
 	}
 
+	public List<LocationVideo> findByIdLocation(int idLocation) {
+		try (Session session = this.sessionFactory.openSession()) {
+			return session.createQuery("from LocationVideo where locationId = " + idLocation, LocationVideo.class).list();
+		}
+	}
+
 	/*
 	 * public LocationVideo findById(int id) { Session session =
 	 * this.sessionFactory.openSession(); return session.find(LocationVideo.class,
