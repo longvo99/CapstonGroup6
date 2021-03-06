@@ -42,7 +42,7 @@ public class LocationServiceImpl implements LocationService {
 	}
 
 	@Override
-	public Location findUserId(int id) {
+	public Location findLocationId(int id) {
 		return LocationDAO.findById(id);
 	}
 

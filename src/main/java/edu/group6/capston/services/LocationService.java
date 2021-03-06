@@ -10,5 +10,5 @@ public interface LocationService {
 	boolean save(Location location);
 	boolean update(LocationDTO location);
 	boolean delete(Location location);
-	Location findUserId(int id);
+	Location findLocationId(int id);
 }

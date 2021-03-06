@@ -3,6 +3,7 @@
 >>>>>>>=c6976bf55988db4b634060c5430a5db014b8b548
 eclipse.preferences.version=1
 encoding//src/main/java/edu/group6/capston/configs/SpringMVCApplication.java=UTF-8
+encoding//src/main/java/edu/group6/capston/controller/admins/AdminIndexController.java=UTF-8
 encoding//src/main/java/edu/group6/capston/controller/admins/AdminLocationController.java=UTF-8
 encoding//src/main/java/edu/group6/capston/controller/admins/AdminLocationVideoController.java=UTF-8
 encoding//src/main/java/edu/group6/capston/controller/admins/AdminUserController.java=UTF-8
@@ -10,6 +11,7 @@ encoding//src/main/java/edu/group6/capston/dtos/LocationDTO.java=UTF-8
 encoding//src/main/java/edu/group6/capston/models/Location.java=UTF-8
 encoding//src/main/java/edu/group6/capston/utils/GlobalsConstant.java=UTF-8
 encoding//src/main/java/edu/group6/capston/utils/UploadFile.java=UTF-8
+encoding//src/main/java/edu/group6/capston/utils/readFileJson.java=UTF-8
 encoding//src/main/resources/messages.properties=UTF-8
 encoding//src/main/webapp/WEB-INF/resources/admin/assets/js/city_district_ward.json=UTF-8
 encoding//src/main/webapp/WEB-INF/views/public/blog-single.jsp=UTF-8

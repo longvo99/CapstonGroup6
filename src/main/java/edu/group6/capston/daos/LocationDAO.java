@@ -27,7 +27,6 @@ public class LocationDAO {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			System.out.println("5");
 			session.persist(location);
 			tx.commit();
 			session.close();

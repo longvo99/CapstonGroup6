@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/templates/tags/taglib.jsp" %>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/admin/assets/js/image-uploader.min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h2 class="m-0 font-weight-bold text-primary">Quản lý địa điểm</h2>
@@ -53,13 +53,13 @@
 							<td>${location.locationName}</td>
 							<td>${location.locationCategoryName}</td>
 							<td class="center text-center">
-								<a href="" data-toggle="modal" data-target="#exampleModalCenter${location.locationId}" class="btn btn-sm btn-success"><i class="fa fa-edit"> Chi tiết </i></a>
-                                <a href="${pageContext.request.contextPath}/admin/locationVideo/image/${location.locationId}" class="btn btn-sm btn-primary"><i class="fa fa-edit"> Hình ảnh  </i></a>
+								<a href="${pageContext.request.contextPath}/admin/location/edit/${location.locationId}" class="btn btn-sm btn-success"><i class="fa fa-edit">Chi tiết</i></a>
+                                <a href="${pageContext.request.contextPath}/admin/locationVideo/image/${location.locationId}" class="btn btn-sm btn-primary"><i class="fa fa-edit">Hình ảnh</i></a>
                                 <a href="${pageContext.request.contextPath}/admin/location/delete"  class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa không');"><i class="fas fa-trash"> Xóa </i></a>
 							</td>
 						</tr>
 						<!-- Modal Center -->
-			          <div class="modal fade" id="exampleModalCenter${location.locationId}" tabindex="-1" role="dialog"
+			         <%--  <div class="modal fade" id="exampleModalCenter${location.locationId}" tabindex="-1" role="dialog"
 			            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 			            <div class="modal-dialog modal-dialog-centered" role="document">
 			              <div class="modal-content">
@@ -101,29 +101,94 @@
 					                      <input class="form-control mb-3" type="text" value="${location.locationTypeName}" id="locationtype" name="locationtype">
 					                    </div>
 					                    <div class="form-group">
-					                      <label for="ward">Ward</label>
-					                      <input class="form-control mb-3" type="text" value="${location.ward}" id="ward" name="ward">
+					                      <label for="country">Nước</label>
+					                      <select class="form-control" name="country">
+					                      	<option value="Việt Nam">Việt Nam</option>
+					                      </select>
 					                    </div>
 					                    <div class="form-group">
-					                      <label for="district">District</label>
-					                      <input class="form-control mb-3" type="text" value="${location.district}" id="district" name="district">
-					                    </div>
-					                    <div class="form-group">
-					                      <label for="city">City</label>
-					                      <input class="form-control mb-3" type="text" value="${location.city}" id="city" name="city">
-					                    </div>
-					                    <div class="form-group">
-					                      <label for="country">Country</label>
-					                      <input class="form-control mb-3" type="text" value="${location.country}" id="country" name="country">
-					                    </div>
+					                    	<label for="country">Tỉnh/thành</label>
+										   <select name="city" id="city" class="form-control input-lg">
+										    <option value="">Select tỉnh/thành</option>
+										   </select>
+										</div>
+										<div class="form-group">
+											<label for="country">Quận huyện</label>
+										   <select name="district" id="district" class="form-control input-lg">
+										    <option value="">Select</option>
+										   </select>
+										</div>
+										<div class="form-group">
+											<label for="country">Xã/phường</label>
+										   <select name="ward" id="ward" class="form-control input-lg">
+										    <option value="">Select</option>
+										   </select>
+										</div>
 									</form>
 								</div>
 			                </div>
 			              </div>
 			            </div>
-			          </div>
+			          </div> --%>
 			          <!-- Modal Center -->
 			          </c:forEach>
+			          <script>
+						$(document).ready(function(){
+	
+							 load_json_data('city');
+	
+							 function load_json_data(id, parent_id)
+							 {
+							  var html_code = '';
+							  $.getJSON('${pageContext.request.contextPath}/resources/admin/assets/js/city_district_ward.json', function(data){
+	
+							   html_code += '<option value="">Select</option>';
+							   $.each(data, function(key, value){
+							    if(id == 'city')
+							    {
+							     if(value.parent_id == '0')
+							     {
+							      html_code += '<option value="'+value.id+'">'+value.name+'</option>';
+							     }
+							    }
+							    else
+							    {
+							     if(value.parent_id == parent_id)
+							     {
+							      html_code += '<option value="'+value.id+'">'+value.name+'</option>';
+							     }
+							    }
+							   });
+							   $('#'+id).html(html_code);
+							  });
+	
+							 }
+	
+							 $(document).on('change', '#city', function(){
+							  var city_id = $(this).val();
+							  if(city_id != '')
+							  {
+							   load_json_data('district', city_id);
+							  }
+							  else
+							  {
+							   $('#district').html('<option value="">Select</option>');
+							   $('#ward').html('<option value="">Select</option>');
+							  }
+							 });
+							 $(document).on('change', '#district', function(){
+							  var district_id = $(this).val();
+							  if(district_id != '')
+							  {
+							   load_json_data('ward', district_id);
+							  }
+							  else
+							  {
+							   $('#ward').html('<option value="">Select</option>');
+							  }
+							 });
+							});
+						</script>
                     </tbody>
                   </table>
                   </c:if>

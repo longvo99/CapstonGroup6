@@ -16,6 +16,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -113,6 +114,26 @@ public class AdminLocationController {
 		rd.addFlashAttribute("error", true);
 		model.addAttribute("location", location);
 		return "admin.location.add";
+	}
+	
+	@GetMapping("edit/{locationId}")
+	public String edit(@PathVariable Integer locationId, Model model) {
+		Location location = locationService.findLocationId(locationId);
+		List<LocationCategories> locationCategoriesList = locationCategoriesService.findAll();
+		List<LocationCategories> locationCategoriesList1 = new ArrayList<LocationCategories>();
+		List<LocationCategories> locationCategoriesList2 = new ArrayList<LocationCategories>();
+		for (LocationCategories locationCategories : locationCategoriesList) {
+			if (locationCategories.getParentId() == locationCategories.getLocationCategoryId()) {
+				locationCategoriesList1.add(locationCategories);
+			} else {
+				locationCategoriesList2.add(locationCategories);
+			}
+		}
+		model.addAttribute("location", location);
+		model.addAttribute("locationCategoriesList1", locationCategoriesList1);
+		model.addAttribute("locationCategoriesList2", locationCategoriesList2);
+		model.addAttribute("locationTypeList", locationTypeService.findAll());
+		return "admin.location.edit";
 	}
 
 	@PostMapping(value = "/edit")
