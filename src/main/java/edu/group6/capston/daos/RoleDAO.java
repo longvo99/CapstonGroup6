@@ -36,10 +36,10 @@ public class RoleDAO {
 		}
 	}
 
-	public boolean update(Roles locationTypies) {
+	public boolean update(Roles role) {
 		try (Session session = this.sessionFactory.openSession()) {
 			Transaction tx = session.beginTransaction();
-			session.update(locationTypies);
+			session.update(role);
 			tx.commit();
 			session.close();
 			return true;

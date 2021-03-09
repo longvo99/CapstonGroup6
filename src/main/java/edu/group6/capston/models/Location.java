@@ -55,4 +55,5 @@ public class Location{
 	private int productId;
 	@Column
 	private int ratingId;
+	
 }

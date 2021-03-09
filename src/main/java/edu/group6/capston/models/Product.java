@@ -2,47 +2,36 @@ package edu.group6.capston.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 @Entity
-@Table(name = "Product")
+@Table(name = "Products")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class Product {
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	private int productId;
 	@Column
-	private String name;
+	private String productName;
 	@Column
-	private int price;
+	private String price;
 	@Column
 	private String describe;
 	@Column
-	private int orderCount;
+	private String orderCount;
 	@Column
-	private String imagePath;
+	private int productImageId;
 	@Column
-	private int locationId;
-	@ManyToOne
-	@JoinColumn(name = "productCategoryId")
-	private ProductCategories productCategories;
-	@Override
-	public String toString() {
-		return "Product [productId=" + productId + ", name=" + name + ", price=" + price + ", describe=" + describe
-				+ ", orderCount=" + orderCount + ", imagePath=" + imagePath + ", locationId=" + locationId
-				+ ", productCategories=" + productCategories + "]";
-	}
+	private int productCategoryId;
+	@Column
+	private int discountId;
+	
 	
 }

@@ -23,4 +23,5 @@ public class Roles {
 	private int roleId;
 	@Column
 	private String roleName;
+	
 }
