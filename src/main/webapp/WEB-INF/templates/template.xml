@@ -53,6 +53,17 @@
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/user/add.jsp" />
 	</definition>
 	
+	<!-- ADMIN PRODUCT  -->
+	<definition name="admin.product.index" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/product/index.jsp" />
+	</definition>
+	<definition name="admin.product.add" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/product/add.jsp" />
+	</definition>
+	<definition name="admin.product.edit" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/product/edit.jsp" />
+	</definition>
+	
 	<!-- ADMIN LOCATIONS  -->
 	<definition name="admin.location.index" extends="templates.admin">
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/location/index.jsp" />
@@ -73,6 +84,15 @@
 	<definition name="admin.locationType.add" extends="templates.admin">
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/locationType/add.jsp" />
 	</definition>
+	
+	<!-- ADMIN ORDER  -->
+	<definition name="admin.order.index" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/order/index.jsp" />
+	</definition>
+	<definition name="admin.order.orderDetail" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/order/detail.jsp" />
+	</definition>
+	
 <!-- <<<<<<< Updated upstream -->
 	<!-- ADMIN DISCOUNTS  -->
 	<definition name="admin.discount.index" extends="templates.admin">

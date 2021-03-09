@@ -55,6 +55,7 @@
 							<td class="center text-center">
 								<a href="${pageContext.request.contextPath}/admin/location/edit/${location.locationId}" class="btn btn-sm btn-success"><i class="fa fa-edit">Chi tiết</i></a>
                                 <a href="${pageContext.request.contextPath}/admin/locationVideo/image/${location.locationId}" class="btn btn-sm btn-primary"><i class="fa fa-edit">Hình ảnh</i></a>
+                                <a href="${pageContext.request.contextPath}/admin/product/index/${location.locationId}" class="btn btn-sm btn-primary"><i class="fa fa-edit">Sản phẩm</i></a>
                                 <a href="${pageContext.request.contextPath}/admin/location/delete"  class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa không');"><i class="fas fa-trash"> Xóa </i></a>
 							</td>
 						</tr>

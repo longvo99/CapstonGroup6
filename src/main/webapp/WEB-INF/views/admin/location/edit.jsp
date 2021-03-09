@@ -60,19 +60,18 @@
                       <select class="form-control" id="locationcategory" name="locationCategories.locationCategoryId">
 	                      <c:if test="${not empty locationCategoriesList1}">
 	                      	<c:forEach items="${locationCategoriesList1}" var="cat1">
-	                      	<c:choose>
-								<c:when test="${cat1.locationCategoryId eq location.locationCategories.locationCategoryId }">
-									<c:set var="selected" value="selected='selected'" />
-								</c:when>
-								<c:otherwise>
-									<c:set var="selected" value="" />
-								</c:otherwise>
-							</c:choose>
-	                      	<optgroup ${selected} label="${cat1.locationCategoryName}">
+	                      	<optgroup label="${cat1.locationCategoryName}">
 							        <c:forEach items="${locationCategoriesList2}" var="cat2">
 							        <c:if test="${cat2.parentId eq cat1.locationCategoryId}">
-							        	
-								        <option  value="${cat2.locationCategoryId}">${cat2.locationCategoryName}</option>
+							        	<c:choose>
+											<c:when test="${cat2.locationCategoryId eq location.locationCategories.locationCategoryId }">
+												<c:set var="selected" value="selected='selected'" />
+											</c:when>
+											<c:otherwise>
+												<c:set var="selected" value="" />
+											</c:otherwise>
+										</c:choose>
+								        <option ${selected} value="${cat2.locationCategoryId}">${cat2.locationCategoryName}</option>
 								    </c:if>
 								    </c:forEach>
 							</optgroup>    
@@ -106,9 +105,9 @@
                     </div>
                     <div class="form-group">
                     	<label for="country">Tỉnh/thành</label>
-					   <select name="city" id="city" class="form-control input-lg">
-					    <option value="">Select tỉnh/thành</option>
-					   </select>
+					    <select name="city" id="city" class="form-control input-lg">
+					    	<option value="${location.city}">${location.city}</option>
+					    </select>
 					</div>
 					<div class="form-group">
 						<label for="country">Quận huyện</label>
@@ -124,14 +123,11 @@
 					</div>
 					<script>
 					$(document).ready(function(){
-
 						 load_json_data('city');
-
 						 function load_json_data(id, parent_id)
 						 {
 						  var html_code = '';
 						  $.getJSON('${pageContext.request.contextPath}/resources/admin/assets/js/city_district_ward.json', function(data){
-
 						   html_code += '<option value="">Select</option>';
 						   $.each(data, function(key, value){
 						    if(id == 'city')
@@ -151,9 +147,7 @@
 						   });
 						   $('#'+id).html(html_code);
 						  });
-
 						 }
-
 						 $(document).on('change', '#city', function(){
 						  var city_id = $(this).val();
 						  if(city_id != '')

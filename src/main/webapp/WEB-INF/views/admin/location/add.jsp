@@ -59,7 +59,7 @@
 	                      	<optgroup label="${cat1.locationCategoryName}">
 							        <c:forEach items="${locationCategoriesList2}" var="cat2">
 							        <c:if test="${cat2.parentId eq cat1.locationCategoryId}">
-								        <option value="${cat1.locationCategoryId}">${cat2.locationCategoryName}</option>
+								        <option value="${cat2.locationCategoryId}">${cat2.locationCategoryName}</option>
 								    </c:if>
 								    </c:forEach>
 							</optgroup>    

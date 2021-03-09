@@ -37,7 +37,6 @@ public class AdminLocationVideoController {
 
 	@RequestMapping(value = "/image/{locationId}")
 	public String LocationVideo(@PathVariable Integer locationId, Model model) {
-		System.out.println(locationVideoService.findByIdLocation(locationId).size());
 		model.addAttribute("locationVideoList", locationVideoService.findByIdLocation(locationId));
 		model.addAttribute("locationId", locationId);
 		return "admin.location.image";
@@ -49,12 +48,14 @@ public class AdminLocationVideoController {
 			throws IllegalStateException, IOException {
 		List<LocationVideo> listlocationVideo = locationVideoService.findByIdLocation(locationId);
 		List<MultipartFile> files = imageUpload.getImages();
-		System.out.println("size: " + files.size());
-		for (LocationVideo locationVideo : listlocationVideo) {
-			UploadFile.del(locationVideo.getLocationVideoPath(), request);
-			locationVideoService.delete(locationVideo.getLocationVideoId());
-		}
-		if (null != files && files.size() > 0) {
+		if (null != files && files.size() > 1 ) {
+			System.out.println(files.size());
+			System.out.println("abc " + files.get(0));
+			for (LocationVideo locationVideo : listlocationVideo) {
+				System.out.println(locationVideo.getLocationVideoPath());
+				UploadFile.del(locationVideo.getLocationVideoPath(), request);
+				locationVideoService.delete(locationVideo.getLocationVideoId());
+			}
 			for (MultipartFile multipartFile : files) {
 				String fileName = UploadFile.upload(multipartFile, request);
 				if (!"".equals(fileName)) {
@@ -69,7 +70,7 @@ public class AdminLocationVideoController {
 		}
 		rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
 		rd.addFlashAttribute("error", true);
-		return "admin.location.image";
+		return "redirect:/admin/locationVideo/image/" + locationId;
 	}
 
 }
