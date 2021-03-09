@@ -96,7 +96,7 @@ public class LocationDAO {
 			session.delete(location);
 			tx.commit();
 			session.close();
-			return false;
+			return true;
 		} catch (Exception e) {
 			return false;
 		}

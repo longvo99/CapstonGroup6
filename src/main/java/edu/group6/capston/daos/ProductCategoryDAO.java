@@ -58,7 +58,7 @@ public class ProductCategoryDAO {
 			session.flush();
 			tx.commit();
 			session.close();
-			return false;
+			return true;
 		} catch (Exception e) {
 			return false;
 		}
