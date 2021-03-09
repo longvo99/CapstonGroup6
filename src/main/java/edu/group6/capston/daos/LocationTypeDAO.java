@@ -8,7 +8,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import edu.group6.capston.models.LocationType;
+import edu.group6.capston.models.LocationTypes;
 
 @Repository
 public class LocationTypeDAO {
@@ -16,18 +16,18 @@ public class LocationTypeDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public List<LocationType> findAll() {
+	public List<LocationTypes> findAll() {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("from LocationType", LocationType.class).list();
+			return session.createQuery("from LocationTypes", LocationTypes.class).list();
 		}
 	}
 
-	public boolean save(LocationType locationTypies) {
+	public boolean save(LocationTypes locationTypes) {
 		Session session = this.sessionFactory.openSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			session.persist(locationTypies);
+			session.persist(locationTypes);
 			tx.commit();
 			session.close();
 			return true;
@@ -36,10 +36,10 @@ public class LocationTypeDAO {
 		}
 	}
 
-	public boolean update(LocationType locationTypies) {
+	public boolean update(LocationTypes locationTypes) {
 		try (Session session = this.sessionFactory.openSession()) {
 			Transaction tx = session.beginTransaction();
-			session.update(locationTypies);
+			session.update(locationTypes);
 			tx.commit();
 			session.close();
 			return true;
@@ -51,9 +51,9 @@ public class LocationTypeDAO {
 	public boolean delete(Integer id) {
 		try (Session session = this.sessionFactory.openSession()) {
 			Transaction tx = session.beginTransaction();
-			LocationType LocationType;
-			LocationType = (LocationType) session.load(LocationType.class, id);
-			session.delete(LocationType);
+			LocationTypes locationTypes;
+			locationTypes = (LocationTypes) session.load(LocationTypes.class, id);
+			session.delete(locationTypes);
 			// This makes the pending delete to be done
 			session.flush();
 			tx.commit();
@@ -65,8 +65,8 @@ public class LocationTypeDAO {
 	}
 
 	/*
-	 * public LocationType findById(int id) { Session session =
-	 * this.sessionFactory.openSession(); return session.find(LocationType.class,
+	 * public LocationTypes findById(int id) { Session session =
+	 * this.sessionFactory.openSession(); return session.find(LocationTypes.class,
 	 * id); }
 	 */
 }
