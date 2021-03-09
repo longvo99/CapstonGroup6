@@ -1,28 +1,14 @@
 package edu.group6.capston.controller.admins;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-
 import javax.servlet.http.HttpServletRequest;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import edu.group6.capston.services.LocationTypeService;
-import edu.group6.capston.utils.readFileJson;
+import edu.group6.capston.services.LocationService;
 
 @Controller
 @RequestMapping("admin")
@@ -32,11 +18,11 @@ public class AdminIndexController {
 	MessageSource messageSource;
 	
 	@Autowired
-	private LocationTypeService locationTypeService;
+	private LocationService locationService;
 	
 	@RequestMapping(value ="/index")
 	public String Index(Model model, HttpServletRequest request) {
-		readFileJson.readFileJsonCity();
+		model.addAttribute("locationCount", locationService.locationCount());
 		return "admin.index";
 	}
 

@@ -25,7 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import edu.group6.capston.dtos.ImageUpload;
 import edu.group6.capston.dtos.LocationDTO;
 import edu.group6.capston.models.Location;
-import edu.group6.capston.models.LocationCategories;
+import edu.group6.capston.models.LocationCategory;
 import edu.group6.capston.models.LocationVideo;
 import edu.group6.capston.services.LocationCategoriesService;
 import edu.group6.capston.services.LocationService;
@@ -67,10 +67,10 @@ public class AdminLocationController {
 
 	@GetMapping("add")
 	public String add(ModelMap modelMap) {
-		List<LocationCategories> locationCategoriesList = locationCategoriesService.findAll();
-		List<LocationCategories> locationCategoriesList1 = new ArrayList<LocationCategories>();
-		List<LocationCategories> locationCategoriesList2 = new ArrayList<LocationCategories>();
-		for (LocationCategories locationCategories : locationCategoriesList) {
+		List<LocationCategory> locationCategoriesList = locationCategoriesService.findAll();
+		List<LocationCategory> locationCategoriesList1 = new ArrayList<LocationCategory>();
+		List<LocationCategory> locationCategoriesList2 = new ArrayList<LocationCategory>();
+		for (LocationCategory locationCategories : locationCategoriesList) {
 			if (locationCategories.getParentId() == locationCategories.getLocationCategoryId()) {
 				locationCategoriesList1.add(locationCategories);
 			} else {
@@ -119,10 +119,10 @@ public class AdminLocationController {
 	@GetMapping("edit/{locationId}")
 	public String edit(@PathVariable Integer locationId, Model model) {
 		Location location = locationService.findLocationId(locationId);
-		List<LocationCategories> locationCategoriesList = locationCategoriesService.findAll();
-		List<LocationCategories> locationCategoriesList1 = new ArrayList<LocationCategories>();
-		List<LocationCategories> locationCategoriesList2 = new ArrayList<LocationCategories>();
-		for (LocationCategories locationCategories : locationCategoriesList) {
+		List<LocationCategory> locationCategoriesList = locationCategoriesService.findAll();
+		List<LocationCategory> locationCategoriesList1 = new ArrayList<LocationCategory>();
+		List<LocationCategory> locationCategoriesList2 = new ArrayList<LocationCategory>();
+		for (LocationCategory locationCategories : locationCategoriesList) {
 			if (locationCategories.getParentId() == locationCategories.getLocationCategoryId()) {
 				locationCategoriesList1.add(locationCategories);
 			} else {

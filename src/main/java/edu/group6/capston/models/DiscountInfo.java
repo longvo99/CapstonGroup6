@@ -12,30 +12,36 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "Discounts")
+@Table(name = "DiscountInfo")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Discounts {
+public class DiscountInfo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="discountId")
 	private int discountId;
 	@Column
-	private String discountTitle;
+	private String title;
 	@Column
-	private String codeDiscount;
+	private String code;
 	@Column
 	private String rateDiscount;
 	@Column
 	private String description;
 	@Column
+	private String value;
+	@Column
+	private String mediaPath;
+	@Column
 	private String startDate;
 	@Column
 	private String endDate;
 	@Column
-	private String minimumOrder;
+	private int userId;
 	@Column
-	private int discountVideoId;
+	private int limitedUse;
+	@Column
+	private int limitedPerUse;
 	
 }

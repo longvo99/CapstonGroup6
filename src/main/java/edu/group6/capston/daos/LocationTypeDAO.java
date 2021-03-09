@@ -8,7 +8,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import edu.group6.capston.models.LocationTypes;
+import edu.group6.capston.models.LocationType;
 
 @Repository
 public class LocationTypeDAO {
@@ -16,13 +16,13 @@ public class LocationTypeDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public List<LocationTypes> findAll() {
+	public List<LocationType> findAll() {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("from LocationTypes", LocationTypes.class).list();
+			return session.createQuery("from LocationType", LocationType.class).list();
 		}
 	}
 
-	public boolean save(LocationTypes locationTypies) {
+	public boolean save(LocationType locationTypies) {
 		Session session = this.sessionFactory.openSession();
 		Transaction tx = null;
 		try {
@@ -36,7 +36,7 @@ public class LocationTypeDAO {
 		}
 	}
 
-	public boolean update(LocationTypes locationTypies) {
+	public boolean update(LocationType locationTypies) {
 		try (Session session = this.sessionFactory.openSession()) {
 			Transaction tx = session.beginTransaction();
 			session.update(locationTypies);
@@ -51,9 +51,9 @@ public class LocationTypeDAO {
 	public boolean delete(Integer id) {
 		try (Session session = this.sessionFactory.openSession()) {
 			Transaction tx = session.beginTransaction();
-			LocationTypes locationTypes;
-			locationTypes = (LocationTypes) session.load(LocationTypes.class, id);
-			session.delete(locationTypes);
+			LocationType LocationType;
+			LocationType = (LocationType) session.load(LocationType.class, id);
+			session.delete(LocationType);
 			// This makes the pending delete to be done
 			session.flush();
 			tx.commit();
@@ -65,8 +65,8 @@ public class LocationTypeDAO {
 	}
 
 	/*
-	 * public LocationTypes findById(int id) { Session session =
-	 * this.sessionFactory.openSession(); return session.find(LocationTypes.class,
+	 * public LocationType findById(int id) { Session session =
+	 * this.sessionFactory.openSession(); return session.find(LocationType.class,
 	 * id); }
 	 */
 }

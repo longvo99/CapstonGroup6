@@ -87,7 +87,6 @@ public class LocationDAO {
 		Session session = this.sessionFactory.openSession();
 		return session.find(Location.class, id);
 	}
-
 	public boolean delete(Location location) {
 		Session session = this.sessionFactory.openSession();
 		Transaction tx = null;
@@ -101,4 +100,16 @@ public class LocationDAO {
 			return false;
 		}
 	}
+	
+	/*
+	 * public long locationCount() { Session session =
+	 * this.sessionFactory.openSession(); Query query =
+	 * session.createQuery("select count(*) from Location"); return
+	 * (Long)query.uniqueResult(); }
+	 */
+	
+	
+	
+	
+	
 }

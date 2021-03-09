@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.group6.capston.daos.DiscountDAO;
-import edu.group6.capston.models.Discounts;
+import edu.group6.capston.models.DiscountInfo;
 import edu.group6.capston.services.DiscountService;
 
 @Service
@@ -16,20 +16,20 @@ public class DiscountServiceImpl implements DiscountService {
 	private DiscountDAO discountDAO;
 	
 	@Override
-	public List<Discounts> findAll() {
+	public List<DiscountInfo> findAll() {
 		return discountDAO.findAll();
 	}
 
 	@Override
-	public boolean save(Discounts discounts) {
-		if(discountDAO.save(discounts))
+	public boolean save(DiscountInfo DiscountInfo) {
+		if(discountDAO.save(DiscountInfo))
 			return true;
 		return false;
 	}
 
 	@Override
-	public boolean update(Discounts discounts) {
-		if(discountDAO.update(discounts))
+	public boolean update(DiscountInfo DiscountInfo) {
+		if(discountDAO.update(DiscountInfo))
 			return true;
 		return false;
 	}

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import edu.group6.capston.models.LocationTypes;
+import edu.group6.capston.models.LocationType;
 import edu.group6.capston.services.LocationTypeService;
 import edu.group6.capston.utils.GlobalsConstant;
 
@@ -43,7 +43,7 @@ public class AdminLocationTypeController {
 	}
 	
 	@PostMapping(value ="/add")
-	public String Add(@Valid @ModelAttribute("location") LocationTypes locationTypes, BindingResult br, RedirectAttributes rd,
+	public String Add(@Valid @ModelAttribute("location") LocationType locationTypes, BindingResult br, RedirectAttributes rd,
 			HttpServletRequest request, Model model) {
 		if (br.hasErrors()) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
@@ -61,7 +61,7 @@ public class AdminLocationTypeController {
 	}
 	
 	@PostMapping(value ="/edit")
-	public String Edit(@Valid @ModelAttribute("location") LocationTypes locationTypes, BindingResult br, RedirectAttributes rd,
+	public String Edit(@Valid @ModelAttribute("location") LocationType locationTypes, BindingResult br, RedirectAttributes rd,
 			HttpServletRequest request, Model model) throws UnsupportedEncodingException {
 		if (br.hasErrors()) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));

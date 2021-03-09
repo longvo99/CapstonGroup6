@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.group6.capston.daos.LocationCategoriesDAO;
-import edu.group6.capston.models.LocationCategories;
+import edu.group6.capston.models.LocationCategory;
 import edu.group6.capston.services.LocationCategoriesService;
 
 @Service
@@ -18,7 +18,7 @@ public class LocationCategoriesServiceImpl implements LocationCategoriesService 
 	
 	@Override
 	@Transactional
-	public List<LocationCategories> findAll() {
+	public List<LocationCategory> findAll() {
 		return locationCategoriesDAO.findAll();
 	}
 }

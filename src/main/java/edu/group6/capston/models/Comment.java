@@ -7,9 +7,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Rating {
-	private int ratingId;
+public class Comment {
 	private int commentId;
-	private int point;
-	private int criteriaId;
+	private String title;
+	private String currentTime;
+	private String textContent;
+	private int parentCommentId;
+	private int locationId;
+	private int userId;
 }

@@ -14,7 +14,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "Locations")
+@Table(name = "Location")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -26,20 +26,6 @@ public class Location{
 	@Column
 	private String locationName;
 	@Column
-	private String address;
-	@Column
-	private String openTime;
-	@Column
-	private String closeTime;
-	@Column
-	private int reviewCount;
-	@ManyToOne
-	@JoinColumn(name = "LocationCategoryId")
-	private LocationCategories locationCategories;
-	@ManyToOne
-	@JoinColumn(name = "locationTypeId")
-	private LocationTypes locationTypies;
-	@Column
 	private String ward;
 	@Column
 	private String district;
@@ -48,12 +34,21 @@ public class Location{
 	@Column
 	private String country;
 	@Column
-	private int categoryId;
+	private String address;
 	@Column
-	private int discountId;
+	private String mediaPath;
 	@Column
-	private int productId;
+	private String openTime;
 	@Column
-	private int ratingId;
-	
+	private String closeTime;
+	@Column
+	private int reviewCount;
+	@ManyToOne
+	@JoinColumn(name = "CategoryId")
+	private LocationCategory locationCategory;
+	@ManyToOne
+	@JoinColumn(name = "locationTypeId")
+	private LocationType locationType;
+	@Column
+	private int userId;
 }

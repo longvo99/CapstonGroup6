@@ -6,7 +6,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import edu.group6.capston.models.LocationCategories;
+import edu.group6.capston.models.LocationCategory;
+import edu.group6.capston.models.LocationCategory;
 
 @Repository
 public class LocationCategoriesDAO {
@@ -15,7 +16,7 @@ public class LocationCategoriesDAO {
 	private SessionFactory sessionFactory;
 	
 	@SuppressWarnings("unchecked")
-	public List<LocationCategories> findAll() {
-		return sessionFactory.getCurrentSession().createQuery("from LocationCategories").list();
+	public List<LocationCategory> findAll() {
+		return sessionFactory.getCurrentSession().createQuery("from LocationCategory").list();
 	}
 }

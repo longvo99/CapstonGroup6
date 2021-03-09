@@ -2,11 +2,11 @@ package edu.group6.capston.services;
 
 import java.util.List;
 
-import edu.group6.capston.models.Discounts;
+import edu.group6.capston.models.DiscountInfo;
 
 public interface DiscountService {
-	List<Discounts> findAll();
-	boolean save(Discounts discount);
-	boolean update(Discounts discount);
+	List<DiscountInfo> findAll();
+	boolean save(DiscountInfo discount);
+	boolean update(DiscountInfo discount);
 	boolean delete(Integer id);
 }

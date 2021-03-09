@@ -11,4 +11,5 @@ public interface LocationService {
 	boolean update(LocationDTO location);
 	boolean delete(Location location);
 	Location findLocationId(int id);
+	long locationCount();
 }

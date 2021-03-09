@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import edu.group6.capston.models.Discounts;
+import edu.group6.capston.models.DiscountInfo;
 import edu.group6.capston.services.DiscountService;
 import edu.group6.capston.utils.GlobalsConstant;
 
@@ -29,11 +29,11 @@ public class AdminDiscountController {
 	MessageSource messageSource;
 	
 	@Autowired
-	private DiscountService discountService;
+	private DiscountService DiscountService;
 	
 	@RequestMapping(value ="/index")
 	public String Index(Model model) {
-		model.addAttribute("discountList" , discountService.findAll());
+		model.addAttribute("discountList" , DiscountService.findAll());
 		return "admin.discount.index";
 	}
 	
@@ -43,31 +43,31 @@ public class AdminDiscountController {
 	}
 	
 	@PostMapping(value ="/add")
-	public String Add(@Valid @ModelAttribute("discounts") Discounts discounts, BindingResult br, RedirectAttributes rd,
+	public String Add(@Valid @ModelAttribute("DiscountInfo") DiscountInfo DiscountInfo, BindingResult br, RedirectAttributes rd,
 			HttpServletRequest request, Model model) {
 		if (br.hasErrors()) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
 			return "admin.discount.add";
 		}
-		if (discountService.save(discounts)) {
+		if (DiscountService.save(DiscountInfo)) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE,
 					messageSource.getMessage("success", null, Locale.getDefault()));
 			rd.addFlashAttribute("success", true);
 			return "redirect:/admin/discount/index";
 		}
 		rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
-		model.addAttribute("discounts", discounts);
-		return "admin.discounts.add";
+		model.addAttribute("DiscountInfo", DiscountInfo);
+		return "admin.DiscountInfo.add";
 	}
 	
 	@PostMapping(value ="/edit")
-	public String Edit(@Valid @ModelAttribute("discounts") Discounts discounts, BindingResult br, RedirectAttributes rd,
+	public String Edit(@Valid @ModelAttribute("DiscountInfo") DiscountInfo DiscountInfo, BindingResult br, RedirectAttributes rd,
 			HttpServletRequest request, Model model) throws UnsupportedEncodingException {
 		if (br.hasErrors()) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
 			return "admin.discount.index";
 		}
-		if (discountService.update(discounts)) {
+		if (DiscountService.update(DiscountInfo)) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("success", null, Locale.getDefault()));
 			rd.addFlashAttribute("success", true);
 			return "redirect:/admin/discount/index";
@@ -79,7 +79,7 @@ public class AdminDiscountController {
 	
 	@RequestMapping(value ="/del/{id}")
 	public String delete(@PathVariable Integer id, RedirectAttributes rd, HttpServletRequest request, Model mode) {
-		if (discountService.delete(id)) {
+		if (DiscountService.delete(id)) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
 			rd.addFlashAttribute("error", true);
 			return "redirect:/admin/discount/index";

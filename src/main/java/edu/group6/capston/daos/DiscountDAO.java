@@ -8,7 +8,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import edu.group6.capston.models.Discounts;
+import edu.group6.capston.models.DiscountInfo;;
 
 @Repository
 public class DiscountDAO {
@@ -16,18 +16,18 @@ public class DiscountDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public List<Discounts> findAll() {
+	public List<DiscountInfo> findAll() {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("from Discounts", Discounts.class).list();
+			return session.createQuery("from DiscountInfo", DiscountInfo.class).list();
 		}
 	}
 
-	public boolean save(Discounts discounts) {
+	public boolean save(DiscountInfo DiscountInfo) {
 		Session session = this.sessionFactory.openSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			session.persist(discounts);
+			session.persist(DiscountInfo);
 			tx.commit();
 			session.close();
 			return true;
@@ -36,10 +36,10 @@ public class DiscountDAO {
 		}
 	}
 
-	public boolean update(Discounts discounts) {
+	public boolean update(DiscountInfo DiscountInfo) {
 		try (Session session = this.sessionFactory.openSession()) {
 			Transaction tx = session.beginTransaction();
-			session.update(discounts);
+			session.update(DiscountInfo);
 			tx.commit();
 			session.close();
 			return true;
@@ -51,9 +51,9 @@ public class DiscountDAO {
 	public boolean delete(Integer id) {
 		try (Session session = this.sessionFactory.openSession()) {
 			Transaction tx = session.beginTransaction();
-			Discounts discounts;
-			discounts = (Discounts) session.load(Discounts.class, id);
-			session.delete(discounts);
+			DiscountInfo DiscountInfo;
+			DiscountInfo = (DiscountInfo) session.load(DiscountInfo.class, id);
+			session.delete(DiscountInfo);
 			// This makes the pending delete to be done
 			session.flush();
 			tx.commit();

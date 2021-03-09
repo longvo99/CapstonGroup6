@@ -46,4 +46,9 @@ public class LocationServiceImpl implements LocationService {
 		return LocationDAO.findById(id);
 	}
 
+	@Override
+	public long locationCount() {
+		return 0;
+	}
+
 }
