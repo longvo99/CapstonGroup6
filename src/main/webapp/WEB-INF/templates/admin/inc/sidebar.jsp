@@ -68,8 +68,8 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Quản lý Locations</h6>
             <a class="collapse-item" href="${pageContext.request.contextPath}/admin/location/index">Địa điểm</a>
-            <a class="collapse-item" href="${pageContext.request.contextPath}/admin/locationType/index">Loại hình địa điểm</a>
-            <a class="collapse-item" href="${pageContext.request.contextPath}/admin/locationCategory/index">Location Categories</a>
+            <a class="collapse-item" href="${pageContext.request.contextPath}/admin/locationType/index">Kiểu địa điểm</a>
+            <a class="collapse-item" href="${pageContext.request.contextPath}/admin/locationCategory/index">Phân loại địa điểm</a>
           </div>
         </div>
       </li>

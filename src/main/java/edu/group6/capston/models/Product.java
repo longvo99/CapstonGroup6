@@ -27,11 +27,12 @@ public class Product {
 	@Column
 	private String orderCount;
 	@Column
-	private int productImageId;
+	private String imagePath;
 	@Column
 	private int productCategoryId;
 	@Column
 	private int discountId;
-	
+	@Column
+	private int locationId;
 	
 }

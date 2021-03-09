@@ -19,4 +19,11 @@ public class AdminUserController {
 		model.addAttribute("userList" , userService.findAll());
 		return "admin.user.index";
 	}
+	
+	@RequestMapping(value ="/profile")
+	public String profile(Model model) {
+		model.addAttribute("userList" , userService.findAll());
+		return "admin.user.index";
+	}
+	
 }
