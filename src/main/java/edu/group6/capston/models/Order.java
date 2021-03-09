@@ -17,4 +17,5 @@ public class Order {
 	private String shipDistance;
 	private String shipPrice;
 	private String recieverAddress;
+	
 }

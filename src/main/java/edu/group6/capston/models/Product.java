@@ -32,4 +32,6 @@ public class Product {
 	private int productCategoryId;
 	@Column
 	private int discountId;
+	
+	
 }

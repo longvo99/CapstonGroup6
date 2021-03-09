@@ -37,4 +37,5 @@ public class Discounts {
 	private String minimumOrder;
 	@Column
 	private int discountVideoId;
+	
 }
