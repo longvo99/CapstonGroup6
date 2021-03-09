@@ -36,19 +36,26 @@
                 </div>
                 
                 <div class="table-responsive p-3">
-                <c:if test="${not empty discountList}">
+                <c:if test="${not empty discountList}"> 
                   <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                     <thead class="thead-light">
                       <tr>
+<<<<<<< Updated upstream
                         <th>ID</th>
                         <th>Tiêu đề giảm giá</th>
                         <th>Ngày bắt đầu</th>
                         <th>Ngày kết thúc</th>
+=======
+                        <th>ID</th> 
+                        <th>Loại giảm giá</th> 
+                        <th>Mã giảm giá</th> 
+>>>>>>> Stashed changes
                         <th>Chức năng</th>
                       </tr>
                     </thead>
                     <tbody>
                       <c:forEach items="${discountList}" var="discount">
+<<<<<<< Updated upstream
 						<c:set var="urlDel" value="${pageContext.request.contextPath}/admin/discount/del/${discount.discountId}" />
 						<tr class="odd gradeX">
 							<td>${discount.discountId}</td>
@@ -58,6 +65,16 @@
 							<td class="center text-center">
 								<a href="" data-toggle="modal" data-target="#exampleModalCenter${discount.discountId}" class="btn btn-sm btn-success"><i class="fa fa-edit">Detail</i></a>
 								<a href="" data-toggle="modal" data-target="#exampleModalCenter${discount.discountId}" class="btn btn-sm btn-primary"><i class="fa fa-edit">Edit</i></a>
+=======
+						<c:set var="urlDel" value="${pageContext.request.contextPath}/admin/locationType/del/${discount.discountId}" />
+						<tr class="odd gradeX">
+							<td>${discount.discountId}</td>
+							<td>${discount.discountTitle}</td>
+							<td>${discount.codeDiscount}</td>
+							<td class="center text-center">
+								<a href="" data-toggle="modal" data-target="#exampleModalCenter${discount.discountId}" class="btn btn-sm btn-success"><i class="fa fa-edit">Detail</i></a>
+								<a href="" data-toggle="modal" data-target="#exampleModalCenter${discount.discountId}" class="btn btn-sm btn-success"><i class="fa fa-edit">Edit</i></a>
+>>>>>>> Stashed changes
                                 <a href="${urlDel}" title="Xóa" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Xóa</a>
 							</td>
 						</tr>
@@ -71,6 +88,7 @@
 			                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			                    <span aria-hidden="true">&times;</span>
 			                  </button>
+<<<<<<< Updated upstream
 			                </div>
 			                <div class="modal-body">
 				                <form role="form" action="${pageContext.request.contextPath}/admin/discount/edit/${discount.discountId}" method="post" id="form">
@@ -110,7 +128,24 @@
 					                    <div class="form-group">
 					                      <label for="name">Hình ảnh</label>
 					                      <input class="form-control mb-3" type="text" value="${discount.discountVideoId}" id="discountVideoId" name="discountVideoId">
+=======
+			                </div> 
+			                <div class="modal-body"> 
+				                <form role="form" action="${pageContext.request.contextPath}/admin/discount/edit/${discount.discountId}" method="post" id="form">
+				                	<div class="comment-form">
+				                		<div class="form-group">
+					                      <label for="name">ID loại địa điểm</label>
+					                      <input class="form-control mb-3" type="text" value="${discount.discountId}" id="discountId" name="discountId">
 					                    </div>
+										<div class="form-group">
+					                      <label for="name">Tên loại địa điểm</label>
+					                      <input class="form-control mb-3" type="text" value="${discount.discounTitle}" id="discounTitle" name="discounTitle">
+>>>>>>> Stashed changes
+					                    </div>
+					                    <div class="form-group">
+					                      <label for="name">Tên loại địa điểm</label>
+					                      <input class="form-control mb-3" type="text" value="${discount.codeDiscount}" id="codeDiscount" name="codeDiscount">
+					                    </div> 
 					                    <div class="form-group">
 					                      <input class="form-control mb-3" type="submit" value="SỬA">
 					                    </div>
