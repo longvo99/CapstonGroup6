@@ -5,7 +5,7 @@
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+            <h1 class="h3 mb-0 text-gray-800">Trang chủ</h1>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="./">Home</a></li>
               <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
@@ -19,7 +19,7 @@
                 <div class="card-body">
                   <div class="row align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">QUẢN LÝ DANH MỤC</div>
+                      <div class="text-xs font-weight-bold text-uppercase mb-1">QUẢN LÝ ĐỊA ĐIỂM</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800">20</div>
                     </div>
                     <div class="col-auto">
@@ -35,8 +35,8 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">QUẢN LÝ TIN TỨC</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">10</div>
+                      <div class="text-xs font-weight-bold text-uppercase mb-1">QUẢN LÝ ĐẶT HÀNG</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">Có 10 đơn hàng mới</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-shopping-cart fa-2x text-success"></i>
@@ -52,7 +52,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-uppercase mb-1">QUẢN LÝ NGƯỜI DÙNG</div>
-                      <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">20</div>
+                      <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">Có 20 người đăng nhập gần đây</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-users fa-2x text-info"></i>
@@ -67,8 +67,8 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">QUẢN LÝ BÌNH LUẬN</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                      <div class="text-xs font-weight-bold text-uppercase mb-1">QUẢN LÝ LIÊN HỆ</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">Có 18 liên hệ chưa trả lời</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-comments fa-2x text-warning"></i>
