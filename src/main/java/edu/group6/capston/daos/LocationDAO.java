@@ -22,10 +22,10 @@ public class LocationDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	public boolean save(LocationDTO location) {
+	public boolean save(Location location) {
 		Session session = this.sessionFactory.openSession();
 		Transaction tx = null;
-		try{
+		try {
 			tx = session.beginTransaction();
 			session.persist(location);
 			tx.commit();
@@ -74,7 +74,6 @@ public class LocationDAO {
 			root.get("country"),
 			root.get("categoryId"),
 			root.get("discountId"),
-			root.get("locationVideoId"),
 			root.get("productId"),
 			root.get("ratingId")
 		));

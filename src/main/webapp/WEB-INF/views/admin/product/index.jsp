@@ -31,7 +31,7 @@
               <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <div class="col-sm-10">
-                  	<a href="${pageContext.request.contextPath}/admin/product/add" class="btn btn-success btn-md"><i class="fa fa-plus-square"> Thêm </i></a>
+                  	<a href="${pageContext.request.contextPath}/admin/product/add/${locationId}" class="btn btn-success btn-md"><i class="fa fa-plus-square"> Thêm </i></a>
                   </div>
                 </div>
                 
@@ -49,15 +49,15 @@
                     </thead>
                     <tbody>
                       <c:forEach items="${productList}" var="product">
-						<c:set var="urlDel" value="${pageContext.request.contextPath}/admin/locationType/del/${locationType.locationTypeId}" />
+						<c:set var="urlDel" value="${pageContext.request.contextPath}/admin/edit/del/${product.productId}" />
 						<tr class="odd gradeX">
 							<td>${product.productId}</td>
-							<td>${product.productName}</td>
-							<td>${product.productPrice}</td>
-							<td>${product.CategoryName}</td>
+							<td>${product.name}</td>
+							<td>${product.price}</td>
+							<td>${product.productCategories.productCategoryName}</td>
 							<td class="center text-center">
 								<a href="" data-toggle="modal" data-target="#exampleModalCenter${product.productId}" class="btn btn-sm btn-success"><i class="fa fa-edit">Detail</i></a>
-								<a href="" data-toggle="modal" data-target="#exampleModalCenter${product.productId}" class="btn btn-sm btn-primary"><i class="fa fa-edit">Edit</i></a>
+								<a href="${pageContext.request.contextPath}/admin/product/edit/${product.productId}" class="btn btn-sm btn-primary"><i class="fa fa-edit">Edit</i></a>
                                 <a href="${urlDel}" title="Xóa" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Xóa</a>
 							</td>
 						</tr>
@@ -76,13 +76,35 @@
 				                <form role="form" action="${pageContext.request.contextPath}/admin/product/edit/${product.productId}" method="post" id="form">
 				                	<div class="comment-form">
 				                		<div class="form-group">
-					                      <label for="name">ID loại địa điểm</label>
-					                      <input class="form-control mb-3" type="text" value="${locationType.locationTypeId}" id="locationTypeId" name="locationTypeId">
+					                      <label for="name">ID</label>
+					                      <input class="form-control mb-3" type="text" value="${product.productId}" id="productId" name="productId" readonly>
 					                    </div>
 										<div class="form-group">
-					                      <label for="name">Tên loại địa điểm</label>
-					                      <input class="form-control mb-3" type="text" value="${locationType.locationTypeName}" id="locationTypeName" name="locationTypeName">
+					                      <label for="name">Tên sản phẩm</label>
+					                      <input class="form-control mb-3" type="text" value="${product.name}" id="name" name="name" readonly>
 					                    </div>
+					                    <div class="form-group">
+					                      <label for="name">Tên giá</label>
+					                      <input class="form-control mb-3" type="text" value="${product.price}" id="price" name="price" readonly>
+					                    </div>
+					                    <div class="form-group">
+					                      <label for="name">Tên mô tả</label>
+					                      <input class="form-control mb-3" type="text" value="${product.describe}" id="describe" name="describe" readonly>
+					                    </div>
+					                    <div class="form-group">
+					                      <label for="name">Số lần đặt hàng</label>
+					                      <input class="form-control mb-3" type="text" value="${product.orderCount}" id="orderCount" name="orderCount" readonly>
+					                    </div>
+					                    <div class="form-group">
+					                      <label for="name">Loại sản phẩm</label>
+					                      <input class="form-control mb-3" type="text" value="${product.productCategories.productCategoryName}" id="productCategories.productCategoryId" name="productCategories.productCategoryId" readonly>
+					                    </div>
+					                    <div class="form-group">
+					                    	<label for="name">Hình ảnh</label>
+									    	<div class="ml-2 col-sm-6">
+											  <img src="${pageContext.request.contextPath}/resources/admin/image/uploads/${product.imagePath}" class="img-thumbnail">
+											</div>
+									    </div>
 					                    <div class="form-group">
 					                      <input class="form-control mb-3" type="submit" value="SỬA">
 					                    </div>
@@ -97,7 +119,7 @@
                     </tbody>
                   </table>
                   </c:if>
-                  <c:if test="${empty locationTypeList}">
+                  <c:if test="${empty productList}">
 					<tr>
 						<td colspan="4" align="center">Chưa có người dùng nào!</td>
 					</tr>

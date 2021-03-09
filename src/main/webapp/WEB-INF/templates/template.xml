@@ -37,6 +37,11 @@
 		<put-attribute name="public-sidebar" value="" />
 	</definition>
 	
+	<!-- PAGE ADMIN INDEX  -->
+	<definition name="admin.index" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/index/index.jsp" />
+	</definition>
+	
 	<!-- ADMIN USER  -->
 	<definition name="admin.user.index" extends="templates.admin">
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/user/index.jsp" />
@@ -48,8 +53,17 @@
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/user/add.jsp" />
 	</definition>
 	
-	<definition name="admin.location.test" template="/WEB-INF/views/admin/location/test.jsp">
+	<!-- ADMIN PRODUCT  -->
+	<definition name="admin.product.index" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/product/index.jsp" />
 	</definition>
+	<definition name="admin.product.add" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/product/add.jsp" />
+	</definition>
+	<definition name="admin.product.edit" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/product/edit.jsp" />
+	</definition>
+	
 	<!-- ADMIN LOCATIONS  -->
 	<definition name="admin.location.index" extends="templates.admin">
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/location/index.jsp" />
@@ -60,6 +74,9 @@
 	<definition name="admin.location.edit" extends="templates.admin">
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/location/edit.jsp" />
 	</definition>
+	<definition name="admin.location.image" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/location/image.jsp" />
+	</definition>
 	<!-- ADMIN LOCATIONTYPES  -->
 	<definition name="admin.locationType.index" extends="templates.admin">
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/locationType/index.jsp" />
@@ -67,6 +84,15 @@
 	<definition name="admin.locationType.add" extends="templates.admin">
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/locationType/add.jsp" />
 	</definition>
+	
+	<!-- ADMIN ORDER  -->
+	<definition name="admin.order.index" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/order/index.jsp" />
+	</definition>
+	<definition name="admin.order.orderDetail" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/order/detail.jsp" />
+	</definition>
+	
 <!-- <<<<<<< Updated upstream -->
 	<!-- ADMIN DISCOUNTS  -->
 	<definition name="admin.discount.index" extends="templates.admin">

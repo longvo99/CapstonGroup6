@@ -23,7 +23,11 @@
 			</c:if>
               <div class="card mb-4">
                 <div class="card-body">
-                  <form role="form" action="${pageContext.request.contextPath}/admin/product/add" method="post" id="form" enctype="multipart/form-data">
+                  <form role="form" action="${pageContext.request.contextPath}/admin/product/edit" method="post" id="form" enctype="multipart/form-data">
+                  	<div class="form-group">
+                      <label for="name">ID sản phẩm</label>
+                      <input class="form-control mb-3" type="text" value="${product.productId}" id="productId" name="productId" readonly>
+                    </div>
                   	<div class="form-group">
                       <label for="name">Tên sản phẩm</label>
                       <input class="form-control mb-3" type="text" value="${product.name}" id="name" name="name">
@@ -41,26 +45,34 @@
                       <select class="form-control" id="productCategories.productCategoryId" name="productCategories.productCategoryId">
                       <c:if test="${not empty productCategoryList}">
                       	<c:forEach items="${productCategoryList}" var="productCategory">
-							<option value="${productCategory.productCategoryId}">${productCategory.productCategoryName}</option>
+							<c:choose>
+								<c:when test="${productCategory.productCategoryId eq product.productCategories.productCategoryId}">
+									<c:set var="selected" value="selected='selected'" />
+								</c:when>
+								<c:otherwise>
+									<c:set var="selected" value="" />
+								</c:otherwise>
+							</c:choose>
+							<option ${selected} value="${productCategory.productCategoryId}">${productCategory.productCategoryName}</option>
 						 </c:forEach>
 					  </c:if>
                       </select>
                     </div>
                     <div class="form-group">
                       <label for="name">Id địa điểm</label>
-                      <input class="form-control mb-3" type="text" value="${locationId}" id="locationId" name="locationId" readonly>
+                      <input class="form-control mb-3" type="text" value="${product.locationId}" id="locationId" name="locationId" readonly>
                     </div>
                     <div class="form-group">
                     	<label for="name">Upload hình ảnh</label>
                     	<input type="file" name="image" class="file" accept="image/*">
 					    <div class="input-group my-3">
-					      <input type="text" class="form-control" name="image" disabled placeholder="Upload File" id="file">
+					      <input type="text" class="form-control" value="${product.imagePath}" name="image" disabled placeholder="Upload File" id="file">
 					      <div class="input-group-append">
 					        <button type="button" class="browse btn btn-primary">Chọn ảnh</button>
 					      </div>
 				    	</div>
 				    	<div class="ml-2 col-sm-6">
-						  <img src="https://placehold.it/80x80" id="preview" class="img-thumbnail">
+						  <img src="${pageContext.request.contextPath}/resources/admin/image/uploads/${product.imagePath}" id="preview" class="img-thumbnail">
 						</div>
 				    </div>
                     <style type="text/css">
@@ -91,7 +103,7 @@
                     	  reader.readAsDataURL(this.files[0]);
                     	});
                     </script>
-                    <button type="submit" class="btn btn-primary" name="submit">Thêm mới</button>
+                    <button type="submit" class="btn btn-primary" name="submit">Cập nhập</button>
                   </form>
                 </div>
               </div>

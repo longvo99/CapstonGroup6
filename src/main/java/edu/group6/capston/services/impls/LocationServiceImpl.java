@@ -21,7 +21,7 @@ public class LocationServiceImpl implements LocationService {
 	}
 
 	@Override
-	public boolean save(LocationDTO location) {
+	public boolean save(Location location) {
 		if(LocationDAO.save(location))
 			return true;
 		return false;
@@ -42,7 +42,7 @@ public class LocationServiceImpl implements LocationService {
 	}
 
 	@Override
-	public Location findUserId(int id) {
+	public Location findLocationId(int id) {
 		return LocationDAO.findById(id);
 	}
 
