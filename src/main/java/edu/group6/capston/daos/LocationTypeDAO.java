@@ -22,12 +22,12 @@ public class LocationTypeDAO {
 		}
 	}
 
-	public boolean save(LocationTypes locationTypies) {
+	public boolean save(LocationTypes locationTypes) {
 		Session session = this.sessionFactory.openSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			session.persist(locationTypies);
+			session.persist(locationTypes);
 			tx.commit();
 			session.close();
 			return true;
@@ -36,10 +36,10 @@ public class LocationTypeDAO {
 		}
 	}
 
-	public boolean update(LocationTypes locationTypies) {
+	public boolean update(LocationTypes locationTypes) {
 		try (Session session = this.sessionFactory.openSession()) {
 			Transaction tx = session.beginTransaction();
-			session.update(locationTypies);
+			session.update(locationTypes);
 			tx.commit();
 			session.close();
 			return true;
