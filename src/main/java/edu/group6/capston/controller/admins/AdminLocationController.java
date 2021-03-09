@@ -26,11 +26,9 @@ import edu.group6.capston.dtos.ImageUpload;
 import edu.group6.capston.dtos.LocationDTO;
 import edu.group6.capston.models.Location;
 import edu.group6.capston.models.LocationCategory;
-import edu.group6.capston.models.LocationVideo;
 import edu.group6.capston.services.LocationCategoriesService;
 import edu.group6.capston.services.LocationService;
 import edu.group6.capston.services.LocationTypeService;
-import edu.group6.capston.services.LocationVideoService;
 import edu.group6.capston.utils.GlobalsConstant;
 import edu.group6.capston.utils.UploadFile;
 
@@ -50,13 +48,9 @@ public class AdminLocationController {
 	@Autowired
 	private LocationTypeService locationTypeService;
 
-	@Autowired
-	private LocationVideoService locationVideoService;
-
 	@GetMapping("/index")
 	public String Index(Model model) {
 		model.addAttribute("locationList", locationService.findAll());
-		model.addAttribute("locationVideoList", locationVideoService.findAll());
 		return "admin.location.index";
 	}
 
@@ -71,7 +65,7 @@ public class AdminLocationController {
 		List<LocationCategory> locationCategoriesList1 = new ArrayList<LocationCategory>();
 		List<LocationCategory> locationCategoriesList2 = new ArrayList<LocationCategory>();
 		for (LocationCategory locationCategories : locationCategoriesList) {
-			if (locationCategories.getParentId() == locationCategories.getLocationCategoryId()) {
+			if (locationCategories.getParentId() == locationCategories.getCategoryId()) {
 				locationCategoriesList1.add(locationCategories);
 			} else {
 				locationCategoriesList2.add(locationCategories);
@@ -95,21 +89,6 @@ public class AdminLocationController {
 		}
 		System.out.println("abc " + UploadFile.getDirPath(request));
 		List<MultipartFile> files = imageUpload.getImages();
-		if (locationService.save(location)) {
-			if (null != files && files.size() > 0) {
-				for (MultipartFile multipartFile : files) {
-					String fileName = UploadFile.upload(multipartFile, request);
-					if (!"".equals(fileName)) {
-						LocationVideo locationVideo = new LocationVideo(fileName, location.getLocationId());
-						locationVideoService.save(locationVideo);
-					}
-				}
-			}
-			rd.addFlashAttribute(GlobalsConstant.MESSAGE,
-					messageSource.getMessage("success", null, Locale.getDefault()));
-			rd.addFlashAttribute("success", true);
-			return "redirect:/admin/location/index";
-		}
 		rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
 		rd.addFlashAttribute("error", true);
 		model.addAttribute("location", location);
@@ -123,7 +102,7 @@ public class AdminLocationController {
 		List<LocationCategory> locationCategoriesList1 = new ArrayList<LocationCategory>();
 		List<LocationCategory> locationCategoriesList2 = new ArrayList<LocationCategory>();
 		for (LocationCategory locationCategories : locationCategoriesList) {
-			if (locationCategories.getParentId() == locationCategories.getLocationCategoryId()) {
+			if (locationCategories.getParentId() == locationCategories.getCategoryId()) {
 				locationCategoriesList1.add(locationCategories);
 			} else {
 				locationCategoriesList2.add(locationCategories);

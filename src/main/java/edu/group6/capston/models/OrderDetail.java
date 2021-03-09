@@ -12,16 +12,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "Roles")
+@Table(name = "OrderDetail")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Roles {
+public class OrderDetail {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	private int roleId;
+	private int orderDetailId;
 	@Column
-	private String roleName;
-	
+	private String currentPrice;
+	@Column
+	private String quantity;
+	@Column
+	private String note;
+	@Column
+	private int productId;
+	@Column
+	private boolean isCompo;
+	@Column
+	private int orderId;
 }

@@ -2,11 +2,11 @@ package edu.group6.capston.services;
 
 import java.util.List;
 
-import edu.group6.capston.models.Roles;;
+import edu.group6.capston.models.Role;;
 
 public interface RoleService {
-	List<Roles> findAll();
-	boolean save(Roles role);
-	boolean update(Roles role);
+	List<Role> findAll();
+	boolean save(Role role);
+	boolean update(Role role);
 	boolean delete(Integer id);
 }

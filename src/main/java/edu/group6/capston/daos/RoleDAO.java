@@ -8,7 +8,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import edu.group6.capston.models.Roles;
+import edu.group6.capston.models.Role;
 
 @Repository
 public class RoleDAO {
@@ -16,13 +16,13 @@ public class RoleDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public List<Roles> findAll() {
+	public List<Role> findAll() {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("from Roles", Roles.class).list();
+			return session.createQuery("from Role", Role.class).list();
 		}
 	}
 
-	public boolean save(Roles locationTypies) {
+	public boolean save(Role locationTypies) {
 		Session session = this.sessionFactory.openSession();
 		Transaction tx = null;
 		try {
@@ -36,7 +36,7 @@ public class RoleDAO {
 		}
 	}
 
-	public boolean update(Roles role) {
+	public boolean update(Role role) {
 		try (Session session = this.sessionFactory.openSession()) {
 			Transaction tx = session.beginTransaction();
 			session.update(role);
@@ -51,8 +51,8 @@ public class RoleDAO {
 	public boolean delete(Integer id) {
 		try (Session session = this.sessionFactory.openSession()) {
 			Transaction tx = session.beginTransaction();
-			Roles locationTypes;
-			locationTypes = (Roles) session.load(Roles.class, id);
+			Role locationTypes;
+			locationTypes = (Role) session.load(Role.class, id);
 			session.delete(locationTypes);
 			// This makes the pending delete to be done
 			session.flush();

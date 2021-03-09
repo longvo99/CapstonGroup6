@@ -32,10 +32,10 @@ public class Orders {
 	@JoinColumn(name = "orderStatusId")
 	private OrderStatus orderStatus;
 	@ManyToOne
-	@JoinColumn(name = "userOrderId")
+	@JoinColumn(name = "UserId")
 	private User user;
 	@Column
-	private String totalPrice;
+	private float totalPrice;
 	@Column
 	private String note;
 	@Column

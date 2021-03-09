@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import edu.group6.capston.models.Roles;
+import edu.group6.capston.models.Role;
 import edu.group6.capston.services.RoleService;
 import edu.group6.capston.utils.GlobalsConstant;
 
@@ -42,31 +42,31 @@ public class AdminRoleController {
 	}
 	
 	@PostMapping(value ="/add")
-	public String Add(@Valid @ModelAttribute("roles") Roles roles, BindingResult br, RedirectAttributes rd,
+	public String Add(@Valid @ModelAttribute("role") Role role, BindingResult br, RedirectAttributes rd,
 			HttpServletRequest request, Model model) {
 		if (br.hasErrors()) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
 			return "admin.role.add";
 		}
-		if (roleService.save(roles)) {
+		if (roleService.save(role)) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE,
 					messageSource.getMessage("success", null, Locale.getDefault()));
 			rd.addFlashAttribute("success", true);
 			return "redirect:/admin/role/index";
 		}
 		rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
-		model.addAttribute("roles", roles);
+		model.addAttribute("roles", role);
 		return "admin.role.add";
 	}
 	
 	@PostMapping(value ="/edit")
-	public String Edit(@Valid @ModelAttribute("roles") Roles roles, BindingResult br, RedirectAttributes rd,
+	public String Edit(@Valid @ModelAttribute("role") Role role, BindingResult br, RedirectAttributes rd,
 			HttpServletRequest request, Model model) throws UnsupportedEncodingException {
 		if (br.hasErrors()) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
 			return "admin.role.index";
 		}
-		if (roleService.update(roles)) {
+		if (roleService.update(role)) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("success", null, Locale.getDefault()));
 			rd.addFlashAttribute("success", true);
 			return "redirect:/admin/role/index";

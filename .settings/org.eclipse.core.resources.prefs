@@ -5,7 +5,6 @@ eclipse.preferences.version=1
 encoding//src/main/java/edu/group6/capston/configs/SpringMVCApplication.java=UTF-8
 encoding//src/main/java/edu/group6/capston/controller/admins/AdminIndexController.java=UTF-8
 encoding//src/main/java/edu/group6/capston/controller/admins/AdminLocationController.java=UTF-8
-encoding//src/main/java/edu/group6/capston/controller/admins/AdminLocationVideoController.java=UTF-8
 encoding//src/main/java/edu/group6/capston/controller/admins/AdminUserController.java=UTF-8
 encoding//src/main/java/edu/group6/capston/dtos/LocationDTO.java=UTF-8
 encoding//src/main/java/edu/group6/capston/models/Location.java=UTF-8

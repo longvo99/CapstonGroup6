@@ -11,26 +11,21 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Entity
-@Table(name = "LocationVideo")
+@Table(name = "Size")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class LocationVideo {
+public class Size {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	private int locationVideoId;
+	private int sizeId;
 	@Column
-	private String locationVideoPath;
+	private String sizeName;
 	@Column
-	private int locationId;
-	
-	public LocationVideo(String locationVideoPath, int locationId) {
-		super();
-		this.locationVideoPath = locationVideoPath;
-		this.locationId = locationId;
-	}
-	
+	private String priceBonus;
+	@Column
+	private String note;
 }

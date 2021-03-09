@@ -11,22 +11,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Entity
-@Table(name = "LocationCategory")
+@Table(name = "Role")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class LocationCategory{
-	/**
-	 * 
-	 */
+public class Role {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "CategoryId")
-	private int CategoryId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	private String lCategoryName;
-	@Column(nullable = true)
-	private int parentId;
+	private int roleId;
+	@Column
+	private String roleName;
+	
 }

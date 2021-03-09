@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,12 +16,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "User")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class User {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	private int userId;
 	@Column
@@ -52,5 +55,5 @@ public class User {
 	private boolean hide;
 	@ManyToOne
 	@JoinColumn(name = "roleId")
-	private Roles roles;
+	private Role roles;
 }
