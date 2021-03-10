@@ -27,6 +27,6 @@ public class LocationCategory{
 	private int CategoryId;
 	@Column
 	private String lCategoryName;
-	@Column(nullable = true)
+	@Column
 	private int parentId;
 }

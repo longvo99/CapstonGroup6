@@ -2,11 +2,6 @@ package edu.group6.capston.daos;
 
 import java.util.List;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.JoinType;
-import javax.persistence.criteria.Root;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -47,7 +42,14 @@ public class LocationDAO {
 			return false;
 		}
 	}
-
+	
+	public List<Location> findAll() {
+		try (Session session = this.sessionFactory.openSession()) {
+			return session.createQuery("from Location", Location.class).list();
+		}
+	}
+	
+	/**
 	public List<LocationDTO> findAll() {
 		List<LocationDTO> locationList = null;
 		Session session = this.sessionFactory.openSession();
@@ -55,34 +57,32 @@ public class LocationDAO {
 		CriteriaBuilder builder = session.getCriteriaBuilder();
 		CriteriaQuery<LocationDTO> query = builder.createQuery(LocationDTO.class);
 		Root<Location> root = query.from(Location.class);
-		root.join("locationCategories", JoinType.INNER);
-		root.join("locationTypies", JoinType.INNER);
+		root.join("locationCategory", JoinType.INNER);
+		root.join("locationType", JoinType.INNER);
 		query.select(builder.construct(LocationDTO.class,
 			root.get("locationId"),
 			root.get("locationName"),
+			root.get("country"),
+			root.get("city"),
+			root.get("district"),
+			root.get("ward"),
 			root.get("address"),
+			root.get("mediaPath"),
 			root.get("openTime"),
 			root.get("closeTime"),
 			root.get("reviewCount"),
-			root.get("locationCategories").get("locationCategoryId"),
-			root.get("locationCategories").get("locationCategoryName"),
-			root.get("locationTypies").get("locationTypeId"),
-			root.get("locationTypies").get("locationTypeName"),
-			root.get("ward"),
-			root.get("district"),
-			root.get("city"),
-			root.get("country"),
-			root.get("categoryId"),
-			root.get("discountId"),
-			root.get("productId"),
-			root.get("ratingId")
+			root.get("locationCategory").get("categoryId"),
+			root.get("locationCategory").get("lCategoryName"),
+			root.get("locationType").get("locationTypeId"),
+			root.get("locationType").get("locationTypeName"),
+			root.get("userId")
 		));
 		locationList = session.createQuery(query).getResultList();
 		transaction.commit();
 		session.close();
 		return locationList;
 	}
-
+	**/
 	public Location findById(int id) {
 		Session session = this.sessionFactory.openSession();
 		return session.find(Location.class, id);

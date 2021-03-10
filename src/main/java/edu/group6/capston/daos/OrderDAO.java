@@ -8,7 +8,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import edu.group6.capston.models.Orders;
+import edu.group6.capston.models.Order;
 
 @Repository
 public class OrderDAO {
@@ -16,13 +16,13 @@ public class OrderDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public List<Orders> findAll() {
+	public List<Order> findAll() {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("from Orders ", Orders.class).list();
+			return session.createQuery("from Order ", Order.class).list();
 		}
 	}
 
-	public boolean save(Orders order) {
+	public boolean save(Order order) {
 		Session session = this.sessionFactory.openSession();
 		Transaction tx = null;
 		try {
@@ -36,7 +36,7 @@ public class OrderDAO {
 		}
 	}
 
-	public boolean update(Orders order) {
+	public boolean update(Order order) {
 		try (Session session = this.sessionFactory.openSession()) {
 			Transaction tx = session.beginTransaction();
 			session.update(order);
@@ -51,8 +51,8 @@ public class OrderDAO {
 	public boolean delete(Integer id) {
 		try (Session session = this.sessionFactory.openSession()) {
 			Transaction tx = session.beginTransaction();
-			Orders Order;
-			Order = (Orders) session.load(Orders.class, id);
+			Order Order;
+			Order = (Order) session.load(Order.class, id);
 			session.delete(Order);
 			// This makes the pending delete to be done
 			session.flush();

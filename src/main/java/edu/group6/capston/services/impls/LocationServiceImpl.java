@@ -16,7 +16,7 @@ public class LocationServiceImpl implements LocationService {
 	private LocationDAO LocationDAO;
 	
 	@Override
-	public List<LocationDTO> findAll() {
+	public List<Location> findAll() {
 		return LocationDAO.findAll();
 	}
 

@@ -51,7 +51,7 @@
 					  	<tr class="odd gradeX">
 							<td>${location.locationId}</td>
 							<td>${location.locationName}</td>
-							<td>${location.locationCategoryName}</td>
+							<td>${location.locationCategory.lCategoryName}</td>
 							<td class="center text-center">
 								<a href="${pageContext.request.contextPath}/admin/location/edit/${location.locationId}" class="btn btn-sm btn-success"><i class="fa fa-edit">Chi tiết</i></a>
                                 <a href="${pageContext.request.contextPath}/admin/locationVideo/image/${location.locationId}" class="btn btn-sm btn-primary"><i class="fa fa-edit">Hình ảnh</i></a>
@@ -133,63 +133,6 @@
 			          </div> --%>
 			          <!-- Modal Center -->
 			          </c:forEach>
-			          <script>
-						$(document).ready(function(){
-	
-							 load_json_data('city');
-	
-							 function load_json_data(id, parent_id)
-							 {
-							  var html_code = '';
-							  $.getJSON('${pageContext.request.contextPath}/resources/admin/assets/js/city_district_ward.json', function(data){
-	
-							   html_code += '<option value="">Select</option>';
-							   $.each(data, function(key, value){
-							    if(id == 'city')
-							    {
-							     if(value.parent_id == '0')
-							     {
-							      html_code += '<option value="'+value.id+'">'+value.name+'</option>';
-							     }
-							    }
-							    else
-							    {
-							     if(value.parent_id == parent_id)
-							     {
-							      html_code += '<option value="'+value.id+'">'+value.name+'</option>';
-							     }
-							    }
-							   });
-							   $('#'+id).html(html_code);
-							  });
-	
-							 }
-	
-							 $(document).on('change', '#city', function(){
-							  var city_id = $(this).val();
-							  if(city_id != '')
-							  {
-							   load_json_data('district', city_id);
-							  }
-							  else
-							  {
-							   $('#district').html('<option value="">Select</option>');
-							   $('#ward').html('<option value="">Select</option>');
-							  }
-							 });
-							 $(document).on('change', '#district', function(){
-							  var district_id = $(this).val();
-							  if(district_id != '')
-							  {
-							   load_json_data('ward', district_id);
-							  }
-							  else
-							  {
-							   $('#ward').html('<option value="">Select</option>');
-							  }
-							 });
-							});
-						</script>
                     </tbody>
                   </table>
                   </c:if>

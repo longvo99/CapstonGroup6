@@ -26,13 +26,13 @@ public class Location{
 	@Column
 	private String locationName;
 	@Column
-	private String ward;
-	@Column
-	private String district;
+	private String country;
 	@Column
 	private String city;
 	@Column
-	private String country;
+	private String district;
+	@Column
+	private String ward;
 	@Column
 	private String address;
 	@Column
@@ -49,6 +49,7 @@ public class Location{
 	@ManyToOne
 	@JoinColumn(name = "locationTypeId")
 	private LocationType locationType;
-	@Column
-	private int userId;
+	@ManyToOne
+	@JoinColumn(name = "userId")
+	private User user;
 }

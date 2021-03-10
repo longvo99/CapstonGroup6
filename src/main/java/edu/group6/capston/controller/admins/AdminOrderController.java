@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import edu.group6.capston.models.Orders;
+import edu.group6.capston.models.Order;
 import edu.group6.capston.services.OrderService;
 import edu.group6.capston.utils.GlobalsConstant;
 
@@ -28,22 +28,22 @@ public class AdminOrderController {
 	MessageSource messageSource;
 	
 	@Autowired
-	private OrderService orderService;
+	private OrderService OrderService;
 	
 	@RequestMapping(value ="/index")
 	public String Index(Model model) {
-		model.addAttribute("orderList" , orderService.findAll());
+		model.addAttribute("orderList" , OrderService.findAll());
 		return "admin.order.index";
 	}
 	
 	@PostMapping(value ="/edit")
-	public String Edit(@Valid @ModelAttribute("order") Orders orders, BindingResult br, RedirectAttributes rd,
+	public String Edit(@Valid @ModelAttribute("order") Order Order, BindingResult br, RedirectAttributes rd,
 			HttpServletRequest request, Model model) throws UnsupportedEncodingException {
 		if (br.hasErrors()) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
 			return "admin.order.index";
 		}
-		if (orderService.update(orders)) {
+		if (OrderService.update(Order)) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("success", null, Locale.getDefault()));
 			rd.addFlashAttribute("success", true);
 			return "redirect:/admin/order/index";

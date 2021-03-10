@@ -1,6 +1,6 @@
 package edu.group6.capston.models;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,30 +30,28 @@ public class User {
 	@Column
 	private String password;
 	@Column
-	private String fullname;
+	private String contactName;
 	@Column
-	private String phone;
+	private String contactPhone;
 	@Column
-	private String email;
+	private String contactEmail;
 	@Column
-	private String address;
+	private String contactAddress;
 	@Column
 	private String gender;
 	@Column
-	private Date dateOfBirth;
+	private Timestamp dateOfBirth;
 	@Column
 	private String avatarPath;
 	@Column
-	private String avatarAlt;
-	@Column
 	private String description;
 	@Column
-	private Date joinDate;
+	private Timestamp joinDate;
 	@Column
-	private boolean banned;
+	private boolean isBanned;
 	@Column
-	private boolean hide;
+	private boolean isHide;
 	@ManyToOne
 	@JoinColumn(name = "roleId")
-	private Role roles;
+	private Role role;
 }
