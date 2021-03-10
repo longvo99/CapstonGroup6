@@ -8,8 +8,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import edu.group6.capston.models.Product;
-import edu.group6.capston.models.ProductCategories;
+import edu.group6.capston.models.ProductCategory;
 
 @Repository
 public class ProductCategoryDAO {
@@ -17,13 +16,13 @@ public class ProductCategoryDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public List<ProductCategories> findAll() {
+	public List<ProductCategory> findAll() {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("from ProductCategories", ProductCategories.class).list();
+			return session.createQuery("from ProductCategory", ProductCategory.class).list();
 		}
 	}
 	
-	public boolean save(ProductCategories Product) {
+	public boolean save(ProductCategory Product) {
 		Session session = this.sessionFactory.openSession();
 		Transaction tx = null;
 		try {
@@ -37,7 +36,7 @@ public class ProductCategoryDAO {
 		}
 	}
 
-	public boolean update(ProductCategories Product) {
+	public boolean update(ProductCategory Product) {
 		try (Session session = this.sessionFactory.openSession()) {
 			Transaction tx = session.beginTransaction();
 			session.update(Product);
@@ -52,8 +51,8 @@ public class ProductCategoryDAO {
 	public boolean delete(Integer id) {
 		try (Session session = this.sessionFactory.openSession()) {
 			Transaction tx = session.beginTransaction();
-			ProductCategories Product;
-			Product = (ProductCategories) session.load(ProductCategories.class, id);
+			ProductCategory Product;
+			Product = (ProductCategory) session.load(ProductCategory.class, id);
 			session.delete(Product);
 			session.flush();
 			tx.commit();

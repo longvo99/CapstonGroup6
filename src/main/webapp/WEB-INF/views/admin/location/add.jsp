@@ -53,13 +53,13 @@
                     </div>
                     <div class="form-group">
                       <label for="locationcategory">Location Category</label>
-                      <select class="form-control" id="locationcategory" name="locationCategories.locationCategoryId">
+                      <select class="form-control" id="locationcategory" name="locationCategory.categoryId">
 	                      <c:if test="${not empty locationCategoriesList1}">
 	                      	<c:forEach items="${locationCategoriesList1}" var="cat1">
 	                      	<optgroup label="${cat1.locationCategoryName}">
 							        <c:forEach items="${locationCategoriesList2}" var="cat2">
-							        <c:if test="${cat2.parentId eq cat1.locationCategoryId}">
-								        <option value="${cat2.locationCategoryId}">${cat2.locationCategoryName}</option>
+							        <c:if test="${cat2.parentId eq cat1.categoryId}">
+								        <option value="${cat2.categoryId}">${cat2.locationCategoryName}</option>
 								    </c:if>
 								    </c:forEach>
 							</optgroup>    
@@ -69,7 +69,7 @@
                     </div>
                     <div class="form-group">
                       <label for="locationtype">Location Type</label>
-                      <select class="form-control" id="locationType" name="locationTypies.locationTypeId">
+                      <select class="form-control" id="locationType" name="locationType.locationTypeId">
                       <c:if test="${not empty locationTypeList}">
                       	<c:forEach items="${locationTypeList}" var="type">
 							<option value="${type.locationTypeId}">${type.locationTypeName}</option>

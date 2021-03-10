@@ -42,11 +42,11 @@
                     </div>
                     <div class="form-group">
                       <label for="name">Loại sản phẩm</label>
-                      <select class="form-control" id="productCategories.productCategoryId" name="productCategories.productCategoryId">
+                      <select class="form-control" id="productCategory.productCategoryId" name="productCategory.productCategoryId">
                       <c:if test="${not empty productCategoryList}">
                       	<c:forEach items="${productCategoryList}" var="productCategory">
 							<c:choose>
-								<c:when test="${productCategory.productCategoryId eq product.productCategories.productCategoryId}">
+								<c:when test="${productCategory.productCategoryId eq product.productCategory.productCategoryId}">
 									<c:set var="selected" value="selected='selected'" />
 								</c:when>
 								<c:otherwise>
