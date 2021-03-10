@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import edu.group6.capston.dtos.UserDTO;
-import edu.group6.capston.models.User;
+import edu.group6.capston.models.Users;
 
 @Repository
 public class UserDAO{
@@ -22,7 +22,7 @@ public class UserDAO{
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public void save(User customer) {
+	public void save(Users customer) {
 		Session session = this.sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		session.persist(customer);
@@ -36,7 +36,7 @@ public class UserDAO{
 		Transaction transaction = session.beginTransaction();
 		CriteriaBuilder builder = session.getCriteriaBuilder();
 		CriteriaQuery<UserDTO> query = builder.createQuery(UserDTO.class);
-		Root<User> root = query.from(User.class);
+		Root<Users> root = query.from(Users.class);
 		root.join("roles", JoinType.INNER);
 		query.select(builder.construct(UserDTO.class,
 			root.get("userId"),

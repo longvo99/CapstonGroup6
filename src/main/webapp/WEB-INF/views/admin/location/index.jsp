@@ -51,7 +51,7 @@
 					  	<tr class="odd gradeX">
 							<td>${location.locationId}</td>
 							<td>${location.locationName}</td>
-							<td>${location.locationCategory.lCategoryName}</td>
+							<td>${location.locationCategory.locationCategoryName}</td>
 							<td class="center text-center">
 								<a href="${pageContext.request.contextPath}/admin/location/edit/${location.locationId}" class="btn btn-sm btn-success"><i class="fa fa-edit">Chi tiết</i></a>
                                 <a href="${pageContext.request.contextPath}/admin/locationVideo/image/${location.locationId}" class="btn btn-sm btn-primary"><i class="fa fa-edit">Hình ảnh</i></a>

@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -28,12 +26,12 @@ public class Order {
 	private int orderId;
 	@Column
 	private Timestamp orderTime;
-	@ManyToOne
-	@JoinColumn(name = "orderStatusId")
-	private OrderStatus orderStatus;
-	@ManyToOne
-	@JoinColumn(name = "UserId")
-	private User user;
+	@Column
+	//@ManyToOne
+	//@JoinColumn(name = "OrderStatusId")
+	private int orderStatusId;
+	@Column
+	private int userId;
 	@Column
 	private float totalPrice;
 	@Column

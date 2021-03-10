@@ -62,4 +62,9 @@ public class UploadFile {
 		}
 		return newFileName;
 	}
+	
+	public static String[] splitPathMedia(String pathMedia){
+		String[] parts = pathMedia.split(";");
+		return parts;
+	}
 }

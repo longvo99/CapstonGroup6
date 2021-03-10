@@ -51,5 +51,5 @@ public class Location{
 	private LocationType locationType;
 	@ManyToOne
 	@JoinColumn(name = "userId")
-	private User user;
+	private Users users;
 }
