@@ -47,10 +47,10 @@ public class Users {
 	private String description;
 	@Column
 	private Timestamp joinDate;
-	@Column
-	private boolean isBanned;
-	@Column
-	private boolean isHide;
+	@Column(name = "isBanned")
+	private boolean banned;
+	@Column(name = "isHide")
+	private boolean hide;
 	@ManyToOne
 	@JoinColumn(name = "roleId")
 	private Role role;

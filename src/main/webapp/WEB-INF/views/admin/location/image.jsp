@@ -9,7 +9,7 @@
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="m-0 font-weight-bold text-primarys">Add location</h1>
+            <h1 class="m-0 font-weight-bold text-primarys">Cập nhập hình ảnh</h1>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="./">Home</a></li>
               <li class="breadcrumb-item active" aria-current="page">Forms</li>
@@ -36,7 +36,7 @@
                 <div class="card-body">
                   <form role="form" method="post" action="${pageContext.request.contextPath}/admin/location/image/edit/${locationId}"  name="form-example-1" id="form-example-1" enctype="multipart/form-data">
                     <div class="input-field">
-				        <label class="active">Photos</label>
+				        <label class="active">Hình ảnh</label>
 				        <div class="input-images" style="padding-top: .5rem;"></div>
 				    </div>
                     <button type="submit" class="btn btn-primary" name="submit">Cập nhập</button>
@@ -52,8 +52,10 @@
       let preloaded = [
     	<c:if test="${not empty imagePath}">
 		    	<c:forEach items="${imagePath}" var="image">
+		    		<c:if test="${image != ''}"> 
 		  	  		{id: 1, src: '${pageContext.request.contextPath}/resources/admin/image/uploads/${image}'},
-		        </c:forEach>
+		  	  	 	</c:if>
+		  	  	</c:forEach>
 	    </c:if>
     	];
       	$('.input-images').imageUploader({

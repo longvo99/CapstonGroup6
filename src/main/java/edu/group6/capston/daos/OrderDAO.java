@@ -8,7 +8,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import edu.group6.capston.models.Order;
+import edu.group6.capston.models.Orders;
 
 @Repository
 public class OrderDAO {
@@ -16,18 +16,18 @@ public class OrderDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public List<Order> findAll() {
+	public List<Orders> findAll() {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("from Order ", Order.class).list();
+			return session.createQuery("from Order ", Orders.class).list();
 		}
 	}
 
-	public boolean save(Order order) {
+	public boolean save(Orders orders) {
 		Session session = this.sessionFactory.openSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			session.persist(order);
+			session.persist(orders);
 			tx.commit();
 			session.close();
 			return true;
@@ -36,10 +36,10 @@ public class OrderDAO {
 		}
 	}
 
-	public boolean update(Order order) {
+	public boolean update(Orders orders) {
 		try (Session session = this.sessionFactory.openSession()) {
 			Transaction tx = session.beginTransaction();
-			session.update(order);
+			session.update(orders);
 			tx.commit();
 			session.close();
 			return true;
@@ -51,9 +51,9 @@ public class OrderDAO {
 	public boolean delete(Integer id) {
 		try (Session session = this.sessionFactory.openSession()) {
 			Transaction tx = session.beginTransaction();
-			Order Order;
-			Order = (Order) session.load(Order.class, id);
-			session.delete(Order);
+			Orders Orders;
+			Orders = (Orders) session.load(Orders.class, id);
+			session.delete(Orders);
 			// This makes the pending delete to be done
 			session.flush();
 			tx.commit();

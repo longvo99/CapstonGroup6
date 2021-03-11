@@ -2,11 +2,11 @@ package edu.group6.capston.services;
 
 import java.util.List;
 
-import edu.group6.capston.models.Order;
+import edu.group6.capston.models.Orders;
 
 public interface OrderService {
-	List<Order> findAll();
-	boolean save(Order locationType);
-	boolean update(Order locationType);
+	List<Orders> findAll();
+	boolean save(Orders locationType);
+	boolean update(Orders locationType);
 	boolean delete(Integer id);
 }
