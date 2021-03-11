@@ -18,7 +18,7 @@ public class ProductDAO {
 
 	public List<Product> findByLocationId(int locationId) {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("from Product Where locationId = " + locationId, Product.class).list();
+			return session.createQuery("from Product Where locationId = " + locationId,Product.class).list();
 		}
 	}
 
@@ -26,7 +26,6 @@ public class ProductDAO {
 		Session session = this.sessionFactory.openSession();
 		Transaction tx = null;
 		try {
-			System.out.println("okkkk");
 			tx = session.beginTransaction();
 			session.persist(Product);
 			tx.commit();

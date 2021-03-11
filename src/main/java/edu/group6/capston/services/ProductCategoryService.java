@@ -2,11 +2,11 @@ package edu.group6.capston.services;
 
 import java.util.List;
 
-import edu.group6.capston.models.ProductCategories;
+import edu.group6.capston.models.ProductCategory;
 
 public interface ProductCategoryService {
-	List<ProductCategories> findAll();
-	boolean save(ProductCategories discount);
-	boolean update(ProductCategories discount);
+	List<ProductCategory> findAll();
+	boolean save(ProductCategory discount);
+	boolean update(ProductCategory discount);
 	boolean delete(Integer id);
 }

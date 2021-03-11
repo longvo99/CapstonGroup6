@@ -9,7 +9,7 @@
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="m-0 font-weight-bold text-primarys">Add location</h1>
+            <h1 class="m-0 font-weight-bold text-primarys">Cập nhập địa điểm</h1>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="./">Home</a></li>
               <li class="breadcrumb-item active" aria-current="page">Forms</li>
@@ -57,21 +57,21 @@
                     </div>
                     <div class="form-group">
                       <label for="locationcategory">Location Category</label>
-                      <select class="form-control" id="locationcategory" name="locationCategories.locationCategoryId">
+                      <select class="form-control" id="locationcategory" name="locationCategory.categoryId">
 	                      <c:if test="${not empty locationCategoriesList1}">
 	                      	<c:forEach items="${locationCategoriesList1}" var="cat1">
 	                      	<optgroup label="${cat1.locationCategoryName}">
 							        <c:forEach items="${locationCategoriesList2}" var="cat2">
-							        <c:if test="${cat2.parentId eq cat1.locationCategoryId}">
+							        <c:if test="${cat2.parentId eq cat1.categoryId}">
 							        	<c:choose>
-											<c:when test="${cat2.locationCategoryId eq location.locationCategories.locationCategoryId }">
+											<c:when test="${cat2.categoryId eq location.locationCategory.categoryId }">
 												<c:set var="selected" value="selected='selected'" />
 											</c:when>
 											<c:otherwise>
 												<c:set var="selected" value="" />
 											</c:otherwise>
 										</c:choose>
-								        <option ${selected} value="${cat2.locationCategoryId}">${cat2.locationCategoryName}</option>
+								        <option ${selected} value="${cat2.categoryId}">${cat2.locationCategoryName}</option>
 								    </c:if>
 								    </c:forEach>
 							</optgroup>    
@@ -81,11 +81,11 @@
                     </div>
                     <div class="form-group">
                       <label for="locationtype">Location Type</label>
-                      <select class="form-control" id="locationType" name="locationTypies.locationTypeId">
+                      <select class="form-control" id="locationType" name="locationType.locationTypeId">
                       <c:if test="${not empty locationTypeList}">
                       	<c:forEach items="${locationTypeList}" var="type">
 							<c:choose>
-								<c:when test="${type.locationTypeId eq location.locationTypies.locationTypeId }">
+								<c:when test="${type.locationTypeId eq location.locationType.locationTypeId }">
 									<c:set var="selected" value="selected='selected'" />
 								</c:when>
 								<c:otherwise>
@@ -120,6 +120,10 @@
 					   <select name="ward" id="ward" class="form-control input-lg">
 					    <option value="">Select</option>
 					   </select>
+					</div>
+					<div class="form-group">
+						<label for="country">Người tạo</label>
+						<input class="form-control mb-3" type="text" value="${location.users.username}" id="user.username" name="user.username">
 					</div>
 					<script>
 					$(document).ready(function(){

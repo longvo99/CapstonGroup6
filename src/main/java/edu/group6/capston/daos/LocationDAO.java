@@ -9,7 +9,6 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import edu.group6.capston.dtos.LocationDTO;
 import edu.group6.capston.models.Location;
 
 @Repository
@@ -32,7 +31,7 @@ public class LocationDAO {
 		}
 	}
 
-	public boolean update(LocationDTO location) {
+	public boolean update(Location location) {
 		try (Session session = this.sessionFactory.openSession()) {
 			Transaction tx = session.beginTransaction();
 			session.update(location);
@@ -62,7 +61,7 @@ public class LocationDAO {
 	 * session.close(); }
 	 */
 	
-	/**
+	/*
 	public List<LocationDTO> findAll() {
 		List<LocationDTO> locationList = null;
 		Session session = this.sessionFactory.openSession();
@@ -95,7 +94,7 @@ public class LocationDAO {
 		session.close();
 		return locationList;
 	}
-	**/
+	*/
 	public Location findById(int id) {
 		Session session = this.sessionFactory.openSession();
 		return session.find(Location.class, id);

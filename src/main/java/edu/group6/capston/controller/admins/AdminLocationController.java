@@ -23,7 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.group6.capston.dtos.ImageUpload;
-import edu.group6.capston.dtos.LocationDTO;
 import edu.group6.capston.models.Location;
 import edu.group6.capston.models.LocationCategory;
 import edu.group6.capston.services.LocationCategoriesService;
@@ -53,10 +52,42 @@ public class AdminLocationController {
 		model.addAttribute("locationList", locationService.findAll());
 		return "admin.location.index";
 	}
-
-	@GetMapping("/test")
-	public String test() {
-		return "admin.location.test";
+	
+	@GetMapping("/image/{locationId}")
+	public String image(@PathVariable Integer locationId, Model model) {
+		Location location =  locationService.findLocationId(locationId);
+		String[] imagePath = UploadFile.splitPathMedia(location.getMediaPath());
+		model.addAttribute("imagePath", imagePath);
+		return "admin.location.image";
+	}
+	
+	@PostMapping("/image/edit/{locationId}")
+	public String image(@PathVariable Integer locationId, Model model, @Valid @ModelAttribute("images") ImageUpload images, BindingResult br, RedirectAttributes rd,
+			HttpServletRequest request, MultipartFile file) throws IllegalStateException, IOException {
+		Location location =  locationService.findLocationId(locationId);
+		List<MultipartFile> files = images.getImages();
+		if(files != null && files.size() > 0) {
+			String mediaPath = "";
+			for (MultipartFile multipartFile : files) {
+				String filename = UploadFile.upload(multipartFile, request);
+				if(files.indexOf(multipartFile) == 0) {
+					mediaPath = filename ;
+				}else {
+					mediaPath = mediaPath + ";" + filename ;
+				}
+			}
+			location.setMediaPath(mediaPath);
+			if(locationService.update(location)) {
+				rd.addFlashAttribute(GlobalsConstant.MESSAGE,
+						messageSource.getMessage("success", null, Locale.getDefault()));
+				rd.addFlashAttribute("success", true);
+				return "redirect:/admin/location/index";
+			}
+		}
+		
+		rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
+		rd.addFlashAttribute("error", true);
+		return "admin.location.image";
 	}
 
 	@GetMapping("add")
@@ -79,7 +110,7 @@ public class AdminLocationController {
 
 	@PostMapping("add")
 	public String add(@Valid @ModelAttribute("location") Location location,
-			@Valid @ModelAttribute("imageUpload") ImageUpload imageUpload, BindingResult br, RedirectAttributes rd,
+			@Valid @ModelAttribute("images") ImageUpload images, BindingResult br, RedirectAttributes rd,
 			HttpServletRequest request, MultipartFile file, Model model) throws IllegalStateException, IOException {
 		if (br.hasErrors()) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
@@ -87,8 +118,26 @@ public class AdminLocationController {
 			model.addAttribute("location", location);
 			return "admin.location.add";
 		}
-		System.out.println("abc " + UploadFile.getDirPath(request));
-		List<MultipartFile> files = imageUpload.getImages();
+		List<MultipartFile> files = images.getImages();
+		if(files != null && files.size() > 0) {
+			String mediaPath = "";
+			for (MultipartFile multipartFile : files) {
+				String filename = UploadFile.upload(multipartFile, request);
+				if(files.indexOf(multipartFile) == 0) {
+					mediaPath = filename ;
+				}else {
+					mediaPath = mediaPath + ";" + filename ;
+				}
+			}
+			location.setMediaPath(mediaPath);
+			if(locationService.save(location)) {
+				rd.addFlashAttribute(GlobalsConstant.MESSAGE,
+						messageSource.getMessage("success", null, Locale.getDefault()));
+				rd.addFlashAttribute("success", true);
+				return "redirect:/admin/location/index";
+			}
+		}
+		
 		rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
 		rd.addFlashAttribute("error", true);
 		model.addAttribute("location", location);
@@ -108,15 +157,15 @@ public class AdminLocationController {
 				locationCategoriesList2.add(locationCategories);
 			}
 		}
-		model.addAttribute("location", location);
 		model.addAttribute("locationCategoriesList1", locationCategoriesList1);
 		model.addAttribute("locationCategoriesList2", locationCategoriesList2);
 		model.addAttribute("locationTypeList", locationTypeService.findAll());
+		model.addAttribute("location", location);
 		return "admin.location.edit";
 	}
 
 	@PostMapping(value = "/edit")
-	public String Edit(@Valid @ModelAttribute("location") LocationDTO location, BindingResult br, RedirectAttributes rd,
+	public String Edit(@Valid @ModelAttribute("location") Location location, BindingResult br, RedirectAttributes rd,
 			HttpServletRequest request, MultipartFile file, Model model) {
 		if (br.hasErrors()) {
 			return "admin.location.index";

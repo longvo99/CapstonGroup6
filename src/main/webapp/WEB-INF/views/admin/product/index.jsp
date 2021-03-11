@@ -54,7 +54,7 @@
 							<td>${product.productId}</td>
 							<td>${product.name}</td>
 							<td>${product.price}</td>
-							<td>${product.productCategories.productCategoryName}</td>
+							<td>${product.productCategory.productCategoryName}</td>
 							<td class="center text-center">
 								<a href="" data-toggle="modal" data-target="#exampleModalCenter${product.productId}" class="btn btn-sm btn-success"><i class="fa fa-edit">Detail</i></a>
 								<a href="${pageContext.request.contextPath}/admin/product/edit/${product.productId}" class="btn btn-sm btn-primary"><i class="fa fa-edit">Edit</i></a>
@@ -97,7 +97,7 @@
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="name">Loại sản phẩm</label>
-					                      <input class="form-control mb-3" type="text" value="${product.productCategories.productCategoryName}" id="productCategories.productCategoryId" name="productCategories.productCategoryId" readonly>
+					                      <input class="form-control mb-3" type="text" value="${product.productCategory.productCategoryName}" id="productCategory.productCategoryId" name="productCategory.productCategoryId" readonly>
 					                    </div>
 					                    <div class="form-group">
 					                    	<label for="name">Hình ảnh</label>

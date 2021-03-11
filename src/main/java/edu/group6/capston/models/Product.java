@@ -35,7 +35,7 @@ public class Product {
 	private String imagePath;
 	@ManyToOne
 	@JoinColumn(name = "productCategoryId")
-	private ProductCategories productCategories;
+	private ProductCategory productCategory;
 	@Column
 	private int locationId;
 	

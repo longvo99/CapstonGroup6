@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.group6.capston.daos.LocationDAO;
-import edu.group6.capston.dtos.LocationDTO;
 import edu.group6.capston.models.Location;
 import edu.group6.capston.services.LocationService;
 
@@ -28,7 +27,7 @@ public class LocationServiceImpl implements LocationService {
 	}
 
 	@Override
-	public boolean update(LocationDTO location) {
+	public boolean update(Location location) {
 		if(LocationDAO.update(location))
 			return true;
 		return false;

@@ -38,7 +38,7 @@
                     </div>
                     <div class="form-group">
                       <label for="name">Loại sản phẩm</label>
-                      <select class="form-control" id="productCategories.productCategoryId" name="productCategories.productCategoryId">
+                      <select class="form-control" id="productCategory.productCategoryId" name="productCategory.productCategoryId">
                       <c:if test="${not empty productCategoryList}">
                       	<c:forEach items="${productCategoryList}" var="productCategory">
 							<option value="${productCategory.productCategoryId}">${productCategory.productCategoryName}</option>

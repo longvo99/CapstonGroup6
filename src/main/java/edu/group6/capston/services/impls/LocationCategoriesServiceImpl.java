@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.group6.capston.daos.LocationCategoriesDAO;
+import edu.group6.capston.daos.LocationCategoryDAO;
 import edu.group6.capston.models.LocationCategory;
 import edu.group6.capston.services.LocationCategoriesService;
 
@@ -14,11 +14,11 @@ import edu.group6.capston.services.LocationCategoriesService;
 @Transactional
 public class LocationCategoriesServiceImpl implements LocationCategoriesService {
 	@Autowired
-	private LocationCategoriesDAO locationCategoriesDAO;
+	private LocationCategoryDAO locationCategoryDAO;
 	
 	@Override
 	@Transactional
 	public List<LocationCategory> findAll() {
-		return locationCategoriesDAO.findAll();
+		return locationCategoryDAO.findAll();
 	}
 }

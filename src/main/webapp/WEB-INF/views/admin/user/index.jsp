@@ -38,8 +38,8 @@
 						<c:set var="urlDel" value="${pageContext.request.contextPath}/admin/user/del/${user.userId}" />
 						<tr class="odd gradeX">
 							<td>${user.userId}</td>
-							<td>${user.fullname}</td>
-							<td>${user.phone}</td>
+							<td>${user.contactName}</td>
+							<td>${user.contactPhone}</td>
 							<td class="center text-center">
 								<a href="" data-toggle="modal" data-target="#exampleModalCenter${user.userId}" class="btn btn-sm btn-success"><i class="fa fa-edit"> Detail </i></a>
 								<a href="" data-toggle="modal" data-target="#exampleModalCenter${user.userId}" class="btn btn-sm btn-primary"><i class="fa fa-edit">Edit</i></a>
@@ -65,19 +65,19 @@
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="address">Họ và Tên</label>
-					                      <input class="form-control mb-3" type="text" value="${user.fullname}" id="fullname" name="fullname">
+					                      <input class="form-control mb-3" type="text" value="${user.contactName}" id="contactName" name="contactName">
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="opentime">Số điện thoại</label>
-					                      <input class="form-control mb-3" type="text" value="${user.phone}" id="phone" name="phone">
+					                      <input class="form-control mb-3" type="text" value="${user.contactPhone}" id="contactPhone" name="contactPhone">
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="closetime">Email</label>
-					                      <input class="form-control mb-3" type="text" value="${user.email}" id="email" name="email">
+					                      <input class="form-control mb-3" type="text" value="${user.contactEmail}" id="contactEmail" name="contactEmail">
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="usercategory">Địa chỉ</label>
-					                      <input class="form-control mb-3" type="text" value="${user.address}" id="address" name="address">
+					                      <input class="form-control mb-3" type="text" value="${user.contactAddress}" id="contactAddress" name="contactAddress">
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="usertype">Giới tính</label>
@@ -93,11 +93,11 @@
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="city">Trạng thái tài khoản</label>
-					                      <input class="form-control mb-3" type="text" value='<c:choose><c:when test="${user.banned}">Đã khóa</c:when><c:when test="${user.banned}">Đã ẩn</c:when><c:otherwise>Đang hoạt động</c:otherwise></c:choose>' id="status" name="status">
+					                      <input class="form-control mb-3" type="text" value='<c:choose><c:when test="${user.banned}">Đã khóa</c:when><c:when test="${user.hide}">Đã ẩn</c:when><c:otherwise>Đang hoạt động</c:otherwise></c:choose>' id="isBanned" name="isBanned">
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="country">Chức vụ</label>
-					                      <input class="form-control mb-3" type="text" value="${user.roleName}" id="roleId" name="roleId">
+					                      <input class="form-control mb-3" type="text" value="${user.role.roleName}" id="roleName" name="roleName">
 					                    </div>
 								</div>
 			                </div>
