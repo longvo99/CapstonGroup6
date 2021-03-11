@@ -12,28 +12,33 @@
 	<!-- public -->
 	<definition name="templates.public" template="/WEB-INF/templates/public/inc/master.jsp">
 		<put-attribute name="public-topbar" value="/WEB-INF/templates/public/inc/topbar.jsp" />
-		<put-attribute name="public-slider" value="" />
-		<put-attribute name="public-sidebar" value="/WEB-INF/templates/public/inc/sidebar.jsp" />
 		<put-attribute name="public-content" value="" />
 		<put-attribute name="public-footer" value="/WEB-INF/templates/public/inc/footer.jsp" />
 	</definition>
 	<!-- PUBLIC -->
 	<definition name="public.index" extends="templates.public">
-		<put-attribute name="public-slider" value="/WEB-INF/templates/public/inc/slider.jsp" />
 		<put-attribute name="public-content" value="/WEB-INF/views/public/index.jsp" />
 	</definition>
+	<definition name="public.restaurant" extends="templates.public">
+		<put-attribute name="public-content" value="/WEB-INF/views/public/restaurant.jsp" />
+	</definition>
 	<definition name="public.shop" extends="templates.public">
-		<put-attribute name="public-content" value="/WEB-INF/views/public/shop.jsp" />
+		<put-attribute name="public-content"
+			value="/WEB-INF/views/public/shop.jsp" />
 	</definition>
 	<definition name="public.contact" extends="templates.public">
-		<put-attribute name="public-content" value="/WEB-INF/views/public/contact.jsp" />
+		<put-attribute name="public-content"
+			value="/WEB-INF/views/public/contact.jsp" />
 		<put-attribute name="public-sidebar" value="" />
 	</definition>
-	<definition name="public.productdetail" extends="templates.public">
-		<put-attribute name="public-content" value="/WEB-INF/views/public/productdetail.jsp" />
+	<definition name="public.productdetail"
+		extends="templates.public">
+		<put-attribute name="public-content"
+			value="/WEB-INF/views/public/productdetail.jsp" />
 	</definition>
 	<definition name="public.cart" extends="templates.public">
-		<put-attribute name="public-content" value="/WEB-INF/views/public/cart.jsp" />
+		<put-attribute name="public-content"
+			value="/WEB-INF/views/public/cart.jsp" />
 		<put-attribute name="public-sidebar" value="" />
 	</definition>
 	

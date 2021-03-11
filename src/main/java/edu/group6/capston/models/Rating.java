@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -23,10 +25,12 @@ public class Rating {
 	@Column
 	private int ratingId;
 	@Column
-	private int point;
-	@Column
-	private int criteriaId;
-	@Column
-	private int commentId;
+	private Float point;
+	@ManyToOne
+	@JoinColumn(name = "criteriaId")
+	private Criteria criteria;
+	@ManyToOne
+	@JoinColumn(name = "commentId")
+	private Comment comment;
 	
 }
