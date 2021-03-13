@@ -4,31 +4,29 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import edu.group6.capston.models.OrderStatus;
-import edu.group6.capston.models.Orders;
+import edu.group6.capston.models.OrderDetail;
 
 @Repository
-public class OrderDAO {
+public class OrderDetailDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public List<Orders> findAll() {
+	public List<OrderDetail> findByOrderId(int orderId) {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("from Orders ", Orders.class).list();
+			return session.createQuery("from OrderDetail WHERE orderId = " + orderId, OrderDetail.class).list();
 		}
 	}
-
-	public boolean save(Orders orders) {
+	/*
+	public boolean save(OrderDetail OrderDetail) {
 		Session session = this.sessionFactory.openSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			session.persist(orders);
+			session.persist(OrderDetail);
 			tx.commit();
 			session.close();
 			return true;
@@ -37,10 +35,10 @@ public class OrderDAO {
 		}
 	}
 
-	public boolean update(Orders orders) {
+	public boolean update(OrderDetail OrderDetail) {
 		try (Session session = this.sessionFactory.openSession()) {
 			Transaction tx = session.beginTransaction();
-			session.update(orders);
+			session.update(OrderDetail);
 			tx.commit();
 			session.close();
 			return true;
@@ -52,9 +50,9 @@ public class OrderDAO {
 	public boolean delete(Integer id) {
 		try (Session session = this.sessionFactory.openSession()) {
 			Transaction tx = session.beginTransaction();
-			Orders Orders;
-			Orders = (Orders) session.load(Orders.class, id);
-			session.delete(Orders);
+			OrderDetail OrderDetail;
+			OrderDetail = (OrderDetail) session.load(OrderDetail.class, id);
+			session.delete(OrderDetail);
 			// This makes the pending delete to be done
 			session.flush();
 			tx.commit();
@@ -64,17 +62,7 @@ public class OrderDAO {
 			return false;
 		}
 	}
-
-	public Orders findByOrderId(int orderId) {
-		Session session = this.sessionFactory.openSession();
-		return session.find(Orders.class, orderId);
-	}
-
-	public List<OrderStatus> findAllOrderStatus() {
-		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("from OrderStatus ", OrderStatus.class).list();
-		}
-	}
+	*/
 
 	/*
 	 * public Order findById(int id) { Session session =

@@ -52,7 +52,7 @@
 			            <div class="modal-dialog modal-dialog-centered" role="document">
 			              <div class="modal-content">
 			                <div class="modal-header">
-			                  <h5 class="modal-title" id="exampleModalCenterTitle">user Detail: <strong></strong> </h5>
+			                  <h5 class="modal-title" id="exampleModalCenterTitle"><strong>Chi tiết: </strong> </h5>
 			                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			                    <span aria-hidden="true">&times;</span>
 			                  </button>
@@ -61,44 +61,49 @@
 			                	<div class="comment-form">
 										<div class="form-group">
 					                      <label for="name">Tài khoản</label>
-					                      <input class="form-control mb-3" type="text" value="${user.username}" id="userName" name="userName">
+					                      <input class="form-control mb-3" type="text" value="${user.username}" id="userName" name="userName" readonly>
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="address">Họ và Tên</label>
-					                      <input class="form-control mb-3" type="text" value="${user.contactName}" id="contactName" name="contactName">
+					                      <input class="form-control mb-3" type="text" value="${user.contactName}" id="contactName" name="contactName" readonly>
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="opentime">Số điện thoại</label>
-					                      <input class="form-control mb-3" type="text" value="${user.contactPhone}" id="contactPhone" name="contactPhone">
+					                      <input class="form-control mb-3" type="text" value="${user.contactPhone}" id="contactPhone" name="contactPhone" readonly>
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="closetime">Email</label>
-					                      <input class="form-control mb-3" type="text" value="${user.contactEmail}" id="contactEmail" name="contactEmail">
+					                      <input class="form-control mb-3" type="text" value="${user.contactEmail}" id="contactEmail" name="contactEmail" readonly> 
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="usercategory">Địa chỉ</label>
-					                      <input class="form-control mb-3" type="text" value="${user.contactAddress}" id="contactAddress" name="contactAddress">
+					                      <input class="form-control mb-3" type="text" value="${user.contactAddress}" id="contactAddress" name="contactAddress" readonly>
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="usertype">Giới tính</label>
-					                      <input class="form-control mb-3" type="text" value="${user.gender}" id="gender" name="gender">
+					                      <input class="form-control mb-3" type="text" value="${user.gender}" id="gender" name="gender" readonly>
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="ward">Ngày sinh</label>
-					                      <input class="form-control mb-3" type="text" value="${user.dateOfBirth}" id="dateOfBirth" name="dateOfBirth">
+					                      <input class="form-control mb-3" type="text" value="${user.dateOfBirth}" id="dateOfBirth" name="dateOfBirth" readonly>
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="district">Ngày tạo tài khoản</label>
-					                      <input class="form-control mb-3" type="text" value="${user.joinDate}" id="joinDate" name="joinDate">
+					                      <input class="form-control mb-3" type="text" value="${user.joinDate}" id="joinDate" name="joinDate" readonly>
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="city">Trạng thái tài khoản</label>
-					                      <input class="form-control mb-3" type="text" value='<c:choose><c:when test="${user.banned}">Đã khóa</c:when><c:when test="${user.hide}">Đã ẩn</c:when><c:otherwise>Đang hoạt động</c:otherwise></c:choose>' id="isBanned" name="isBanned">
+					                      <select class="form-control input-lg">
+										    <option><c:choose><c:when test="${user.banned}">Đã khóa</c:when><c:when test="${user.hide}">Đã ẩn</c:when><c:otherwise>Đang hoạt động</c:otherwise></c:choose></option>
+										   </select>
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="country">Chức vụ</label>
-					                      <input class="form-control mb-3" type="text" value="${user.role.roleName}" id="roleName" name="roleName">
+					                      <select class="form-control input-lg">
+										    <option>${user.role.roleName}</option>
+										   </select>
 					                    </div>
+					                    <button type="submit" class="btn btn-primary" name="submit">Cập nhập</button>
 								</div>
 			                </div>
 			              </div>

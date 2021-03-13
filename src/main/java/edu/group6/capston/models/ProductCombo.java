@@ -31,5 +31,5 @@ public class ProductCombo {
 	@Column
 	private String description;
 	@Column
-	private int ImagePath;
+	private String ImagePath;
 }

@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -27,10 +29,13 @@ public class OrderDetail {
 	private String quantity;
 	@Column
 	private String note;
-	@Column
-	private int productId;
-	@Column
-	private boolean isCompo;
-	@Column
-	private int orderId;
+	@ManyToOne
+	@JoinColumn(name = "productId")
+	private Product product;
+	@ManyToOne
+	@JoinColumn(name = "ProductComboId")
+	private ProductCombo productCombo;
+	@ManyToOne
+	@JoinColumn(name = "orderId")
+	private Orders orders;
 }

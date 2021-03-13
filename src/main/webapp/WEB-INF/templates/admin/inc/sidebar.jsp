@@ -109,13 +109,6 @@
             <a class="collapse-item" href="${pageContext.request.contextPath}/admin/role/index">Chức vụ</a>
           </div>
         </div>
-        <div id="collapsePage" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Quản lý sản phẩm</h6>
-            <a class="collapse-item" href="${pageContext.request.contextPath}/admin/user/index">Loại sản phẩm</a>
-            <a class="collapse-item" href="${pageContext.request.contextPath}/admin/customer/index">Sản phẩm</a>
-          </div>
-        </div>
       </li>
       <hr class="sidebar-divider">
       <div class="version" id="version-ruangadmin"></div>

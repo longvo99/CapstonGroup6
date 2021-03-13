@@ -17,6 +17,9 @@
 		<put-attribute name="public-content" value="" />
 		<put-attribute name="public-footer" value="/WEB-INF/templates/public/inc/footer.jsp" />
 	</definition>
+	<!-- AUTHS -->
+	<definition name="auths.admin.login" template="/WEB-INF/views/auths/admin-login.jsp">
+	</definition>
 	<!-- PUBLIC -->
 	<definition name="public.index" extends="templates.public">
 		<put-attribute name="public-slider" value="/WEB-INF/templates/public/inc/slider.jsp" />
@@ -51,6 +54,9 @@
 	</definition>
 	<definition name="admin.user.add" extends="templates.admin">
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/user/add.jsp" />
+	</definition>
+	<definition name="admin.user.profile" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/user/profile.jsp" />
 	</definition>
 	
 	<!-- ADMIN PRODUCT  -->

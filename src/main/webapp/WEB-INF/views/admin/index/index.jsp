@@ -20,7 +20,7 @@
                   <div class="row align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-uppercase mb-1">QUẢN LÝ ĐỊA ĐIỂM</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">${locationCount}</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">Có tổng 20 địa điểm</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-calendar fa-2x text-primary"></i>
@@ -36,7 +36,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-uppercase mb-1">QUẢN LÝ ĐẶT HÀNG</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">Có 10 đơn hàng mới</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">Có 5 đơn hàng mới</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-shopping-cart fa-2x text-success"></i>
@@ -81,56 +81,56 @@
             <div class="col-xl-8 col-lg-7 mb-4">
               <div class="card">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Invoice</h6>
-                  <a class="m-0 float-right btn btn-danger btn-sm" href="#">View More <i
+                  <h6 class="m-0 font-weight-bold text-primary">Đơn hàng mới</h6>
+                  <a class="m-0 float-right btn btn-danger btn-sm" href="#">Xem thêm <i
                       class="fas fa-chevron-right"></i></a>
                 </div>
                 <div class="table-responsive">
                   <table class="table align-items-center table-flush">
                     <thead class="thead-light">
                       <tr>
-                        <th>Order ID</th>
-                        <th>Customer</th>
-                        <th>Item</th>
-                        <th>Status</th>
-                        <th>Action</th>
+                        <th>ID</th>
+                        <th>Người đặt</th>
+                        <th>Tổng tiền</th>
+                        <th>Thời gian đặt</th>
+                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td><a href="#">RA0449</a></td>
-                        <td>Udin Wayang</td>
-                        <td>Nasi Padang</td>
-                        <td><span class="badge badge-success">Delivered</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary">Detail</a></td>
+                        <td><a href="#">01</a></td>
+                        <td>Nguyễn Văn A</td>
+                        <td>200.000</td>
+                        <td><span class="badge badge-success">08:30</span></td>
+                        <td><a href="#" class="btn btn-sm btn-primary">Chi tiết</a></td>
                       </tr>
                       <tr>
-                        <td><a href="#">RA5324</a></td>
-                        <td>Jaenab Bajigur</td>
-                        <td>Gundam 90' Edition</td>
-                        <td><span class="badge badge-warning">Shipping</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary">Detail</a></td>
+                        <td><a href="#">02</a></td>
+                        <td>Nguyễn Văn B</td>
+                        <td>200.000</td>
+                        <td><span class="badge badge-success">08:35</span></td>
+                        <td><a href="#" class="btn btn-sm btn-primary">Chi tiết</a></td>
                       </tr>
                       <tr>
-                        <td><a href="#">RA8568</a></td>
-                        <td>Rivat Mahesa</td>
-                        <td>Oblong T-Shirt</td>
-                        <td><span class="badge badge-danger">Pending</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary">Detail</a></td>
+                        <td><a href="#">03</a></td>
+                        <td>Nguyễn Văn C</td>
+                        <td>200.000</td>
+                        <td><span class="badge badge-success">08:40</span></td>
+                        <td><a href="#" class="btn btn-sm btn-primary">Chi tiết</a></td>
                       </tr>
                       <tr>
-                        <td><a href="#">RA1453</a></td>
-                        <td>Indri Junanda</td>
-                        <td>Hat Rounded</td>
-                        <td><span class="badge badge-info">Processing</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary">Detail</a></td>
+                        <td><a href="#">04</a></td>
+                        <td>Nguyễn Văn D</td>
+                        <td>200.000</td>
+                        <td><span class="badge badge-success">08:50</span></td>
+                        <td><a href="#" class="btn btn-sm btn-primary">Chi tiết</a></td>
                       </tr>
                       <tr>
-                        <td><a href="#">RA1998</a></td>
-                        <td>Udin Cilok</td>
-                        <td>Baby Powder</td>
-                        <td><span class="badge badge-success">Delivered</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary">Detail</a></td>
+                        <td><a href="#">05</a></td>
+                        <td>Nguyễn Văn E</td>
+                        <td>200.000</td>
+                        <td><span class="badge badge-success">09:00</span></td>
+                        <td><a href="#" class="btn btn-sm btn-primary">Chi tiết</a></td>
                       </tr>
                     </tbody>
                   </table>
@@ -142,40 +142,36 @@
             <div class="col-xl-4 col-lg-5 ">
               <div class="card">
                 <div class="card-header py-4 bg-primary d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-light">Message From Customer</h6>
+                  <h6 class="m-0 font-weight-bold text-light">Địa điểm mới chưa duyệt</h6>
                 </div>
                 <div>
                   <div class="customer-message align-items-center">
                     <a class="font-weight-bold" href="#">
-                      <div class="text-truncate message-title">Hi there! I am wondering if you can help me with a
-                        problem I've been having.</div>
-                      <div class="small text-gray-500 message-time font-weight-bold">Udin Cilok Â· 58m</div>
+                      <div class="text-truncate message-title">Nhà Hàng A</div>
+                      <div class="small text-gray-500 message-time font-weight-bold">03 - Lê Đại Hành</div>
                     </a>
                   </div>
                   <div class="customer-message align-items-center">
                     <a href="#">
-                      <div class="text-truncate message-title">But I must explain to you how all this mistaken idea
-                      </div>
-                      <div class="small text-gray-500 message-time">Nana Haminah Â· 58m</div>
+                      <div class="text-truncate message-title">Nhà Hàng B</div>
+                      <div class="small text-gray-500 message-time">05 - Lê Đại Hành</div>
                     </a>
                   </div>
                   <div class="customer-message align-items-center">
                     <a class="font-weight-bold" href="#">
-                      <div class="text-truncate message-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                      </div>
-                      <div class="small text-gray-500 message-time font-weight-bold">Jajang Cincau Â· 25m</div>
+                      <div class="text-truncate message-title">Nhà Hàng C</div>
+                      <div class="small text-gray-500 message-time font-weight-bold">05 - Lê Lợi</div>
                     </a>
                   </div>
                   <div class="customer-message align-items-center">
                     <a class="font-weight-bold" href="#">
-                      <div class="text-truncate message-title">At vero eos et accusamus et iusto odio dignissimos
-                        ducimus qui blanditiis
+                      <div class="text-truncate message-title">Nhà Hàng D
                       </div>
-                      <div class="small text-gray-500 message-time font-weight-bold">Udin Wayang Â· 54m</div>
+                      <div class="small text-gray-500 message-time font-weight-bold">20 - Nguyễn Hoàng</div>
                     </a>
                   </div>
                   <div class="card-footer text-center">
-                    <a class="m-0 small text-primary card-link" href="#">View More <i
+                    <a class="m-0 small text-primary card-link" href="#">Xem thêm<i
                         class="fas fa-chevron-right"></i></a>
                   </div>
                 </div>
@@ -183,14 +179,6 @@
             </div>
           </div>
           <!--Row-->
-
-          <div class="row">
-            <div class="col-lg-12 text-center">
-              <p>Do you like this template ? you can download from <a href="https://github.com/indrijunanda/RuangAdmin"
-                  class="btn btn-primary btn-sm" target="_blank"><i class="fab fa-fw fa-github"></i>&nbsp;GitHub</a></p>
-            </div>
-          </div>
-
         </div>
         <!---Container Fluid-->
       </div>

@@ -1,7 +1,7 @@
 [
 	{
 		"id": "01",
-		"name": "Hà Nội",
+		"name": "TP HCM",
 		"parent_id": "0"
 	},
 	{
@@ -11,13 +11,8 @@
 	},
 	{
 		"id": "03",
-		"name": "Hồ Chí Minh",
+		"name": "Hà Nội",
 		"parent_id": "0"
-	},
-	{
-		"id": "101",
-		"name": "Quận Ba Đình",
-		"parent_id": "01"
 	},
 	{
 		"id": "201",

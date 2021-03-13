@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.group6.capston.daos.OrderDAO;
+import edu.group6.capston.models.OrderStatus;
 import edu.group6.capston.models.Orders;
 import edu.group6.capston.services.OrderService;
 
@@ -39,5 +40,15 @@ public class OrderServiceImpl implements OrderService {
 		if(orderDAO.delete(id))
 			return true;
 		return false;
+	}
+
+	@Override
+	public Orders findByOrderId(int orderId) {
+		return orderDAO.findByOrderId(orderId);
+	}
+
+	@Override
+	public List<OrderStatus> findAllOrderStatus() {
+		return orderDAO.findAllOrderStatus();
 	}
 }
