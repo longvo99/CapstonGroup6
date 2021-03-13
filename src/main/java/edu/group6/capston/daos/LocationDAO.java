@@ -2,6 +2,7 @@ package edu.group6.capston.daos;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -47,6 +48,18 @@ public class LocationDAO {
 			return session.createQuery("from Location", Location.class).list();
 		}
 	}
+	/*
+	 * public void findAll1() { Session session = this.sessionFactory.openSession();
+	 * String hql = "SELECT l.LocationName, avg(Point) FROM Comment c " +
+	 * "INNER JOIN Location l ON c.LocationId = l.LocationId " +
+	 * "INNER JOIN Rating r ON c.CommentId = r.CommentId " +
+	 * "GROUP BY l.LocationName"; Query query = session.createQuery(hql);
+	 * List<Object[]> listResult = query.list(); for (Object[] aRow : listResult) {
+	 * Float avg = (Float) aRow[1]; String name = (String) aRow[0];
+	 * System.out.println(name + " - " + avg); }
+	 * 
+	 * session.close(); }
+	 */
 	
 	/*
 	public List<LocationDTO> findAll() {

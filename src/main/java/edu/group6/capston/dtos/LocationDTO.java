@@ -1,9 +1,5 @@
 package edu.group6.capston.dtos;
 
-import java.util.List;
-
-import org.springframework.web.multipart.MultipartFile;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,5 +26,6 @@ public class LocationDTO {
 	private Integer discountId;
 	private Integer productId;
 	private Integer ratingId;
+	private Float ratingAvgPoint;
 	
 }
