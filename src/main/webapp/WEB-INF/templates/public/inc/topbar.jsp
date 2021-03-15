@@ -45,6 +45,8 @@
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 	<!-- CSS of Productdetail  -->
     <link href="${pageContext.request.contextPath}/resources/public/assets/css/productdetail.css" rel="stylesheet">
+    <!-- plus and minus  -->
+   <%--  <link href="${pageContext.request.contextPath}/resources/public/assets/css/checkout.css" rel="stylesheet"> --%>
     <!-- place -->
     <style type="text/css">
 	.dropdown-submenu {

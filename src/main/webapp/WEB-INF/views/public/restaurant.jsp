@@ -1870,13 +1870,11 @@
                         <div class="product-quantity padding-10"> <span class="text-light-black fw-700 fs-16">Quantity</span>
                             <div class="input-group quantity">
                                 <div class="input-group-append">
-                                    <button class="minus-btn" type="button" name="button"> <i class="fas fa-minus"></i>
-                  </button>
+                                    <button class="minus-btn" type="button" name="button"> <i class="fas fa-minus"></i></button>
                                 </div>
                                 <input type="text" class="text-center" name="name" value="1">
                                 <div class="input-group-prepend">
-                                    <button class="plus-btn" type="button" name="button"><i class="fas fa-plus"></i>
-                  </button>
+                                    <button class="plus-btn" type="button" name="button"><i class="fas fa-plus"></i></button>
                                 </div>
                             </div>
                         </div>
