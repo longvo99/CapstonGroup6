@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import edu.group6.capston.dtos.CityDistrictWard;
 import edu.group6.capston.dtos.ImageUpload;
 import edu.group6.capston.models.Location;
 import edu.group6.capston.models.LocationCategory;
@@ -30,6 +31,7 @@ import edu.group6.capston.services.LocationService;
 import edu.group6.capston.services.LocationTypeService;
 import edu.group6.capston.utils.GlobalsConstant;
 import edu.group6.capston.utils.UploadFile;
+import edu.group6.capston.utils.readFileJson;
 
 @Controller
 @RequestMapping("admin/location")
@@ -157,10 +159,14 @@ public class AdminLocationController {
 				locationCategoriesList2.add(locationCategories);
 			}
 		}
+		List<CityDistrictWard> listJson = readFileJson.getName(location.getCity(), location.getDistrict(), location.getWard());
+		String[] imagePath = UploadFile.splitPathMedia(location.getMediaPath());
+		model.addAttribute("imagePath", imagePath);
 		model.addAttribute("locationCategoriesList1", locationCategoriesList1);
 		model.addAttribute("locationCategoriesList2", locationCategoriesList2);
 		model.addAttribute("locationTypeList", locationTypeService.findAll());
 		model.addAttribute("location", location);
+		model.addAttribute("listJson", listJson);
 		return "admin.location.edit";
 	}
 

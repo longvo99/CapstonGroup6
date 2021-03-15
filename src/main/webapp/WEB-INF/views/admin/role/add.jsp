@@ -24,6 +24,10 @@
                 <div class="card-body">
                   <form role="form" method="post" id="form">
                   	<div class="form-group">
+                      <label for="name">ID</label>
+                      <input class="form-control mb-3" type="text" value="${role.roleId}" id="roleId" name="roleId">
+                    </div>
+                  	<div class="form-group">
                       <label for="name">Tên chức vụ</label>
                       <input class="form-control mb-3" type="text" value="${role.roleName}" id="roleName" name="roleName">
                     </div>

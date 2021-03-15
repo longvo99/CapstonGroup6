@@ -29,12 +29,6 @@
             <!-- DataTable with Hover -->
             <div class="col-lg-12">
               <div class="card mb-4">
-                <%-- <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <div class="col-sm-10">
-                  	<a href="${pageContext.request.contextPath}/admin/order/add" class="btn btn-success btn-md"><i class="fa fa-plus-square"> Thêm </i></a>
-                  </div>
-                </div> --%>
-                
                 <div class="table-responsive p-3">
                 <c:if test="${not empty orderList}">
                   <table class="table align-items-center table-flush table-hover" id="dataTableHover">
@@ -49,16 +43,13 @@
                     </thead>
                     <tbody>
                       <c:forEach items="${orderList}" var="order">
-						<c:set var="urlDel" value="${pageContext.request.contextPath}/admin/order/del/${order.orderId}" />
 						<tr class="odd gradeX">
 							<td>${order.orderId}</td>
-							<td>${order.user.fullname}</td>
+							<td>${order.users.contactName}</td>
 							<td>${order.orderTime}</td>
 							<td>${order.orderStatus.statusName}</td>
 							<td class="center text-center">
-								<a href="" data-toggle="modal" data-target="#exampleModalCenter${order.orderId}" class="btn btn-sm btn-success"><i class="fa fa-edit">Detail</i></a>
-								<a href="" data-toggle="modal" data-target="#exampleModalCenter${order.orderId}" class="btn btn-sm btn-primary"><i class="fa fa-edit">Edit</i></a>
-                                <a href="${urlDel}" title="Xóa" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Xóa</a>
+								<a href="${pageContext.request.contextPath}/admin/order/detail/${order.orderId}"  class="btn btn-success" ><i class="fa fa-edit">Chi tiết</i></a>
 							</td>
 						</tr>
 			          </c:forEach>

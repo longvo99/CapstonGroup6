@@ -162,10 +162,10 @@
                 aria-haspopup="true" aria-expanded="false">
                 <img class="img-profile rounded-circle" src="${pageContext.request.contextPath}/resources/admin/assets/img/boy.png" style="max-width: 60px">
                 <%-- <span class="ml-2 d-none d-lg-inline text-white small"><%=objUser.getFullname() %></span> --%>
-            	<span class="ml-2 d-none d-lg-inline text-white small">Admin</span>
+            	<span class="ml-2 d-none d-lg-inline text-white small">${pageContext.request.userPrincipal.name}</span>
               </a>
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/user/profile/">
+                <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/user/profile/${pageContext.request.userPrincipal.name}">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Profile
                 </a>

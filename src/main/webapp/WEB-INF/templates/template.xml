@@ -15,6 +15,9 @@
 		<put-attribute name="public-content" value="" />
 		<put-attribute name="public-footer" value="/WEB-INF/templates/public/inc/footer.jsp" />
 	</definition>
+	<!-- AUTHS -->
+	<definition name="auths.admin.login" template="/WEB-INF/views/auths/admin-login.jsp">
+	</definition>
 	<!-- PUBLIC -->
 	<definition name="public.index" extends="templates.public">
 		<put-attribute name="public-content" value="/WEB-INF/views/public/index.jsp" />
@@ -70,6 +73,9 @@
 	<definition name="admin.user.add" extends="templates.admin">
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/user/add.jsp" />
 	</definition>
+	<definition name="admin.user.profile" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/user/profile.jsp" />
+	</definition>
 	
 	<!-- ADMIN PRODUCT  -->
 	<definition name="admin.product.index" extends="templates.admin">
@@ -109,6 +115,11 @@
 	</definition>
 	<definition name="admin.order.orderDetail" extends="templates.admin">
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/order/detail.jsp" />
+	</definition>
+	
+	<!-- ADMIN ERROR  -->
+	<definition name="error.404" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/error/404.jsp" />
 	</definition>
 	
 <!-- <<<<<<< Updated upstream -->

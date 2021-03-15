@@ -8,6 +8,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import edu.group6.capston.models.OrderStatus;
 import edu.group6.capston.models.Orders;
 
 @Repository
@@ -18,7 +19,7 @@ public class OrderDAO {
 
 	public List<Orders> findAll() {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("from Order ", Orders.class).list();
+			return session.createQuery("from Orders ", Orders.class).list();
 		}
 	}
 
@@ -61,6 +62,17 @@ public class OrderDAO {
 			return true;
 		} catch (Exception e) {
 			return false;
+		}
+	}
+
+	public Orders findByOrderId(int orderId) {
+		Session session = this.sessionFactory.openSession();
+		return session.find(Orders.class, orderId);
+	}
+
+	public List<OrderStatus> findAllOrderStatus() {
+		try (Session session = this.sessionFactory.openSession()) {
+			return session.createQuery("from OrderStatus ", OrderStatus.class).list();
 		}
 	}
 

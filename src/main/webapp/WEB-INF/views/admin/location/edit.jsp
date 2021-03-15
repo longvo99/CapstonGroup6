@@ -37,27 +37,27 @@
                   <form role="form" method="post"  name="form-example-1" id="form-example-1" enctype="multipart/form-data">
                   	<div class="form-group">
                       <label for="name">Location ID</label>
-                      <input class="form-control mb-3" type="text" value="${location.locationId}" id="locationId" name="locationId">
+                      <input class="form-control mb-3" type="text" value="${location.locationId}" id="locationId" name="locationId" readonly>
                     </div>
                   	<div class="form-group">
                       <label for="name">Location Name</label>
-                      <input class="form-control mb-3" type="text" value="${location.locationName}" id="locationName" name="locationName">
+                      <input class="form-control mb-3" type="text" value="${location.locationName}" id="locationName" name="locationName" readonly>
                     </div>
                     <div class="form-group">
                       <label for="address">Address</label>
-                      <input class="form-control mb-3" type="text" value="${location.address}" id="address" name="address">
+                      <input class="form-control mb-3" type="text" value="${location.address}" id="address" name="address" readonly>
                     </div>
                     <div class="form-group">
                       <label for="opentime">Open Time</label>
-                      <input class="form-control mb-3" type="text" value="${location.openTime}" id="openTime" name="openTime">
+                      <input class="form-control mb-3" type="text" value="${location.openTime}" id="openTime" name="openTime" readonly>
                     </div>
                     <div class="form-group">
                       <label for="closetime">Close Time</label>
-                      <input class="form-control mb-3" type="text" value="${location.closeTime}" id="closeTime" name="closeTime">
+                      <input class="form-control mb-3" type="text" value="${location.closeTime}" id="closeTime" name="closeTime" readonly>
                     </div>
                     <div class="form-group">
                       <label for="locationcategory">Location Category</label>
-                      <select class="form-control" id="locationcategory" name="locationCategory.categoryId">
+                      <select class="form-control" id="locationcategory" name="locationCategory.categoryId" readonly>
 	                      <c:if test="${not empty locationCategoriesList1}">
 	                      	<c:forEach items="${locationCategoriesList1}" var="cat1">
 	                      	<optgroup label="${cat1.locationCategoryName}">
@@ -81,7 +81,7 @@
                     </div>
                     <div class="form-group">
                       <label for="locationtype">Location Type</label>
-                      <select class="form-control" id="locationType" name="locationType.locationTypeId">
+                      <select class="form-control" id="locationType" name="locationType.locationTypeId" readonly>
                       <c:if test="${not empty locationTypeList}">
                       	<c:forEach items="${locationTypeList}" var="type">
 							<c:choose>
@@ -99,40 +99,78 @@
                     </div>
                     <div class="form-group">
                       <label for="country">Nước</label>
-                      <select class="form-control" name="country">
+                      <select class="form-control" name="country" readonly>
                       	<option value="Việt Nam">Việt Nam</option>
                       </select>
                     </div>
+                    <c:forEach items="${listJson}" var="json">
+                    	<c:choose>
+                    		<c:when test="${json.id eq location.city}">
+                    			<c:set var="cityName" value="${json.name}" />
+                    		</c:when>
+                    		<c:when test="${json.id eq location.district}">
+                    			<c:set var="districtName" value="${json.name}" />
+                    		</c:when>
+                    		<c:when test="${json.id eq location.ward}">
+                    			<c:set var="wardName" value="${json.name}" />
+                    		</c:when>
+                    	</c:choose>
+                    </c:forEach>
                     <div class="form-group">
                     	<label for="country">Tỉnh/thành</label>
-					    <select name="city" id="city" class="form-control input-lg">
-					    	<option value="${location.city}">${location.city}</option>
+					    <select name="city" id="city" class="form-control input-lg" readonly>
+					    	<option value="${location.city}">${cityName}</option>
 					    </select>
 					</div>
 					<div class="form-group">
 						<label for="country">Quận huyện</label>
-					   <select name="district" id="district" class="form-control input-lg">
-					    <option value="">Select</option>
+					   <select name="district" id="district" class="form-control input-lg" readonly>
+					    <option value="${location.district}">${districtName}</option>
 					   </select>
 					</div>
 					<div class="form-group">
 						<label for="country">Xã/phường</label>
-					   <select name="ward" id="ward" class="form-control input-lg">
-					    <option value="">Select</option>
+					   <select name="ward" id="ward" class="form-control input-lg" readonly>
+					    <option value="${location.ward}">${wardName}</option>
 					   </select>
 					</div>
 					<div class="form-group">
 						<label for="country">Người tạo</label>
-						<input class="form-control mb-3" type="text" value="${location.users.username}" id="user.username" name="user.username">
+						<input class="form-control mb-3" type="text" value="${location.users.username}" id="user.username" name="user.username" readonly>
+					</div>
+					<div class="input-field">
+				        <label class="active">Hình ảnh</label>
+				        <div class="input-images" style="padding-top: .5rem;"></div>
+				    </div>
+				    	<div class="form-group">
+						<label for="country">Trạng Thái</label>
+					   <select class="form-control input-lg">
+					    <option>Cho phép hiển thị</option>
+					   </select>
 					</div>
 					<script>
+					
+					let preloaded = [
+				    	<c:if test="${not empty imagePath}">
+						    	<c:forEach items="${imagePath}" var="image">
+						    		<c:if test="${image != ''}"> 
+						  	  		{id: 1, src: '${pageContext.request.contextPath}/resources/admin/image/uploads/${image}'},
+						  	  	 	</c:if>
+						  	  	</c:forEach>
+					    </c:if>
+				    	];
+				      	$('.input-images').imageUploader({
+				      	    preloaded: preloaded,
+				      	    imagesInputName: 'images',
+				      	    preloadedInputName: 'image'
+				      	});
+					
 					$(document).ready(function(){
 						 load_json_data('city');
 						 function load_json_data(id, parent_id)
 						 {
 						  var html_code = '';
 						  $.getJSON('${pageContext.request.contextPath}/resources/admin/assets/js/city_district_ward.json', function(data){
-						   html_code += '<option value="">Select</option>';
 						   $.each(data, function(key, value){
 						    if(id == 'city')
 						    {

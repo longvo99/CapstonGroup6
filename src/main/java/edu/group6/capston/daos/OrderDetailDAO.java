@@ -4,30 +4,29 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import edu.group6.capston.models.Role;
+import edu.group6.capston.models.OrderDetail;
 
 @Repository
-public class RoleDAO {
+public class OrderDetailDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public List<Role> findAll() {
+	public List<OrderDetail> findByOrderId(int orderId) {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("from Role", Role.class).list();
+			return session.createQuery("from OrderDetail WHERE orderId = " + orderId, OrderDetail.class).list();
 		}
 	}
-
-	public boolean save(Role locationTypies) {
+	/*
+	public boolean save(OrderDetail OrderDetail) {
 		Session session = this.sessionFactory.openSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			session.persist(locationTypies);
+			session.persist(OrderDetail);
 			tx.commit();
 			session.close();
 			return true;
@@ -36,10 +35,10 @@ public class RoleDAO {
 		}
 	}
 
-	public boolean update(Role role) {
+	public boolean update(OrderDetail OrderDetail) {
 		try (Session session = this.sessionFactory.openSession()) {
 			Transaction tx = session.beginTransaction();
-			session.update(role);
+			session.update(OrderDetail);
 			tx.commit();
 			session.close();
 			return true;
@@ -48,12 +47,12 @@ public class RoleDAO {
 		}
 	}
 
-	public boolean delete(String id) {
+	public boolean delete(Integer id) {
 		try (Session session = this.sessionFactory.openSession()) {
 			Transaction tx = session.beginTransaction();
-			Role locationTypes;
-			locationTypes = (Role) session.load(Role.class, id);
-			session.delete(locationTypes);
+			OrderDetail OrderDetail;
+			OrderDetail = (OrderDetail) session.load(OrderDetail.class, id);
+			session.delete(OrderDetail);
 			// This makes the pending delete to be done
 			session.flush();
 			tx.commit();
@@ -63,10 +62,11 @@ public class RoleDAO {
 			return false;
 		}
 	}
+	*/
 
 	/*
-	 * public LocationTypes findById(int id) { Session session =
-	 * this.sessionFactory.openSession(); return session.find(LocationTypes.class,
+	 * public Order findById(int id) { Session session =
+	 * this.sessionFactory.openSession(); return session.find(Order.class,
 	 * id); }
 	 */
 }

@@ -3,16 +3,34 @@ package edu.group6.capston.services.impls;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import edu.group6.capston.daos.UserDAO;
+import edu.group6.capston.models.CustomUserDetails;
 import edu.group6.capston.models.Users;
 import edu.group6.capston.services.UserService;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
 	@Autowired
 	private UserDAO UserDAO;
+	
+	@Autowired
+    private UserService userRepository;
+	
+	@Override
+    public UserDetails loadUserByUsername(String username) {
+        // Kiểm tra xem user có tồn tại trong database không?
+        Users user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException(username);
+        }
+        return new CustomUserDetails(user);
+    }
+	
 	
 	@Override
 	public List<Users> findAll() {
@@ -49,4 +67,34 @@ public class UserServiceImpl implements UserService {
 		return UserDAO.totalRow();
 	}
 	*/
+
+	@Override
+	public List<Users> findByRoleName(String roleName) {
+		// TODO Auto-generated method stub
+		return UserDAO.findByRoleName(roleName);
+	}
+
+	@Override
+	public Users getProfile(Users users) {
+		return UserDAO.getProfile(users);
+	}
+
+	@Override
+	public boolean save(Users user) {
+		return UserDAO.save(user);
+	}
+
+	@Override
+	public Users findByUsername(String username) {
+		// TODO Auto-generated method stub
+//		System.out.println(username);
+//		Users user = UserDAO.findByUsername(username);
+//		System.out.println("a" + user.getUsername());
+//		user.setUsername("admin5");
+//		user.setPassword("123456");
+//		boolean a = save(user);
+//		System.out.println("a" + a);
+		return UserDAO.findByUsername(username);
+	}
+
 }

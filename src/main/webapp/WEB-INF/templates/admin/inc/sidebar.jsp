@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@include file="/WEB-INF/templates/tags/taglib.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -104,16 +105,12 @@
         <div id="collapsePage" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Quản lý nhân sự</h6>
-            <a class="collapse-item" href="${pageContext.request.contextPath}/admin/user/index">Khách hàng</a>
-            <a class="collapse-item" href="${pageContext.request.contextPath}/admin/customer/index">Nhân viên</a>
-            <a class="collapse-item" href="${pageContext.request.contextPath}/admin/role/index">Chức vụ</a>
-          </div>
-        </div>
-        <div id="collapsePage" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Quản lý sản phẩm</h6>
-            <a class="collapse-item" href="${pageContext.request.contextPath}/admin/user/index">Loại sản phẩm</a>
-            <a class="collapse-item" href="${pageContext.request.contextPath}/admin/customer/index">Sản phẩm</a>
+            <c:if test="${ not empty sessionScope.roleList}">
+            	<c:forEach items="${sessionScope.roleList}" var="role">
+            		<a class="collapse-item" href="${pageContext.request.contextPath}/admin/user/${role.roleId}">${role.roleName}</a>
+            	</c:forEach>
+            </c:if>
+            <a class="collapse-item" href="${pageContext.request.contextPath}/admin/role/index">Quản lý Chức vụ</a>
           </div>
         </div>
       </li>
