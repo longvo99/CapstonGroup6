@@ -1213,7 +1213,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-header-left">
-                        <h3 class="text-light-black header-title title">Reviews for Great Burger</h3>
+                        <h3 class="text-light-black header-title title">Đánh giá Nhà Hàng 1</h3>
                     </div>
                     <div class="restaurent-rating mb-xl-20">
                         <div class="star"> <span class="text-yellow fs-16">
@@ -1233,19 +1233,27 @@
               </span>
                         </div> <span class="fs-12 text-light-black">58 Ratings</span>
                     </div>
-                    <p class="text-light-black mb-xl-20">Here's what people are saying:</p>
+                    <p class="text-light-black mb-xl-20">Đánh giá từ mọi người</p>
                     <ul>
                         <li>
-                            <h6 class="text-light-black mb-1">73%</h6>
-                            <span class="text-light-black fs-12 fw-400">Food was good</span>
+                            <h6 class="text-light-black mb-1">9</h6>
+                            <span class="text-light-black fs-12 fw-400">Quality</span>
                         </li>
                         <li>
-                            <h6 class="text-light-black mb-1">85%</h6>
-                            <span class="text-light-black fs-12 fw-400">Delivery was on time</span>
+                            <h6 class="text-light-black mb-1">8,5</h6>
+                            <span class="text-light-black fs-12 fw-400">Service</span>
                         </li>
                         <li>
-                            <h6 class="text-light-black mb-1">68%</h6>
-                            <span class="text-light-black fs-12 fw-400">Order was accurate</span>
+                            <h6 class="text-light-black mb-1">8,5</h6>
+                            <span class="text-light-black fs-12 fw-400">Space</span>
+                        </li>
+                        <li>
+                            <h6 class="text-light-black mb-1">9</h6>
+                            <span class="text-light-black fs-12 fw-400">Location</span>
+                        </li>
+                        <li>
+                            <h6 class="text-light-black mb-1">8</h6>
+                            <span class="text-light-black fs-12 fw-400">Price</span>
                         </li>
                     </ul>
                     <div class="u-line"></div>
@@ -1276,10 +1284,10 @@
 							<label class="active">Photos</label>
 							<div class="input-images-1" style="padding-top: .5rem;"></div>
 						</div>
-						<div class="input-field">
+						<!-- <div class="input-field">
 					        <label class="active">Photos</label>
 					        <div class="input-images-2" style="padding-top: .5rem;"></div>
-					    </div>
+					    </div> -->
 						<hr />
 						<div>
 							<h5>Videos</h5>
@@ -1330,6 +1338,9 @@
 					</form>
 				</div>
 				<!-- Comment  -->
+				<div style="margin-left: 15px;" class="section-header-left">
+                    <h3 class="text-light-black header-title title">DANH SÁCH BÌNH LUẬN</h3>
+                </div>
 				<div class="container bootdey comments">
 					<div class="col-md-12 bootstrap snippets">
 						<div class="panel">
@@ -1340,12 +1351,12 @@
 									<a class="media-left" href="#"><img class="img-circle img-sm" alt="Profile Picture" src="https://bootdey.com/img/Content/avatar/avatar1.png"></a>
 									<div class="media-body">
 										<div class="mar-btm">
-											<a href="#" class="btn-link text-semibold media-heading box-inline">Lisa D.</a>
+											<a href="#" class="btn-link text-semibold media-heading box-inline">Thanh Hải</a>
 											<p class="text-muted text-sm">
 												<i class="fa fa-mobile fa-lg"></i> - From Mobile - 11 min ago
 											</p>
 										</div>
-										<p>consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.</p>
+										<p>Nhà hàng sạch sẽ và giá cả hợp lí</p>
 										<div class="pad-ver">
 											<span class="tag tag-sm"><i class="fa fa-heart text-danger"></i> 250 Likes</span>
 											<div class="btn-group">
@@ -1363,12 +1374,12 @@
 												</a>
 												<div class="media-body">
 													<div class="mar-btm">
-														<a href="#" class="btn-link text-semibold media-heading box-inline">Bobby Marz</a>
+														<a href="#" class="btn-link text-semibold media-heading box-inline">Đình Long</a>
 														<p class="text-muted text-sm">
 															<i class="fa fa-mobile fa-lg"></i> - From Mobile - 7 min ago
 														</p>
 													</div>
-													<p>Sed diam nonummy nibh euismod tincidunt ut laoreet. </p>
+													<p>OK ok </p>
 													<div class="pad-ver">
 														<div class="btn-group">
 															<a class="btn btn-sm btn-default btn-hover-success active" href="#"><i class="fa fa-thumbs-up"></i> You Like it</a>
@@ -1386,12 +1397,12 @@
 												</a>
 												<div class="media-body">
 													<div class="mar-btm">
-														<a href="#" class="btn-link text-semibold media-heading box-inline">Lucy Moon</a>
+														<a href="#" class="btn-link text-semibold media-heading box-inline">Long</a>
 														<p class="text-muted text-sm">
 															<i class="fa fa-globe fa-lg"></i> - From Web - 2 min ago
 														</p>
 													</div>
-													<p>Duis autem vel eum iriure dolor in hendrerit in vulputate ?</p>
+													<p>Nhà hàng đẹp</p>
 													<div class="pad-ver">
 														<div class="btn-group">
 															<a class="btn btn-sm btn-default btn-hover-success" href="#"><i class="fa fa-thumbs-up"></i></a> 
@@ -1409,16 +1420,16 @@
 												</a>
 												<div class="media-body">
 													<div class="mar-btm">
-														<a href="#" class="btn-link text-semibold media-heading box-inline">Lucy Moon</a>
+														<a href="#" class="btn-link text-semibold media-heading box-inline">Thanh Hải</a>
 														<p class="text-muted text-sm">
 															<i class="fa fa-globe fa-lg"></i> - From Web - 2 min ago
 														</p>
 													</div>
 													<div class="pad-ver">
 														<div>
-															<textarea id="focu" class="form-control" rows="2" cols="80" placeholder="What are you thinking?"></textarea><br/>
-															<button class="btn btn-primary btn-sm shadow-none" type="submit">Post comment</button>
-															<button style="margin-left: 10px;" class="btn btn-sm btn-primary shadow-none" type="button">Cancel</button>
+															<textarea id="focu" class="form-control" rows="2" cols="80" placeholder="Nhập bình luận..."></textarea><br/>
+															<button class="btn btn-primary btn-sm shadow-none" type="submit">Trả lời</button>
+															<button style="margin-left: 10px;" class="btn btn-sm btn-primary shadow-none" type="button">Hủy</button>
 														</div>
 													</div>
 													<hr>
@@ -1440,12 +1451,12 @@
 									</a>
 									<div class="media-body">
 										<div class="mar-btm">
-											<a href="#" class="btn-link text-semibold media-heading box-inline">John Doe</a>
+											<a href="#" class="btn-link text-semibold media-heading box-inline">Thanh Hải</a>
 											<p class="text-muted text-sm">
 												<i class="fa fa-mobile fa-lg"></i> - From Mobile - 11 min ago
 											</p>
 										</div>
-										<p>Lorem ipsum dolor sit amet.</p>
+										<p>Nhà hàng sạch sẽ và giá cả hợp lí</p>
 										<img class="img-responsive thumbnail" src="https://via.placeholder.com/400x300" alt="Image">
 										<div class="pad-ver">
 											<span class="tag tag-sm"><i class="fa fa-heart text-danger"></i> 250 Likes</span>
@@ -1464,12 +1475,12 @@
 												</a>
 												<div class="media-body">
 													<div class="mar-btm">
-														<a href="#" class="btn-link text-semibold media-heading box-inline">Maria Leanz</a>
+														<a href="#" class="btn-link text-semibold media-heading box-inline">Long</a>
 														<p class="text-muted text-sm">
 															<i class="fa fa-globe fa-lg"></i> - From Web - 2 min ago
 														</p>
 													</div>
-													<p>Duis autem vel eum iriure dolor in hendrerit in vulputate ?</p>
+													<p>Ok</p>
 													<div>
 														<div class="btn-group">
 															<a class="btn btn-sm btn-default btn-hover-success" href="#"><i class="fa fa-thumbs-up"></i></a> 

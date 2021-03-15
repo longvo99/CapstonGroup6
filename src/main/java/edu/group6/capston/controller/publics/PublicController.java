@@ -25,38 +25,64 @@ public class PublicController extends PublicAbstractController {
 
 	@Autowired
 	private LocationService locationService;
-	
+
 	@Autowired
 	private LocationDAO locationDAO;
-	
-	@GetMapping("/index")
-	public String index(Model model) {
-		model.addAttribute("locationList", locationService.findAll());
-		//locationDAO.findAll1();
-		return "public.index";
-	}
-	@GetMapping("/restaurant")
-	public String productdetail(Model model) {
-		model.addAttribute("linkanh", "DSC_3005.jpg");
-		return "public.restaurant";
-	}
-	@PostMapping("/restaurant")
-	public String restaurant(Model model, HttpServletRequest request,
-			@RequestParam(value = "images[]") MultipartFile[] files) throws IllegalStateException, IOException {
-		model.addAttribute("locationList", locationService.findAll());
-		for (MultipartFile obj : files) {
-			String fileName = UploadFile.upload(obj, request);
-			System.out.println(fileName);
-		}
-		System.out.println(UploadFile.getDirPath(request));
-		return "public.restaurant";
-	}
 
 	@Override
 	public void addCommonObjects(Model model) {
 		super.addCommonObjects(model);
 	}
 
+	@GetMapping("/index")
+	public String index(Model model) {
+		model.addAttribute("locationList", locationService.findAll());
+		// locationDAO.findAll1();
+		return "public.index";
+	}
+
+	@GetMapping("/restaurant")
+	public String productdetail(Model model) {
+		model.addAttribute("linkanh", "DSC_3005.jpg");
+		return "public.restaurant";
+	}
+
+	@PostMapping("/restaurant")
+	public String restaurant(Model model, HttpServletRequest request,
+			@RequestParam(value = "images[]") MultipartFile[] files) throws IllegalStateException, IOException {
+		model.addAttribute("locationList", locationService.findAll());
+		for (MultipartFile obj : files) {
+			String fileName = UploadFile.upload(obj, request);
+		}
+		System.out.println(UploadFile.getDirPath(request));
+		return "public.restaurant";
+	}
+
+	@GetMapping("/register")
+	public String register(Model model) {
+		return "public.register";
+	}
+	
+	@GetMapping("/login")
+	public String login(Model model) {
+		return "public.login";
+	}
+	
+	@GetMapping("/checkout")
+	public String checkout(Model model) {
+		return "public.checkout";
+	}
+	
+	@GetMapping("/orderdetails")
+	public String orderdetails(Model model) {
+		return "public.orderdetails";
+	}
+	
+	@GetMapping("/listview")
+	public String listview(Model model) {
+		return "public.listview";
+	}
+	
 //	@GetMapping("/shop")
 //	public String shop(Model model) {
 //		return "public.shop";

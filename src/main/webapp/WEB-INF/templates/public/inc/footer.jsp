@@ -253,6 +253,7 @@
     <script src="${pageContext.request.contextPath}/resources/public/assets/js/jquery.magnific-popup.min.js"></script>
     <!-- Maps -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnd9JwZvXty-1gHZihMoFhJtCXmHfeRQg"></script>
+    <script src="${pageContext.request.contextPath}/resources/public/assets/js/map.js"></script>
     <!-- sticky sidebar -->
     <script src="${pageContext.request.contextPath}/resources/public/assets/js/sticksy.js"></script>
     <!-- Munch Box Js -->

@@ -113,7 +113,7 @@ input[type="file"] {
                         <div style="width: 200px; margin-right: 20px;" class="btn-group">
 		                    <a id="dLabel" role="button" data-toggle="dropdown" class="btn btn-outline-secondary dropdown-toggle"
 		                       href="">
-		                        Protien Search
+		                        Select Category
 		                    </a>
 		                    <c:if test="${not empty locationCategoriesList1}">
 		                    <ul class="selectPkeyVkey dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
