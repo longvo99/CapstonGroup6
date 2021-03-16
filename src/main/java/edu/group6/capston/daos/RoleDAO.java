@@ -48,7 +48,7 @@ public class RoleDAO {
 		}
 	}
 
-	public boolean delete(Integer id) {
+	public boolean delete(String id) {
 		try (Session session = this.sessionFactory.openSession()) {
 			Transaction tx = session.beginTransaction();
 			Role locationTypes;

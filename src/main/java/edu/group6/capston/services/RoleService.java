@@ -8,5 +8,5 @@ public interface RoleService {
 	List<Role> findAll();
 	boolean save(Role role);
 	boolean update(Role role);
-	boolean delete(Integer id);
+	boolean delete(String id);
 }

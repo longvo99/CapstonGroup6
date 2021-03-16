@@ -10,4 +10,8 @@ public interface UserService {
 	 * int add(User user); int edit(UserDTO user, int id); int delete(int id);
 	 * UserDTO findUserId(int id); List<Role> findRoleAll(); int totalRow();
 	 */
+	List<Users> findByRoleName(String roleName);
+	Users getProfile(Users users);
+	boolean save(Users user);
+	Users findByUsername(String username);
 }

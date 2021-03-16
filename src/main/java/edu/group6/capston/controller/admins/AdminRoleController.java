@@ -77,7 +77,7 @@ public class AdminRoleController {
 	}
 	
 	@RequestMapping(value ="/del/{id}")
-	public String delete(@PathVariable Integer id, RedirectAttributes rd, HttpServletRequest request, Model mode) {
+	public String delete(@PathVariable String id, RedirectAttributes rd, HttpServletRequest request, Model mode) {
 		if (roleService.delete(id)) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
 			rd.addFlashAttribute("error", true);

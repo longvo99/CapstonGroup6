@@ -68,7 +68,7 @@
 			                  </button>
 			                </div>
 			                <div class="modal-body">
-				                <form role="form" action="${pageContext.request.contextPath}/admin/role/edit/${role.roleId}" method="post" id="form">
+				                <form role="form" action="${pageContext.request.contextPath}/admin/role/edit" method="post" id="form">
 				                	<div class="comment-form">
 				                		<div class="form-group">
 					                      <label for="name">ID</label>

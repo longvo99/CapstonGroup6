@@ -28,22 +28,24 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">LOGIN</h1>
                   </div>
-                  <form class="user">
+                  <c:if test="${not empty param['msg']}">
+	                	<p style="color:red;">Sai tên đăng nhập hoặc mật khẩu</p>
+	              </c:if>
+                  <form action="${pageContext.request.contextPath}/auth/login" name='loginForm' class="user" method="POST">
                     <div class="form-group">
-                      <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address">
+                      <input type="text" class="form-control" name="username" id="username" aria-describedby="username" placeholder="Enter username">
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control" id="exampleInputPassword" placeholder="Password">
+                      <input type="password" class="form-control" name="password" id="password" placeholder="Password">
                     </div>
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small" style="line-height: 1.5rem;">
                         <input type="checkbox" class="custom-control-input" id="customCheck">
-                        <label class="custom-control-label" for="customCheck">Remember
-                          Me</label>
+                        <label class="custom-control-label" for="customCheck">Remember Me</label>
                       </div>
                     </div>
                     <div class="form-group">
-                      <a href="https://indrijunanda.github.io/RuangAdmin/index.html" class="btn btn-primary btn-block">Login</a>
+                      <button type="submit" class="btn btn-primary btn-block">Login</button>
                     </div>
                     <!-- <hr>
                     <a href="https://indrijunanda.github.io/RuangAdmin/index.html" class="btn btn-google btn-block">
