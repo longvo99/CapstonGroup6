@@ -34,63 +34,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             throws Exception {
         auth.userDetailsService(userServiceImpl) // Cung cáp userservice cho spring security
             .passwordEncoder(bCryptPasswordEncoder()); // cung cấp password encoder
-//    	auth.jdbcAuthentication().dataSource(dataSource)
-//		.usersByUsernameQuery("select username, password from users where username=?")
-//		.authoritiesByUsernameQuery(
-//				"select username, concat('ROLE_',u.roleId) role from users where username=?")
-//		.passwordEncoder(bCryptPasswordEncoder());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("/public/**").permitAll() // Cho phép tất cả mọi người truy cập vào 2 địa chỉ này
-                .anyRequest().authenticated() // Tất cả các request khác đều cần phải xác thực mới được truy cập
-                .and().csrf()
-        		.disable()
-        		.formLogin()
-        		.loginPage("/auth/login")
-                //.formLogin() // Cho phép người dùng xác thực bằng form login
-                .defaultSuccessUrl("/admin/index")
-                .failureUrl("/auth/login?msg=Error")
-                .permitAll() // Tất cả đều được truy cập vào địa chỉ này
-                .and()
-                .logout()
-                .logoutUrl("/auth/logout")
-        		.logoutSuccessUrl("/auth/login") // Cho phép logout
-                .permitAll()
-                .and().exceptionHandling().accessDeniedPage("/error403");
-        		
-        http.authorizeRequests().antMatchers("/").permitAll();
-		http.authorizeRequests().antMatchers("/admin/locationType/index").access("hasAnyRole('ROLE_ADMIN', 'ROLE_STAFF')");
-		http.authorizeRequests().antMatchers("/admin/locationType/add").access("hasAnyRole('ROLE_ADMIN')");
-		http.authorizeRequests().antMatchers("/admin/**").access("hasAnyRole('ROLE_ADMIN', 'ROLE_STAFF', 'ROLE_POSTER')");
-    }
-	
-	/*
-	@Autowired
-	private DataSource dataSource;
-	
-	/*
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.jdbcAuthentication().dataSource(dataSource)
-				.usersByUsernameQuery("select username, password from users where username=?")
-				.authoritiesByUsernameQuery(
-						"select username, concat('ROLE_',u.roleId) role from users where username=?")
-				.passwordEncoder(bCryptPasswordEncoder());
-	}
-	
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("admin").password("123456").roles("ADMIN");
-		auth.inMemoryAuthentication().withUser("user").password("123").roles("USER");
-	}
-	
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().
+    	http.authorizeRequests().
 		and().csrf().
 		disable().
 		formLogin().
@@ -107,15 +55,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		deleteCookies("JSESSIONID").
 		and().exceptionHandling().accessDeniedPage("/error403");
 		http.authorizeRequests().antMatchers("/").permitAll();
-		http.authorizeRequests().antMatchers("/admin/cat/index").access("hasAnyRole('ROLE_ADMIN', 'ROLE_STAFF')");
-		http.authorizeRequests().antMatchers("/admin/cat/add").access("hasAnyRole('ROLE_ADMIN')");
-		http.authorizeRequests().antMatchers("/admin/user/add").access("hasAnyRole('ROLE_ADMIN')");
+		http.authorizeRequests().antMatchers("/admin/locationType/index").access("hasAnyRole('ROLE_ADMIN', 'ROLE_STAFF')");
+		http.authorizeRequests().antMatchers("/admin/locationType/add").access("hasAnyRole('ROLE_ADMIN')");
 		http.authorizeRequests().antMatchers("/admin/**").access("hasAnyRole('ROLE_ADMIN', 'ROLE_STAFF', 'ROLE_POSTER')");
-	}
-	*/
-//	@Bean
-//	public BCryptPasswordEncoder bCryptPasswordEncoder() {
-//		return new BCryptPasswordEncoder();
-//	}
+    	
+    }
 	
 }

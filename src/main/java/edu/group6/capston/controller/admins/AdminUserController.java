@@ -21,9 +21,9 @@ public class AdminUserController {
 		return "admin.user.index";
 	}
 	
-	@RequestMapping(value ="/profile")
-	public String profile(Model model) {
-		//model.addAttribute("user" , userService.findByUserName());
+	@RequestMapping(value ="/profile/{username}")
+	public String profile(@PathVariable String username, Model model) {
+		model.addAttribute("user" , userService.findByUsername(username));
 		return "admin.user.profile";
 	}
 	

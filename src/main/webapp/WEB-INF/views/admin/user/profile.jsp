@@ -4,16 +4,18 @@
 <div class="container bootstrap snippet">
 	<div class="row">
 		<div class="col-sm-10">
-			<h1>UserName</h1>
+			<h1>${user.username}</h1>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-sm-3">
 			<!--left col-->
-
-
 			<div class="text-center">
-				<img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png"
+				<c:set var="avatarPath" value="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+				<c:if test="${not empty user.avatarPath}">
+					<c:set var="avatarPath" value="${pageContext.request.contextPath}/resources/admin/image/uploads/${user.avatarPath}" />
+				</c:if>
+				<img src="${avatarPath}"
 					class="avatar img-circle img-thumbnail" alt="avatar">
 				<h6>Upload a different photo...</h6>
 				<input type="file" class="text-center center-block file-upload">
@@ -52,49 +54,49 @@
 						<div class="form-group">
 							<div class="col-xs-6">
 								<label for="first_name"> Họ và Tên </label> 
-								<input type="text" class="form-control" name="first_name" id="first_name" >
+								<input type="text" class="form-control" value="${user.contactName}" name="contactName" id="contactName" >
 							</div>
 						</div>
 						<div class="form-group">
 
 							<div class="col-xs-6">
 								<label for="phone"> Số điện thoại </label> 
-								<input type="text" class="form-control" name="phone" id="phone">
+								<input type="text" value="${user.contactPhone}" class="form-control" name="phone" id="phone">
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-xs-6">
 								<label for="email"> Email </label> 
-								<input type="email" class="form-control" name="email" id="email" >
+								<input type="email" class="form-control" value="${user.contactEmail}" name="contactAddress" id="contactAddress" >
 						</div>
 						<div class="form-group">
 							<div class="col-xs-6">
 								<label for="email"> Địa chỉ </label> 
-								<input type="email" class="form-control" id="location" >
+								<input type="email" class="form-control" value="${user.contactAddress}" name="contactAddress" id="contactAddress" >
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-xs-6">
 								<label for="mobile"> Giới tính </label> 
-								<input type="text" class="form-control" name="mobile" id="mobile">
+								<input type="text" class="form-control" value="${user.gender}" name="gender" id="gender">
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-xs-6">
 								<label for="mobile"> Ngày sinh </label> 
-								<input type="text" class="form-control" name="mobile" id="mobile">
+								<input type="text" class="form-control" value="${user.dateOfBirth}" name="dateOfBirth" id="dateOfBirth">
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-xs-6">
 								<label for="mobile"> Mô tả </label> 
-								<input type="text" class="form-control" name="mobile" id="mobile">
+								<input type="text" class="form-control" value="${user.description}" name="description" id="description">
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-xs-6">
 								<label for="password"> Password </label> 
-								<input type="password" class="form-control" name="password" >
+								<input type="password" class="form-control" value="********" name="password" >
 							</div>
 						</div>
 						<div class="form-group">

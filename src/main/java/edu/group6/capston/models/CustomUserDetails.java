@@ -22,7 +22,7 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         // Mặc định mình sẽ để tất cả là ROLE_USER. Để demo cho đơn giản.
-        return Collections.singleton(new SimpleGrantedAuthority("ROLE_STAFF"));
+        return Collections.singleton(new SimpleGrantedAuthority("ROLE_" + user.getRole().getRoleId()));
     }
 
     @Override

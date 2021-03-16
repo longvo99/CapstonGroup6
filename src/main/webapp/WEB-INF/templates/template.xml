@@ -104,6 +104,11 @@
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/order/detail.jsp" />
 	</definition>
 	
+	<!-- ADMIN ERROR  -->
+	<definition name="error.404" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/error/404.jsp" />
+	</definition>
+	
 <!-- <<<<<<< Updated upstream -->
 	<!-- ADMIN DISCOUNTS  -->
 	<definition name="admin.discount.index" extends="templates.admin">
