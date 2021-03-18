@@ -72,7 +72,7 @@
 					      </div>
 				    	</div>
 				    	<div class="ml-2 col-sm-6">
-						  <img src="${pageContext.request.contextPath}/resources/admin/image/uploads/${product.imagePath}" id="preview" class="img-thumbnail">
+						  <img src="${pageContext.request.contextPath}/resources/admin/assets/img/uploads/${product.imagePath}" id="preview" class="img-thumbnail">
 						</div>
 				    </div>
                     <style type="text/css">

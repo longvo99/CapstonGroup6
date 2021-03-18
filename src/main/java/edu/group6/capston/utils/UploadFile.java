@@ -25,7 +25,7 @@ public class UploadFile {
 			if (!new File(dirPath).exists()) {
 				new File(dirPath).mkdir();
 			}
-			String fileName = mtf.getOriginalFilename();
+			String fileName = rename(mtf.getOriginalFilename());
 			String pathFile = dirPath + File.separator + fileName;
 			mtf.transferTo(new File(pathFile));
 			return fileName;

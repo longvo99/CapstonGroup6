@@ -117,8 +117,10 @@ public class AdminProductController {
 		if (productService.delete(id)) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
 			rd.addFlashAttribute("error", true);
+			System.out.println("aaaaa");
 			return "redirect:/admin/product/index";
 		}
+		System.out.println("bbbbb");
 		rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("success", null, Locale.getDefault()));
 		rd.addFlashAttribute("success", true);
 		return "redirect:/admin/product/index";

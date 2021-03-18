@@ -49,7 +49,7 @@
                     </thead>
                     <tbody>
                       <c:forEach items="${productList}" var="product">
-						<c:set var="urlDel" value="${pageContext.request.contextPath}/admin/edit/del/${product.productId}" />
+						<c:set var="urlDel" value="${pageContext.request.contextPath}/admin/product/del/${product.productId}" />
 						<tr class="odd gradeX">
 							<td>${product.productId}</td>
 							<td>${product.name}</td>
@@ -102,7 +102,7 @@
 					                    <div class="form-group">
 					                    	<label for="name">Hình ảnh</label>
 									    	<div class="ml-2 col-sm-6">
-											  <img src="${pageContext.request.contextPath}/resources/admin/image/uploads/${product.imagePath}" class="img-thumbnail">
+											  <img src="${pageContext.request.contextPath}/resources/admin/assets/img/uploads/${product.imagePath}" class="img-thumbnail">
 											</div>
 									    </div>
 					                    <div class="form-group">
