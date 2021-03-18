@@ -61,11 +61,6 @@ public class PublicController extends PublicAbstractController {
 		return "public.register";
 	}
 	
-	@GetMapping("/login")
-	public String login(Model model) {
-		return "public.login";
-	}
-	
 	@GetMapping("/checkout")
 	public String checkout(Model model) {
 		return "public.checkout";

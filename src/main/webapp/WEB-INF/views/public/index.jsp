@@ -163,12 +163,9 @@
             </div>
             <!-- advertisement banner-->
             <div class="row">
-                <div class="col-12">
-                    <div class="banner-adv2 mb-xl-20">
-                        <img src="https://via.placeholder.com/1110x100" class="img-fluid full-width" alt="banner"> <span class="text">Unlimited Free Delivery with. <img src="https://via.placeholder.com/105x30" alt="logo">
-                            <a href="restaurant.html" class="btn-second btn-submit">Try 30 Days FREE</a></span>
-                        <span class="close-banner"></span>
-                        <div class="overlay overlay-bg"></div>
+            	<div class="col-12">
+                    <div class="section-header-left">
+                        <h3 class="text-light-black header-title title">Địa điểm đang giảm giá</h3>
                     </div>
                 </div>
             </div>
@@ -498,11 +495,8 @@
             <!-- advertisement banner-->
             <div class="row">
                 <div class="col-12">
-                    <div class="banner-adv2 mb-xl-20">
-                        <img src="https://via.placeholder.com/1110x100" class="img-fluid full-width" alt="banner"> <span class="text">Unlimited Free Delivery with. <img src="https://via.placeholder.com/105x30" alt="logo"> 
-                            <a href="restaurant.html" class="btn-second btn-submit">Try 30 Days FREE</a></span>
-                        <span class="close-banner"></span>
-                        <div class="overlay overlay-bg"></div>
+                    <div class="section-header-left">
+                        <h3 class="text-light-black header-title title">Địa điểm được xem nhiều</h3>
                     </div>
                 </div>
             </div>
@@ -832,11 +826,8 @@
             <!-- advertisement banner-->
             <div class="row">
                 <div class="col-12">
-                    <div class="banner-adv2 mb-xl-20">
-                        <img src="https://via.placeholder.com/1110x100" class="img-fluid full-width" alt="banner"> <span class="text">Unlimited Free Delivery with. <img src="https://via.placeholder.com/105x30" alt="logo"> 
-                            <a href="restaurant.html" class="btn-second btn-submit">Try 30 Days FREE</a></span>
-                        <span class="close-banner"></span>
-                        <div class="overlay overlay-bg"></div>
+                    <div class="section-header-left">
+                        <h3 class="text-light-black header-title title">Địa điểm bạn yêu thích</h3>
                     </div>
                 </div>
             </div>

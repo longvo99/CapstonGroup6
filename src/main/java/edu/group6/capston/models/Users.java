@@ -55,7 +55,7 @@ public class Users {
 	@ManyToOne
 	@JoinColumn(name = "roleId")
 	private Role role;
-
+ 
 //	@Transient
 //	public List<GrantedAuthority> getAuthorities() {
 //		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
