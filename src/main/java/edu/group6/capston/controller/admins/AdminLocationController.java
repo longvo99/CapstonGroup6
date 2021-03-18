@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -54,39 +55,78 @@ public class AdminLocationController {
 		model.addAttribute("locationList", locationService.findAll());
 		return "admin.location.index";
 	}
-	
+
 	@GetMapping("/image/{locationId}")
 	public String image(@PathVariable Integer locationId, Model model) {
-		Location location =  locationService.findLocationId(locationId);
+		Location location = locationService.findLocationId(locationId);
 		String[] imagePath = UploadFile.splitPathMedia(location.getMediaPath());
 		model.addAttribute("imagePath", imagePath);
 		return "admin.location.image";
 	}
-	
+
 	@PostMapping("/image/edit/{locationId}")
-	public String image(@PathVariable Integer locationId, Model model, @Valid @ModelAttribute("images") ImageUpload images, BindingResult br, RedirectAttributes rd,
-			HttpServletRequest request, MultipartFile file) throws IllegalStateException, IOException {
-		Location location =  locationService.findLocationId(locationId);
-		List<MultipartFile> files = images.getImages();
-		if(files != null && files.size() > 0) {
-			String mediaPath = "";
-			for (MultipartFile multipartFile : files) {
-				String filename = UploadFile.upload(multipartFile, request);
-				if(files.indexOf(multipartFile) == 0) {
-					mediaPath = filename ;
-				}else {
-					mediaPath = mediaPath + ";" + filename ;
-				}
+	public String image(@PathVariable Integer locationId, @Valid @ModelAttribute("images") ImageUpload images,
+			@RequestParam(value = "images") MultipartFile[] filess,
+			@RequestParam(value = "image[]", required = false) String oldImages, BindingResult br,
+			RedirectAttributes rd, HttpServletRequest request) throws IllegalStateException, IOException {
+		Location location = locationService.findLocationId(locationId);
+		String mediaPath = "";
+		for (MultipartFile file : filess) {
+			String fileName = UploadFile.upload(file, request);
+			if( fileName != "") {
+				mediaPath += fileName + ";" ;
 			}
+		}
+		if(mediaPath != "" && oldImages == null) {
 			location.setMediaPath(mediaPath);
-			if(locationService.update(location)) {
+		} else
+			if(mediaPath == "" && oldImages != null) {
+				String[] mediaPathArr = UploadFile.splitPathMedia(location.getMediaPath());
+				for (int i = 0; i < mediaPathArr.length; i++) {
+					if(oldImages.contains(String.valueOf(i)) == true) {
+						mediaPath += mediaPathArr[i] + ";" ;
+					} else {
+						UploadFile.del(mediaPathArr[i], request);
+					}
+				}
+				location.setMediaPath(mediaPath);
+			} else
+				if(mediaPath != "" && oldImages != null) {
+					if (oldImages.lastIndexOf("0") != 0) {
+						oldImages = oldImages.substring(0, oldImages.lastIndexOf("0") - 1);
+						String[] mediaPathArr = UploadFile.splitPathMedia(location.getMediaPath());
+						String str = "";
+						for (int i = 0; i < mediaPathArr.length; i++) {
+							if(oldImages.contains(String.valueOf(i)) == true) {
+								str += mediaPathArr[i] + ";" ;
+							} else {
+								UploadFile.del(mediaPathArr[i], request);
+							}
+						}
+						location.setMediaPath(str + mediaPath);
+					} else {
+						String[] mediaPathArr = UploadFile.splitPathMedia(location.getMediaPath());
+						for (int i = 0; i < mediaPathArr.length; i++) {
+								UploadFile.del(mediaPathArr[i], request);
+						}
+						location.setMediaPath(mediaPath);
+					}
+				} else if(mediaPath == "" && oldImages == null) {
+					String[] mediaPathArr = UploadFile.splitPathMedia(location.getMediaPath());
+					for (int i = 0; i < mediaPathArr.length; i++) {
+							UploadFile.del(mediaPathArr[i], request);
+					}
+					location.setMediaPath(mediaPath);
+				}
+		System.out.println(UploadFile.getDirPath(request));
+
+		
+			if (locationService.update(location)) {
 				rd.addFlashAttribute(GlobalsConstant.MESSAGE,
 						messageSource.getMessage("success", null, Locale.getDefault()));
 				rd.addFlashAttribute("success", true);
 				return "redirect:/admin/location/index";
 			}
-		}
-		
 		rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
 		rd.addFlashAttribute("error", true);
 		return "admin.location.image";
@@ -121,31 +161,31 @@ public class AdminLocationController {
 			return "admin.location.add";
 		}
 		List<MultipartFile> files = images.getImages();
-		if(files != null && files.size() > 0) {
+		if (files != null && files.size() > 0) {
 			String mediaPath = "";
 			for (MultipartFile multipartFile : files) {
 				String filename = UploadFile.upload(multipartFile, request);
-				if(files.indexOf(multipartFile) == 0) {
-					mediaPath = filename ;
-				}else {
-					mediaPath = mediaPath + ";" + filename ;
+				if (files.indexOf(multipartFile) == 0) {
+					mediaPath = filename;
+				} else {
+					mediaPath = mediaPath + ";" + filename;
 				}
 			}
 			location.setMediaPath(mediaPath);
-			if(locationService.save(location)) {
+			if (locationService.save(location)) {
 				rd.addFlashAttribute(GlobalsConstant.MESSAGE,
 						messageSource.getMessage("success", null, Locale.getDefault()));
 				rd.addFlashAttribute("success", true);
 				return "redirect:/admin/location/index";
 			}
 		}
-		
+
 		rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
 		rd.addFlashAttribute("error", true);
 		model.addAttribute("location", location);
 		return "admin.location.add";
 	}
-	
+
 	@GetMapping("edit/{locationId}")
 	public String edit(@PathVariable Integer locationId, Model model) {
 		Location location = locationService.findLocationId(locationId);
@@ -159,7 +199,8 @@ public class AdminLocationController {
 				locationCategoriesList2.add(locationCategories);
 			}
 		}
-		List<CityDistrictWard> listJson = readFileJson.getName(location.getCity(), location.getDistrict(), location.getWard());
+		List<CityDistrictWard> listJson = readFileJson.getName(location.getCity(), location.getDistrict(),
+				location.getWard());
 		String[] imagePath = UploadFile.splitPathMedia(location.getMediaPath());
 		model.addAttribute("imagePath", imagePath);
 		model.addAttribute("locationCategoriesList1", locationCategoriesList1);

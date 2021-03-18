@@ -51,10 +51,10 @@
 	  <script type="text/javascript">
       let preloaded = [
     	<c:if test="${not empty imagePath}">
-		    	<c:forEach items="${imagePath}" var="image">
-		    		<c:if test="${image != ''}"> 
-		  	  		{id: 1, src: '${pageContext.request.contextPath}/resources/admin/image/uploads/${image}'},
-		  	  	 	</c:if>
+		    	<c:forEach items="${imagePath}" var="image" varStatus="theCount">
+		    	<c:if test="${not empty image}">
+		  	  		{id: ${theCount.index}, src: '${pageContext.request.contextPath}/resources/admin/assets/img/uploads/${image}'},
+		  	  	</c:if>	
 		  	  	</c:forEach>
 	    </c:if>
     	];

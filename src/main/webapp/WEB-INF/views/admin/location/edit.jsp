@@ -154,7 +154,7 @@
 				    	<c:if test="${not empty imagePath}">
 						    	<c:forEach items="${imagePath}" var="image">
 						    		<c:if test="${image != ''}"> 
-						  	  		{id: 1, src: '${pageContext.request.contextPath}/resources/admin/image/uploads/${image}'},
+						  	  		{id: 1, src: '${pageContext.request.contextPath}/resources/admin/assets/img/uploads/${image}'},
 						  	  	 	</c:if>
 						  	  	</c:forEach>
 					    </c:if>
