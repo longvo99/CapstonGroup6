@@ -55,14 +55,19 @@ public class Users {
 	@ManyToOne
 	@JoinColumn(name = "roleId")
 	private Role role;
+	
+	public Users(String username, String contactName, String contactEmail, Timestamp joinDate, boolean banned,
+			boolean hide, Role role) {
+		super();
+		this.username = username;
+		this.contactName = contactName;
+		this.contactEmail = contactEmail;
+		this.joinDate = joinDate;
+		this.banned = banned;
+		this.hide = hide;
+		this.role = role;
+	}
+	
+	
  
-//	@Transient
-//	public List<GrantedAuthority> getAuthorities() {
-//		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-//		for (Role usersRoles : role) {
-//			authorities.add(new SimpleGrantedAuthority(usersRoles.get.getName()));
-//		}
-//		return authorities;
-//	}
-
 }

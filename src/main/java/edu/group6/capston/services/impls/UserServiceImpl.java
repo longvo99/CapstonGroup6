@@ -86,15 +86,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	public Users findByUsername(String username) {
-		// TODO Auto-generated method stub
-//		System.out.println(username);
-//		Users user = UserDAO.findByUsername(username);
-//		System.out.println("a" + user.getUsername());
-//		user.setUsername("admin5");
-//		user.setPassword("123456");
-//		boolean a = save(user);
-//		System.out.println("a" + a);
 		return UserDAO.findByUsername(username);
+	}
+
+
+	@Override
+	public Users findByEmail(String email) {
+		return UserDAO.findByEmail(email);
 	}
 
 }

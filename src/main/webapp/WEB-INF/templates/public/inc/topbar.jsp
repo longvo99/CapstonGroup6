@@ -313,12 +313,33 @@ input[type="file"] {
                             <!-- mobile search -->
                             <!-- user account -->
                             <div class="user-details p-relative">
+                            <c:choose>
+                            	<c:when test="${not empty sessionScope.userSession}">
                                 <a href="#" class="text-light-white fw-500">
-                                    <img src="https://via.placeholder.com/30" class="rounded-circle" alt="userimg"> <span>Hi, Kate</span>
+                                	<c:set var="avatarPath" value="" />
+                                	<c:choose> 
+                                		<c:when test="${not empty sessionScope.userSession.avatarPath}">
+                                			<c:set var="avatarPath" value="${pageContext.request.contextPath}/resources/admin/assets/img/uploads/${sessionScope.userSession.avatarPath}" />
+                                		</c:when>
+                                		<c:otherwise>
+                                			<c:set var="avatarPath" value="https://via.placeholder.com/30" />
+                                		</c:otherwise>
+                                	</c:choose>
+                                	<c:set var="nameUser" value="" />
+                                	<c:choose>
+                                		<c:when test="${not empty sessionScope.userSession.contactName}">
+                                			<c:set var="nameUser" value="${sessionScope.userSession.contactName}" />
+                                		</c:when>
+                                		<c:otherwise>
+                                			<c:set var="nameUser" value="${sessionScope.userSession.username}" />
+                                		</c:otherwise>
+                                	</c:choose>
+                                    <img src="${avatarPath}" class="rounded-circle" alt="userimg"> <span>Hi, ${nameUser}</span>
                                 </a>
                                 <div class="user-dropdown">
+                                   <!--
                                     <ul>
-                                        <li>
+                                         <li>
                                             <a href="order-details.html">
                                                 <div class="icon"><i class="flaticon-rewind"></i>
                                                 </div> <span class="details">Past Orders</span>
@@ -365,11 +386,15 @@ input[type="file"] {
                                                 <div class="icon"><i class="flaticon-board-games-with-roles"></i>
                                                 </div> <span class="details">Help</span>
                                             </a>
-                                        </li>
-                                    </ul>
-                                    <div class="user-footer"> <span class="text-light-black">Not Jhon?</span> <a href="#">Sign Out</a>
-                                    </div>
+                                        </li> 
+                                    </ul>-->
+                                    <div class="user-footer"><a href="${pageContext.request.contextPath}/public/logout">Sign Out</a></div>
                                 </div>
+                                </c:when>
+                                <c:otherwise>
+                                	<img src="https://via.placeholder.com/30" class="rounded-circle" alt="userimg"><span> <a href="${pageContext.request.contextPath}/public/login"> Đăng nhập </a></span>
+                                </c:otherwise>
+                            </c:choose>  
                             </div>
                             <!-- mobile search -->
                             <!-- user notification -->

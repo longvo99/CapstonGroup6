@@ -2,6 +2,9 @@ package edu.group6.capston.utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -63,8 +66,4 @@ public class UploadFile {
 		return newFileName;
 	}
 	
-	public static String[] splitPathMedia(String pathMedia){
-		String[] parts = pathMedia.split(";");
-		return parts;
-	}
 }

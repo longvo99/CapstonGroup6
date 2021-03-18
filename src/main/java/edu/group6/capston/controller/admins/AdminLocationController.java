@@ -31,6 +31,7 @@ import edu.group6.capston.services.LocationCategoriesService;
 import edu.group6.capston.services.LocationService;
 import edu.group6.capston.services.LocationTypeService;
 import edu.group6.capston.utils.GlobalsConstant;
+import edu.group6.capston.utils.GlobalsFunction;
 import edu.group6.capston.utils.UploadFile;
 import edu.group6.capston.utils.readFileJson;
 
@@ -59,7 +60,7 @@ public class AdminLocationController {
 	@GetMapping("/image/{locationId}")
 	public String image(@PathVariable Integer locationId, Model model) {
 		Location location = locationService.findLocationId(locationId);
-		String[] imagePath = UploadFile.splitPathMedia(location.getMediaPath());
+		String[] imagePath = GlobalsFunction.splitPathMedia(location.getMediaPath());
 		model.addAttribute("imagePath", imagePath);
 		return "admin.location.image";
 	}
@@ -81,7 +82,7 @@ public class AdminLocationController {
 			location.setMediaPath(mediaPath);
 		} else
 			if(mediaPath == "" && oldImages != null) {
-				String[] mediaPathArr = UploadFile.splitPathMedia(location.getMediaPath());
+				String[] mediaPathArr = GlobalsFunction.splitPathMedia(location.getMediaPath());
 				for (int i = 0; i < mediaPathArr.length; i++) {
 					if(oldImages.contains(String.valueOf(i)) == true) {
 						mediaPath += mediaPathArr[i] + ";" ;
@@ -94,7 +95,7 @@ public class AdminLocationController {
 				if(mediaPath != "" && oldImages != null) {
 					if (oldImages.lastIndexOf("0") != 0) {
 						oldImages = oldImages.substring(0, oldImages.lastIndexOf("0") - 1);
-						String[] mediaPathArr = UploadFile.splitPathMedia(location.getMediaPath());
+						String[] mediaPathArr = GlobalsFunction.splitPathMedia(location.getMediaPath());
 						String str = "";
 						for (int i = 0; i < mediaPathArr.length; i++) {
 							if(oldImages.contains(String.valueOf(i)) == true) {
@@ -105,14 +106,14 @@ public class AdminLocationController {
 						}
 						location.setMediaPath(str + mediaPath);
 					} else {
-						String[] mediaPathArr = UploadFile.splitPathMedia(location.getMediaPath());
+						String[] mediaPathArr = GlobalsFunction.splitPathMedia(location.getMediaPath());
 						for (int i = 0; i < mediaPathArr.length; i++) {
 								UploadFile.del(mediaPathArr[i], request);
 						}
 						location.setMediaPath(mediaPath);
 					}
 				} else if(mediaPath == "" && oldImages == null) {
-					String[] mediaPathArr = UploadFile.splitPathMedia(location.getMediaPath());
+					String[] mediaPathArr = GlobalsFunction.splitPathMedia(location.getMediaPath());
 					for (int i = 0; i < mediaPathArr.length; i++) {
 							UploadFile.del(mediaPathArr[i], request);
 					}
@@ -201,7 +202,7 @@ public class AdminLocationController {
 		}
 		List<CityDistrictWard> listJson = readFileJson.getName(location.getCity(), location.getDistrict(),
 				location.getWard());
-		String[] imagePath = UploadFile.splitPathMedia(location.getMediaPath());
+		String[] imagePath = GlobalsFunction.splitPathMedia(location.getMediaPath());
 		model.addAttribute("imagePath", imagePath);
 		model.addAttribute("locationCategoriesList1", locationCategoriesList1);
 		model.addAttribute("locationCategoriesList2", locationCategoriesList2);
