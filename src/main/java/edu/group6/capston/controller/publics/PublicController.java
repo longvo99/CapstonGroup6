@@ -1,7 +1,6 @@
 package edu.group6.capston.controller.publics;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,9 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import edu.group6.capston.daos.LocationDAO;
-import edu.group6.capston.models.Location;
 import edu.group6.capston.services.LocationService;
+import edu.group6.capston.services.LocationTypeService;
 import edu.group6.capston.utils.UploadFile;
 
 @Controller
@@ -27,8 +25,8 @@ public class PublicController extends PublicAbstractController {
 	private LocationService locationService;
 
 	@Autowired
-	private LocationDAO locationDAO;
-
+	private LocationTypeService locationTypeService;
+	
 	@Override
 	public void addCommonObjects(Model model) {
 		super.addCommonObjects(model);
@@ -37,7 +35,7 @@ public class PublicController extends PublicAbstractController {
 	@GetMapping("/index")
 	public String index(Model model) {
 		model.addAttribute("locationList", locationService.findAll());
-		// locationDAO.findAll1();
+		model.addAttribute("locationTypeList", locationTypeService.findAll());
 		return "public.index";
 	}
 
