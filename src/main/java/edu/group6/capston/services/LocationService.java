@@ -2,7 +2,8 @@ package edu.group6.capston.services;
 
 import java.util.List;
 
-import edu.group6.capston.models.Location;;
+import edu.group6.capston.models.Location;
+import edu.group6.capston.models.LocationFavorites;;
 
 public interface LocationService {
 	List<Location> findAll();
@@ -11,4 +12,7 @@ public interface LocationService {
 	boolean delete(Location location);
 	Location findLocationId(int id);
 	long locationCount();
+	List<Location> findLocationFavorite(int userId);
+	List<String> search(String keyword);
+	
 }

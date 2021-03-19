@@ -57,25 +57,27 @@ public class LocationDAO {
 	 * listResult.get(0); System.out.println(number.intValue()); }
 	 */
 
-	/*
-	 * public List<LocationDTO> findAll() { List<LocationDTO> locationList = null;
-	 * Session session = this.sessionFactory.openSession(); Transaction transaction
-	 * = session.beginTransaction(); CriteriaBuilder builder =
-	 * session.getCriteriaBuilder(); CriteriaQuery<LocationDTO> query =
-	 * builder.createQuery(LocationDTO.class); Root<Location> root =
-	 * query.from(Location.class); root.join("locationCategory", JoinType.INNER);
-	 * root.join("locationType", JoinType.INNER);
-	 * query.select(builder.construct(LocationDTO.class, root.get("locationId"),
-	 * root.get("locationName"), root.get("country"), root.get("city"),
-	 * root.get("district"), root.get("ward"), root.get("address"),
-	 * root.get("mediaPath"), root.get("openTime"), root.get("closeTime"),
-	 * root.get("reviewCount"), root.get("locationCategory").get("categoryId"),
-	 * root.get("locationCategory").get("lCategoryName"),
-	 * root.get("locationType").get("locationTypeId"),
-	 * root.get("locationType").get("locationTypeName"), root.get("userId") ));
-	 * locationList = session.createQuery(query).getResultList();
-	 * transaction.commit(); session.close(); return locationList; }
-	 */
+//	public List<LocationDTO> findAll() {
+//		List<LocationDTO> locationList = null;
+//		Session session = this.sessionFactory.openSession();
+//		Transaction transaction = session.beginTransaction();
+//		CriteriaBuilder builder = session.getCriteriaBuilder();
+//		CriteriaQuery<LocationDTO> query = builder.createQuery(LocationDTO.class);
+//		Root<Location> root = query.from(Location.class);
+//		root.join("locationCategory", JoinType.INNER);
+//		root.join("locationType", JoinType.INNER);
+//		query.select(builder.construct(LocationDTO.class, root.get("locationId"), root.get("locationName"),
+//				root.get("country"), root.get("city"), root.get("district"), root.get("ward"), root.get("address"),
+//				root.get("mediaPath"), root.get("openTime"), root.get("closeTime"), root.get("reviewCount"),
+//				root.get("locationCategory").get("categoryId"), root.get("locationCategory").get("lCategoryName"),
+//				root.get("locationType").get("locationTypeId"), root.get("locationType").get("locationTypeName"),
+//				root.get("userId")));
+//		locationList = session.createQuery(query).getResultList();
+//		transaction.commit();
+//		session.close();
+//		return locationList;
+//	}
+
 	public Location findById(int id) {
 		Session session = this.sessionFactory.openSession();
 		return session.find(Location.class, id);
@@ -100,4 +102,29 @@ public class LocationDAO {
 			return (long) (session.createQuery("select count(*) from Location").uniqueResult());
 		}
 	}
+
+	public List<Location> findLocationFavorite(int userId) {
+//		try (Session session = this.sessionFactory.openSession()) {
+//			return session.createQuery("from LocationFavorites WHERE userId = " + userId, LocationFavorites.class).list();
+//		}
+		
+		try (Session session = this.sessionFactory.openSession()) {
+			String hql = "SELECT l.LocationId,LocationName,Country,City,District,Ward,Address,MediaPath,OpenTime,CloseTime,ReviewCount,CategoryId,LocationTypeId,lf.UserId FROM Location l INNER JOIN LocationFavorites lf ON l.LocationId = lf.LocationId WHERE lf.UserId = " + userId;
+			List<Location> listResult = session.createQuery(hql).getResultList();
+			return listResult;
+		}
+		
+	}
+
+	public List<String> search(String keyword) {
+		try (Session session = this.sessionFactory.openSession()) {
+			String hql = "SELECT locationName from Location WHERE locationName LIKE '%" + keyword + "%'";
+			List<String> listResult = session.createQuery(hql).getResultList();
+//			for (String string : listResult) {
+//				System.out.println("- " + string);
+//			}
+			return listResult;
+		}
+	}
+
 }

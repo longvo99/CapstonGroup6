@@ -1,6 +1,7 @@
 package edu.group6.capston.controller.publics;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,9 +11,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import edu.group6.capston.models.Users;
 import edu.group6.capston.services.LocationService;
 import edu.group6.capston.services.LocationTypeService;
 import edu.group6.capston.utils.UploadFile;
@@ -33,9 +37,14 @@ public class PublicController extends PublicAbstractController {
 	}
 
 	@GetMapping("/index")
-	public String index(Model model) {
-		model.addAttribute("locationList", locationService.findAll());
+	public String index(Model model, HttpServletRequest request) {
 		model.addAttribute("locationTypeList", locationTypeService.findAll());
+		locationService.search("nh");
+		if(request.getSession().getAttribute("userSession") != null) {
+			Users user = (Users) request.getSession().getAttribute("userSession");
+			model.addAttribute("locationFavoriteList", locationService.findLocationFavorite(user.getUserId()));
+		}
+		
 		return "public.index";
 	}
 
@@ -74,6 +83,13 @@ public class PublicController extends PublicAbstractController {
 	@GetMapping("/listview")
 	public String listview(Model model) {
 		return "public.listview";
+	}
+	
+	@RequestMapping(value = "search", method = RequestMethod.GET)
+	@ResponseBody
+	public List<String> search(HttpServletRequest request) {
+		System.out.println("avd");
+		return locationService.search(request.getParameter("term"));
 	}
 	
 //	@GetMapping("/shop")
