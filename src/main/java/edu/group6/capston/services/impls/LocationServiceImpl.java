@@ -47,7 +47,7 @@ public class LocationServiceImpl implements LocationService {
 
 	@Override
 	public long locationCount() {
-		return 0;
+		return LocationDAO.locationCount();
 	}
 
 }

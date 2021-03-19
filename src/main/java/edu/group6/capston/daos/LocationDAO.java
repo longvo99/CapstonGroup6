@@ -95,11 +95,9 @@ public class LocationDAO {
 		}
 	}
 
-	/*
-	 * public long locationCount() { Session session =
-	 * this.sessionFactory.openSession(); Query query =
-	 * session.createQuery("select count(*) from Location"); return
-	 * (Long)query.uniqueResult(); }
-	 */
-
+	public long locationCount() {
+		try (Session session = this.sessionFactory.openSession()) {
+			return (long) (session.createQuery("select count(*) from Location").uniqueResult());
+		}
+	}
 }
