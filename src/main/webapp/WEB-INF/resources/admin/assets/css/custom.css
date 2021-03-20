@@ -5,3 +5,17 @@
 	font-size: inherit !important;;
 	width: 100% !important;
 }
+.placeholderrd {
+    position: relative;
+    display: block;
+}
+
+.placeholderrd::after {
+    position: absolute;
+    right: 5px;
+    top: 10px;
+    content: attr(data-placeholder);
+    pointer-events: none;
+    font-size: 18px;
+    font-weight: bold;
+}

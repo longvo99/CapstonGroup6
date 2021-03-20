@@ -1,6 +1,8 @@
 package edu.group6.capston.controller.publics;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,11 +12,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import edu.group6.capston.services.LocationService;
 import edu.group6.capston.services.LocationTypeService;
+import edu.group6.capston.services.ProductCategoryService;
 import edu.group6.capston.utils.UploadFile;
 
 @Controller
@@ -31,9 +36,24 @@ public class PublicController extends PublicAbstractController {
 	public void addCommonObjects(Model model) {
 		super.addCommonObjects(model);
 	}
+	
+	@Autowired
+	private ProductCategoryService productCategoryService;
+	
+	@RequestMapping(value = "search", method = RequestMethod.GET)
+	@ResponseBody
+	public List<String> search(HttpServletRequest request) {
+		System.out.println(productCategoryService.search(request.getParameter("term")));
+		List<String> listStr = new ArrayList<String>();
+		listStr.add("Hau");
+		listStr.add("Sua");
+		listStr.add("cafe");
+		System.out.println(listStr);
+		return listStr;
+	}
 
 	@GetMapping("/index")
-	public String index(Model model) {
+	public String index(Model model, HttpServletRequest request) {
 		model.addAttribute("locationList", locationService.findAll());
 		model.addAttribute("locationTypeList", locationTypeService.findAll());
 		return "public.index";

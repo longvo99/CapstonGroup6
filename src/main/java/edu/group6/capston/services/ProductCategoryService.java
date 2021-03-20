@@ -9,4 +9,5 @@ public interface ProductCategoryService {
 	boolean save(ProductCategory discount);
 	boolean update(ProductCategory discount);
 	boolean delete(Integer id);
+	List<String> search(String keywork);
 }

@@ -1,13 +1,19 @@
 package edu.group6.capston.models;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -55,7 +61,11 @@ public class Users {
 	@ManyToOne
 	@JoinColumn(name = "roleId")
 	private Role role;
-
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	  @JoinTable(name = "LocationFavorites", 
+	    joinColumns = { @JoinColumn(name = "UserId") }, 
+	    inverseJoinColumns = {@JoinColumn(name = "LocationId") })
+	  private Set<Location> Locations = new HashSet<>();
 //	@Transient
 //	public List<GrantedAuthority> getAuthorities() {
 //		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();

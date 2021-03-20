@@ -9,15 +9,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
+/*@Entity
 @Table(name = "TypeRule")
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Data*/
 public class TypeRule {
-	@Id
-	@Column
-	private int discountId;
-	@Column
-	private int ruleId;
+	/*
+	 * @Id
+	 * 
+	 * @Column private int discountId;
+	 * 
+	 * @Column private int ruleId;
+	 */
 }

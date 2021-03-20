@@ -89,22 +89,23 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-3 col-md-4">
+                <!-- <div class="col-lg-3 col-md-4">
                     <div class="large-product-box mb-xl-20 p-relative">
                         <img src="https://via.placeholder.com/255x587" class="img-fluid full-width" alt="image">
                         <div class="category-type overlay padding-15">
                             <button class="category-btn">Most popular near you</button> <a href="restaurant.html" class="btn-first white-btn text-light-black fw-600 full-width">See all</a>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-9 col-md-8">
+                </div> -->
+                <div class="col-lg-12 col-md-12">
                     <div class="row">
                     <c:forEach items="${locationList}" var="location">
-                        <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="col-lg-3 col-md-6 col-sm-6">
                             <div class="product-box mb-xl-20">
                                 <div class="product-img">
                                     <a href="restaurant.html">
-                                        <img src="${pageContext.request.contextPath}/resources/admin/assets/img/uploads/${location.mediaPath}" class="img-fluid full-width" alt="product-img">
+                                        <%-- <img src="${pageContext.request.contextPath}/resources/admin/assets/img/uploads/${location.mediaPath}" class="img-fluid full-width" alt="product-img"> --%>
+                                        <img src="https://via.placeholder.com/255x150" class="img-fluid full-width" alt="product-img">
                                     </a>
                                     <div class="overlay">
                                         <div class="product-tags padding-10"> 
@@ -118,7 +119,7 @@
                                 <div class="product-caption">
                                     <div class="title-box">
                                         <h6 class="product-title"><a href="restaurant.html" class="text-light-black ">${location.locationName}</a></h6>
-                                        <div class="tags"><span class="text-custom-white rectangle-tag bg-yellow">${location.users.role.roleName}</span></div>
+                                        <div class="tags"><span class="text-custom-white rectangle-tag bg-yellow">5.8</span></div>
                                     </div>
                                     <p class="text-light-white">${location.locationType.locationTypeName}</p>
                                     <div class="product-details">

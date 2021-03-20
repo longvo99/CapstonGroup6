@@ -97,4 +97,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		return UserDAO.findByUsername(username);
 	}
 
+
+	@Override
+	public Users findByUsersId(int i) {
+		return UserDAO.findByUsersId(i);
+	}
+
 }

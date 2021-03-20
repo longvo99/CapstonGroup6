@@ -73,4 +73,15 @@ public class UserDAO{
 	      return null;
 	    }
 	}
+
+	public Users findByUsersId(int i) {
+		List<Users> users = new ArrayList<>();
+	    Session session = this.sessionFactory.openSession();
+	    users = session.createQuery("from Users where userId='"+ i +"'", Users.class).list();
+	    if (users.size() > 0) {
+	      return users.get(0);
+	    } else {
+	      return null;
+	    }
+	}
 }

@@ -64,4 +64,8 @@ public class DiscountDAO {
 		}
 	}
 
+	public List<String> search(String keyword) {
+		return null;
+	}
+
 }
