@@ -118,7 +118,7 @@
                     </c:forEach>
                     <div class="form-group">
                     	<label for="country">Tỉnh/thành</label>
-					    <select name="city" id="city" class="form-control input-lg" readonly>
+					    <select name="" id="" class="form-control input-lg" readonly>
 					    	<option value="${location.city}">${cityName}</option>
 					    </select>
 					</div>

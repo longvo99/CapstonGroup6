@@ -43,14 +43,15 @@
                       </div>
                       <div class="form-group text-center"> <span>or</span>
                       </div>
-                      <div class="form-group">
+                      <%-- <div class="form-group">
                         <button type="submit" class="btn-second btn-facebook full-width">
                           <img src="${pageContext.request.contextPath}/resources/public/assets/img/facebook-logo.svg" alt="btn logo">Continue with Facebook</button>
-                      </div>
-                      <div class="form-group">
-                        <button type="submit" class="btn-second btn-google full-width">
-                          <img src="${pageContext.request.contextPath}/resources/public/assets/img/google-logo.png" alt="btn logo">Continue with Google</button>
-                      </div>
+                      </div> --%>
+                      <%-- <div class="form-group">
+                        <a href="${pageContext.request.contextPath}/oauth2/auth/google"><button type="submit" class="btn-second btn-google full-width">
+                          <img src="${pageContext.request.contextPath}/resources/public/assets/img/google-logo.png" alt="btn logo">Continue with Google</button></a>
+                      </div> --%>
+                      <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/Capston.Group6/public/login-google&response_type=code&client_id=620272103683-kgo588qtq63in5a2orb96nq10tlbskld.apps.googleusercontent.com&approval_prompt=force">Login With Google</a>
                       <div class="form-group text-center mb-0"> <a href="register.html">Create your account</a>
                       </div>
                     </div>
