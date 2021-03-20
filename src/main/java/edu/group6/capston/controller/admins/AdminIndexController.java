@@ -39,7 +39,6 @@ public class AdminIndexController {
 		model.addAttribute("locationCount", locationService.locationCount());
 		Users users = userService.findByUsersId(2);
 		List<Location> lists = new ArrayList<>();
-		lists.addAll(users.getLocations());
 		model.addAttribute("users", users);
 		model.addAttribute("list", lists);
 		for (Location location : lists) {

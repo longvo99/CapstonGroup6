@@ -84,4 +84,15 @@ public class UserDAO{
 	      return null;
 	    }
 	}
+	
+	public Users findByEmail(String email) {
+		List<Users> users = new ArrayList<>();
+	    Session session = this.sessionFactory.openSession();
+	    users = session.createQuery("from Users where contactEmail='"+ email +"'", Users.class).list();
+	    if (users.size() > 0) {
+	      return users.get(0);
+	    } else {
+	      return null;
+	    }
+	}
 }

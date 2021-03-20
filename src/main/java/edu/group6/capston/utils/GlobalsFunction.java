@@ -47,14 +47,14 @@ public class GlobalsFunction {
 		return Timestamp.valueOf(formatter.format(date));
 	}
 	
-	public static List<LocationFavorites> changeImageLocation(List<LocationFavorites> list){
-		String image = "";
-		for (LocationFavorites locationFavorites : list) {
-			image = locationFavorites.getLocation().getMediaPath();
-			String[] mediaPath = splitPathMedia(image);
-			image = mediaPath[0];
-			locationFavorites.setLocation(locationFavorites.getLocation().setMediaPath(image));
-		}
-	}
+//	public static List<LocationFavorites> changeImageLocation(List<LocationFavorites> list){
+//		String image = "";
+//		for (LocationFavorites locationFavorites : list) {
+//			image = locationFavorites.getLocation().getMediaPath();
+//			String[] mediaPath = splitPathMedia(image);
+//			image = mediaPath[0];
+//			locationFavorites.setLocation(locationFavorites.getLocation().setMediaPath(image));
+//		}
+//	}
 	
 }
