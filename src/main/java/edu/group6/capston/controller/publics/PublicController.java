@@ -44,6 +44,7 @@ public class PublicController extends PublicAbstractController {
 		if(request.getSession().getAttribute("userSession") != null) {
 			Users user = (Users) request.getSession().getAttribute("userSession");
 			List<LocationFavorites> locationFavoriteList = locationService.findLocationFavorite(user.getUserId());
+			
 			model.addAttribute("locationFavoriteList", locationFavoriteList);
 		}
 		
