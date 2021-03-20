@@ -26,10 +26,7 @@ public class UserDAO{
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			if(customer.getPassword() != null) {
-				customer.setPassword(bcyptPasswordEncoder.encode(customer.getPassword()));
-			}
-			System.out.println("acs7777777");
+			customer.setPassword(bcyptPasswordEncoder.encode(customer.getPassword()));
 			session.persist(customer);
 			tx.commit();
 			session.close();
@@ -77,10 +74,10 @@ public class UserDAO{
 	    }
 	}
 
-	public Users findByEmail(String email) {
+	public Users findByUsersId(int i) {
 		List<Users> users = new ArrayList<>();
 	    Session session = this.sessionFactory.openSession();
-	    users = session.createQuery("from Users where contactEmail='"+ email +"'", Users.class).list();
+	    users = session.createQuery("from Users where userId='"+ i +"'", Users.class).list();
 	    if (users.size() > 0) {
 	      return users.get(0);
 	    } else {

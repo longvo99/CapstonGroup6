@@ -122,7 +122,6 @@
 		<put-attribute name="admin-content" value="/WEB-INF/views/error/404.jsp" />
 	</definition>
 	
-<!-- <<<<<<< Updated upstream -->
 	<!-- ADMIN DISCOUNTS  -->
 	<definition name="admin.discount.index" extends="templates.admin">
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/discount/index.jsp" />
@@ -145,7 +144,6 @@
 	</definition>
 	<definition name="admin.role.list" extends="templates.admin">
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/role/list.jsp" />
-<!-- >>>>>>> Stashed changes -->
 	</definition>
 	<!--
 	<definition name="public.cat" extends="templates.public">

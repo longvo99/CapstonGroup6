@@ -9,4 +9,5 @@ public interface DiscountService {
 	boolean save(DiscountInfo discount);
 	boolean update(DiscountInfo discount);
 	boolean delete(Integer id);
+	List<String> search(String keyword);
 }

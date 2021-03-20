@@ -126,7 +126,7 @@ public class AdminLocationController {
 				rd.addFlashAttribute(GlobalsConstant.MESSAGE,
 						messageSource.getMessage("success", null, Locale.getDefault()));
 				rd.addFlashAttribute("success", true);
-				return "redirect:/admin/location/index";
+				return "redirect:/admin/location/image/" + locationId;
 			}
 		rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
 		rd.addFlashAttribute("error", true);

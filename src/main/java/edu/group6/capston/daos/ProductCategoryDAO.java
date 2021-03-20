@@ -63,4 +63,22 @@ public class ProductCategoryDAO {
 		}
 	}
 
+	public List<ProductCategory> search(String keywork) {
+		try (Session session = this.sessionFactory.openSession()) {
+			return session.createQuery("from ProductCategory where PCategoryName like '%"+keywork+"%'", ProductCategory.class).list();
+		}
+	}
+	
+	/*
+	 * @SuppressWarnings({ "unchecked", "deprecation" }) public List<String>
+	 * search1(String keywork) { List<String> result = null; Session session =
+	 * this.sessionFactory.openSession(); Transaction transaction = null; try {
+	 * transaction = session.beginTransaction(); result =
+	 * session.createQuery("select PCategoryName " + "from ProductCategory " +
+	 * "where PCategoryName like :keywork").setString("keywork", "%"+ keywork +"%")
+	 * .setMaxResults(10).list(); transaction.commit(); } catch (Exception e) {
+	 * result = null; if(transaction != null) { transaction.rollback(); } } finally
+	 * { session.close(); } return result; }
+	 */
+
 }

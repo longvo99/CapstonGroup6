@@ -48,6 +48,9 @@
     <!-- plus and minus  -->
    <%--  <link href="${pageContext.request.contextPath}/resources/public/assets/css/checkout.css" rel="stylesheet"> --%>
     <!-- place -->
+    
+    <link href="${pageContext.request.contextPath}/resources/admin/assets/css/jquery-ui.css" rel="stylesheet">
+    
     <style type="text/css">
 	.dropdown-submenu {
   		position: relative;
@@ -191,8 +194,15 @@ input[type="file"] {
                                     <!-- search -->
                                     <div class="col-lg-6 col-md-7">
                                         <div class="search-box padding-10">
-                                            <input type="text" class="form-control" placeholder="Pizza, Burger, Chinese">
+                                            <input id="productName" type="text" class="form-control" placeholder="Pizza, Burger, Chinese">
                                         </div>
+                    <script type="text/javascript">
+						$(document).ready(function() {
+							$('#productName').autocomplete({
+								source : '${pageContext.request.contextPath}/public/search'
+							});
+						});
+					</script>
                                     </div>
                                     <!-- search -->
                                 </div>

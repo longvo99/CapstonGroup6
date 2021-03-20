@@ -140,7 +140,7 @@
 					</div>
 					<div class="input-field">
 				        <label class="active">Hình ảnh</label>
-				        <div class="input-images" style="padding-top: .5rem;"></div>
+				        <div style="pointer-events:none;" class="input-images" style="padding-top: .5rem;" ></div>
 				    </div>
 				    	<div class="form-group">
 						<label for="country">Trạng Thái</label>

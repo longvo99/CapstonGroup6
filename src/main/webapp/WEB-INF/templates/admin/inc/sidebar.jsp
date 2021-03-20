@@ -31,12 +31,15 @@
 			float: none;  
 		} 
 	</style>
+	
 	<link href="${pageContext.request.contextPath}/resources/admin/assets/css/custom.css" rel="stylesheet" />
 	<link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
 	<!-- test dropdown -->
 	<!-- <meta name="apple-mobile-web-app-title" content="CodePen"> -->
 	<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link type="text/css" rel="stylesheet" href="https://www.codehim.com/demo/jquery-image-uploader-preview-and-delete/dist/image-uploader.min.css">
+    <script src="${pageContext.request.contextPath}/resources/admin/assets/js/jquery-ui.js"></script> 
+    <link href="${pageContext.request.contextPath}/resources/admin/assets/css/jquery-ui.css" rel="stylesheet">
 </head>
 
 <body id="page-top">

@@ -14,5 +14,5 @@ public interface UserService {
 	Users getProfile(Users users);
 	boolean save(Users user);
 	Users findByUsername(String username);
-	Users findByEmail(String email);
+	Users findByUsersId(int i);
 }
