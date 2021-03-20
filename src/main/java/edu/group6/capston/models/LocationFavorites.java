@@ -2,6 +2,8 @@ package edu.group6.capston.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,10 +20,13 @@ import lombok.NoArgsConstructor;
 @Data
 public class LocationFavorites{
 	@Id
-	@Column(name = "userId")
-	private int userId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column
+	private int id;
 	@ManyToOne
-	@JoinColumn(name = "locationId")
+	@JoinColumn(name = "LFuserId")
+	private Users user;
+	@ManyToOne
+	@JoinColumn(name = "LFlocationId")
 	private Location location;
-	
 }

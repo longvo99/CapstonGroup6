@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import edu.group6.capston.models.Location;
+import edu.group6.capston.models.LocationFavorites;
 
 @Repository
 public class LocationDAO {
@@ -103,26 +104,16 @@ public class LocationDAO {
 		}
 	}
 
-	public List<Location> findLocationFavorite(int userId) {
-//		try (Session session = this.sessionFactory.openSession()) {
-//			return session.createQuery("from LocationFavorites WHERE userId = " + userId, LocationFavorites.class).list();
-//		}
-		
+	public List<LocationFavorites> findLocationFavorite(int userId) {
 		try (Session session = this.sessionFactory.openSession()) {
-			String hql = "SELECT l.LocationId,LocationName,Country,City,District,Ward,Address,MediaPath,OpenTime,CloseTime,ReviewCount,CategoryId,LocationTypeId,lf.UserId FROM Location l INNER JOIN LocationFavorites lf ON l.LocationId = lf.LocationId WHERE lf.UserId = " + userId;
-			List<Location> listResult = session.createQuery(hql).getResultList();
-			return listResult;
+			return session.createQuery("from LocationFavorites WHERE LFUserId = " + userId, LocationFavorites.class).list();
 		}
-		
 	}
 
 	public List<String> search(String keyword) {
 		try (Session session = this.sessionFactory.openSession()) {
 			String hql = "SELECT locationName from Location WHERE locationName LIKE '%" + keyword + "%'";
 			List<String> listResult = session.createQuery(hql).getResultList();
-//			for (String string : listResult) {
-//				System.out.println("- " + string);
-//			}
 			return listResult;
 		}
 	}

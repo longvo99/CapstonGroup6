@@ -12,7 +12,7 @@ public interface LocationService {
 	boolean delete(Location location);
 	Location findLocationId(int id);
 	long locationCount();
-	List<Location> findLocationFavorite(int userId);
+	List<LocationFavorites> findLocationFavorite(int userId);
 	List<String> search(String keyword);
 	
 }

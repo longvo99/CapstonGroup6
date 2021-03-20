@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import edu.group6.capston.models.LocationFavorites;
 import edu.group6.capston.models.Users;
 import edu.group6.capston.services.LocationService;
 import edu.group6.capston.services.LocationTypeService;
@@ -42,7 +43,8 @@ public class PublicController extends PublicAbstractController {
 		locationService.search("nh");
 		if(request.getSession().getAttribute("userSession") != null) {
 			Users user = (Users) request.getSession().getAttribute("userSession");
-			model.addAttribute("locationFavoriteList", locationService.findLocationFavorite(user.getUserId()));
+			List<LocationFavorites> locationFavoriteList = locationService.findLocationFavorite(user.getUserId());
+			model.addAttribute("locationFavoriteList", locationFavoriteList);
 		}
 		
 		return "public.index";

@@ -52,11 +52,11 @@ public class LocationServiceImpl implements LocationService {
 	}
 
 	@Override
-	public List<Location> findLocationFavorite(int userId) {
+	public List<LocationFavorites> findLocationFavorite(int userId) {
 		// TODO Auto-generated method stub
-		List<Location> a = LocationDAO.findLocationFavorite(userId);
-		for (Location Location : a) {
-			System.out.println("- " +Location.getLocationName());
+		List<LocationFavorites> a = LocationDAO.findLocationFavorite(userId);
+		for (LocationFavorites Location : a) {
+			System.out.println("- " +Location.getLocation().getLocationName());
 		}
 		return LocationDAO.findLocationFavorite(userId);
 	}
