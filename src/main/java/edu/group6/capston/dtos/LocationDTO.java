@@ -8,24 +8,48 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class LocationDTO {
+	private int discountId;
 	private int locationId;
 	private String locationName;
-	private String address;
 	private String openTime;
 	private String closeTime;
 	private Integer reviewCount;
-	private Integer locationCategoryId;
 	private String locationCategoryName;
-	private Integer locationTypeId;
 	private String locationTypeName;
-	private String ward;
-	private String district;
-	private String city;
-	private String country;
-	private Integer categoryId;
-	private Integer discountId;
-	private Integer productId;
-	private Integer ratingId;
-	private Float ratingAvgPoint;
+	private String mediaPath;
+	private double point;
+	private String minPrice;
+	private String maxPrice;
+	public LocationDTO(int locationId, String locationName, String mediaPath, double point) {
+		super();
+		this.locationId = locationId;
+		this.locationName = locationName;
+		this.mediaPath = mediaPath;
+		this.point = point;
+	}
+	public LocationDTO(int discountId, int locationId, String locationName, String openTime, String closeTime,
+			Integer reviewCount, String locationCategoryName, String locationTypeName, String mediaPath) {
+		super();
+		this.discountId = discountId;
+		this.locationId = locationId;
+		this.locationName = locationName;
+		this.openTime = openTime;
+		this.closeTime = closeTime;
+		this.reviewCount = reviewCount;
+		this.locationCategoryName = locationCategoryName;
+		this.locationTypeName = locationTypeName;
+		this.mediaPath = mediaPath;
+	}
+	public LocationDTO(int locationId, double point) {
+		super();
+		this.locationId = locationId;
+		this.point = point;
+	}
+	public LocationDTO(int locationId, String minPrice, String maxPrice) {
+		super();
+		this.locationId = locationId;
+		this.minPrice = minPrice;
+		this.maxPrice = maxPrice;
+	}
 	
 }

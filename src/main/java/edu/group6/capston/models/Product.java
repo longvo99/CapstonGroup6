@@ -36,7 +36,8 @@ public class Product {
 	@ManyToOne
 	@JoinColumn(name = "productCategoryId")
 	private ProductCategory productCategory;
-	@Column
-	private int locationId;
+	@ManyToOne
+	@JoinColumn(name = "locationId")
+	private Location location;
 	
 }

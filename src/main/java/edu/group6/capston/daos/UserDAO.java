@@ -26,7 +26,9 @@ public class UserDAO{
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			customer.setPassword(bcyptPasswordEncoder.encode(customer.getPassword()));
+			if(customer.getPassword() != null) {
+				customer.setPassword(bcyptPasswordEncoder.encode(customer.getPassword()));
+			}
 			session.persist(customer);
 			tx.commit();
 			session.close();

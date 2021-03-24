@@ -89,7 +89,7 @@ public class LoginController {
 	
 	@GetMapping("/public/logout")
 	private String logout(HttpServletRequest request) {
-		request.getSession().removeAttribute("userSession");
+		request.getSession().invalidate();
 		return "redirect:/public/index";
 	}
 

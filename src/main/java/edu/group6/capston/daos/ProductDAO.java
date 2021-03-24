@@ -2,13 +2,20 @@ package edu.group6.capston.daos;
 
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Root;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import edu.group6.capston.dtos.LocationDTO;
 import edu.group6.capston.models.Product;
+import edu.group6.capston.models.Rating;
 
 @Repository
 public class ProductDAO {
@@ -66,6 +73,24 @@ public class ProductDAO {
 	public Product findByProductId(Integer productId) {
 		Session session = this.sessionFactory.openSession();
 		return session.find(Product.class, productId);
+	}
+	
+	public List<LocationDTO> findMinMaxPriceLocation() {
+		List<LocationDTO> locationList = null;
+		Session session = this.sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<LocationDTO> query = builder.createQuery(LocationDTO.class);
+		Root<Product> root = query.from(Product.class);
+		query.multiselect(
+				root.get("locationId"),
+				builder.min(root.get("price")),
+				builder.max(root.get("price")));
+		query.groupBy(root.get("locationId"));
+		locationList = session.createQuery(query).getResultList();
+		transaction.commit();
+		session.close();
+		return locationList;
 	}
 
 }

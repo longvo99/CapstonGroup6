@@ -26,6 +26,10 @@ public class Location{
 	@Column
 	private String locationName;
 	@Column
+	private String locationPhone;
+	@Column
+	private String locationEmail;
+	@Column
 	private String country;
 	@Column
 	private String city;

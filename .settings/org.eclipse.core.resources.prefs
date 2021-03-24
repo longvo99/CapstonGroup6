@@ -10,6 +10,7 @@ encoding//src/main/java/edu/group6/capston/controller/auths/LoginController.java
 encoding//src/main/java/edu/group6/capston/dtos/LocationDTO.java=UTF-8
 encoding//src/main/java/edu/group6/capston/models/CustomUserDetails.java=UTF-8
 encoding//src/main/java/edu/group6/capston/models/Location.java=UTF-8
+encoding//src/main/java/edu/group6/capston/services/impls/RatingServiceImpl.java=UTF-8
 encoding//src/main/java/edu/group6/capston/services/impls/UserServiceImpl.java=UTF-8
 encoding//src/main/java/edu/group6/capston/utils/GlobalsConstant.java=UTF-8
 encoding//src/main/java/edu/group6/capston/utils/UploadFile.java=UTF-8

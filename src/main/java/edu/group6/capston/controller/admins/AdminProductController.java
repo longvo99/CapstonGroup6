@@ -60,7 +60,7 @@ public class AdminProductController {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
 			rd.addFlashAttribute("error", true);
 			model.addAttribute("product", product);
-			return "redirect:/admin/product/add/"+product.getLocationId();
+			return "redirect:/admin/product/add/"+product.getLocation().getLocationId();
 		}
 		String filename = UploadFile.upload(file, request);
 		product.setImagePath(filename);
@@ -68,12 +68,12 @@ public class AdminProductController {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE,
 					messageSource.getMessage("success", null, Locale.getDefault()));
 			rd.addFlashAttribute("success", true);
-			return "redirect:/admin/product/index/"+product.getLocationId();
+			return "redirect:/admin/product/index/"+product.getLocation().getLocationId();
 		}
 		rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
 		rd.addFlashAttribute("error", true);
 		model.addAttribute("product", product);
-		return "redirect:/admin/product/add/"+ product.getLocationId();
+		return "redirect:/admin/product/add/"+ product.getLocation().getLocationId();
 	}
 	
 	@RequestMapping(value ="/edit/{productId}")
@@ -104,7 +104,7 @@ public class AdminProductController {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE,
 					messageSource.getMessage("success", null, Locale.getDefault()));
 			rd.addFlashAttribute("success", true);
-			return "redirect:/admin/product/index/"+product.getLocationId();
+			return "redirect:/admin/product/index/"+product.getLocation().getLocationId();
 		}
 		rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
 		rd.addFlashAttribute("error", true);

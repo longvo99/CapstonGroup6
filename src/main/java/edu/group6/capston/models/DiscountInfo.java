@@ -46,5 +46,8 @@ public class DiscountInfo {
 	private int limitedUse;
 	@Column
 	private int limitedPerUse;
+	@ManyToOne
+	@JoinColumn(name = "locationId")
+	private Location location;
 	
 }

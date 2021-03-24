@@ -2,14 +2,22 @@ package edu.group6.capston.daos;
 
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Root;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import edu.group6.capston.dtos.LocationDTO;
+import edu.group6.capston.models.DiscountInfo;
 import edu.group6.capston.models.Location;
 import edu.group6.capston.models.LocationFavorites;
+import edu.group6.capston.models.Rating;
 
 @Repository
 public class LocationDAO {
@@ -48,36 +56,6 @@ public class LocationDAO {
 			return session.createQuery("from Location", Location.class).list();
 		}
 	}
-	/*
-	 * public void findAll1() { Session session = this.sessionFactory.openSession();
-	 * String hql = "SELECT avg(Point) FROM Comment c " +
-	 * "INNER JOIN Location l ON c.LocationId = l.LocationId " +
-	 * "INNER JOIN Rating r ON c.CommentId = r.CommentId GROUP BY l.LocationName";
-	 * //List<Object[]> listResult = session.createQuery(hql).list(); List
-	 * listResult = session.createQuery(hql).list(); Number number = (Number)
-	 * listResult.get(0); System.out.println(number.intValue()); }
-	 */
-
-//	public List<LocationDTO> findAll() {
-//		List<LocationDTO> locationList = null;
-//		Session session = this.sessionFactory.openSession();
-//		Transaction transaction = session.beginTransaction();
-//		CriteriaBuilder builder = session.getCriteriaBuilder();
-//		CriteriaQuery<LocationDTO> query = builder.createQuery(LocationDTO.class);
-//		Root<Location> root = query.from(Location.class);
-//		root.join("locationCategory", JoinType.INNER);
-//		root.join("locationType", JoinType.INNER);
-//		query.select(builder.construct(LocationDTO.class, root.get("locationId"), root.get("locationName"),
-//				root.get("country"), root.get("city"), root.get("district"), root.get("ward"), root.get("address"),
-//				root.get("mediaPath"), root.get("openTime"), root.get("closeTime"), root.get("reviewCount"),
-//				root.get("locationCategory").get("categoryId"), root.get("locationCategory").get("lCategoryName"),
-//				root.get("locationType").get("locationTypeId"), root.get("locationType").get("locationTypeName"),
-//				root.get("userId")));
-//		locationList = session.createQuery(query).getResultList();
-//		transaction.commit();
-//		session.close();
-//		return locationList;
-//	}
 
 	public Location findById(int id) {
 		Session session = this.sessionFactory.openSession();
@@ -106,16 +84,73 @@ public class LocationDAO {
 
 	public List<LocationFavorites> findLocationFavorite(int userId) {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("from LocationFavorites WHERE LFUserId = " + userId, LocationFavorites.class).list();
+			return session.createQuery("from LocationFavorites WHERE LFUserId = " + userId, LocationFavorites.class)
+					.list();
+
 		}
 	}
 
 	public List<String> search(String keyword) {
 		try (Session session = this.sessionFactory.openSession()) {
 			String hql = "SELECT locationName from Location WHERE locationName LIKE '%" + keyword + "%'";
+			@SuppressWarnings("unchecked")
 			List<String> listResult = session.createQuery(hql).getResultList();
 			return listResult;
 		}
 	}
 
+	public List<Location> findTopNewLocationNew() {
+		try (Session session = this.sessionFactory.openSession()) {
+			return session.createQuery("from Location ORDER BY locationId DESC", Location.class).setMaxResults(6)
+					.getResultList();
+		}
+	}
+
+	public List<LocationDTO> findTopRate() {
+		List<LocationDTO> locationList = null;
+		Session session = this.sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<LocationDTO> query = builder.createQuery(LocationDTO.class);
+		Root<Rating> root = query.from(Rating.class);
+		root.join("comment", JoinType.INNER);
+		query.multiselect(
+				root.get("comment").get("location").get("locationId"),
+				root.get("comment").get("location").get("locationName"),
+				root.get("comment").get("location").get("mediaPath"),
+				builder.avg(root.get("point")));
+		query.groupBy(root.get("comment").get("location").get("locationId"),
+				root.get("comment").get("location").get("locationName"),
+				root.get("comment").get("location").get("mediaPath"));
+		query.orderBy(builder.desc(builder.avg(root.get("point"))));
+		locationList = session.createQuery(query).setMaxResults(4).getResultList();
+		transaction.commit();
+		session.close();
+		return locationList;
+	}
+	
+	public List<LocationDTO> findTopDiscount() {
+		List<LocationDTO> locationList = null;
+		Session session = this.sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<LocationDTO> query = builder.createQuery(LocationDTO.class);
+		Root<DiscountInfo> root = query.from(DiscountInfo.class);
+		root.join("location", JoinType.INNER);
+		query.multiselect(
+				root.get("discountId"),
+				root.get("location").get("locationId"),
+				root.get("location").get("locationName"),
+				root.get("location").get("openTime"),
+				root.get("location").get("closeTime"),
+				root.get("location").get("reviewCount"),
+				root.get("location").get("locationCategory").get("locationCategoryName"),
+				root.get("location").get("locationType").get("locationTypeName"),
+				root.get("location").get("mediaPath"));
+		query.orderBy(builder.desc(root.get("discountId")));
+		locationList = session.createQuery(query).setMaxResults(6).getResultList();
+		transaction.commit();
+		session.close();
+		return locationList;
+	}
 }

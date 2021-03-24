@@ -21,7 +21,7 @@ public class DiscountDAO {
 			return session.createQuery("from DiscountInfo", DiscountInfo.class).list();
 		}
 	}
-
+	
 	public boolean save(DiscountInfo DiscountInfo) {
 		Session session = this.sessionFactory.openSession();
 		Transaction tx = null;
@@ -64,8 +64,9 @@ public class DiscountDAO {
 		}
 	}
 
-	public List<String> search(String keyword) {
-		return null;
+	public List<DiscountInfo> findTopNewDiscountInfo() {
+		try (Session session = this.sessionFactory.openSession()) {
+			return session.createQuery("from DiscountInfo ORDER BY DiscountId DESC", DiscountInfo.class).setMaxResults(3).getResultList();
+		}
 	}
-
 }
