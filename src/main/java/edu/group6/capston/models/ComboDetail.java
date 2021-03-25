@@ -2,6 +2,8 @@ package edu.group6.capston.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,8 +20,12 @@ import lombok.NoArgsConstructor;
 @Data
 public class ComboDetail {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	private int productId;
+	private int comboDetailId;
+	@ManyToOne
+	@JoinColumn(name = "productId")
+	private Product product;
 	@ManyToOne
 	@JoinColumn(name = "productCompoId")
 	private ProductCombo productCompo;

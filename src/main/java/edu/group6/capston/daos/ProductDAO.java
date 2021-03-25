@@ -83,10 +83,10 @@ public class ProductDAO {
 		CriteriaQuery<LocationDTO> query = builder.createQuery(LocationDTO.class);
 		Root<Product> root = query.from(Product.class);
 		query.multiselect(
-				root.get("locationId"),
+				root.get("location").get("locationId"),
 				builder.min(root.get("price")),
 				builder.max(root.get("price")));
-		query.groupBy(root.get("locationId"));
+		query.groupBy(root.get("location").get("locationId"));
 		locationList = session.createQuery(query).getResultList();
 		transaction.commit();
 		session.close();

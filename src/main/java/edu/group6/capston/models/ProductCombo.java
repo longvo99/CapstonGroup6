@@ -17,7 +17,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class ProductCombo {
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
@@ -31,5 +30,5 @@ public class ProductCombo {
 	@Column
 	private String description;
 	@Column
-	private String ImagePath;
+	private String imagePath;
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import edu.group6.capston.models.Location;
 import edu.group6.capston.models.LocationFavorites;
 import edu.group6.capston.models.Users;
+import edu.group6.capston.services.ComboDetailService;
 import edu.group6.capston.services.DiscountService;
 import edu.group6.capston.services.LocationService;
 import edu.group6.capston.services.LocationTypeService;
@@ -38,6 +39,9 @@ public class PublicController extends PublicAbstractController {
 
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private ComboDetailService comboDetailService;
 	
 	@Autowired
 	private RatingService ratingService;
@@ -73,6 +77,8 @@ public class PublicController extends PublicAbstractController {
 		model.addAttribute("image1", imagePath[0]);
 		model.addAttribute("image2", imagePath[1]);
 		model.addAttribute("product", productService.findByLocationId(locationId));
+		model.addAttribute("comboDetailList", comboDetailService.findComboLocation(locationId));
+		model.addAttribute("productComboDetailList", comboDetailService.findProductInComboLocation(locationId));
 		return "public.restaurant";
 	}
 

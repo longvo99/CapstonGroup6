@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/templates/tags/taglib.jsp"%>
-
     <!-- restaurent top -->
     <div class="page-banner p-relative smoothscroll" id="menu">
         <img src="${pageContext.request.contextPath}/resources/admin/assets/img/uploads/${image1}" class="img-fluid full-width" alt="banner">
@@ -79,8 +78,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="restaurent-logo">
-                        <img style="width: 150px;height: 150px;" src="${pageContext.request.contextPath}/resources/admin/assets/img/uploads/${image2}" class="img-fluid" alt="#">
+                    <div style="width: 200px;" class="restaurent-logo">
+                        <img src="${pageContext.request.contextPath}/resources/admin/assets/img/uploads/${image2}" class="img-fluid" alt="#">
                     </div>
                 </div>
             </div>
@@ -126,7 +125,7 @@
                             <div class="change-address"> <a href="checkout.html" class="fw-500">Change</a>
                             </div>
                         </div>
-                        <p class="text-light-white no-margin">Lorem ipsum dolor sit amet, consectetur adipiscing elit,</p>
+                        <p class="text-light-white no-margin">description</p>
                     </div>
                 </div>
             </div>
@@ -358,7 +357,7 @@
                                                             <div class="restaurent-product-title-box">
                                                                 <div class="restaurent-product-box">
                                                                     <div class="restaurent-product-title">
-                                                                        <h6 class="mb-2" data-toggle="modal" data-target="#restaurent-popup"><a href="javascript:void(0)" class="text-light-black fw-600">${product.name}</a></h6>
+                                                                        <h6 class="mb-2" data-toggle="modal" data-target="#restaurent-product${product.productId}"><a href="javascript:void(0)" class="text-light-black fw-600">${product.name}</a></h6>
                                                                         <%-- <p class="text-light-white">${product.price}</p> --%>
                                                                     </div>
                                                                     <div class="restaurent-product-label"> <span class="rectangle-tag bg-gradient-red text-custom-white">Sale</span>
@@ -421,7 +420,7 @@
                                     <div class="section-header-left">
                                         <h3 class="text-light-black header-title">
                                             <a class="card-link text-light-black no-margin" data-toggle="collapse" href="#collapseTwo">
-                        Combo Meals
+                        Combo
                       </a>
                                         </h3>
                                     </div>
@@ -429,6 +428,8 @@
                                 <div id="collapseTwo" class="collapse show">
                                     <div class="card-body no-padding">
                                         <div class="row">
+                                        	<c:if test="${not empty comboDetailList}">
+                                        		<c:forEach items="${comboDetailList}" var="comboDetail">
                                             <div class="col-lg-12">
                                                 <div class="restaurent-product-list">
                                                     <div class="restaurent-product-detail">
@@ -436,10 +437,10 @@
                                                             <div class="restaurent-product-title-box">
                                                                 <div class="restaurent-product-box">
                                                                     <div class="restaurent-product-title">
-                                                                        <h6 class="mb-2" data-toggle="modal" data-target="#restaurent-popup"><a href="javascript:void(0)" class="text-light-black fw-600">Hakka Noodles & Sticky Date Cake - Meal</a></h6>
+                                                                        <h6 class="mb-2" data-toggle="modal" data-target="#restaurent-combo${comboDetail.productComboId}"><a href="javascript:void(0)" class="text-light-black fw-600">${comboDetail.comboName}</a></h6>
                                                                         <p class="text-light-white">600-700 Cal.</p>
                                                                     </div>
-                                                                    <div class="restaurent-product-label"> <span class="rectangle-tag bg-gradient-red text-custom-white">Sale</span>
+                                                                    <div class="restaurent-product-label"> <span class="rectangle-tag bg-gradient-red text-custom-white">${comboDetail.rateDiscount}</span>
                                                                         <!-- <span class="rectangle-tag bg-dark text-custom-white">Combo</span> -->
                                                                     </div>
                                                                 </div>
@@ -455,7 +456,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="restaurent-product-caption-box"> <span class="text-light-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor...</span>
+                                                            <div class="restaurent-product-caption-box"> <span class="text-light-white">${comboDetail.description}</span>
                                                             </div>
                                                             <div class="restaurent-tags-price">
                                                                 <div class="restaurent-tags"> <span class="text-custom-white square-tag">
@@ -482,244 +483,14 @@
                                                             </div>
                                                         </div>
                                                         <div class="restaurent-product-img">
-                                                            <img src="https://via.placeholder.com/150x151" class="img-fluid" alt="#">
+                                                            <img src="${pageContext.request.contextPath}/resources/admin/assets/img/uploads/${comboDetail.comboImagePath}" class="img-fluid" alt="#">
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-12">
-                                                <div class="restaurent-product-list">
-                                                    <div class="restaurent-product-detail">
-                                                        <div class="restaurent-product-left">
-                                                            <div class="restaurent-product-title-box">
-                                                                <div class="restaurent-product-box">
-                                                                    <div class="restaurent-product-title">
-                                                                        <h6 class="mb-2" data-toggle="modal" data-target="#restaurent-popup"><a href="javascript:void(0)" class="text-light-black fw-600">Hakka Noodles & Sticky Date Cake - Meal</a></h6>
-                                                                        <p class="text-light-white">600-700 Cal.</p>
-                                                                    </div>
-                                                                    <div class="restaurent-product-label"> <span class="rectangle-tag bg-gradient-red text-custom-white">Label</span>
-                                                                        <span class="rectangle-tag bg-dark text-custom-white">Combo</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="restaurent-product-rating">
-                                                                    <div class="ratings"> <span class="text-yellow"><i class="fas fa-star"></i></span>
-                                                                        <span class="text-yellow"><i class="fas fa-star"></i></span>
-                                                                        <span class="text-yellow"><i class="fas fa-star"></i></span>
-                                                                        <span class="text-yellow"><i class="fas fa-star"></i></span>
-                                                                        <span class="text-yellow"><i class="fas fa-star-half-alt"></i></span>
-                                                                    </div>
-                                                                    <div class="rating-text">
-                                                                        <p class="text-light-white fs-12 title">3845 ratings</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="restaurent-product-caption-box"> <span class="text-light-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor...</span>
-                                                            </div>
-                                                            <div class="restaurent-tags-price">
-                                                                <div class="restaurent-tags"> <span class="text-custom-white square-tag">
-                                    <img src="${pageContext.request.contextPath}/resources/public/assets/img/svg/004-leaf.svg" alt="tag">
-                                  </span>
-                                                                    <span class="text-custom-white square-tag">
-                                    <img src="${pageContext.request.contextPath}/resources/public/assets/img/svg/006-chili.svg" alt="tag">
-                                  </span>
-                                                                    <span class="text-custom-white square-tag">
-                                    <img src="${pageContext.request.contextPath}/resources/public/assets/img/svg/005-chef.svg" alt="tag">
-                                  </span>
-                                                                    <span class="text-custom-white square-tag">
-                                    <img src="${pageContext.request.contextPath}/resources/public/assets/img/svg/008-protein.svg" alt="tag">
-                                  </span>
-                                                                    <span class="text-custom-white square-tag">
-                                    <img src="${pageContext.request.contextPath}/resources/public/assets/img/svg/009-lemon.svg" alt="tag">
-                                  </span>
-                                                                </div> <span class="circle-tag">
-                                  <img src="${pageContext.request.contextPath}/resources/public/assets/img/svg/010-heart.svg" alt="tag">
-                                </span>
-                                                                <div class="restaurent-product-price">
-                                                                    <h6 class="text-success fw-600 no-margin">$7.99+</h6>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="restaurent-product-img">
-                                                            <img src="https://via.placeholder.com/150x151" class="img-fluid" alt="#">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12">
-                                                <div class="restaurent-product-list">
-                                                    <div class="restaurent-product-detail">
-                                                        <div class="restaurent-product-left">
-                                                            <div class="restaurent-product-title-box">
-                                                                <div class="restaurent-product-box">
-                                                                    <div class="restaurent-product-title">
-                                                                        <h6 class="mb-2" data-toggle="modal" data-target="#restaurent-popup"><a href="javascript:void(0)" class="text-light-black fw-600">Hakka Noodles & Sticky Date Cake - Meal</a></h6>
-                                                                        <p class="text-light-white">600-700 Cal.</p>
-                                                                    </div>
-                                                                    <div class="restaurent-product-label"> <span class="rectangle-tag bg-gradient-red text-custom-white">Label</span>
-                                                                        <span class="rectangle-tag bg-dark text-custom-white">Combo</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="restaurent-product-rating">
-                                                                    <div class="ratings"> <span class="text-yellow"><i class="fas fa-star"></i></span>
-                                                                        <span class="text-yellow"><i class="fas fa-star"></i></span>
-                                                                        <span class="text-yellow"><i class="fas fa-star"></i></span>
-                                                                        <span class="text-yellow"><i class="fas fa-star"></i></span>
-                                                                        <span class="text-yellow"><i class="fas fa-star-half-alt"></i></span>
-                                                                    </div>
-                                                                    <div class="rating-text">
-                                                                        <p class="text-light-white fs-12 title">3845 ratings</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="restaurent-product-caption-box"> <span class="text-light-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor...</span>
-                                                            </div>
-                                                            <div class="restaurent-tags-price">
-                                                                <div class="restaurent-tags"> <span class="text-custom-white square-tag">
-                                    <img src="${pageContext.request.contextPath}/resources/public/assets/img/svg/004-leaf.svg" alt="tag">
-                                  </span>
-                                                                    <span class="text-custom-white square-tag">
-                                    <img src="${pageContext.request.contextPath}/resources/public/assets/img/svg/006-chili.svg" alt="tag">
-                                  </span>
-                                                                    <span class="text-custom-white square-tag">
-                                    <img src="${pageContext.request.contextPath}/resources/public/assets/img/svg/005-chef.svg" alt="tag">
-                                  </span>
-                                                                    <span class="text-custom-white square-tag">
-                                    <img src="${pageContext.request.contextPath}/resources/public/assets/img/svg/008-protein.svg" alt="tag">
-                                  </span>
-                                                                    <span class="text-custom-white square-tag">
-                                    <img src="${pageContext.request.contextPath}/resources/public/assets/img/svg/009-lemon.svg" alt="tag">
-                                  </span>
-                                                                </div> <span class="circle-tag">
-                                  <img src="${pageContext.request.contextPath}/resources/public/assets/img/svg/013-heart-1.svg" alt="tag">
-                                </span>
-                                                                <div class="restaurent-product-price">
-                                                                    <h6 class="text-success fw-600 no-margin">$7.99+</h6>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="restaurent-product-img">
-                                                            <img src="https://via.placeholder.com/150x151" class="img-fluid" alt="#">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12">
-                                                <div class="restaurent-product-list">
-                                                    <div class="restaurent-product-detail">
-                                                        <div class="restaurent-product-left">
-                                                            <div class="restaurent-product-title-box">
-                                                                <div class="restaurent-product-box">
-                                                                    <div class="restaurent-product-title">
-                                                                        <h6 class="mb-2" data-toggle="modal" data-target="#restaurent-popup"><a href="javascript:void(0)" class="text-light-black fw-600">Hakka Noodles & Sticky Date Cake - Meal</a></h6>
-                                                                        <p class="text-light-white">600-700 Cal.</p>
-                                                                    </div>
-                                                                    <div class="restaurent-product-label"> <span class="rectangle-tag bg-gradient-red text-custom-white">Label</span>
-                                                                        <span class="rectangle-tag bg-dark text-custom-white">Combo</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="restaurent-product-rating">
-                                                                    <div class="ratings"> <span class="text-yellow"><i class="fas fa-star"></i></span>
-                                                                        <span class="text-yellow"><i class="fas fa-star"></i></span>
-                                                                        <span class="text-yellow"><i class="fas fa-star"></i></span>
-                                                                        <span class="text-yellow"><i class="fas fa-star"></i></span>
-                                                                        <span class="text-yellow"><i class="fas fa-star-half-alt"></i></span>
-                                                                    </div>
-                                                                    <div class="rating-text">
-                                                                        <p class="text-light-white fs-12 title">3845 ratings</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="restaurent-product-caption-box"> <span class="text-light-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor...</span>
-                                                            </div>
-                                                            <div class="restaurent-tags-price">
-                                                                <div class="restaurent-tags"> <span class="text-custom-white square-tag">
-                                    <img src="${pageContext.request.contextPath}/resources/public/assets/img/svg/004-leaf.svg" alt="tag">
-                                  </span>
-                                                                    <span class="text-custom-white square-tag">
-                                    <img src="${pageContext.request.contextPath}/resources/public/assets/img/svg/006-chili.svg" alt="tag">
-                                  </span>
-                                                                    <span class="text-custom-white square-tag">
-                                    <img src="${pageContext.request.contextPath}/resources/public/assets/img/svg/005-chef.svg" alt="tag">
-                                  </span>
-                                                                    <span class="text-custom-white square-tag">
-                                    <img src="${pageContext.request.contextPath}/resources/public/assets/img/svg/008-protein.svg" alt="tag">
-                                  </span>
-                                                                    <span class="text-custom-white square-tag">
-                                    <img src="${pageContext.request.contextPath}/resources/public/assets/img/svg/009-lemon.svg" alt="tag">
-                                  </span>
-                                                                </div> <span class="circle-tag">
-                                  <img src="${pageContext.request.contextPath}/resources/public/assets/img/svg/010-heart.svg" alt="tag">
-                                </span>
-                                                                <div class="restaurent-product-price">
-                                                                    <h6 class="text-success fw-600 no-margin">$7.99+</h6>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="restaurent-product-img">
-                                                            <img src="https://via.placeholder.com/150x151" class="img-fluid" alt="#">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12">
-                                                <div class="restaurent-product-list">
-                                                    <div class="restaurent-product-detail">
-                                                        <div class="restaurent-product-left">
-                                                            <div class="restaurent-product-title-box">
-                                                                <div class="restaurent-product-box">
-                                                                    <div class="restaurent-product-title">
-                                                                        <h6 class="mb-2" data-toggle="modal" data-target="#restaurent-popup"><a href="javascript:void(0)" class="text-light-black fw-600">Hakka Noodles & Sticky Date Cake - Meal</a></h6>
-                                                                        <p class="text-light-white">600-700 Cal.</p>
-                                                                    </div>
-                                                                    <div class="restaurent-product-label"> <span class="rectangle-tag bg-gradient-red text-custom-white">Label</span>
-                                                                        <span class="rectangle-tag bg-dark text-custom-white">Combo</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="restaurent-product-rating">
-                                                                    <div class="ratings"> <span class="text-yellow"><i class="fas fa-star"></i></span>
-                                                                        <span class="text-yellow"><i class="fas fa-star"></i></span>
-                                                                        <span class="text-yellow"><i class="fas fa-star"></i></span>
-                                                                        <span class="text-yellow"><i class="fas fa-star"></i></span>
-                                                                        <span class="text-yellow"><i class="fas fa-star-half-alt"></i></span>
-                                                                    </div>
-                                                                    <div class="rating-text">
-                                                                        <p class="text-light-white fs-12 title">3845 ratings</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="restaurent-product-caption-box"> <span class="text-light-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor...</span>
-                                                            </div>
-                                                            <div class="restaurent-tags-price">
-                                                                <div class="restaurent-tags"> <span class="text-custom-white square-tag">
-                                    <img src="${pageContext.request.contextPath}/resources/public/assets/img/svg/004-leaf.svg" alt="tag">
-                                  </span>
-                                                                    <span class="text-custom-white square-tag">
-                                    <img src="${pageContext.request.contextPath}/resources/public/assets/img/svg/006-chili.svg" alt="tag">
-                                  </span>
-                                                                    <span class="text-custom-white square-tag">
-                                    <img src="${pageContext.request.contextPath}/resources/public/assets/img/svg/005-chef.svg" alt="tag">
-                                  </span>
-                                                                    <span class="text-custom-white square-tag">
-                                    <img src="${pageContext.request.contextPath}/resources/public/assets/img/svg/008-protein.svg" alt="tag">
-                                  </span>
-                                                                    <span class="text-custom-white square-tag">
-                                    <img src="${pageContext.request.contextPath}/resources/public/assets/img/svg/009-lemon.svg" alt="tag">
-                                  </span>
-                                                                </div> <span class="circle-tag">
-                                  <img src="${pageContext.request.contextPath}/resources/public/assets/img/svg/013-heart-1.svg" alt="tag">
-                                </span>
-                                                                <div class="restaurent-product-price">
-                                                                    <h6 class="text-success fw-600 no-margin">$7.99+</h6>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="restaurent-product-img">
-                                                            <img src="https://via.placeholder.com/150x151" class="img-fluid" alt="#">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    		</c:forEach>
+                                        	</c:if>
+                                    	</div>
                                     </div>
                                 </div>
                             </div>
@@ -1620,36 +1391,39 @@
     <!-- offer near -->
    
     <!-- product popup -->
-    <div class="modal fade restaurent-popup" id="restaurent-popup">
+    <c:forEach items="${product}" var="product">
+    <div class="modal fade restaurent-popup" id="restaurent-product${product.productId}" >
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
+                <div style="height: 410px"; class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <img src="https://via.placeholder.com/800x200" class="img-fluid full-width" alt="#">
+                    <img style="height: 400px"; src="${pageContext.request.contextPath}/resources/admin/assets/img/uploads/${product.imagePath}" class="img-fluid full-width" alt="#">
                 </div>
-                <div class="modal-body">
-                    <div class="name padding-10">
-                        <h3 class="text-light-black fw-700 mb-2">Sausage Egg McMuffin - Meal</h3>
-                        <h5 class="text-light-black fw-600 no-margin">$7.40</h5>
-                    </div>
-                    <div class="padding-10">
-                        <p class="text-light-black no-margin">600-770 Cal.</p>
-                    </div>
-                    <div class="u-line">
-                        <div class="product-quantity padding-10"> <span class="text-light-black fw-700 fs-16">Quantity</span>
-                            <div class="input-group quantity">
-                                <div class="input-group-append">
-                                    <button class="minus-btn" type="button" name="button"> <i class="fas fa-minus"></i></button>
-                                </div>
-                                <input type="text" class="text-center" name="name" value="1">
-                                <div class="input-group-prepend">
-                                    <button class="plus-btn" type="button" name="button"><i class="fas fa-plus"></i></button>
-                                </div>
+                <div class="name padding-10">
+                    <h3 class="text-light-black fw-700 mb-2">${product.name}</h3>
+                    <h5 class="text-light-black fw-600 no-margin">${product.price}VNĐ</h5>
+                </div>
+                <div class="u-line">
+                    <div class="product-quantity padding-10"> <span class="text-light-black fw-700 fs-16">Quantity</span>
+                        <div class="input-group quantity">
+                            <div class="input-group-append">
+                                <button class="minus-btn" type="button" name="button"> <i class="fas fa-minus"></i></button>
+                            </div>
+                            <input type="text" class="text-center" name="name" value="1">
+                            <div class="input-group-prepend">
+                                <button class="plus-btn" type="button" name="button"><i class="fas fa-plus"></i></button>
+                            </div>
+                            <div class="input-group-prepend">
+                            	<button class="btn-second btn-submit">${product.price}VNĐ</button>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-second btn-submit center">ĐẶT HÀNG</button>
+                </div>
                     <!-- sub product -->
-                    <div class="additional-product">
+                    <!-- <div class="additional-product">
                         <div class="card">
                             <div class="card-header">
                                 <h5 class="no-margin">
@@ -1850,15 +1624,262 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- sub product -->
-                </div>
-                <div class="modal-footer padding-10">
-                    <button class="btn-second btn-submit">Add Bag : $7.40</button>
-                </div>
             </div>
         </div>
     </div>
+	</c:forEach>
+	<!-- combo popup -->
+	<c:forEach items="${comboDetailList}" var="comboDetail">
+    <div class="modal fade restaurent-popup" id="restaurent-combo${comboDetail.productComboId}" >
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div style="height: 410px"; class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <img style="height: 400px"; src="${pageContext.request.contextPath}/resources/admin/assets/img/uploads/${comboDetail.comboImagePath}" class="img-fluid full-width" alt="#">
+                </div>
+                <div class="name padding-10">
+                    <h3 class="text-light-black fw-700 mb-2">${comboDetail.comboName}</h3>
+                    <h5 class="text-light-black fw-600 no-margin">${comboDetail.rateDiscount}VNĐ</h5>
+                </div>
+                <div class="u-line">
+                    <div class="product-quantity padding-10"> <span class="text-light-black fw-700 fs-16">Quantity</span>
+                        <div class="input-group quantity">
+                            <div class="input-group-append">
+                                <button class="minus-btn" type="button" name="button"> <i class="fas fa-minus"></i></button>
+                            </div>
+                            <input type="text" class="text-center" name="name" value="1">
+                            <div class="input-group-prepend">
+                                <button class="plus-btn" type="button" name="button"><i class="fas fa-plus"></i></button>
+                            </div>
+                            <div class="input-group-prepend">
+                            	<button class="btn-second btn-submit">${comboDetail.rateDiscount}VNĐ</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="u-line">
+					<c:forEach items="${productComboDetailList}" var="productComboDetail">
+	                	<c:if test="${productComboDetail.productComboId == comboDetail.productComboId}">
+		                	<div>
+		                		<p>${productComboDetail.productName}</p>
+		                	</div>
+	                	</c:if>
+                	</c:forEach>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-second btn-submit center">ĐẶT HÀNG</button>
+                </div>
+                    <!-- sub product -->
+                    <!-- <div class="additional-product">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="no-margin">
+                                    <a class="card-link collapsed text-light-black fw-700" data-toggle="collapse" href="#additionalOne">
+                                        <span>Select Breakfast Drink
+                      <span class="text-light-white fw-500 fs-12 padding-tb-10">Select one (Required)</span></span>
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="additionalOne" class="collapse">
+                                <div class="card-body padding-10">
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="no-margin">
+                                    <a class="card-link collapsed text-light-black fw-700" data-toggle="collapse" href="#additionalTwo">
+                                        <span>Select Breakfast Drink
+                      <span class="text-light-white fw-500 fs-12 padding-tb-10">Select one (Required)</span></span>
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="additionalTwo" class="collapse">
+                                <div class="card-body padding-10">
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="no-margin">
+                                    <a class="card-link collapsed text-light-black fw-700" data-toggle="collapse" href="#additionalThree">
+                                        <span>Select Breakfast Drink
+                      <span class="text-light-white fw-500 fs-12 padding-tb-10">Select one (Required)</span></span>
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="additionalThree" class="collapse">
+                                <div class="card-body padding-10">
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="no-margin">
+                                    <a class="card-link collapsed text-light-black fw-700" data-toggle="collapse" href="#additionalFour">
+                                        <span>Select Breakfast Drink
+                      <span class="text-light-white fw-500 fs-12 padding-tb-10">Select one (Required)</span></span>
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="additionalFour" class="collapse">
+                                <div class="card-body padding-10">
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                    <button class="add-pro">Small Premium Roast Coffee (0 Cal.) <span>+$0.59</span>
+                    <span class="close">+</span>
+                  </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- sub product -->
+            </div>
+        </div>
+    </div>
+	</c:forEach>
+	
 <!-- upload multi image -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="https://www.codehim.com/demo/jquery-image-uploader-preview-and-delete/dist/image-uploader.min.js"></script>
