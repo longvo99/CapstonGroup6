@@ -259,6 +259,39 @@
     <!-- Munch Box Js -->
     <script src="${pageContext.request.contextPath}/resources/public/assets/js/foodmart.js"></script>
     <!-- /Place all Scripts Here -->
+    <c:set var="userId" value="0" />
+   	<c:if test="${not empty sessionScope.userSession}">
+   		<c:set var="userId" value="${sessionScope.userSession.userId}" />
+   	</c:if>
+   	<script>
+   	function editLocationFavorite(locationId) {
+   			var userId =  ${userId};
+   			var json = { "locationId" : locationId, "userId" : userId};
+   			if(userId == 0){
+   				return alert("Bạn hãy đăng nhập để thực hiện thao tác này!!!");
+   			}else{
+    		$.ajax({
+    			type : "POST",
+    			contentType : "application/json",
+    			url : "${pageContext.request.contextPath}/public/editLocationFavorite/"+locationId,
+    			data : JSON.stringify(userId),
+    			dataType : 'json',				
+    		});
+    	}
+   	}
+   	</script>
+   	<script>
+		/* function addQuantity(quantity, price) {
+				$.ajax({
+	    			type : "POST",
+	    			contentType : "application/json",
+	    			url : "${pageContext.request.contextPath}/public/editLocationFavorite/"+locationId,
+	    			data : JSON.stringify(quantity, price),
+	    			dataType : 'json',				
+	    		});
+			} */
+			
+	</script>
 </body>
 
 </html>

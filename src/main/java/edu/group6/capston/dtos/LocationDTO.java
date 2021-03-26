@@ -18,8 +18,8 @@ public class LocationDTO {
 	private String locationTypeName;
 	private String mediaPath;
 	private double point;
-	private String minPrice;
-	private String maxPrice;
+	private float minPrice;
+	private float maxPrice;
 	public LocationDTO(int locationId, String locationName, String mediaPath, double point) {
 		super();
 		this.locationId = locationId;
@@ -45,7 +45,7 @@ public class LocationDTO {
 		this.locationId = locationId;
 		this.point = point;
 	}
-	public LocationDTO(int locationId, String minPrice, String maxPrice) {
+	public LocationDTO(int locationId, float minPrice, float maxPrice) {
 		super();
 		this.locationId = locationId;
 		this.minPrice = minPrice;

@@ -2,6 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/templates/tags/taglib.jsp"%>
 <!-- slider -->
+<c:set var="circletag" value="" />
+<c:if test="${not empty sessionScope.userSession}">
+	<c:set var="circletag" value="circle-tag" />
+</c:if>
 <section class="about-us-slider swiper-container p-relative">
 	<div class="swiper-wrapper">
 		<c:forEach items="${DiscountTopList}" var="discountTop">
@@ -92,14 +96,16 @@
 									</a>
 									<div class="overlay">
 										<div class="product-tags padding-10">
-											<span class="circle-tag"> <c:set var="heartLNew"
-													value="013-heart-1.svg" /> <c:forEach
+											<span class="${circletag}"> 
+											<c:set var="heartLNew" value="013-heart-1.svg" /> 
+											<c:forEach
 													items="${locationFavoriteList}" var="locationLF">
 													<c:if
 														test="${locationLF.location.locationId == locationDiscountTop.locationId}">
 														<c:set var="heartLNew" value="010-heart.svg" />
 													</c:if>
-												</c:forEach> <img
+											</c:forEach> 
+											<img onclick="editLocationFavorite(${locationDiscountTop.locationId})"
 												src="${pageContext.request.contextPath}/resources/public/assets/img/svg/${heartLNew}"
 												alt="tag">
 											</span>
@@ -183,7 +189,7 @@
 			</div>
 			<div class="col-lg-3 col-md-4">
 				<div class="large-product-box mb-xl-20 p-relative">
-					<img src="https://via.placeholder.com/255x587"
+					<img src="${pageContext.request.contextPath}/resources/public/assets/img/images.jpg"
 						class="img-fluid full-width" alt="image">
 					<div class="category-type overlay padding-15">
 						<button class="category-btn">Địa điểm đang giảm giá</button>
@@ -206,7 +212,7 @@
 		<div class="row">
 			<div class="col-lg-3 col-md-4">
 				<div class="large-product-box mb-xl-20 p-relative">
-					<img src="https://via.placeholder.com/255x587"
+					<img src="${pageContext.request.contextPath}/resources/public/assets/img/images (1).jpg"
 						class="img-fluid full-width" alt="image">
 					<div class="category-type overlay padding-15">
 						<button class="category-btn">Địa điểm mới</button>
@@ -230,14 +236,14 @@
 									</a>
 									<div class="overlay">
 										<div class="product-tags padding-10">
-											<span class="circle-tag"> <c:set var="heartLNew"
+											<span class="${circletag}"> <c:set var="heartLNew"
 													value="013-heart-1.svg" /> <c:forEach
 													items="${locationFavoriteList}" var="locationLF">
 													<c:if
 														test="${locationLF.location.locationId == location.locationId}">
 														<c:set var="heartLNew" value="010-heart.svg" />
 													</c:if>
-												</c:forEach> <img
+												</c:forEach> <img onclick="editLocationFavorite(${location.locationId})"
 												src="${pageContext.request.contextPath}/resources/public/assets/img/svg/${heartLNew}"
 												alt="tag">
 											</span> <span class="text-custom-white type-tag bg-gradient-orange">
@@ -349,7 +355,7 @@
 												</a>
 												<div class="overlay">
 													<div class="product-tags padding-10">
-														<span class="circle-tag"><img
+														<span class="${circletag}"><img onclick="editLocationFavorite(${locationFavorite.location.locationId})"
 															src="${pageContext.request.contextPath}/resources/public/assets/img/svg/010-heart.svg"
 															alt="tag"></span>
 														<c:forEach items="${listLocationTopNew}" var="location">
@@ -444,7 +450,7 @@
 				<c:if test="${not empty locationFavoriteList}">
 					<div class="col-lg-3 col-md-4">
 						<div class="large-product-box mb-xl-20 p-relative">
-							<img src="https://via.placeholder.com/255x587"
+							<img src="${pageContext.request.contextPath}/resources/public/assets/img/images (2).jpg"
 								class="img-fluid full-width" alt="image">
 							<div class="category-type overlay padding-15">
 								<button class="category-btn">Địa điểm bạn yêu thích</button>

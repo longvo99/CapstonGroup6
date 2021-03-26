@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Repository;
 
 import edu.group6.capston.dtos.LocationDTO;
 import edu.group6.capston.models.Product;
-import edu.group6.capston.models.Rating;
 
 @Repository
 public class ProductDAO {
@@ -25,7 +23,9 @@ public class ProductDAO {
 
 	public List<Product> findByLocationId(int locationId) {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("from Product Where locationId = " + locationId,Product.class).list();
+			List<Product> list = session.createQuery("from Product Where locationId = " + locationId,Product.class).list();
+			session.close();
+			return list;
 		}
 	}
 
@@ -72,7 +72,9 @@ public class ProductDAO {
 
 	public Product findByProductId(Integer productId) {
 		Session session = this.sessionFactory.openSession();
-		return session.find(Product.class, productId);
+		Product product = session.find(Product.class, productId);
+		session.close();
+		return product;
 	}
 	
 	public List<LocationDTO> findMinMaxPriceLocation() {

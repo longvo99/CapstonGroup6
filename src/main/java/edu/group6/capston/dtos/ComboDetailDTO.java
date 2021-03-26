@@ -13,15 +13,15 @@ public class ComboDetailDTO {
 	private int productComboId;
 	private String comboName;
 	private int orderCount;
-	private String rateDiscount;
+	private int rateDiscount;
 	private String description;
 	private String comboImagePath;
 	
 	private String productName;
 	private String productImagePath;
-	private String price;
+	private float price;
 	
-	public ComboDetailDTO(int productComboId, String comboName, int orderCount, String rateDiscount, String description,
+	public ComboDetailDTO(int productComboId, String comboName, int orderCount, int rateDiscount, String description,
 			String imagePath) {
 		super();
 		this.productComboId = productComboId;
@@ -33,7 +33,7 @@ public class ComboDetailDTO {
 	}
 
 	public ComboDetailDTO(int productId, int productComboId, String productName, String productImagePath,
-			String price) {
+			float price) {
 		super();
 		this.productId = productId;
 		this.productComboId = productComboId;

@@ -53,15 +53,6 @@ public class LocationServiceImpl implements LocationService {
 	}
 
 	@Override
-	public List<LocationFavorites> findLocationFavorite(int userId) {
-		List<LocationFavorites> a = LocationDAO.findLocationFavorite(userId);
-		for (LocationFavorites Location : a) {
-			System.out.println("- " +Location.getLocation().getLocationName());
-		}
-		return LocationDAO.findLocationFavorite(userId);
-	}
-	
-	@Override
 	public List<String> search(String keyword) {
 		return LocationDAO.search(keyword);
 	}

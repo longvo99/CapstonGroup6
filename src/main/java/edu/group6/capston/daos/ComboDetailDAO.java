@@ -60,8 +60,8 @@ public class ComboDetailDAO{
 				root.get("product").get("productId"),
 				root.get("productCompo").get("productComboId"),
 				root.get("product").get("name"),
-				root.get("product").get("price"),
-				root.get("product").get("imagePath"));
+				root.get("product").get("imagePath"),
+				root.get("product").get("price"));
 		query.where(builder.equal(root.get("product").get("location").get("locationId"), locationId));
 		locationList = session.createQuery(query).getResultList();
 		transaction.commit();

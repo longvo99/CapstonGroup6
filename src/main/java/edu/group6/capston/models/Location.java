@@ -56,4 +56,8 @@ public class Location{
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private Users users;
+	public Location(int locationId) {
+		super();
+		this.locationId = locationId;
+	}
 }

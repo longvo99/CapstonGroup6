@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,6 +19,7 @@ import edu.group6.capston.models.LocationFavorites;
 import edu.group6.capston.models.Users;
 import edu.group6.capston.services.ComboDetailService;
 import edu.group6.capston.services.DiscountService;
+import edu.group6.capston.services.LocationFavoriteService;
 import edu.group6.capston.services.LocationService;
 import edu.group6.capston.services.LocationTypeService;
 import edu.group6.capston.services.ProductService;
@@ -30,6 +32,9 @@ public class PublicController extends PublicAbstractController {
 
 	@Autowired
 	private LocationService locationService;
+	
+	@Autowired
+	private LocationFavoriteService locationFavoriteService;
 
 	@Autowired
 	private LocationTypeService locationTypeService;
@@ -63,14 +68,14 @@ public class PublicController extends PublicAbstractController {
 		model.addAttribute("LocationDiscountTopList", GlobalsFunction.changeImageTopLocation(locationService.findTopDiscount()));
 		if(request.getSession().getAttribute("userSession") != null) {
 			Users user = (Users) request.getSession().getAttribute("userSession");
-			List<LocationFavorites> locationFavoriteList = locationService.findLocationFavorite(user.getUserId());
+			List<LocationFavorites> locationFavoriteList = locationFavoriteService.findLocationFavorite(user.getUserId());
 			model.addAttribute("locationFavoriteList", GlobalsFunction.changeImageLocationFavorites(locationFavoriteList));
 		}
 		return "public.index";
 	}
 
 	@GetMapping("/restaurant/{locationId}")
-	public String productdetail(@PathVariable Integer locationId, Model model) {
+	public String productdetail(@PathVariable Integer locationId, Model model, HttpServletRequest request) {
 		Location location = locationService.findLocationId(locationId);
 		String[] imagePath = GlobalsFunction.splitPathMedia(location.getMediaPath());
 		model.addAttribute("location", GlobalsFunction.formatTime(location));
@@ -79,6 +84,10 @@ public class PublicController extends PublicAbstractController {
 		model.addAttribute("product", productService.findByLocationId(locationId));
 		model.addAttribute("comboDetailList", comboDetailService.findComboLocation(locationId));
 		model.addAttribute("productComboDetailList", comboDetailService.findProductInComboLocation(locationId));
+		if(request.getSession().getAttribute("userSession") != null) {
+			Users user = (Users) request.getSession().getAttribute("userSession");
+			model.addAttribute("locationFavoriteList", locationFavoriteService.findLocationFavorite(user.getUserId(), locationId));
+		}
 		return "public.restaurant";
 	}
 
@@ -97,11 +106,14 @@ public class PublicController extends PublicAbstractController {
 		return "public.listview";
 	}
 	
-	@RequestMapping(value = "search", method = RequestMethod.GET)
-	@ResponseBody
-	public List<String> search(HttpServletRequest request) {
-		System.out.println("avd");
-		return locationService.search(request.getParameter("term"));
+	@RequestMapping(value = "/editLocationFavorite/{locationId}", method = RequestMethod.POST, produces = "application/json")
+	public @ResponseBody void editLocationFavorite(@RequestBody Integer userId, @PathVariable Integer locationId) {
+		LocationFavorites locationFavorite = locationFavoriteService.findLocationFavorites(userId, locationId);
+		if(locationFavorite != null) {
+			locationFavoriteService.delete(locationFavorite);
+		}else {
+			locationFavoriteService.save(locationId, userId);
+		}
 	}
 	
 //	@GetMapping("/shop")

@@ -19,7 +19,9 @@ public class OrderDAO {
 
 	public List<Orders> findAll() {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("from Orders ", Orders.class).list();
+			List<Orders> list = session.createQuery("from Orders ", Orders.class).list();
+			session.close();
+			return list;
 		}
 	}
 
@@ -67,12 +69,16 @@ public class OrderDAO {
 
 	public Orders findByOrderId(int orderId) {
 		Session session = this.sessionFactory.openSession();
-		return session.find(Orders.class, orderId);
+		Orders order = session.find(Orders.class, orderId);
+		session.close();
+		return order;
 	}
 
 	public List<OrderStatus> findAllOrderStatus() {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("from OrderStatus ", OrderStatus.class).list();
+			List<OrderStatus> list = session.createQuery("from OrderStatus ", OrderStatus.class).list();
+			session.close();
+			return list;
 		}
 	}
 

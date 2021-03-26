@@ -26,7 +26,7 @@ public class ProductCombo {
 	@Column
 	private int orderCount;
 	@Column
-	private String rateDiscount;
+	private int rateDiscount;
 	@Column
 	private String description;
 	@Column

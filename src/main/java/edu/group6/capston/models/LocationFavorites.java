@@ -29,4 +29,9 @@ public class LocationFavorites{
 	@ManyToOne
 	@JoinColumn(name = "LFlocationId")
 	private Location location;
+	public LocationFavorites(Users user, Location location) {
+		super();
+		this.user = user;
+		this.location = location;
+	}
 }

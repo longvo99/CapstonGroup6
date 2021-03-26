@@ -16,6 +16,8 @@ public class LocationCategoryDAO {
 	
 	@SuppressWarnings("unchecked")
 	public List<LocationCategory> findAll() {
-		return sessionFactory.getCurrentSession().createQuery("from LocationCategory").list();
+		List<LocationCategory> list = sessionFactory.getCurrentSession().createQuery("from LocationCategory").list();
+		sessionFactory.close();
+		return list;
 	}
 }

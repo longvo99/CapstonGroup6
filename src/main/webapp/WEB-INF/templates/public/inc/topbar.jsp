@@ -196,13 +196,13 @@ input[type="file"] {
                                         <div class="search-box padding-10">
                                             <input id="productName" type="text" class="form-control" placeholder="Pizza, Burger, Chinese">
                                         </div>
-                    <script type="text/javascript">
+                   <!--  <script type="text/javascript">
 						$(document).ready(function() {
 							$('#productName').autocomplete({
 								source : '${pageContext.request.contextPath}/public/search'
 							});
 						});
-					</script>
+					</script> -->
                                     </div>
                                     <!-- search -->
                                 </div>

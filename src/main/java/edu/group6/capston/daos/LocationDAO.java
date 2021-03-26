@@ -16,7 +16,6 @@ import org.springframework.stereotype.Repository;
 import edu.group6.capston.dtos.LocationDTO;
 import edu.group6.capston.models.DiscountInfo;
 import edu.group6.capston.models.Location;
-import edu.group6.capston.models.LocationFavorites;
 import edu.group6.capston.models.Rating;
 
 @Repository
@@ -53,13 +52,17 @@ public class LocationDAO {
 
 	public List<Location> findAll() {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("from Location", Location.class).list();
+			List<Location> list = session.createQuery("from Location", Location.class).list();
+			session.close();
+			return list;
 		}
 	}
 
 	public Location findById(int id) {
 		Session session = this.sessionFactory.openSession();
-		return session.find(Location.class, id);
+		Location location = session.find(Location.class, id);
+		session.close();
+		return location;
 	}
 
 	public boolean delete(Location location) {
@@ -78,15 +81,8 @@ public class LocationDAO {
 
 	public long locationCount() {
 		try (Session session = this.sessionFactory.openSession()) {
-			return (long) (session.createQuery("select count(*) from Location").uniqueResult());
-		}
-	}
-
-	public List<LocationFavorites> findLocationFavorite(int userId) {
-		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("from LocationFavorites WHERE LFUserId = " + userId, LocationFavorites.class)
-					.list();
-
+			long count = (long) session.createQuery("select count(*) from Location").uniqueResult();
+			return count;
 		}
 	}
 
@@ -95,14 +91,16 @@ public class LocationDAO {
 			String hql = "SELECT locationName from Location WHERE locationName LIKE '%" + keyword + "%'";
 			@SuppressWarnings("unchecked")
 			List<String> listResult = session.createQuery(hql).getResultList();
+			session.close();
 			return listResult;
 		}
 	}
 
 	public List<Location> findTopNewLocationNew() {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("from Location ORDER BY locationId DESC", Location.class).setMaxResults(6)
-					.getResultList();
+			List<Location> list = session.createQuery("from Location ORDER BY locationId DESC", Location.class).setMaxResults(6)
+			.getResultList();
+			return list;
 		}
 	}
 

@@ -18,7 +18,9 @@ public class DiscountDAO {
 
 	public List<DiscountInfo> findAll() {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("from DiscountInfo", DiscountInfo.class).list();
+			List<DiscountInfo> list = session.createQuery("from DiscountInfo", DiscountInfo.class).list();
+			session.close();
+			return list;
 		}
 	}
 	
@@ -66,7 +68,9 @@ public class DiscountDAO {
 
 	public List<DiscountInfo> findTopNewDiscountInfo() {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("from DiscountInfo ORDER BY DiscountId DESC", DiscountInfo.class).setMaxResults(3).getResultList();
+			List<DiscountInfo> list = session.createQuery("from DiscountInfo ORDER BY DiscountId DESC", DiscountInfo.class).setMaxResults(3).getResultList();
+			session.close();
+			return list;
 		}
 	}
 }

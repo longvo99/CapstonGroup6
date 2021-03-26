@@ -66,5 +66,8 @@ public class Users {
 		this.hide = hide;
 		this.role = role;
 	}
-
+	public Users(int userId) {
+		super();
+		this.userId = userId;
+	}
 }

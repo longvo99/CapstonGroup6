@@ -18,7 +18,9 @@ public class RoleDAO {
 
 	public List<Role> findAll() {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("from Role", Role.class).list();
+			List<Role> list = session.createQuery("from Role", Role.class).list();
+			session.close();
+			return list;
 		}
 	}
 
