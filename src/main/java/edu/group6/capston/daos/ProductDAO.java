@@ -24,7 +24,6 @@ public class ProductDAO {
 	public List<Product> findByLocationId(int locationId) {
 		try (Session session = this.sessionFactory.openSession()) {
 			List<Product> list = session.createQuery("from Product Where locationId = " + locationId,Product.class).list();
-			session.close();
 			return list;
 		}
 	}
@@ -73,7 +72,6 @@ public class ProductDAO {
 	public Product findByProductId(Integer productId) {
 		Session session = this.sessionFactory.openSession();
 		Product product = session.find(Product.class, productId);
-		session.close();
 		return product;
 	}
 	

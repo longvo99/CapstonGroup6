@@ -36,7 +36,6 @@ public class LocationFavoriteDAO {
 	public LocationFavorites findLocationFavorites(int userId, int locationId) {
 		try (Session session = this.sessionFactory.openSession()) {
 			LocationFavorites locationFavorites = session.createQuery("from LocationFavorites WHERE LFuserId = " + userId + " AND LFlocationId = " + locationId, LocationFavorites.class).uniqueResult();
-			session.close();
 			return locationFavorites;
 		}
 	}
@@ -59,7 +58,6 @@ public class LocationFavoriteDAO {
 		try (Session session = this.sessionFactory.openSession()) {
 			List<LocationFavorites> list = session.createQuery("from LocationFavorites WHERE LFUserId = " + userId, LocationFavorites.class)
 			.list();
-			session.close();
 			return list;
 		}
 	}

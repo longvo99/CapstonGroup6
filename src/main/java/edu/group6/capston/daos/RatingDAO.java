@@ -39,4 +39,18 @@ public class RatingDAO{
 		session.close();
 		return locationList;
 	}
+
+	public boolean save(Rating rate) {
+		Session session = this.sessionFactory.openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			session.persist(rate);
+			tx.commit();
+			session.close();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 }

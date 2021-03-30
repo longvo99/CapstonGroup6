@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import edu.group6.capston.daos.RatingDAO;
 import edu.group6.capston.dtos.LocationDTO;
+import edu.group6.capston.models.Rating;
 import edu.group6.capston.services.RatingService;
 
 @Service
@@ -17,6 +18,12 @@ public class RatingServiceImpl implements RatingService {
 	@Override
 	public List<LocationDTO> findAllRatingLocation() {
 		return ratingDAO.findAllRatingLocation();
+	}
+
+	@Override
+	public boolean save(Rating rate) {
+		// TODO Auto-generated method stub
+		return ratingDAO.save(rate);
 	}
 	
 }

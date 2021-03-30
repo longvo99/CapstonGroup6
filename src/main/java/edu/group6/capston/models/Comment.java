@@ -30,6 +30,8 @@ public class Comment {
 	@Column
 	private String textContent;
 	@Column
+	private String mediaPath;
+	@Column
 	private int parentCommentId;
 	@ManyToOne
 	@JoinColumn(name = "locationId")

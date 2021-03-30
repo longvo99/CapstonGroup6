@@ -19,7 +19,6 @@ public class LocationTypeDAO {
 	public List<LocationType> findAll() {
 		try (Session session = this.sessionFactory.openSession()) {
 			List<LocationType> list = session.createQuery("from LocationType", LocationType.class).list();
-			session.close();
 			return list;
 		}
 	}

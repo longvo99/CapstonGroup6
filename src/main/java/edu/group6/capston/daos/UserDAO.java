@@ -41,7 +41,6 @@ public class UserDAO{
 	public List<Users> findAll() {
 		try (Session session = this.sessionFactory.openSession()) {
 			List<Users> list = session.createQuery("from Users", Users.class).list();
-			session.close();
 			return list;
 		}
 	}
@@ -49,7 +48,6 @@ public class UserDAO{
 	public List<Users> findByRoleName(String roleId) {
 		try (Session session = this.sessionFactory.openSession()) {
 			List<Users> list = session.createQuery("from Users WHERE roleId = " + "'"+roleId+"'" , Users.class).list();
-			session.close();
 			return list;
 		}
 	}
@@ -74,7 +72,6 @@ public class UserDAO{
 		List<Users> users = new ArrayList<>();
 	    Session session = this.sessionFactory.openSession();
 	    users = session.createQuery("from Users where username='"+ username +"'", Users.class).list();
-	    session.close();
 	    if (users.size() > 0) {
 	      return users.get(0);
 	    } else {
@@ -86,7 +83,6 @@ public class UserDAO{
 		List<Users> users = new ArrayList<>();
 	    Session session = this.sessionFactory.openSession();
 	    users = session.createQuery("from Users where userId='"+ i +"'", Users.class).list();
-	    session.close();
 	    if (users.size() > 0) {
 	      return users.get(0);
 	    } else {
@@ -98,7 +94,6 @@ public class UserDAO{
 		List<Users> users = new ArrayList<>();
 	    Session session = this.sessionFactory.openSession();
 	    users = session.createQuery("from Users where contactEmail='"+ email +"'", Users.class).list();
-	    session.close();
 	    if (users.size() > 0) {
 	      return users.get(0);
 	    } else {

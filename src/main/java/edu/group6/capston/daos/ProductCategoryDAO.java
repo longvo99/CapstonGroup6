@@ -19,7 +19,6 @@ public class ProductCategoryDAO {
 	public List<ProductCategory> findAll() {
 		try (Session session = this.sessionFactory.openSession()) {
 			List<ProductCategory> list = session.createQuery("from ProductCategory", ProductCategory.class).list();
-			session.close();
 			return list;
 		}
 	}
@@ -68,7 +67,6 @@ public class ProductCategoryDAO {
 	public List<ProductCategory> search(String keywork) {
 		try (Session session = this.sessionFactory.openSession()) {
 			List<ProductCategory> list = session.createQuery("from ProductCategory where PCategoryName like '%"+keywork+"%'", ProductCategory.class).list();
-			session.close();
 			return list;
 		}
 	}

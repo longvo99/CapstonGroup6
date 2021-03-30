@@ -118,7 +118,7 @@ input[type="file"] {
                         <div style="width: 200px; margin-right: 20px;" class="btn-group">
 		                    <a id="dLabel" role="button" data-toggle="dropdown" class="btn btn-outline-secondary dropdown-toggle"
 		                       href="">
-		                        Select Category
+		                        Danh mục
 		                    </a>
 		                    <c:if test="${not empty locationCategoriesList1}">
 		                    <ul class="selectPkeyVkey dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
@@ -183,12 +183,12 @@ input[type="file"] {
                                 <div class="row">
                                     <!-- location picker -->
                                     <div class="col-lg-6 col-md-5">
-                                        <a href="#" class="delivery-add p-relative"> <span class="icon"><i class="fas fa-map-marker-alt"></i></span>
-                                            <span class="address">Brooklyn, NY</span>
+                                        <a href="#" class="delivery-add p-relative"> <!-- <span class="icon"><i class="fas fa-map-marker-alt"></i></span> -->
+                                            <span class="address">Tạo địa điểm mới</span>
                                         </a>
-                                        <div class="location-picker">
+                                        <!-- <div class="location-picker">
                                             <input type="text" class="form-control" placeholder="Enter a new address">
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <!-- location picker -->
                                     <!-- search -->
@@ -209,13 +209,13 @@ input[type="file"] {
                             </form>
                         </div>
                         <div class="right-side fw-700 mainNavCol">
-                            <div class="gem-points">
+                            <!-- <div class="gem-points">
                                 <a href="#"> <i class="fas fa-concierge-bell"></i>
                                     <span>Order Now</span>
                                 </a>
-                            </div>
-                            <div class="catring parent-megamenu">
-                                <a href="#"> <span>Pages <i class="fas fa-caret-down"></i></span>
+                            </div> -->
+                            <%-- <div class="catring parent-megamenu">
+                                <a href="#"> <span>Trang<i class="fas fa-caret-down"></i></span>
                                     <i class="fas fa-bars"></i>
                                 </a>
                                 <div class="megamenu">
@@ -315,6 +315,7 @@ input[type="file"] {
                                     </div>
                                 </div>
                             </div>
+                            a --%>
                             <!-- mobile search -->
                             <div class="mobile-search">
                                 <a href="#" data-toggle="modal" data-target="#search-box"> <i class="fas fa-search"></i>
@@ -344,7 +345,7 @@ input[type="file"] {
                                 			<c:set var="nameUser" value="${sessionScope.userSession.username}" />
                                 		</c:otherwise>
                                 	</c:choose>
-                                    <img src="${avatarPath}" class="rounded-circle" alt="userimg"> <span>Hi, ${nameUser}</span>
+                                    <img style="width:30px;height:30px;" src="${avatarPath}" class="rounded-circle" alt="userimg"> <span>Hi, ${nameUser}</span>
                                 </a>
                                 <div class="user-dropdown">
                                    <!--

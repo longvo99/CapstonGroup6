@@ -20,7 +20,6 @@ public class OrderDAO {
 	public List<Orders> findAll() {
 		try (Session session = this.sessionFactory.openSession()) {
 			List<Orders> list = session.createQuery("from Orders ", Orders.class).list();
-			session.close();
 			return list;
 		}
 	}
@@ -70,14 +69,12 @@ public class OrderDAO {
 	public Orders findByOrderId(int orderId) {
 		Session session = this.sessionFactory.openSession();
 		Orders order = session.find(Orders.class, orderId);
-		session.close();
 		return order;
 	}
 
 	public List<OrderStatus> findAllOrderStatus() {
 		try (Session session = this.sessionFactory.openSession()) {
 			List<OrderStatus> list = session.createQuery("from OrderStatus ", OrderStatus.class).list();
-			session.close();
 			return list;
 		}
 	}

@@ -53,7 +53,6 @@ public class LocationDAO {
 	public List<Location> findAll() {
 		try (Session session = this.sessionFactory.openSession()) {
 			List<Location> list = session.createQuery("from Location", Location.class).list();
-			session.close();
 			return list;
 		}
 	}
@@ -61,7 +60,6 @@ public class LocationDAO {
 	public Location findById(int id) {
 		Session session = this.sessionFactory.openSession();
 		Location location = session.find(Location.class, id);
-		session.close();
 		return location;
 	}
 
@@ -91,7 +89,6 @@ public class LocationDAO {
 			String hql = "SELECT locationName from Location WHERE locationName LIKE '%" + keyword + "%'";
 			@SuppressWarnings("unchecked")
 			List<String> listResult = session.createQuery(hql).getResultList();
-			session.close();
 			return listResult;
 		}
 	}

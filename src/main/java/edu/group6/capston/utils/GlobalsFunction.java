@@ -1,6 +1,7 @@
 package edu.group6.capston.utils;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -73,7 +74,7 @@ public class GlobalsFunction {
 		}
 		return list;
 	}
-	
+
 	public static Location formatTime(Location location) {
 		location.setCloseTime(location.getCloseTime().substring(0, 5));
 		location.setOpenTime(location.getOpenTime().substring(0, 5));
@@ -87,12 +88,58 @@ public class GlobalsFunction {
 			String[] mediaPath = splitPathMedia(image);
 			image = mediaPath[0];
 			location.setMediaPath(image);
-			if (location.getOpenTime() != null || location.getCloseTime() != null ) {
+			if (location.getOpenTime() != null || location.getCloseTime() != null) {
 				location.setCloseTime(location.getCloseTime().substring(0, 5));
 				location.setOpenTime(location.getOpenTime().substring(0, 5));
 			}
 		}
 		return findTopRate;
+	}
+
+	public static String findDifference(String end_date) {
+
+		// SimpleDateFormat converts the
+		// string format to date object
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String result = "";
+		// Try Block
+		try {
+			// parse method is used to parse
+			// the text from a string to
+			// produce the date
+			Date d1 = sdf.parse(end_date);
+			Date d2 = sdf.parse(String.valueOf(getCurrentTime()));
+			
+			// Calculate time difference
+			// in milliseconds
+			long difference_In_Time = d2.getTime() - d1.getTime();
+			// Calculate time difference in
+			// seconds, minutes, hours, years,
+			// and days
+			long difference_In_Minutes = (difference_In_Time / (1000 * 60)) % 60;
+
+			long difference_In_Hours = (difference_In_Time / (1000 * 60 * 60)) % 24;
+
+			long difference_In_Years = (difference_In_Time / (1000l * 60 * 60 * 24 * 365));
+
+			long difference_In_Days = (difference_In_Time / (1000 * 60 * 60 * 24)) % 365;
+			
+			
+			if(difference_In_Years > 0) {
+				result = difference_In_Years + " năm trước";
+			}else if(difference_In_Days < 365 && difference_In_Days > 0) {
+				result = difference_In_Days + " ngày trước";
+			}else if(difference_In_Hours < 24 && difference_In_Hours > 0) {
+				result = difference_In_Hours + " giờ trước";
+			}else {
+				result = difference_In_Minutes + " phút trước";
+			}
+		}
+		// Catch the Exception
+		catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 }

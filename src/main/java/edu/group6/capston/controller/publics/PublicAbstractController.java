@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import edu.group6.capston.models.LocationCategory;
 import edu.group6.capston.services.LocationCategoriesService;
+import edu.group6.capston.utils.UploadFile;
 
 public abstract class PublicAbstractController  {
 	

@@ -25,9 +25,8 @@ public class Rating {
 	private int ratingId;
 	@Column
 	private Float point;
-	@ManyToOne
-	@JoinColumn(name = "criteriaId")
-	private Criteria criteria;
+	@Column
+	private String criteria;
 	@ManyToOne
 	@JoinColumn(name = "commentId")
 	private Comment comment;

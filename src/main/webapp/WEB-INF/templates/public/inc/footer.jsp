@@ -6,34 +6,34 @@
     <div class="footer-top section-padding bg-black">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-2 col-sm-4 col-6 mb-sm-20">
+                <div class="col-md-2 col-sm-4 col-4 mb-sm-20">
                     <div class="icon-box"> <span class="text-light-green"><i class="flaticon-credit-card-1"></i></span>
-                        <span class="text-custom-white">100% Payment<br>Secured</span>
+                        <span class="text-custom-white">100% Bảo mật<br>Thanh toán</span>
                     </div>
                 </div>
                 <div class="col-md-2 col-sm-4 col-6 mb-sm-20">
                     <div class="icon-box"> <span class="text-light-green"><i class="flaticon-wallet-1"></i></span>
-                        <span class="text-custom-white">Support lots<br> of Payments</span>
+                        <span class="text-custom-white">Hỗ trợ thanh toán<br> trực tuyến</span>
                     </div>
                 </div>
-                <div class="col-md-2 col-sm-4 col-6 mb-sm-20">
+                <div class="col-md-2 col-sm-4 col-4 mb-sm-20">
                     <div class="icon-box"> <span class="text-light-green"><i class="flaticon-help"></i></span>
-                        <span class="text-custom-white">24 hours / 7 days<br>Support</span>
+                        <span class="text-custom-white">24/7 <br>Hỗ trợ</span>
                     </div>
                 </div>
-                <div class="col-md-2 col-sm-4 col-6">
+                <div class="col-md-2 col-sm-4 col-4">
                     <div class="icon-box"> <span class="text-light-green"><i class="flaticon-truck"></i></span>
-                        <span class="text-custom-white">Free Delivery<br>with $50</span>
+                        <span class="text-custom-white">Giao hàng <br>Tận nơi</span>
                     </div>
                 </div>
-                <div class="col-md-2 col-sm-4 col-6">
+                <div class="col-md-2 col-sm-4 col-4">
                     <div class="icon-box"> <span class="text-light-green"><i class="flaticon-guarantee"></i></span>
-                        <span class="text-custom-white">Best Price<br>Guaranteed</span>
+                        <span class="text-custom-white">Đảm bảo <br>giá tốt nhất</span>
                     </div>
                 </div>
                 <div class="col-md-2 col-sm-4 col-6">
                     <div class="icon-box"> <span class="text-light-green"><i class="flaticon-app-file-symbol"></i></span>
-                        <span class="text-custom-white">Mobile Apps<br>Ready</span>
+                        <span class="text-custom-white">Ứng dụng<br>trên điện thoại</span>
                     </div>
                 </div>
             </div>
@@ -72,54 +72,48 @@
             <div class="row">
                 <div class="col-xl col-lg-4 col-md-4 col-sm-6">
                     <div class="footer-contact">
-                        <h6 class="text-custom-white">Need Help</h6>
+                        <h6 class="text-custom-white">Thông tin</h6>
                         <ul>
-                            <li class="fw-600"><span class="text-light-white">Call Us</span> <a href="tel:" class="text-custom-white">+(347) 123 456 789</a>
+                            <li class="fw-600"><span class="text-light-white">Số điện thoại</span> <a href="tel:" class="text-custom-white">+(80) 123 456 789</a>
                             </li>
-                            <li class="fw-600"><span class="text-light-white">Email Us</span> <a href="mailto:" class="text-custom-white">demo@domain.com</a>
+                            <li class="fw-600"><span class="text-light-white">Email</span> <a href="mailto:" class="text-custom-white">lhtmp@lhtmp.com</a>
                             </li>
-                            <li class="fw-600"><span class="text-light-white">Join our twitter</span> <a href="#" class="text-custom-white">@foodmart</a>
+                            <li class="fw-600"><span class="text-light-white">Facebook</span> <a href="#" class="text-custom-white">@lhtmp</a>
                             </li>
-                            <li class="fw-600"><span class="text-light-white">Join our instagram</span> <a href="#" class="text-custom-white">@foodmart</a>
+                            <li class="fw-600"><span class="text-light-white">Instagram</span> <a href="#" class="text-custom-white">@lhtmp</a>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-xl col-lg-4 col-md-4 col-sm-6">
                     <div class="footer-links">
-                        <h6 class="text-custom-white">Get to Know Us</h6>
+                        <h6 class="text-custom-white">Hiều về chúng tôi</h6>
                         <ul>
-                            <li><a href="#" class="text-light-white fw-600">About Us</a>
+                            <li><a href="#" class="text-light-white fw-600">Giới thiệu</a>
                             </li>
                             <li><a href="#" class="text-light-white fw-600">Blog</a>
                             </li>
-                            <li><a href="#" class="text-light-white fw-600">Socialize</a>
-                            </li>
-                            <li><a href="#" class="text-light-white fw-600">foodmart</a>
-                            </li>
-                            <li><a href="#" class="text-light-white fw-600">Perks</a>
+                            <li><a href="#" class="text-light-white fw-600">Giao lưu</a>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-xl col-lg-4 col-md-4 col-sm-6">
                     <div class="footer-links">
-                        <h6 class="text-custom-white">Let Us Help You</h6>
+                        <h6 class="text-custom-white">Hỗ trợ bạn</h6>
                         <ul>
-                            <li><a href="#" class="text-light-white fw-600">Account Details</a>
+                            <li><a href="#" class="text-light-white fw-600">Tài khoản của bạn</a>
                             </li>
-                            <li><a href="#" class="text-light-white fw-600">Order History</a>
+                            <li><a href="#" class="text-light-white fw-600">Lịch sử đặt hàng</a>
                             </li>
-                            <li><a href="#" class="text-light-white fw-600">Find restaurant</a>
+                            <li><a href="#" class="text-light-white fw-600">Tìm nhà hàng</a>
                             </li>
-                            <li><a href="#" class="text-light-white fw-600">Login</a>
-                            </li>
-                            <li><a href="#" class="text-light-white fw-600">Track order</a>
+                            <li><a href="#" class="text-light-white fw-600">Theo dõi đơn hàng</a>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-xl col-lg-4 col-md-4 col-sm-6">
+                <!-- <div class="col-xl col-lg-4 col-md-4 col-sm-6">
                     <div class="footer-links">
                         <h6 class="text-custom-white">Doing Business</h6>
                         <ul>
@@ -133,8 +127,8 @@
                             </li>
                         </ul>
                     </div>
-                </div>
-                <div class="col-xl col-lg-4 col-md-4 col-sm-6">
+                </div> -->
+                <!-- <div class="col-xl col-lg-4 col-md-4 col-sm-6">
                     <div class="footer-links">
                         <h6 class="text-custom-white">Download Apps</h6>
                         <div class="appimg">
@@ -148,13 +142,13 @@
                             </a>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-xl col-lg-4 col-md-4 col-sm-6">
                     <div class="footer-contact">
-                        <h6 class="text-custom-white">Newsletter</h6>
+                        <h6 class="text-custom-white">Nhận thông báo</h6>
                         <form class="subscribe_form">
                             <div class="input-group">
-                                <input type="text" class="form-control form-control-submit" name="email" placeholder="Enter your email">
+                                <input type="text" class="form-control form-control-submit" name="email" placeholder="Nhập mail của bạn">
                                 <span class="input-group-btn">
                       <button class="btn btn-second btn-submit" type="button"><i class="fas fa-paper-plane"></i></button>
                  </span>
@@ -182,7 +176,7 @@
             </div>
         </div>
     </footer>
-    <div class="copyright bg-black">
+    <!-- <div class="copyright bg-black">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-4">
@@ -197,7 +191,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4 text-center medewithlove align-self-center">
-                    <a href="http://www.Slidesigma.com" class="text-custom-white">Made with Real <i class="fas fa-heart"></i> Slidesigma</a>
+                    <a href="#" class="text-custom-white">Made with Real <i class="fas fa-heart"></i> Slidesigma</a>
                 </div>
                 <div class="col-lg-4">
                     <div class="copyright-text"> <span class="text-light-white">© <a href="#" class="text-light-white">Slidesigma</a> - 2020 | All Right Reserved</span>
@@ -205,7 +199,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- footer -->
     <!-- modal boxes -->
     <div class="modal fade" id="address-box">
@@ -266,7 +260,6 @@
    	<script>
    	function editLocationFavorite(locationId) {
    			var userId =  ${userId};
-   			var json = { "locationId" : locationId, "userId" : userId};
    			if(userId == 0){
    				return alert("Bạn hãy đăng nhập để thực hiện thao tác này!!!");
    			}else{
@@ -275,23 +268,11 @@
     			contentType : "application/json",
     			url : "${pageContext.request.contextPath}/public/editLocationFavorite/"+locationId,
     			data : JSON.stringify(userId),
-    			dataType : 'json',				
+    			dataType : 'json'				
     		});
     	}
    	}
    	</script>
-   	<script>
-		/* function addQuantity(quantity, price) {
-				$.ajax({
-	    			type : "POST",
-	    			contentType : "application/json",
-	    			url : "${pageContext.request.contextPath}/public/editLocationFavorite/"+locationId,
-	    			data : JSON.stringify(quantity, price),
-	    			dataType : 'json',				
-	    		});
-			} */
-			
-	</script>
 </body>
 
 </html>

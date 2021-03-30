@@ -119,8 +119,6 @@ public class AdminLocationController {
 					}
 					location.setMediaPath(mediaPath);
 				}
-		System.out.println(UploadFile.getDirPath(request));
-
 		
 			if (locationService.update(location)) {
 				rd.addFlashAttribute(GlobalsConstant.MESSAGE,
