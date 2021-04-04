@@ -272,6 +272,77 @@
     		});
     	}
    	}
+   	
+   	/* COOKIE */
+	function setCookieOrder(productId) {
+	  var quantity = $("#quantity" + productId).val();
+	  $.ajax({
+			type : "GET",
+			contentType : "application/json",
+			url : "${pageContext.request.contextPath}/public/addCartAjax",
+			data : {'aProductId': productId, 'aQuantity': quantity },
+			success: function (data) {
+				var html_code = '';
+				var totalPriceDTO = 0;
+				var sizeCart = 0;
+				$.each( data, function( key, val ) {
+					 sizeCart++;
+					 html_code += "<div class='cat-product'>"
+                     +"<div class='cat-name'>"
+		                     +"<a href='#'>"
+		                         +"<p class='text-light-green'><span class='text-dark-white'>"+ val.quantity +"</span> "+ val.name +"</p>"
+		                     +"</a>"
+		                 +"</div>"
+		                 +"<div class='delete-btn'>"
+		                     +"<a href='javascript:void(0)' onclick='deleteCookieOrder("+ val.productId +")' class='text-dark-white'> <i class='far fa-trash-alt'></i></a>"
+		                 +"</div>"
+		                 +"<div class='price'> <a href='#' class='text-dark-white fw-500'>"+ val.price +"</a></div>"
+		             +"</div>"
+		             totalPriceDTO += parseInt(val.price);
+				 });
+				 $("#cat-product-box").html(html_code);
+				 $("#cat-product-box-topbar").html(html_code);
+				 $("#totalPriceDTO").text(totalPriceDTO);
+				 $("#totalPriceDTOTopBar").text(totalPriceDTO);
+				 $("#sizeCart").text(sizeCart);
+			  }
+	  	});
+	}
+	
+	function deleteCookieOrder(productId) {
+		  $.ajax({
+				type : "GET",
+				contentType : "application/json",
+				url : "${pageContext.request.contextPath}/public/deleteCartAjax",
+				data : {'aProductId': productId },
+				success: function (data) {
+					var html_code = '';
+					var totalPriceDTO = 0;
+					var sizeCart = 0;
+					$.each( data, function( key, val ) {
+						 sizeCart++;
+						 html_code += "<div class='cat-product'>"
+	                     +"<div class='cat-name'>"
+			                     +"<a href='#'>"
+			                         +"<p class='text-light-green'><span class='text-dark-white'>"+ val.quantity +"</span> "+ val.name +"</p>"
+			                     +"</a>"
+			                 +"</div>"
+			                 +"<div class='delete-btn'>"
+			                     +"<a href='javascript:void(0)' onclick='deleteCookieOrder("+ val.productId +")' class='text-dark-white'> <i class='far fa-trash-alt'></i></a>"
+			                 +"</div>"
+			                 +"<div class='price'> <a href='#' class='text-dark-white fw-500'>"+ val.price +"</a></div>"
+			             +"</div>"
+			             totalPriceDTO += parseInt(val.price);
+					 });
+					 $("#cat-product-box").html(html_code);
+					 $("#cat-product-box-topbar").html(html_code);
+					 $("#totalPriceDTO").text(totalPriceDTO);
+					 $("#totalPriceDTOTopBar").text(totalPriceDTO);
+					 $("#sizeCart").text(sizeCart);
+				  }
+		  	});
+		}
+   	
    	</script>
 </body>
 

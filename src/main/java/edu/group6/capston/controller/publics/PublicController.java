@@ -73,8 +73,8 @@ public class PublicController extends PublicAbstractController {
 	MessageSource messageSource;
 	
 	@Override
-	public void addCommonObjects(Model model) {
-		super.addCommonObjects(model);
+	public void addCommonObjects(Model model, HttpServletRequest request) {
+		super.addCommonObjects(model, request);
 	}
 
 	@GetMapping("/index")
@@ -125,11 +125,6 @@ public class PublicController extends PublicAbstractController {
 	@GetMapping("/register")
 	public String register(Model model) {
 		return "public.register";
-	}
-	
-	@GetMapping("/orderdetails")
-	public String orderdetails(Model model) {
-		return "public.orderdetails";
 	}
 	
 	@GetMapping("/listview")

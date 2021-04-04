@@ -13,4 +13,9 @@ public class OrderDTO {
 	private String name;
 	private float price;
 	private int quantity;
+	public OrderDTO(String name, float price) {
+		super();
+		this.name = name;
+		this.price = price;
+	}
 }

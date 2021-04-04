@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import edu.group6.capston.dtos.LocationDTO;
+import edu.group6.capston.dtos.OrderDTO;
 import edu.group6.capston.models.Product;
 
 @Repository
@@ -91,6 +92,23 @@ public class ProductDAO {
 		transaction.commit();
 		session.close();
 		return locationList;
+	}
+	
+	public OrderDTO findByProductIdOrder(Integer productId) {
+		OrderDTO product = null;
+		Session session = this.sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<OrderDTO> query = builder.createQuery(OrderDTO.class);
+		Root<Product> root = query.from(Product.class);
+		query.multiselect(
+				root.get("name"),
+				root.get("price"));
+		query.where(builder.equal(root.get("productId"), productId));
+		product = session.createQuery(query).uniqueResult();
+		transaction.commit();
+		session.close();
+		return product;
 	}
 
 }

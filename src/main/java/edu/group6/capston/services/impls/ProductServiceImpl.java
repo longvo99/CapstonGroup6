@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import edu.group6.capston.daos.ProductDAO;
 import edu.group6.capston.dtos.LocationDTO;
+import edu.group6.capston.dtos.OrderDTO;
 import edu.group6.capston.models.Product;
 import edu.group6.capston.services.ProductService;
 
@@ -50,5 +51,10 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<LocationDTO> findMinMaxPriceLocation() {
 		return ProductDAO.findMinMaxPriceLocation();
+	}
+
+	@Override
+	public OrderDTO findByProductIdOrder(Integer productId) {
+		return ProductDAO.findByProductIdOrder(productId);
 	}
 }

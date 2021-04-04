@@ -23,7 +23,6 @@ import edu.group6.capston.services.UserService;
 import edu.group6.capston.utils.GlobalsFunction;
 import edu.group6.capston.utils.GooglePojo;
 import edu.group6.capston.utils.GoogleUtils;
-import edu.group6.capston.utils.UploadFile;
 
 @Controller
 public class LoginController {
@@ -85,7 +84,6 @@ public class LoginController {
 			user = userService.findByEmail(googlePojo.getEmail());
 			request.getSession().setAttribute("userSession", user);
 		}
-		System.out.println(UploadFile.getDirPath(request));
 		return "redirect:/public/index";
 	}
 	

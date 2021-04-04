@@ -531,29 +531,38 @@
                                 <div class="card-header padding-15 fw-700">Đơn hàng của bạn</div>
                                 <div class="card-body no-padding" id="scrollstyle-4">
                                     <div id="cat-product-box" class="cat-product-box">
-                                        <div class="cat-product">
-                                             <div class="cat-name">
-                                                 <a href="#">
-                                                     <p class="text-light-green"><span class="text-dark-white">1</span> loaded cheese</p> <span class="text-light-white">small, chilli chicken</span>
-                                                 </a>
-                                             </div>
-                                             <div class="delete-btn">
-                                                 <a href="#" class="text-dark-white"> <i class="far fa-trash-alt"></i>
-                                                 </a>
-                                             </div>
-                                             <div class="price"> <a href="#" class="text-dark-white fw-500">
-                       $2.25
-                     </a>
-                                             </div>
-                                         </div>
+                                        <c:choose>
+                                        	<c:when test="${not empty listOrderDTO}">
+                                        		<c:forEach items="${listOrderDTO}" var="orderDTO">
+                                        		<div class="cat-product">
+                                                    <div class="cat-name">
+                                                        <a href="#">
+                                                            <p class="text-light-green"><span class="text-dark-white">${orderDTO.quantity}</span> ${orderDTO.name}</p>
+                                                        </a>
+                                                    </div>
+                                                    <div class="delete-btn">
+                                                        <a href="javascript:void(0)" onclick="deleteCookieOrder(${orderDTO.productId})" class="text-dark-white"> <i class="far fa-trash-alt"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="price"> <a href="#" class="text-dark-white fw-500">${orderDTO.price}</a>
+                                                    </div>
+                                                </div>
+                                                </c:forEach>
+                                        	</c:when>
+                                        	<c:otherwise>
+                                        		<div class="empty-bag padding-15 fw-700"> 
+		                                        	<a href="#">Đơn hàng rỗng</a>
+		                                        </div>
+                                        	</c:otherwise>
+                                        </c:choose>
                                     </div>
+                                    <c:if test="${not empty totalCart}">
                                     <div style="height:100%;" class="item-total">
                                         <div class="total-price border-0"> <span class="text-dark-white fw-700">Tổng tiền:</span>
-                                            <span class="text-dark-white fw-700">$9.00</span>
+                                            <span id="totalPriceDTO" class="text-dark-white fw-700">${totalCart}</span>
                                         </div>
-                                        <!-- <div class="empty-bag padding-15 fw-700"> <a href="#">Đơn hàng rỗng</a>
-                                        </div> -->
                                     </div>
+                                    </c:if>
                                 </div>
                                 <div class="card-footer padding-15"> <a href="checkout.html " class="btn-first green-btn text-custom-white full-width fw-500">Proceed to Checkout</a>
                                 </div>
@@ -1436,23 +1445,6 @@ $(document).on("change", ".file_multi_video", function(evt) {
             }
 		});
 	}
-	
-	/* COOKIE */
-	function setCookieOrder(productId) {
-	  var quantity = $("#quantity" + productId).val();
-	  $.ajax({
-			type : "GET",
-			contentType : "application/json",
-			url : "${pageContext.request.contextPath}/public/addCartAjax",
-			data : {'aProductId': productId, 'aQuantity': quantity },
-			success: function (data) {
-				 $.each( data, function( key, val ) {
-				    alert(val.name);
-				 });
-			  }
-	  	});
-	}
-	
 </script>
 <script type="text/javascript">
 	$('.input-images').imageUploader();
