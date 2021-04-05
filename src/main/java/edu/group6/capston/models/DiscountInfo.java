@@ -50,16 +50,12 @@ public class DiscountInfo {
 	@Column
 	private int limitedUse;
 	@Column
-<<<<<<< Updated upstream
-	private int limitedPerUse;
-=======
 	private int limitedPerUser;
 	@ManyToOne
 	@JoinColumn(name = "ruleId")
 	private DiscountRule discountRule;
 	@Column
 	private int valueRule;
->>>>>>> Stashed changes
 	@ManyToOne
 	@JoinColumn(name = "locationId")
 	private Location location;

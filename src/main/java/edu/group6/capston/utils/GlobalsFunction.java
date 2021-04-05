@@ -8,19 +8,16 @@ import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< Updated upstream
 
 import edu.group6.capston.daos.UserDAO;
 import edu.group6.capston.dtos.LocationDTO;
 import edu.group6.capston.models.Location;
-=======
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import edu.group6.capston.daos.UserDAO;
 import edu.group6.capston.models.CustomUserDetails;
->>>>>>> Stashed changes
 import edu.group6.capston.models.LocationFavorites;
 import edu.group6.capston.models.Users;
 
@@ -56,7 +53,6 @@ public class GlobalsFunction {
 		Date date = new Date(System.currentTimeMillis());
 		return Timestamp.valueOf(formatter.format(date));
 	}
-<<<<<<< Updated upstream
 
 	public static List<LocationFavorites> changeImageLocationFavorites(List<LocationFavorites> list) {
 		String image = "";
@@ -119,7 +115,7 @@ public class GlobalsFunction {
 			// produce the date
 			Date d1 = sdf.parse(end_date);
 			Date d2 = sdf.parse(String.valueOf(getCurrentTime()));
-			
+
 			// Calculate time difference
 			// in milliseconds
 			long difference_In_Time = d2.getTime() - d1.getTime();
@@ -133,15 +129,14 @@ public class GlobalsFunction {
 			long difference_In_Years = (difference_In_Time / (1000l * 60 * 60 * 24 * 365));
 
 			long difference_In_Days = (difference_In_Time / (1000 * 60 * 60 * 24)) % 365;
-			
-			
-			if(difference_In_Years > 0) {
+
+			if (difference_In_Years > 0) {
 				result = difference_In_Years + " năm trước";
-			}else if(difference_In_Days < 365 && difference_In_Days > 0) {
+			} else if (difference_In_Days < 365 && difference_In_Days > 0) {
 				result = difference_In_Days + " ngày trước";
-			}else if(difference_In_Hours < 24 && difference_In_Hours > 0) {
+			} else if (difference_In_Hours < 24 && difference_In_Hours > 0) {
 				result = difference_In_Hours + " giờ trước";
-			}else {
+			} else {
 				result = difference_In_Minutes + " phút trước";
 			}
 		}
@@ -152,14 +147,12 @@ public class GlobalsFunction {
 		return result;
 	}
 
-=======
-	
 	public static Users getUsers() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		CustomUserDetails customUser = (CustomUserDetails) authentication.getPrincipal();
 		return customUser.getUser();
 	}
-	
+
 	/*
 	 * public static List<LocationFavorites>
 	 * changeImageLocation(List<LocationFavorites> list){ String image = ""; for
@@ -169,6 +162,5 @@ public class GlobalsFunction {
 	 * //locationFavorites.setLocation(locationFavorites.getLocation()).setMediaPath
 	 * (image)); } }
 	 */
-	
->>>>>>> Stashed changes
+
 }

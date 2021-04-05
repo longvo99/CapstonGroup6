@@ -11,10 +11,10 @@ import edu.group6.capston.services.DiscountService;
 
 @Service
 public class DiscountServiceImpl implements DiscountService {
-	
+
 	@Autowired
 	private DiscountDAO discountDAO;
-	
+
 	@Override
 	public List<DiscountInfo> findAll() {
 		return discountDAO.findAll();
@@ -22,30 +22,30 @@ public class DiscountServiceImpl implements DiscountService {
 
 	@Override
 	public boolean save(DiscountInfo discountInfo) {
-		if(discountDAO.save(discountInfo))
+		if (discountDAO.save(discountInfo))
 			return true;
 		return false;
 	}
 
 	@Override
 	public boolean update(DiscountInfo discountInfo) {
-		if(discountDAO.update(discountInfo))
+		if (discountDAO.update(discountInfo))
 			return true;
 		return false;
 	}
 
 	@Override
 	public boolean delete(Integer id) {
-		if(discountDAO.delete(id))
+		if (discountDAO.delete(id))
 			return true;
 		return false;
 	}
 
 	@Override
-<<<<<<< Updated upstream
 	public List<DiscountInfo> findTopNewDiscountInfo() {
 		return discountDAO.findTopNewDiscountInfo();
-=======
+	}
+
 	public List<DiscountInfo> findAllByUserId(int userId) {
 		return discountDAO.findAllByUserId(userId);
 	}
@@ -58,6 +58,5 @@ public class DiscountServiceImpl implements DiscountService {
 	@Override
 	public int delete(List<Integer> listDiscountId1) {
 		return discountDAO.delete(listDiscountId1);
->>>>>>> Stashed changes
 	}
 }

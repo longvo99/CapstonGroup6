@@ -20,20 +20,17 @@ public class DiscountDAO {
 
 	public List<DiscountInfo> findAll() {
 		try (Session session = this.sessionFactory.openSession()) {
-<<<<<<< Updated upstream
 			List<DiscountInfo> list = session.createQuery("from DiscountInfo", DiscountInfo.class).list();
 			return list;
 		}
 	}
 	
-	public boolean save(DiscountInfo DiscountInfo) {
-=======
-			return session.createQuery("FROM DiscountInfo", DiscountInfo.class).list();
-		}
-	}
+	/*
+	 * public boolean save(DiscountInfo DiscountInfo) { return
+	 * session.createQuery("FROM DiscountInfo", DiscountInfo.class).list(); } }
+	 */
 
 	public boolean save(DiscountInfo discountInfo) {
->>>>>>> Stashed changes
 		Session session = this.sessionFactory.openSession();
 		Transaction tx = null;
 		try {
@@ -75,14 +72,12 @@ public class DiscountDAO {
 		}
 	}
 
-<<<<<<< Updated upstream
 	public List<DiscountInfo> findTopNewDiscountInfo() {
 		try (Session session = this.sessionFactory.openSession()) {
 			List<DiscountInfo> list = session.createQuery("from DiscountInfo ORDER BY DiscountId DESC", DiscountInfo.class).setMaxResults(3).getResultList();
 			return list;
 		}
 	}
-=======
 	public List<DiscountInfo> findAllByUserId(int userId) {
 		try (Session session = this.sessionFactory.openSession()) {
 			return session.createQuery("FROM DiscountInfo WHERE userId = " + userId, DiscountInfo.class).list();
@@ -102,5 +97,4 @@ public class DiscountDAO {
 			return q.executeUpdate();
 		}
 	}
->>>>>>> Stashed changes
 }

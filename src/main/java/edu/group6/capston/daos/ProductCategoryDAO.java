@@ -77,13 +77,13 @@ public class ProductCategoryDAO {
 
 	public List<ProductCategory> search(String keywork) {
 		try (Session session = this.sessionFactory.openSession()) {
-<<<<<<< Updated upstream
-			List<ProductCategory> list = session.createQuery("from ProductCategory where PCategoryName like '%"+keywork+"%'", ProductCategory.class).list();
-			return list;
-=======
+			/*
+			 * List<ProductCategory> list =
+			 * session.createQuery("from ProductCategory where PCategoryName like '%"
+			 * +keywork+"%'", ProductCategory.class).list(); return list;
+			 */
 			return session.createQuery("from ProductCategory where PCategoryName like '%" + keywork + "%'",
 					ProductCategory.class).list();
->>>>>>> Stashed changes
 		}
 	}
 

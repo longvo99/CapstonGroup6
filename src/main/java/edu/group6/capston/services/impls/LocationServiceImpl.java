@@ -15,7 +15,7 @@ import edu.group6.capston.services.LocationService;
 public class LocationServiceImpl implements LocationService {
 	@Autowired
 	private LocationDAO LocationDAO;
-	
+
 	@Override
 	public List<Location> findAll() {
 		return LocationDAO.findAll();
@@ -23,21 +23,21 @@ public class LocationServiceImpl implements LocationService {
 
 	@Override
 	public boolean save(Location location) {
-		if(LocationDAO.save(location))
+		if (LocationDAO.save(location))
 			return true;
 		return false;
 	}
 
 	@Override
 	public boolean update(Location location) {
-		if(LocationDAO.update(location))
+		if (LocationDAO.update(location))
 			return true;
 		return false;
 	}
 
 	@Override
 	public boolean delete(Location location) {
-		if(LocationDAO.delete(location))
+		if (LocationDAO.delete(location))
 			return true;
 		return false;
 	}
@@ -58,7 +58,6 @@ public class LocationServiceImpl implements LocationService {
 	}
 
 	@Override
-<<<<<<< Updated upstream
 	public List<Location> findTopNewLocationNew() {
 		return LocationDAO.findTopNewLocationNew();
 	}
@@ -71,7 +70,8 @@ public class LocationServiceImpl implements LocationService {
 	@Override
 	public List<LocationDTO> findTopDiscount() {
 		return LocationDAO.findTopDiscount();
-=======
+	}
+
 	public Location findByUserId(int userId) {
 		return LocationDAO.findByUserId(userId);
 	}
@@ -79,7 +79,6 @@ public class LocationServiceImpl implements LocationService {
 	@Override
 	public List<Location> findAllByUserId(int userId) {
 		return LocationDAO.findAllByUserId(userId);
->>>>>>> Stashed changes
 	}
 
 }

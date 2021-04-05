@@ -36,11 +36,7 @@ public class Product {
 	@JoinColumn(name = "productCategoryId")
 	private ProductCategory productCategory;
 	@ManyToOne
-<<<<<<< Updated upstream
 	@JoinColumn(name = "locationId")
-=======
-	@JoinColumn(name = "LocationId")
->>>>>>> Stashed changes
 	private Location location;
 	
 }

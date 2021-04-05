@@ -9,11 +9,8 @@ public interface DiscountService {
 	boolean save(DiscountInfo discountInfo);
 	boolean update(DiscountInfo discount);
 	boolean delete(Integer id);
-<<<<<<< Updated upstream
 	List<DiscountInfo> findTopNewDiscountInfo();
-=======
 	List<DiscountInfo> findAllByUserId(int userId);
 	DiscountInfo findOne(Integer discountId);
 	int delete(List<Integer> listDiscountId1);
->>>>>>> Stashed changes
 }

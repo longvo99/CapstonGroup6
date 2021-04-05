@@ -15,10 +15,10 @@ import edu.group6.capston.services.ProductService;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-	
+
 	@Autowired
 	private ProductDAO ProductDAO;
-	
+
 	@Override
 	public List<Product> findByLocationId(int locationId) {
 		return ProductDAO.findByLocationId(locationId);
@@ -26,21 +26,21 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public boolean save(Product Products) {
-		if(ProductDAO.save(Products))
+		if (ProductDAO.save(Products))
 			return true;
 		return false;
 	}
 
 	@Override
 	public boolean update(Product Products) {
-		if(ProductDAO.update(Products))
+		if (ProductDAO.update(Products))
 			return true;
 		return false;
 	}
 
 	@Override
 	public boolean delete(Integer id) {
-		if(ProductDAO.delete(id))
+		if (ProductDAO.delete(id))
 			return true;
 		return false;
 	}
@@ -51,7 +51,6 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-<<<<<<< Updated upstream
 	public List<LocationDTO> findMinMaxPriceLocation() {
 		return ProductDAO.findMinMaxPriceLocation();
 	}
@@ -59,7 +58,8 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public OrderDTO findByProductIdOrder(Integer productId) {
 		return ProductDAO.findByProductIdOrder(productId);
-=======
+	}
+
 	public List<String> searchProductNameByUserId(int userId) {
 		/*
 		 * List<String> listStr = new ArrayList<>(); List<Product> list =
@@ -67,6 +67,5 @@ public class ProductServiceImpl implements ProductService {
 		 * listStr.add(product.getName()); }
 		 */
 		return ProductDAO.searchProductNameByUserId(userId);
->>>>>>> Stashed changes
 	}
 }
