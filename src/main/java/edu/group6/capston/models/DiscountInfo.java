@@ -1,5 +1,7 @@
 package edu.group6.capston.models;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +26,7 @@ import lombok.NoArgsConstructor;
 public class DiscountInfo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="discountId")
+	@Column
 	private int discountId;
 	@Column
 	private String title;
@@ -30,7 +35,7 @@ public class DiscountInfo {
 	@Column
 	private String description;
 	@Column
-	private String rateDiscount;
+	private int rateDiscount;
 	@Column
 	private String value;
 	@Column
@@ -45,7 +50,12 @@ public class DiscountInfo {
 	@Column
 	private int limitedUse;
 	@Column
-	private int limitedPerUse;
+	private int limitedPerUser;
+	@ManyToOne
+	@JoinColumn(name = "ruleId")
+	private DiscountRule discountRule;
+	@Column
+	private int valueRule;
 	@ManyToOne
 	@JoinColumn(name = "locationId")
 	private Location location;

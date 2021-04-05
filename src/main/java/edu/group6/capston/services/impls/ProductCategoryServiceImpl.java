@@ -43,17 +43,13 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 	}
 
 	@Override
-	public List<String> search(String keywork) {
-		List<String> listStr = new ArrayList<>();
-		List<ProductCategory> list = ProductCategoriesDAO.search(keywork);
-		for (ProductCategory productCategory : list) {
-			listStr.add(productCategory.getProductCategoryName());
-		}
-		return listStr;
+	public List<String> searchProductCategoryName() {
+		/*
+		 * List<String> listStr = new ArrayList<>(); List<ProductCategory> list =
+		 * ProductCategoriesDAO.findAll(); for (ProductCategory productCategory : list)
+		 * { listStr.add(productCategory.getProductCategoryName()); }
+		 */
+		return ProductCategoriesDAO.searchProductCategoryName();
 	}
 
-	/*
-	 * @Override public List<String> search(String keywork) { return
-	 * ProductCategoriesDAO.search1(keywork); }
-	 */
 }

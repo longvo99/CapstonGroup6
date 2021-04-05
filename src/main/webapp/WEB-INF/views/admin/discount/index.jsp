@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/templates/tags/taglib.jsp" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}/admin/discount"/>
+<sec:authentication var="userDetail" property="principal" />
 	<div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h2 class="m-0 font-weight-bold text-primary">Quản lý giảm giá</h2>
@@ -12,20 +13,11 @@
             </ol>
           </div>
           <!-- Row -->
-	      <span id="result">
-	      	<c:if test="${not empty msg}">
-               	<c:if test="${success eq true}">
-					<div class="alert alert-success">
-						<strong>${msg}</strong>
-					</div>
-				</c:if>
-				<c:if test="${error eq true}">
-					<div class="alert alert-danger">
-						<strong>${msg}</strong>
-					</div>
-				</c:if>
-			</c:if>
-	      </span>
+	      <c:if test="${not empty msg}">
+			<div class="alert alert-success">
+				<strong>${msg}</strong>
+			</div>
+		  </c:if>
           <div class="row">
             <!-- DataTable with Hover -->
             <div class="col-lg-12">
@@ -43,12 +35,10 @@
                   <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                     <thead class="thead-light">
                       <tr>
-                        <th>ID</th>
-                        <th>Title</th>
-                        <th>Mã giảm giá</th>
-                        <th>Value</th>
-                        <!-- <th class="center text-center">Chức năng</th> -->
-                        <th>Chức năng</th>
+                        <th class="center text-center">ID</th>
+                        <th class="center text-center">Tiêu đề</th>
+                        <th class="center text-center">Tên nhà hàng</th>
+                        <th class="center text-center">Chức năng</th>
 						<th>
      						<label><input type="checkbox" id="select_all"/> Selecct All</label>
      	                </th>
@@ -59,21 +49,18 @@
 					  	<tr class="odd gradeX">
 							<td>${discount.discountId}</td>
 							<td>${discount.title}</td>
-							<td>${discount.code}</td>
-							<td>${discount.value}</td>
+							<td>${discount.location.locationName}</td>
 							<td class="center text-center">
 								<a href="" data-toggle="modal" data-target="#exampleModalCenter${discount.discountId}" class="btn btn-sm btn-primary"><i class="fa fa-edit"> Chi tiết </i></a>
-								<a href="${contextPath}/edit/${discount.discountId}" class="btn btn-sm btn-warning"><i class="fa fa-edit"> Sửa </i></a>
+								<c:if test="${userDetail.user.role.roleId eq discount.users.role.roleId}">
+									<a href="${contextPath}/edit/${discount.discountId}" class="btn btn-sm btn-warning"><i class="fa fa-edit"> Sửa </i></a>
+								</c:if>	
 							</td>
 							<td class="center text-center">
-   								<input type="checkbox" class="checkbox" name="check[]" id="customCheck1" value="${discount.discountId}" style="zoom: 1.5;">
+								<c:if test="${userDetail.user.role.roleId eq discount.users.role.roleId}">
+									<input type="checkbox" class="checkbox" name="check[]" id="customCheck1" value="${discount.discountId}" style="zoom: 1.5;">
+								</c:if>	
             				</td>
-							<%-- <td class="center text-center">
-								<a href="${pageContext.request.contextPath}/admin/location/edit/${location.locationId}" class="btn btn-sm btn-success"><i class="fa fa-edit">Chi tiết</i></a>
-                                <a href="${pageContext.request.contextPath}/admin/location/image/${location.locationId}" class="btn btn-sm btn-primary"><i class="fa fa-edit">Hình ảnh</i></a>
-                                <a href="${pageContext.request.contextPath}/admin/product/index/${location.locationId}" class="btn btn-sm btn-primary"><i class="fa fa-edit">Sản phẩm</i></a>
-                                <a href="${pageContext.request.contextPath}/admin/location/delete"  class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa không');"><i class="fas fa-trash"> Xóa </i></a>
-							</td> --%>
 						</tr>
 						<!-- Modal Center -->
 			          <div class="modal fade" id="exampleModalCenter${discount.discountId}" tabindex="-1" role="dialog"
@@ -91,43 +78,66 @@
 				                	<form action="${contextPath}/edit" method="POST">
 										<div class="form-group">
 					                      <label for="name">Id</label>
-					                      <input class="form-control mb-3" type="text" value="${discount.discountId}" id="locationId" name="locationId">
+					                      <input disabled="disabled" class="form-control mb-3" type="text" value="${discount.discountId}">
+					                    </div>
+					                    <div class="form-group">
+					                      <label for="name">Tên nhà hàng</label>
+					                      <input disabled="disabled" class="form-control mb-3" type="text" value="${discount.location.locationName}">
 					                    </div>
 										<div class="form-group">
-					                      <label for="name">Tên giảm giá</label>
-					                      <input class="form-control mb-3" type="text" value="${discount.title}" id="locationName" name="locationName">
+					                      <label for="name">Tiêu đề</label>
+					                      <input disabled="disabled" class="form-control mb-3" type="text" value="${discount.title}">
+					                    </div>
+					                    <div class="form-group">
+					                      <label for="name">Mô tả</label>
+					                      <textarea disabled="disabled" class="form-control mb-3" rows="3">${discount.description}</textarea>
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="address">Mã giảm giá</label>
-					                      <input class="form-control mb-3" type="text" value="${discount.code}" id="address" name="address">
+					                      <input disabled="disabled" class="form-control mb-3" type="text" value="${discount.code}">
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="address">Áp dụng cho</label>
-					                      <input class="form-control mb-3" type="text" value="${discount.value}" id="address" name="address">
+					                      <textarea disabled="disabled" class="form-control mb-3" rows="3">${discount.value}</textarea>
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="opentime">Giảm bao nhiêu</label>
-					                      <input class="form-control mb-3" type="text" value="${discount.rateDiscount}" id="opentime" name="opentime">
+					                      <c:if test="${discount.rateDiscount le 100}">
+					                      	<c:set var="rd" value="${discount.rateDiscount}%" ></c:set>
+					                      </c:if>
+					                      <c:if test="${discount.rateDiscount gt 100}">
+					                      	<c:set var="rd" value="${discount.rateDiscount} VNĐ" ></c:set>
+					                      </c:if>
+					                      <input disabled="disabled" class="form-control mb-3" type="text" value="${rd}">
+					                    </div>
+					                    <div class="form-group">
+					                      <label for="opentime">Điều kiện giảm</label>
+					                      <input disabled="disabled" class="form-control mb-3" type="text" 
+					                      value="${discount.discountRule.ruleContent}">
+					                    </div>
+					                    <div class="form-group">
+					                      <label for="opentime">Giá trị tối thiểu của điều kiện giảm</label>
+					                      <input disabled="disabled" class="form-control mb-3" type="text" value="${discount.valueRule}">
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="locationcategory">Ngày bắt đầu</label>
-					                      <input class="form-control mb-3" type="text" value="${discount.startDate}" id="locationcategory" name="locationcategory">
+					                      <input disabled="disabled" class="form-control mb-3" type="text" value="${discount.startDate}">
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="locationtype">Ngày kết thúc</label>
-					                      <input class="form-control mb-3" type="text" value="${discount.endDate}" id="locationtype" name="locationtype">
+					                      <input disabled="disabled" class="form-control mb-3" type="text" value="${discount.endDate}">
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="locationtype">Người tạo</label>
-					                      <input class="form-control mb-3" type="text" value="${discount.users.username}" id="locationtype" name="locationtype">
+					                      <input disabled="disabled" class="form-control mb-3" type="text" value="${discount.users.username}">
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="locationtype">Giới hạn dùng (lần)</label>
-					                      <input class="form-control mb-3" type="text" value="${discount.limitedUse}" id="locationtype" name="locationtype">
+					                      <input disabled="disabled" class="form-control mb-3" type="text" value="${discount.limitedUse}">
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="locationtype">Số lần dùng/Người</label>
-					                      <input class="form-control mb-3" type="text" value="${discount.limitedPerUse}" id="locationtype" name="locationtype">
+					                      <input disabled="disabled" class="form-control mb-3" type="text" value="${discount.limitedPerUser}">
 					                    </div>
 					                    <div class="form-group">
 					                      <label>Ảnh</label>
@@ -199,7 +209,7 @@
 	                   str += checkbox[i].value + ",";
 	               } 
 	           }
-			window.location.href = "${pageContext.request.contextPath}/admin/contact/del/" + str;
+			window.location.href = "${pageContext.request.contextPath}/admin/discount/del/" + str;
        } else {return;}
    };
 </script>

@@ -14,4 +14,5 @@ public interface ProductService {
 	Product findByProductId(Integer productId);
 	List<LocationDTO> findMinMaxPriceLocation();
 	OrderDTO findByProductIdOrder(Integer productId);
+	List<String> searchProductNameByUserId(int userId);
 }

@@ -55,4 +55,5 @@ public class GoogleUtils {
 				accountNonLocked, authorities);
 		return userDetail;
 	}
+
 }

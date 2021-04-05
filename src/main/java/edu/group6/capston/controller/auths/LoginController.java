@@ -71,22 +71,23 @@ public class LoginController {
 		// create new user if not empty
 		if (userService.findByEmail(googlePojo.getEmail()) == null) {
 			String username = GlobalsFunction.createUsernameEmail(googlePojo.getEmail());
-			if(userService.findByUsername(username) != null) {
+			if (userService.findByUsername(username) != null) {
 				Random rd = new Random();
-				username = username + rd.nextInt(100);  
+				username = username + rd.nextInt(100);
 			}
-			user = new Users(username, googlePojo.getFamily_name(), googlePojo.getEmail(), GlobalsFunction.getCurrentTime(), false, false, new Role("CUSTOMER", null));
-			if(userService.save(user)) {
+			user = new Users(username, googlePojo.getFamily_name(), googlePojo.getEmail(),
+					GlobalsFunction.getCurrentTime(), false, false, new Role("CUSTOMER", null));
+			if (userService.save(user)) {
 				user = userService.findByEmail(googlePojo.getEmail());
-				request.getSession().setAttribute("userSession",user);
+				request.getSession().setAttribute("userSession", user);
 			}
-		}else{
+		} else {
 			user = userService.findByEmail(googlePojo.getEmail());
 			request.getSession().setAttribute("userSession", user);
 		}
 		return "redirect:/public/index";
 	}
-	
+
 	@GetMapping("/public/logout")
 	private String logout(HttpServletRequest request) {
 		request.getSession().invalidate();

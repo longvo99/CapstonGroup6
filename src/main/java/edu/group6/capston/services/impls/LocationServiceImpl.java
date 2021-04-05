@@ -8,13 +8,14 @@ import org.springframework.stereotype.Service;
 import edu.group6.capston.daos.LocationDAO;
 import edu.group6.capston.dtos.LocationDTO;
 import edu.group6.capston.models.Location;
+import edu.group6.capston.models.LocationFavorites;
 import edu.group6.capston.services.LocationService;
 
 @Service
 public class LocationServiceImpl implements LocationService {
 	@Autowired
 	private LocationDAO LocationDAO;
-	
+
 	@Override
 	public List<Location> findAll() {
 		return LocationDAO.findAll();
@@ -22,21 +23,21 @@ public class LocationServiceImpl implements LocationService {
 
 	@Override
 	public boolean save(Location location) {
-		if(LocationDAO.save(location))
+		if (LocationDAO.save(location))
 			return true;
 		return false;
 	}
 
 	@Override
 	public boolean update(Location location) {
-		if(LocationDAO.update(location))
+		if (LocationDAO.update(location))
 			return true;
 		return false;
 	}
 
 	@Override
 	public boolean delete(Location location) {
-		if(LocationDAO.delete(location))
+		if (LocationDAO.delete(location))
 			return true;
 		return false;
 	}
@@ -57,8 +58,8 @@ public class LocationServiceImpl implements LocationService {
 	}
 
 	@Override
-	public List<LocationDTO> findTopNewLocationNew(int maxResults) {
-		return LocationDAO.findTopNewLocationNew(maxResults);
+	public List<Location> findTopNewLocationNew() {
+		return LocationDAO.findTopNewLocationNew();
 	}
 
 	@Override
@@ -71,9 +72,13 @@ public class LocationServiceImpl implements LocationService {
 		return LocationDAO.findTopDiscount();
 	}
 
+	public Location findByUserId(int userId) {
+		return LocationDAO.findByUserId(userId);
+	}
+
 	@Override
-	public List<LocationDTO> findLocationByCategoryId(int categoryId) {
-		return LocationDAO.findLocationByCategoryId(categoryId);
+	public List<Location> findAllByUserId(int userId) {
+		return LocationDAO.findAllByUserId(userId);
 	}
 
 }
