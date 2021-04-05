@@ -101,11 +101,9 @@ public class LocationDAO {
 		CriteriaQuery<LocationDTO> query = builder.createQuery(LocationDTO.class);
 		Root<Rating> root = query.from(Rating.class);
 		root.join("comment", JoinType.INNER);
-		query.multiselect(
-				root.get("comment").get("location").get("locationId"),
+		query.multiselect(root.get("comment").get("location").get("locationId"),
 				root.get("comment").get("location").get("locationName"),
-				root.get("comment").get("location").get("mediaPath"),
-				builder.avg(root.get("point")));
+				root.get("comment").get("location").get("mediaPath"), builder.avg(root.get("point")));
 		query.groupBy(root.get("comment").get("location").get("locationId"),
 				root.get("comment").get("location").get("locationName"),
 				root.get("comment").get("location").get("mediaPath"));
@@ -115,7 +113,7 @@ public class LocationDAO {
 		session.close();
 		return locationList;
 	}
-	
+
 	public List<LocationDTO> findTopDiscount() {
 		List<LocationDTO> locationList = null;
 		Session session = this.sessionFactory.openSession();
@@ -124,13 +122,9 @@ public class LocationDAO {
 		CriteriaQuery<LocationDTO> query = builder.createQuery(LocationDTO.class);
 		Root<DiscountInfo> root = query.from(DiscountInfo.class);
 		root.join("location", JoinType.INNER);
-		query.multiselect(
-				root.get("discountId"),
-				root.get("location").get("locationId"),
-				root.get("location").get("locationName"),
-				root.get("location").get("openTime"),
-				root.get("location").get("closeTime"),
-				root.get("location").get("reviewCount"),
+		query.multiselect(root.get("discountId"), root.get("location").get("locationId"),
+				root.get("location").get("locationName"), root.get("location").get("openTime"),
+				root.get("location").get("closeTime"), root.get("location").get("reviewCount"),
 				root.get("location").get("locationCategory").get("locationCategoryName"),
 				root.get("location").get("locationType").get("locationTypeName"),
 				root.get("location").get("mediaPath"));
@@ -140,7 +134,7 @@ public class LocationDAO {
 		session.close();
 		return locationList;
 	}
-	
+
 	public List<LocationDTO> findLocationByCategoryId(int categoryId) {
 		List<LocationDTO> locationList = null;
 		Session session = this.sessionFactory.openSession();
@@ -150,15 +144,9 @@ public class LocationDAO {
 		Root<Location> root = query.from(Location.class);
 		root.join("locationCategory", JoinType.INNER);
 		root.join("locationType", JoinType.INNER);
-		query.multiselect(
-				root.get("locationId"),
-				root.get("locationName"),
-				root.get("openTime"),
-				root.get("closeTime"),
-				root.get("reviewCount"),
-				root.get("locationCategory").get("locationCategoryName"),
-				root.get("locationType").get("locationTypeName"),
-				root.get("mediaPath"));
+		query.multiselect(root.get("locationId"), root.get("locationName"), root.get("openTime"), root.get("closeTime"),
+				root.get("reviewCount"), root.get("locationCategory").get("locationCategoryName"),
+				root.get("locationType").get("locationTypeName"), root.get("mediaPath"));
 		query.where(builder.equal(root.get("locationCategory").get("categoryId"), categoryId));
 		query.orderBy(builder.desc(root.get("locationId")));
 		locationList = session.createQuery(query).getResultList();
@@ -166,7 +154,7 @@ public class LocationDAO {
 		session.close();
 		return locationList;
 	}
-	
+
 	public List<LocationDTO> findTopNewLocationNew(int maxResults) {
 		List<LocationDTO> locationList = null;
 		Session session = this.sessionFactory.openSession();
@@ -176,19 +164,25 @@ public class LocationDAO {
 		Root<Location> root = query.from(Location.class);
 		root.join("locationCategory", JoinType.INNER);
 		root.join("locationType", JoinType.INNER);
-		query.multiselect(
-				root.get("locationId"),
-				root.get("locationName"),
-				root.get("openTime"),
-				root.get("closeTime"),
-				root.get("reviewCount"),
-				root.get("locationCategory").get("locationCategoryName"),
-				root.get("locationType").get("locationTypeName"),
-				root.get("mediaPath"));
+		query.multiselect(root.get("locationId"), root.get("locationName"), root.get("openTime"), root.get("closeTime"),
+				root.get("reviewCount"), root.get("locationCategory").get("locationCategoryName"),
+				root.get("locationType").get("locationTypeName"), root.get("mediaPath"));
 		query.orderBy(builder.desc(root.get("locationId")));
 		locationList = session.createQuery(query).setMaxResults(maxResults).getResultList();
 		transaction.commit();
 		session.close();
 		return locationList;
+	}
+
+	public List<Location> findAllByUserId(int userId) {
+		try (Session session = this.sessionFactory.openSession()) {
+			return session.createQuery("FROM Location WHERE users.userId = " + userId, Location.class).list();
+		}
+	}
+	
+	public Location findByUserId(int userId) {
+		try (Session session = this.sessionFactory.openSession()) {
+			return session.createQuery("FROM Location WHERE userId = " + userId, Location.class).uniqueResult();
+		}
 	}
 }
