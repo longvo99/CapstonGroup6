@@ -21,15 +21,15 @@ public class DiscountServiceImpl implements DiscountService {
 	}
 
 	@Override
-	public boolean save(DiscountInfo DiscountInfo) {
-		if(discountDAO.save(DiscountInfo))
+	public boolean save(DiscountInfo discountInfo) {
+		if(discountDAO.save(discountInfo))
 			return true;
 		return false;
 	}
 
 	@Override
-	public boolean update(DiscountInfo DiscountInfo) {
-		if(discountDAO.update(DiscountInfo))
+	public boolean update(DiscountInfo discountInfo) {
+		if(discountDAO.update(discountInfo))
 			return true;
 		return false;
 	}
@@ -42,7 +42,22 @@ public class DiscountServiceImpl implements DiscountService {
 	}
 
 	@Override
+<<<<<<< Updated upstream
 	public List<DiscountInfo> findTopNewDiscountInfo() {
 		return discountDAO.findTopNewDiscountInfo();
+=======
+	public List<DiscountInfo> findAllByUserId(int userId) {
+		return discountDAO.findAllByUserId(userId);
+	}
+
+	@Override
+	public DiscountInfo findOne(Integer discountId) {
+		return discountDAO.findOne(discountId);
+	}
+
+	@Override
+	public int delete(List<Integer> listDiscountId1) {
+		return discountDAO.delete(listDiscountId1);
+>>>>>>> Stashed changes
 	}
 }

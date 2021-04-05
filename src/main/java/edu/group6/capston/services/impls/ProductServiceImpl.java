@@ -1,5 +1,6 @@
 package edu.group6.capston.services.impls;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import edu.group6.capston.daos.ProductDAO;
 import edu.group6.capston.dtos.LocationDTO;
 import edu.group6.capston.dtos.OrderDTO;
 import edu.group6.capston.models.Product;
+import edu.group6.capston.models.ProductCategory;
 import edu.group6.capston.services.ProductService;
 
 @Service
@@ -49,6 +51,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
+<<<<<<< Updated upstream
 	public List<LocationDTO> findMinMaxPriceLocation() {
 		return ProductDAO.findMinMaxPriceLocation();
 	}
@@ -56,5 +59,14 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public OrderDTO findByProductIdOrder(Integer productId) {
 		return ProductDAO.findByProductIdOrder(productId);
+=======
+	public List<String> searchProductNameByUserId(int userId) {
+		/*
+		 * List<String> listStr = new ArrayList<>(); List<Product> list =
+		 * ProductDAO.findAllByIdUser(userId); for (Product product : list) {
+		 * listStr.add(product.getName()); }
+		 */
+		return ProductDAO.searchProductNameByUserId(userId);
+>>>>>>> Stashed changes
 	}
 }

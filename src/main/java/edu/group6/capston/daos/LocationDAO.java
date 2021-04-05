@@ -1,5 +1,6 @@
 package edu.group6.capston.daos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -10,12 +11,18 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import edu.group6.capston.dtos.LocationDTO;
 import edu.group6.capston.models.DiscountInfo;
 import edu.group6.capston.models.Location;
+<<<<<<< Updated upstream
+=======
+import edu.group6.capston.models.LocationFavorites;
+import edu.group6.capston.models.Product;
+>>>>>>> Stashed changes
 import edu.group6.capston.models.Rating;
 
 @Repository
@@ -79,8 +86,19 @@ public class LocationDAO {
 
 	public long locationCount() {
 		try (Session session = this.sessionFactory.openSession()) {
+<<<<<<< Updated upstream
 			long count = (long) session.createQuery("select count(*) from Location").uniqueResult();
 			return count;
+=======
+			return (long) (session.createQuery("select count(*) from Location").uniqueResult());
+		}
+	}
+
+	public List<LocationFavorites> findLocationFavorite(int userId) {
+		try (Session session = this.sessionFactory.openSession()) {
+			return session.createQuery("from LocationFavorites WHERE LFUserId = " + userId, LocationFavorites.class)
+					.list();
+>>>>>>> Stashed changes
 		}
 	}
 
@@ -93,6 +111,7 @@ public class LocationDAO {
 		}
 	}
 
+<<<<<<< Updated upstream
 	public List<Location> findTopNewLocationNew() {
 		try (Session session = this.sessionFactory.openSession()) {
 			List<Location> list = session.createQuery("from Location ORDER BY locationId DESC", Location.class).setMaxResults(6)
@@ -147,5 +166,17 @@ public class LocationDAO {
 		transaction.commit();
 		session.close();
 		return locationList;
+=======
+	public Location findByUserId(int userId) {
+		try (Session session = this.sessionFactory.openSession()) {
+			return session.createQuery("FROM Location WHERE userId = " + userId, Location.class).uniqueResult();
+		}
+	}
+
+	public List<Location> findAllByUserId(int userId) {
+		try (Session session = this.sessionFactory.openSession()) {
+			return session.createQuery("FROM Location WHERE users.userId = " + userId, Location.class).list();
+		}
+>>>>>>> Stashed changes
 	}
 }

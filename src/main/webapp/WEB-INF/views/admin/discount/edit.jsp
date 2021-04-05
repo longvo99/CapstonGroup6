@@ -11,7 +11,7 @@
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="m-0 font-weight-bold text-primarys">Add discount</h1>
+            <h1 class="m-0 font-weight-bold text-primarys">Edit discount</h1>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="./">Home</a></li>
               <li class="breadcrumb-item active" aria-current="page">Forms</li>
@@ -27,15 +27,19 @@
               <!-- Form Basic -->
               <div class="card mb-4">
                 <div class="card-body">
-                  <form action="${pageContext.request.contextPath}/admin/discount/add" role="form" method="POST" name="form" id="form" enctype="multipart/form-data">
+                  <form action="${pageContext.request.contextPath}/admin/discount/edit" role="form" method="POST" name="form" id="form" enctype="multipart/form-data">
+                 	<div class="form-group">
+                      <label for="title">Id</label>
+                      <input readonly="readonly" class="form-control mb-3" type="text" value="${discount.discountId}" id="discountId" name="discountId">
+                    </div>
                   	<div class="form-group">
                       <label for="title">Tiêu đề</label>
-                      <input class="form-control mb-3" type="text" value="" id="title" name="title">
+                      <input class="form-control mb-3" type="text" value="${discount.title}" id="title" name="title">
                     </div>
                     <div class="form-group">
                       <label style="display: block;" for="code">Mã giảm giá</label>
-                      <input readonly="readonly" style="display: inline-block;" class="form-control mb-3 col-lg-3" type="text" value="" id="code" name="code">
-                      <button type="button" onclick="createCode(7)" class="btn btn-success mb-1">Tạo mã</button>
+                      <input readonly="readonly" style="display: inline-block;" class="form-control mb-3 col-lg-3" type="text" value="${discount.code}" id="code" name="code">
+                      <!-- <button type="button" onclick="createCode(7)" class="btn btn-success mb-1">Tạo mã</button>
                       <script type="text/javascript">
                       function createCode(length) {
                     	   var result           = '';
@@ -46,25 +50,37 @@
                     	   }
                     	   document.getElementById("code").value = result;
                     	}
-                      </script>
+                      </script> -->
                     </div>
                     <div class="form-group">
                       <label for="description">Mô tả</label>
-                      <input class="form-control mb-3" type="text" value="" id="description" name="description">
+                      <input class="form-control mb-3" type="text" value="${discount.description}" id="description" name="description">
                     </div>
                     <div class="row form-group" >
 	                    <div class="col-lg-6">
 	                    	<label for="typeDiscount" >Loại khuyến mãi</label>
 	                    	<select id="typeDiscount" name="typeDiscount" class="form-control">
 	                    		<option data-rate="" value="default">--Chọn--</option>
-								<option data-rate="%" >Theo phần trăm</option>
-								<option data-rate="VNĐ">Theo mức giá cố định</option>
+	                    		<c:if test="${discount.rateDiscount le 100}">
+		                      		<option selected="selected" data-rate="%" >Theo phần trăm</option>
+		                      		<option data-rate="VNĐ">Theo mức giá cố định</option>
+		                      	</c:if>
+								<c:if test="${discount.rateDiscount gt 100}">
+									<option data-rate="%" >Theo phần trăm</option>
+		                      		<option selected="selected" data-rate="VNĐ">Theo mức giá cố định</option>
+		                      	</c:if>
 	                      	</select>
 	                    </div>
 	                    <div class="col-lg-6">
 	                    	<label for="rateDiscount">Giá trị khuyến mãi</label>
-	                   		<div class="placeholderrd" data-placeholder="">
-					    		<input class="form-control mb-3" type="text" value="" id="rateDiscount" name="rateDiscount">
+	                    	<c:if test="${discount.rateDiscount le 100}">
+		                      		<c:set value="%" var="dataph"></c:set>
+	                      	</c:if>
+	                      	<c:if test="${discount.rateDiscount gt 100}">
+		                      		<c:set value="VNĐ" var="dataph"></c:set>
+	                      	</c:if>
+	                   		<div class="placeholderrd" data-placeholder="${dataph}">
+					    		<input class="form-control mb-3" type="text" value="${discount.rateDiscount}" id="rateDiscount" name="rateDiscount">
 					  		</div>
 					  	</div>
 					  	<script type="text/javascript">
@@ -76,20 +92,35 @@
 						</script>
                     </div>
                     <c:if test="${userDetail.user.role.roleId eq 'ADMIN'}">
+                    <c:choose>
+                    	<c:when test="${fn:contains(discount.value, 'alldistrict')}">
+                    		<c:set value="checked='checked'" var="checked1" ></c:set>
+                    	</c:when>
+                    	<c:when test="${fn:contains(discount.value, 'somedistrict')}">
+                    		<c:set value="checked='checked'" var="checked2" ></c:set>
+                    		<c:set value="show" var="show2" ></c:set>
+                    		<c:set var="value2" value = "${fn:substring(discount.value, 13, fn:length(discount.value))}" />
+                    	</c:when>
+                    	<c:when test="${fn:contains(discount.value, 'someward')}">
+                    		<c:set value="checked='checked'" var="checked3" ></c:set>
+                    		<c:set value="show" var="show3" ></c:set>
+                    		<c:set var="value3" value = "${fn:substring(discount.value, 9, fn:length(discount.value))}" />
+                    	</c:when>
+                    </c:choose>
 					<div class="form-group">
                     	<label for="optradio" >Áp dụng cho</label>
                       	<div class="form-check">
 					  		<label class="form-check-label">
-				      			<input type="radio" class="form-check-input" value="allproduct" id="optradio" name="optradio">Tất cả các quận/huyện
+				      			<input type="radio" ${checked1} class="form-check-input" value="allproduct" id="optradio" name="optradio">Tất cả các quận/huyện
 							</label>
 						</div>
 						<div class="form-check">
 						  	<label class="form-check-label">
-						    	<input type="radio" class="form-check-input" value="category" id="optradio" name="optradio">Một số quận/huyện
+						    	<input type="radio" ${checked2} class="form-check-input" value="category" id="optradio" name="optradio">Một số quận/huyện
 						  	</label>
 						</div>
-						<div id="collapseOne" class="collapse">
-							<input class="form-control mb-3" type="text" name="categoryName" id="categoryName" placeholder="Chọn bên dưới" >
+						<div id="collapseOne" class="collapse ${show2}">
+							<input class="form-control mb-3" value="${value2}" type="text" name="categoryName" id="categoryName" placeholder="Chọn bên dưới" >
 							<div style="margin-left: 50px;">
 						      	<label>Tỉnh/Thành:</label>
 								<select class="form-control col-lg-4" id="country" name="country">
@@ -113,11 +144,11 @@
 			       		</div>
 						<div class="form-check">
 						  	<label class="form-check-label">
-						    	<input type="radio" class="form-check-input" value="product" id="optradio" name="optradio">Một số phường/xã
+						    	<input type="radio" ${checked3} class="form-check-input" value="product" id="optradio" name="optradio">Một số phường/xã
 						  	</label>
 						</div>
-						<div id="collapseTwo" class="collapse">
-								<input class="form-control mb-3" type="text" name="productName" id="productName" placeholder="Chọn bên dưới" >
+						<div id="collapseTwo" class="collapse ${show3}">
+								<input class="form-control mb-3" value="${value3}" type="text" name="productName" id="productName" placeholder="Chọn bên dưới" >
 								<div style="margin-left: 50px;">
 							      	<label>Tỉnh/Thành:</label>
 									<select id="country1" name="country1" class="form-control col-lg-4">
@@ -144,7 +175,7 @@
 								    var country_id;
 								    var state_id;
 								    var city_id;
-								        $("#country1").append('<option rel="' + index + '" value="'+value.Id+'">'+value.Name+'</option>');
+								   		$("#country1").append('<option rel="' + index + '" value="'+value.Id+'">'+value.Name+'</option>');
 								        $("#country1").change(function () {
 								            $("#state1, #city1").find("option:gt(0)").remove();
 								            $("#state1").find("option:first").text("Loading...");
@@ -175,61 +206,92 @@
                     </div>
 					</c:if>	
 					<c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
+					<c:choose>
+                    	<c:when test="${fn:contains(discount.value, 'allproduct')}">
+                    		<c:set value="checked='checked'" var="checked1" ></c:set>
+                    	</c:when>
+                    	<c:when test="${fn:contains(discount.value, 'category')}">
+                    		<c:set value="checked='checked'" var="checked2" ></c:set>
+                    		<c:set value="show" var="show2" ></c:set>
+                    		<c:set var="value2" value = "${fn:substring(discount.value, 9, fn:length(discount.value))}" />
+                    	</c:when>
+                    	<c:when test="${fn:contains(discount.value, 'product')}">
+                    		<c:set value="checked='checked'" var="checked3" ></c:set>
+                    		<c:set value="show" var="show3" ></c:set>
+                    		<c:set var="value3" value = "${fn:substring(discount.value, 8, fn:length(discount.value))}" />
+                    	</c:when>
+                    </c:choose>
 					<div class="form-group">
                     	<label for="optradio" >Áp dụng cho</label>
                       	<div class="form-check">
 					  		<label class="form-check-label">
-				      			<input type="radio" class="form-check-input" value="allproduct" id="optradio" name="optradio">Tất cả sản phẩm
+				      			<input type="radio" ${checked1} class="form-check-input" value="allproduct" id="optradio" name="optradio">Tất cả sản phẩm
 							</label>
 						</div>
 						<div class="form-check">
 						  	<label class="form-check-label">
-						    	<input type="radio" class="form-check-input" value="category" id="optradio" name="optradio">Danh mục sản phẩm
+						    	<input type="radio" ${checked2} class="form-check-input" value="category" id="optradio" name="optradio">Danh mục sản phẩm
 						  	</label>
 						</div>
-						<div id="collapseOne" class="collapse">
-							<input class="form-control mb-3" type="text" onKeyDown="getCategory();" name="categoryName" id="categoryName" placeholder="Nhập danh mục cần tìm" >
+						<div id="collapseOne" class="collapse ${show2}">
+							<input class="form-control mb-3" value="${value2}" type="text" onKeyDown="getCategory();" name="categoryName" id="categoryName" placeholder="Nhập danh mục cần tìm" >
 			       		</div>
 						<div class="form-check">
 						  	<label class="form-check-label">
-						    	<input type="radio" class="form-check-input" value="product" id="optradio" name="optradio">Sản phẩm
+						    	<input type="radio" ${checked3} class="form-check-input" value="product" id="optradio" name="optradio">Sản phẩm
 						  	</label>
 						</div>
-						<div id="collapseTwo" class="collapse">
-								<input class="form-control mb-3" type="text" onKeyDown="getProduct();" name="productName" id="productName" placeholder="Nhập sản phẩm cần tìm" >
+						<div id="collapseTwo" class="collapse ${show3}">
+								<input class="form-control mb-3" value="${value3}" type="text" onKeyDown="getProduct();" name="productName" id="productName" placeholder="Nhập sản phẩm cần tìm" >
 			       		</div>
                     </div>
 					</c:if>	
+					<c:if test="${discount.discountRule.ruleId ne null}">
+						<c:set var="onoff" value="checked='checked'"></c:set>
+						<c:set value="show" var="show4" ></c:set>
+					</c:if>
                     <div class="form-group">
 						<div class="custom-control custom-switch">
-	                        <input type="checkbox" name="condition" id="checkbox" class="custom-control-input">
+	                        <input type="checkbox" ${onoff} name="condition" id="checkbox" class="custom-control-input">
 	                        <label class="custom-control-label" for="checkbox"><strong>Điều kiện áp dụng</strong></label>
                         </div>
                         <c:if test="${not empty discountRuleList}">
-						 <div id="collapseThree" class="row collapse" >
+						 <div id="collapseThree" class="row collapse ${show4}" >
 		                    <div class="col-lg-6">
 		                    	<label for="ruleId">Điều kiện</label>
 		                    	<select id="ruleId" name="discountRule1" class="form-control">
 		                    		<option data-rate="" value="default">--Chọn--</option>
 		                    		<c:forEach items="${discountRuleList}" var="discountRule">
+		                    		<c:if test="${discountRule.ruleId eq discount.discountRule.ruleId}">
+		                    			<c:set var="selectdr" value="selected='selected'"></c:set>
+		                    		</c:if>
+		                    		<c:if test="${discountRule.ruleId ne discount.discountRule.ruleId}">
+		                    			<c:set var="selectdr" value=""></c:set>
+		                    		</c:if>
 		                    		<c:choose>
 								         <c:when test="${discountRule.ruleId eq 1}">
-								            <option value="${discountRule.ruleId}" data-rate="VNĐ" >${discountRule.ruleContent}</option>
+								            <option ${selectdr} value="${discountRule.ruleId}" data-rate="VNĐ" >${discountRule.ruleContent}</option>
 								         </c:when>
 								         <c:when test="${discountRule.ruleId eq 2}">
-								            <option value="${discountRule.ruleId}" data-rate="Sản phẩm">${discountRule.ruleContent}</option>
+								            <option ${selectdr} value="${discountRule.ruleId}" data-rate="Sản phẩm">${discountRule.ruleContent}</option>
 								         </c:when>
 								         <c:otherwise>
-								            <option value="${discountRule.ruleId}" data-rate="">${discountRule.ruleContent}</option>
+								            <option ${selectdr} value="${discountRule.ruleId}" data-rate="">${discountRule.ruleContent}</option>
 								         </c:otherwise>
 							      	</c:choose>
 		                    		</c:forEach>
 		                      	</select>
 		                    </div>
 		                    <div class="col-lg-6">
+		                    <c:if test="${discount.discountRule.ruleId eq 1}">
+		                      		<c:set value="VNĐ" var="dataph1"></c:set>
+	                      	</c:if>
+	                      	<c:if test="${discount.discountRule.ruleId eq 2}">
+		                      		<c:set value="Sản phẩm" var="dataph1"></c:set>
+	                      	</c:if>
 		                    	<label>Giá trị tối thiểu</label>
-		                   		<div class="placeholderrd abc" data-placeholder="">
-						    		<input class="form-control mb-3" type="text" name="valueRule1">
+		                   		<div class="placeholderrd abc" data-placeholder="${dataph1}">
+						    		<input class="form-control mb-3" value="${discount.valueRule}" type="text" name="valueRule1">
 						  		</div>
 						  	</div>
 						  	<script type="text/javascript">
@@ -381,19 +443,19 @@ $('#checkbox').change(function(){
 </script>
                     <div class="form-group">
                       <label for="startDate">Ngày bắt đầu</label>
-                      <input class="form-control mb-3" type="date" id="startDate" name="startDate">
+                      <input value="${discount.startDate}" class="form-control mb-3" type="date" id="startDate" name="startDate">
                     </div>
                     <div class="form-group">
                       <label for="endDate">Ngày kết thúc</label>
-                      <input class="form-control mb-3" type="date" id="endDate" name="endDate">
+                      <input value="${discount.endDate}" class="form-control mb-3" type="date" id="endDate" name="endDate">
                     </div>
                     <div class="form-group">
                       <label for="limitedUse">Tổng số lần dùng</label>
-                      <input class="form-control mb-3" type="text" value="" id="limitedUse" name="limitedUse">
+                      <input value="${discount.limitedUse}" class="form-control mb-3" type="text" value="" id="limitedUse" name="limitedUse">
                     </div>
                     <div class="form-group">
                       <label for="limitedPerUser">Số lần dùng/1 người</label>
-                      <input class="form-control mb-3" type="text" value="" id="limitedPerUser" name="limitedPerUser">
+                      <input value="${discount.limitedPerUser}" class="form-control mb-3" type="text" value="" id="limitedPerUser" name="limitedPerUser">
                     </div>
                    <!--  <div class="form-group">
                       	<label class="text-light-white fs-14">Ảnh</label><br>
@@ -405,9 +467,9 @@ $('#checkbox').change(function(){
                         <input type="file" name="file" class="custom-file-input" id="file" onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
                         <label class="custom-file-label" for="file">Choose file</label>
                       </div>
-                      <img id="blah" alt="your image" style="max-height: 300px; display:block; margin-top: 15px; " />
+                      <img src="${pageContext.request.contextPath}/resources/admin/assets/img/uploads/${discount.mediaPath}" id="blah" alt="your image" style="max-height: 300px; display:block; margin-top: 15px; " />
                     </div>
-                    <button type="submit" class="btn btn-primary" name="submit">Thêm mới</button>
+                    <button type="submit" class="btn btn-primary" name="submit">Sửa</button>
                   </form>
                 </div>
               </div>
@@ -496,9 +558,6 @@ $.validator.addMethod("valueNotEquals", function(value, element, arg){
 					digits:true,
 					max: 5,
 				},
-				file: {                      
-					required:true,
-				},
 				optradio: {                      
 					required:true,
 				},
@@ -536,9 +595,6 @@ $.validator.addMethod("valueNotEquals", function(value, element, arg){
 					required: " (Mời nhập)",
 					digits: " (Nhập số nguyên dương)",
 					max: " (Nhập số <=5)",
-				},
-				file: {
-					required: " (Mời nhập)",
 				},
 				optradio: {
 					required: " (Mời chọn)",

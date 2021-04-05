@@ -60,4 +60,8 @@ public class Location{
 		super();
 		this.locationId = locationId;
 	}
+<<<<<<< Updated upstream
+=======
+	
+>>>>>>> Stashed changes
 }

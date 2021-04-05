@@ -60,7 +60,7 @@
                     </div>
                     <div class="form-group">
                       <label for="name">Id địa điểm</label>
-                      <input class="form-control mb-3" type="text" value="${product.locationId}" id="locationId" name="locationId" readonly>
+                      <input class="form-control mb-3" type="text" value="${product.location.locationId}" id="locationId" name="locationId" readonly>
                     </div>
                     <div class="form-group">
                     	<label for="name">Upload hình ảnh</label>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -23,6 +24,16 @@ public class ProductCategoryDAO {
 		}
 	}
 	
+	public List<String> searchProductCategoryName() {
+		try (Session session = this.sessionFactory.openSession()) {
+			session.beginTransaction();
+			String hql = "select productCategoryName from ProductCategory";
+			Query query = session.createQuery(hql);
+			List<String> listProducts = query.getResultList();
+			return listProducts;
+		}
+	}
+
 	public boolean save(ProductCategory Product) {
 		Session session = this.sessionFactory.openSession();
 		Transaction tx = null;
@@ -66,21 +77,14 @@ public class ProductCategoryDAO {
 
 	public List<ProductCategory> search(String keywork) {
 		try (Session session = this.sessionFactory.openSession()) {
+<<<<<<< Updated upstream
 			List<ProductCategory> list = session.createQuery("from ProductCategory where PCategoryName like '%"+keywork+"%'", ProductCategory.class).list();
 			return list;
+=======
+			return session.createQuery("from ProductCategory where PCategoryName like '%" + keywork + "%'",
+					ProductCategory.class).list();
+>>>>>>> Stashed changes
 		}
 	}
-	
-	/*
-	 * @SuppressWarnings({ "unchecked", "deprecation" }) public List<String>
-	 * search1(String keywork) { List<String> result = null; Session session =
-	 * this.sessionFactory.openSession(); Transaction transaction = null; try {
-	 * transaction = session.beginTransaction(); result =
-	 * session.createQuery("select PCategoryName " + "from ProductCategory " +
-	 * "where PCategoryName like :keywork").setString("keywork", "%"+ keywork +"%")
-	 * .setMaxResults(10).list(); transaction.commit(); } catch (Exception e) {
-	 * result = null; if(transaction != null) { transaction.rollback(); } } finally
-	 * { session.close(); } return result; }
-	 */
 
 }

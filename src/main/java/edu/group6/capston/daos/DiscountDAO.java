@@ -1,10 +1,12 @@
 package edu.group6.capston.daos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -18,17 +20,25 @@ public class DiscountDAO {
 
 	public List<DiscountInfo> findAll() {
 		try (Session session = this.sessionFactory.openSession()) {
+<<<<<<< Updated upstream
 			List<DiscountInfo> list = session.createQuery("from DiscountInfo", DiscountInfo.class).list();
 			return list;
 		}
 	}
 	
 	public boolean save(DiscountInfo DiscountInfo) {
+=======
+			return session.createQuery("FROM DiscountInfo", DiscountInfo.class).list();
+		}
+	}
+
+	public boolean save(DiscountInfo discountInfo) {
+>>>>>>> Stashed changes
 		Session session = this.sessionFactory.openSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			session.persist(DiscountInfo);
+			session.persist(discountInfo);
 			tx.commit();
 			session.close();
 			return true;
@@ -65,10 +75,32 @@ public class DiscountDAO {
 		}
 	}
 
+<<<<<<< Updated upstream
 	public List<DiscountInfo> findTopNewDiscountInfo() {
 		try (Session session = this.sessionFactory.openSession()) {
 			List<DiscountInfo> list = session.createQuery("from DiscountInfo ORDER BY DiscountId DESC", DiscountInfo.class).setMaxResults(3).getResultList();
 			return list;
 		}
 	}
+=======
+	public List<DiscountInfo> findAllByUserId(int userId) {
+		try (Session session = this.sessionFactory.openSession()) {
+			return session.createQuery("FROM DiscountInfo WHERE userId = " + userId, DiscountInfo.class).list();
+		}
+	}
+
+	public DiscountInfo findOne(Integer discountId) {
+		Session session = this.sessionFactory.openSession();
+		return session.find(DiscountInfo.class, discountId);
+	}
+
+	public int delete(List<Integer> listDiscountId1) {
+		try (Session session = this.sessionFactory.openSession()) {
+			session.beginTransaction();
+			Query q = session.createQuery("DELETE FROM DiscountInfo WHERE discountId IN (:list)");
+			q.setParameter("list", listDiscountId1); 
+			return q.executeUpdate();
+		}
+	}
+>>>>>>> Stashed changes
 }

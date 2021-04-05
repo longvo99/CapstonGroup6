@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class UploadFile {
 	
 	@Autowired 
-	public ServletContext servletContext; 
+	public static ServletContext servletContext; 
 	
 	public static String upload(MultipartFile mtf, HttpServletRequest request)
 			throws IllegalStateException, IOException {
@@ -45,7 +45,7 @@ public class UploadFile {
 		return request.getServletContext().getRealPath("") + GlobalsConstant.DIR_UPLOAD + File.separator;
 	}
 	
-	public String getDirPath() {
+	public static String getDirPath() {
 		return servletContext.getRealPath("") + GlobalsConstant.DIR_UPLOAD + File.separator;
 	}
 	

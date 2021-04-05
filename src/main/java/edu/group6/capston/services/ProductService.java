@@ -12,6 +12,10 @@ public interface ProductService {
 	boolean update(Product product);
 	boolean delete(Integer id);
 	Product findByProductId(Integer productId);
+<<<<<<< Updated upstream
 	List<LocationDTO> findMinMaxPriceLocation();
 	OrderDTO findByProductIdOrder(Integer productId);
+=======
+	List<String> searchProductNameByUserId(int userId);
+>>>>>>> Stashed changes
 }

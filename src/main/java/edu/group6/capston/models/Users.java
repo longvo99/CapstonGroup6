@@ -70,4 +70,9 @@ public class Users {
 		super();
 		this.userId = userId;
 	}
+<<<<<<< Updated upstream
+=======
+	
+
+>>>>>>> Stashed changes
 }

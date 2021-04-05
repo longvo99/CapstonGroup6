@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/templates/tags/taglib.jsp" %>
+<sec:authentication var="userDetail" property="principal" />
 	<div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h2 class="m-0 font-weight-bold text-primary">Quản lý sản phẩm</h2>
@@ -31,7 +32,9 @@
               <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <div class="col-sm-10">
-                  	<a href="${pageContext.request.contextPath}/admin/product/add/${locationId}" class="btn btn-success btn-md"><i class="fa fa-plus-square"> Thêm </i></a>
+                  	<c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
+	               		<a href="${pageContext.request.contextPath}/admin/product/add/${locationId}" class="btn btn-success btn-md"><i class="fa fa-plus-square"> Thêm </i></a>
+	               	</c:if>
                   </div>
                 </div>
                 
@@ -57,8 +60,10 @@
 							<td>${product.productCategory.productCategoryName}</td>
 							<td class="center text-center">
 								<a href="" data-toggle="modal" data-target="#exampleModalCenter${product.productId}" class="btn btn-sm btn-success"><i class="fa fa-edit">Detail</i></a>
-								<a href="${pageContext.request.contextPath}/admin/product/edit/${product.productId}" class="btn btn-sm btn-primary"><i class="fa fa-edit">Edit</i></a>
-                                <a href="${urlDel}" title="Xóa" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Xóa</a>
+								<c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
+			                  		<a href="${pageContext.request.contextPath}/admin/product/edit/${product.productId}" class="btn btn-sm btn-primary"><i class="fa fa-edit">Edit</i></a>
+                                	<a href="${urlDel}" title="Xóa" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Xóa</a>
+			                  	</c:if>
 							</td>
 						</tr>
 						<!-- Modal Center -->
@@ -105,9 +110,11 @@
 											  <img src="${pageContext.request.contextPath}/resources/admin/assets/img/uploads/${product.imagePath}" class="img-thumbnail">
 											</div>
 									    </div>
-					                    <div class="form-group">
-					                      <input class="form-control mb-3" type="submit" value="SỬA">
-					                    </div>
+									    <c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
+			                  				<div class="form-group">
+					                      		<input class="form-control mb-3" type="submit" value="SỬA">
+					                    	</div>
+			                  			</c:if>
 									</div>
 								</form>
 			                </div>

@@ -1,5 +1,6 @@
 package edu.group6.capston.daos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -9,6 +10,7 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -109,6 +111,25 @@ public class ProductDAO {
 		transaction.commit();
 		session.close();
 		return product;
+	}
+
+	public List<String> searchProductNameByUserId(int userId) {
+		try (Session session = this.sessionFactory.openSession()) {
+			session.beginTransaction();
+			String hql = "select p.name from Product p "
+					+ "inner join p.location "
+					+ "inner join p.location.users "
+					+ "where p.location.users.userId = " + userId;
+			Query query = session.createQuery(hql);
+//			query.setParameter("userId", userId);
+			//List<Product> listProducts = query.list();
+			/* List<Object[]> listResult = query.list(); */
+			List<String> listProducts = query.getResultList();
+			/*
+			 * for (Object[] aRow : listResult) { listProducts.add((Product) aRow[0]); }
+			 */
+			return listProducts;
+		}
 	}
 
 }

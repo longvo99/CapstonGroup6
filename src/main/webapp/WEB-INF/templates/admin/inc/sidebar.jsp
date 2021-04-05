@@ -20,7 +20,7 @@
   <link type="text/css" rel="stylesheet" href="https://www.codehim.com/demo/jquery-image-uploader-preview-and-delete/dist/image-uploader.min.css">
   <script src="${pageContext.request.contextPath}/resources/admin/assets/vendor/jquery/jquery.min.js"></script> 
  <!-- JVALIDATE -->
-  <script src="${pageContext.request.contextPath}/lib/js/jquery.validate.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/admin/assets/js/jquery.validate.min.js"></script>
   <!-- CKEDITOR -->
   <script src="${pageContext.request.contextPath}/lib/ckeditor/ckeditor.js"></script>
   <style type="text/css">
@@ -30,6 +30,25 @@
 			display: block;
 			float: none;  
 		} 
+		select[readonly] option, select[readonly] optgroup {
+    		display: none;
+		}
+	</style>
+	<style>
+	.ui-autocomplete {
+		max-height: 100px;
+		overflow-y: auto;
+		/* prevent horizontal scrollbar */
+		overflow-x: hidden;
+		/* add padding to account for vertical scrollbar */
+		padding-right: 20px;
+	}
+	/* IE 6 doesn't support max-height
+	 * we use height instead, but this forces the menu to always be this tall
+	 */
+	* html .ui-autocomplete {
+		height: 100px;
+	}
 	</style>
 	
 	<link href="${pageContext.request.contextPath}/resources/admin/assets/css/custom.css" rel="stylesheet" />
@@ -38,8 +57,7 @@
 	<!-- <meta name="apple-mobile-web-app-title" content="CodePen"> -->
 	<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link type="text/css" rel="stylesheet" href="https://www.codehim.com/demo/jquery-image-uploader-preview-and-delete/dist/image-uploader.min.css">
-    <script src="${pageContext.request.contextPath}/resources/admin/assets/js/jquery-ui.js"></script> 
-    <link href="${pageContext.request.contextPath}/resources/admin/assets/css/jquery-ui.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/admin/assets/css/autocomplete/jquery-ui.css" rel="stylesheet">
 </head>
 
 <body id="page-top">

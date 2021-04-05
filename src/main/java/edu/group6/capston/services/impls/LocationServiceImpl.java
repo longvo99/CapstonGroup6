@@ -58,6 +58,7 @@ public class LocationServiceImpl implements LocationService {
 	}
 
 	@Override
+<<<<<<< Updated upstream
 	public List<Location> findTopNewLocationNew() {
 		return LocationDAO.findTopNewLocationNew();
 	}
@@ -70,6 +71,15 @@ public class LocationServiceImpl implements LocationService {
 	@Override
 	public List<LocationDTO> findTopDiscount() {
 		return LocationDAO.findTopDiscount();
+=======
+	public Location findByUserId(int userId) {
+		return LocationDAO.findByUserId(userId);
+	}
+
+	@Override
+	public List<Location> findAllByUserId(int userId) {
+		return LocationDAO.findAllByUserId(userId);
+>>>>>>> Stashed changes
 	}
 
 }

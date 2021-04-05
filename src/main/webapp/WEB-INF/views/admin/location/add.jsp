@@ -77,6 +77,8 @@
 					  </c:if>
                       </select>
                     </div>
+                    
+                    <div>
                     <div class="form-group">
                       <label for="country">Nước</label>
                       <select class="form-control" name="country">
@@ -84,24 +86,62 @@
                       </select>
                     </div>
                     <div class="form-group">
-                    	<label for="country">Tỉnh/thành</label>
-					   <select name="city" id="city" class="form-control input-lg">
-					    <option value="">Select tỉnh/thành</option>
+                    	<label for="city">Tỉnh/thành</label>
+					   <select name="city" id="country" class="form-control input-lg">
+					    	<option value="000">-Chọn Tỉnh/Thành:-</option>
 					   </select>
 					</div>
 					<div class="form-group">
-						<label for="country">Quận huyện</label>
-					   <select name="district" id="district" class="form-control input-lg">
-					    <option value="">Select</option>
+						<label for="district">Quận huyện</label>
+					   <select name="district" id="state" class="form-control input-lg">
+					    	<option value="000">-Chọn Quận/Huyện-</option>
 					   </select>
 					</div>
 					<div class="form-group">
-						<label for="country">Xã/phường</label>
-					   <select name="ward" id="ward" class="form-control input-lg">
-					    <option value="">Select</option>
+						<label for="ward">Xã/phường</label>
+					   <select name="ward" id="city" class="form-control input-lg">
+					    	<option value="000">-Chọn Phường/Xã-</option>
 					   </select>
 					</div>
-					<script>
+      				</div>
+			<script>
+					$(document).ready(function(){
+						  $.getJSON('${pageContext.request.contextPath}/resources/admin/assets/js/data.json', function(data){
+							  $.each(data, function (index, value) {
+								    var country_id;
+								    var state_id;
+								    var city_id;
+								        $("#country").append('<option rel="' + index + '" value="'+value.Id+'">'+value.Name+'</option>');
+								        $("#country").change(function () {
+								            $("#state, #city").find("option:gt(0)").remove();
+								            $("#state").find("option:first").text("Loading...");
+								            country_id = $(this).find('option:selected').attr('rel');
+								            console.log("Country INDEX : " + country_id);
+								            $.each(data[country_id].Districts, function (index1, value1) {
+								                $("#state").find("option:first").text("-Chọn Quận/Huyện-");
+								                $("#state").append('<option rel="' + index1 + '" value="'+value1.Id+'">'+value1.Name+'</option>');
+								            });
+								            
+								        });
+								        $("#state").change(function () {
+								            $("#city").find("option:gt(0)").remove();
+								            $("#city").find("option:first").text("Loading...");
+								            state_id = $(this).find('option:selected').attr('rel');
+								            console.log("State INDEX : " + state_id);
+								            $.each(data[country_id].Districts[state_id].Wards, function (index2, value2) {
+								                $("#city").find("option:first").text("-Chọn Phường/Xã-");
+								                $("#city").append('<option rel="' + index2 + '" value="'+value2.Id+'">'+value2.Name+'</option>');
+								            });
+								        });     
+								});
+						 });
+						});
+			</script>
+                    
+                    
+                    
+					
+					<!-- <script>
 					$(document).ready(function(){
 
 						 load_json_data('city');
@@ -157,7 +197,7 @@
 						  }
 						 });
 						});
-					</script>
+					</script> -->
                     <!-- <div class="form-group">
 	                  <label for="picture">Hình ảnh</label>
 	                  <input type="file" name="picture" />

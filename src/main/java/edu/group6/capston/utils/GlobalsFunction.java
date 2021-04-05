@@ -8,10 +8,19 @@ import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+<<<<<<< Updated upstream
 
 import edu.group6.capston.daos.UserDAO;
 import edu.group6.capston.dtos.LocationDTO;
 import edu.group6.capston.models.Location;
+=======
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
+
+import edu.group6.capston.daos.UserDAO;
+import edu.group6.capston.models.CustomUserDetails;
+>>>>>>> Stashed changes
 import edu.group6.capston.models.LocationFavorites;
 import edu.group6.capston.models.Users;
 
@@ -47,6 +56,7 @@ public class GlobalsFunction {
 		Date date = new Date(System.currentTimeMillis());
 		return Timestamp.valueOf(formatter.format(date));
 	}
+<<<<<<< Updated upstream
 
 	public static List<LocationFavorites> changeImageLocationFavorites(List<LocationFavorites> list) {
 		String image = "";
@@ -142,4 +152,23 @@ public class GlobalsFunction {
 		return result;
 	}
 
+=======
+	
+	public static Users getUsers() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		CustomUserDetails customUser = (CustomUserDetails) authentication.getPrincipal();
+		return customUser.getUser();
+	}
+	
+	/*
+	 * public static List<LocationFavorites>
+	 * changeImageLocation(List<LocationFavorites> list){ String image = ""; for
+	 * (LocationFavorites locationFavorites : list) { image =
+	 * locationFavorites.getLocation().getMediaPath(); String[] mediaPath =
+	 * splitPathMedia(image); image = mediaPath[0];
+	 * //locationFavorites.setLocation(locationFavorites.getLocation()).setMediaPath
+	 * (image)); } }
+	 */
+	
+>>>>>>> Stashed changes
 }

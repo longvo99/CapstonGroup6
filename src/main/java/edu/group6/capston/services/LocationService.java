@@ -13,7 +13,13 @@ public interface LocationService {
 	Location findLocationId(int id);
 	long locationCount();
 	List<String> search(String keyword);
+<<<<<<< Updated upstream
 	List<Location> findTopNewLocationNew();
 	List<LocationDTO> findTopRate();
 	List<LocationDTO> findTopDiscount();
+=======
+	Location findByUserId(int userId);
+	List<Location> findAllByUserId(int userId);
+	
+>>>>>>> Stashed changes
 }

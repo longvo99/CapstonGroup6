@@ -129,6 +129,9 @@
 	<definition name="admin.discount.add" extends="templates.admin">
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/discount/add.jsp" />
 	</definition>
+	<definition name="admin.discount.edit" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/discount/edit.jsp" />
+	</definition>
 	<!-- ADMIN ROLE MANAGEMENT  -->
 	<definition name="admin.role.index" extends="templates.admin">
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/role/index.jsp" />

@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/templates/tags/taglib.jsp" %>
+	<sec:authentication var="userDetail" property="principal" />
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-   <script type="text/javascript" src="${pageContext.request.contextPath}/resources/admin/assets/js/image-uploader.min.js"></script>
+   	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/admin/assets/js/image-uploader.min.js"></script>
 	<div id="content-wrapper" class="d-flex flex-column">
       <div id="content">
         <%-- <%@ include file="/templates/admin/inc/topbar.jsp" %> --%>
@@ -34,30 +35,33 @@
               <!-- Form Basic -->
               <div class="card mb-4">
                 <div class="card-body">
-                  <form role="form" method="post"  name="form-example-1" id="form-example-1" enctype="multipart/form-data">
+                  <form action="${pageContext.request.contextPath}/admin/location/edit" role="form" method="post"  name="form-example-1" id="form-example-1" enctype="multipart/form-data">
+                  <c:if test="${userDetail.user.role.roleId eq 'ADMIN'}">
+                  	<c:set var="readonly" value="readonly='readonly'" ></c:set>
+                  </c:if>
                   	<div class="form-group">
                       <label for="name">Location ID</label>
-                      <input class="form-control mb-3" type="text" value="${location.locationId}" id="locationId" name="locationId" readonly>
+                      <input class="form-control mb-3" type="text" value="${location.locationId}" id="locationId" name="locationId" readonly="readonly">
                     </div>
                   	<div class="form-group">
                       <label for="name">Location Name</label>
-                      <input class="form-control mb-3" type="text" value="${location.locationName}" id="locationName" name="locationName" readonly>
+                      <input class="form-control mb-3" type="text" value="${location.locationName}" id="locationName" name="locationName" ${readonly}>
                     </div>
                     <div class="form-group">
                       <label for="address">Address</label>
-                      <input class="form-control mb-3" type="text" value="${location.address}" id="address" name="address" readonly>
+                      <input class="form-control mb-3" type="text" value="${location.address}" id="address" name="address" ${readonly}>
                     </div>
                     <div class="form-group">
                       <label for="opentime">Open Time</label>
-                      <input class="form-control mb-3" type="text" value="${location.openTime}" id="openTime" name="openTime" readonly>
+                      <input class="form-control mb-3" type="text" value="${location.openTime}" id="openTime" name="openTime" ${readonly}>
                     </div>
                     <div class="form-group">
                       <label for="closetime">Close Time</label>
-                      <input class="form-control mb-3" type="text" value="${location.closeTime}" id="closeTime" name="closeTime" readonly>
+                      <input class="form-control mb-3" type="text" value="${location.closeTime}" id="closeTime" name="closeTime" ${readonly}>
                     </div>
                     <div class="form-group">
                       <label for="locationcategory">Location Category</label>
-                      <select class="form-control" id="locationcategory" name="locationCategory.categoryId" readonly>
+                      <select class="form-control" id="locationcategory" name="locationCategory.categoryId" ${readonly}>
 	                      <c:if test="${not empty locationCategoriesList1}">
 	                      	<c:forEach items="${locationCategoriesList1}" var="cat1">
 	                      	<optgroup label="${cat1.locationCategoryName}">
@@ -81,7 +85,7 @@
                     </div>
                     <div class="form-group">
                       <label for="locationtype">Location Type</label>
-                      <select class="form-control" id="locationType" name="locationType.locationTypeId" readonly>
+                      <select class="form-control" id="locationType" name="locationType.locationTypeId" ${readonly}>
                       <c:if test="${not empty locationTypeList}">
                       	<c:forEach items="${locationTypeList}" var="type">
 							<c:choose>
@@ -97,7 +101,97 @@
 					  </c:if>
                       </select>
                     </div>
+                     <div>
                     <div class="form-group">
+                      <label for="country">Nước</label>
+                      <select class="form-control" name="country" ${readonly}>
+                      	<option value="Việt Nam">Việt Nam</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                    	<label for="city">Tỉnh/thành</label>
+					   <select name="city" id="country" class="form-control input-lg" ${readonly}>
+					    	<option value="000">-Chọn Tỉnh/Thành:-</option>
+					   </select>
+					</div>
+					<div class="form-group">
+						<label for="district">Quận huyện</label>
+					   <select name="district" id="state" class="form-control input-lg" ${readonly}>
+					    	<option value="000">-Chọn Quận/Huyện-</option>
+					   </select>
+					</div>
+					<div class="form-group">
+						<label for="ward">Xã/phường</label>
+					   <select name="ward" id="city" class="form-control input-lg" ${readonly}>
+					    	<option value="000">-Chọn Phường/Xã-</option>
+					   </select>
+					</div>
+      				</div>
+			<script>
+					$(document).ready(function(){
+						  $.getJSON('${pageContext.request.contextPath}/resources/admin/assets/js/data.json', function(data){
+							  var country_id;
+							  var state_id;
+							  $.each(data, function (index, value) {
+								    var city_id;
+								    if(${location.city} == value.Id){
+								    	$("#country").append('<option selected="selected" rel="' + index + '" value="'+value.Id+'">'+value.Name+'</option>');
+								    } else {
+								    	$("#country").append('<option rel="' + index + '" value="'+value.Id+'">'+value.Name+'</option>');
+								    }
+								   /*  country_id = $("#country").find('option:selected').attr('rel');
+						            console.log("Country INDEX : " + country_id); */
+						            /* $.each(data[country_id].Districts, function (index1, value1) {
+						                 
+						            	if(${location.district} == value1.Id){
+						            		 $("#state").append('<option selected="selected" rel="' + index1 + '" value="'+value1.Id+'">'+value1.Name+'</option>');
+									    } else {
+									    	$("#state").append('<option rel="' + index1 + '" value="'+value1.Id+'">'+value1.Name+'</option>');
+									    }
+						               
+						            });   */
+						            country_id = $("#country").find('option:selected').attr('rel');
+								        $("#country").change(function () {
+								            $("#state, #city").find("option:gt(0)").remove();
+								            $("#state").find("option:first").text("Loading...");
+								            country_id = $(this).find('option:selected').attr('rel');
+								            console.log("Country INDEX : " + country_id);
+								            $.each(data[country_id].Districts, function (index1, value1) {
+								                $("#state").find("option:first").text("-Chọn Quận/Huyện-");
+								                $("#state").append('<option rel="' + index1 + '" value="'+value1.Id+'">'+value1.Name+'</option>');
+								            });
+								            
+								        });
+								        $("#state").change(function () {
+								            $("#city").find("option:gt(0)").remove();
+								            $("#city").find("option:first").text("Loading...");
+								            state_id = $(this).find('option:selected').attr('rel');
+								            console.log("State INDEX : " + state_id);
+								            $.each(data[country_id].Districts[state_id].Wards, function (index2, value2) {
+								                $("#city").find("option:first").text("-Chọn Phường/Xã-");
+								                $("#city").append('<option rel="' + index2 + '" value="'+value2.Id+'">'+value2.Name+'</option>');
+								            });
+								        });     
+								});
+							  $.each(data[country_id].Districts, function (index1, value1) {
+					            	if(${location.district} == value1.Id){
+					            		 $("#state").append('<option selected="selected" rel="' + index1 + '" value="'+value1.Id+'">'+value1.Name+'</option>');
+								    } else {
+								    	$("#state").append('<option rel="' + index1 + '" value="'+value1.Id+'">'+value1.Name+'</option>');
+								    }
+					            }); 
+							  state_id = $("#state").find('option:selected').attr('rel');
+							  $.each(data[country_id].Districts[state_id].Wards, function (index2, value2) {
+					            	if(${location.ward} == value2.Id){
+					            		$("#city").append('<option selected="selected" rel="' + index2 + '" value="'+value2.Id+'">'+value2.Name+'</option>');
+								    } else {
+								    	$("#city").append('<option rel="' + index2 + '" value="'+value2.Id+'">'+value2.Name+'</option>');
+								    }
+					            });
+						 });
+						});
+			</script>
+                    <%-- <div class="form-group">
                       <label for="country">Nước</label>
                       <select class="form-control" name="country" readonly>
                       	<option value="Việt Nam">Việt Nam</option>
@@ -133,20 +227,24 @@
 					   <select name="ward" id="ward" class="form-control input-lg" readonly>
 					    <option value="${location.ward}">${wardName}</option>
 					   </select>
-					</div>
+					</div> --%>
 					<div class="form-group">
 						<label for="country">Người tạo</label>
-						<input class="form-control mb-3" type="text" value="${location.users.username}" id="user.username" name="user.username" readonly>
+						<input readonly="readonly" class="form-control mb-3" type="text" value="${location.users.username}" id="user.username" name="user.username">
 					</div>
 					<div class="input-field">
 				        <label class="active">Hình ảnh</label>
-				        <div style="pointer-events:none;" class="input-images" style="padding-top: .5rem;" ></div>
+				        <div style="pointer-events:none; background-color: #e6e6ff;" class="input-images" style="padding-top: .5rem;" ></div>
 				    </div>
-				    	<div class="form-group">
+				    <c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
+                  		<c:set var="readonly1" value="readonly='readonly'" ></c:set>
+                  	</c:if>
+				    <div class="form-group">
 						<label for="country">Trạng Thái</label>
-					   <select class="form-control input-lg">
-					    <option>Cho phép hiển thị</option>
-					   </select>
+					   	<select class="form-control input-lg" ${readonly1}>
+					    	<option>Cho phép hiển thị</option>
+					    	<option>Không cho phép hiển thị</option>
+					   	</select>
 					</div>
 					<script>
 					
@@ -165,7 +263,7 @@
 				      	    preloadedInputName: 'image'
 				      	});
 					
-					$(document).ready(function(){
+					/* $(document).ready(function(){
 						 load_json_data('city');
 						 function load_json_data(id, parent_id)
 						 {
@@ -213,7 +311,7 @@
 						   $('#ward').html('<option value="">Select</option>');
 						  }
 						 });
-						});
+						}); */
 					</script>
                     <!-- <div class="form-group">
 	                  <label for="picture">Hình ảnh</label>

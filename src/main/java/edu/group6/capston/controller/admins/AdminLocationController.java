@@ -27,6 +27,7 @@ import edu.group6.capston.dtos.CityDistrictWard;
 import edu.group6.capston.dtos.ImageUpload;
 import edu.group6.capston.models.Location;
 import edu.group6.capston.models.LocationCategory;
+import edu.group6.capston.models.Users;
 import edu.group6.capston.services.LocationCategoriesService;
 import edu.group6.capston.services.LocationService;
 import edu.group6.capston.services.LocationTypeService;
@@ -53,7 +54,11 @@ public class AdminLocationController {
 
 	@GetMapping("/index")
 	public String Index(Model model) {
-		model.addAttribute("locationList", locationService.findAll());
+		if (GlobalsFunction.getUsers().getRole().getRoleId().equals("ADMIN")) {
+			model.addAttribute("locationList", locationService.findAll());
+		} else {
+			model.addAttribute("locationList", locationService.findAllByUserId(GlobalsFunction.getUsers().getUserId()));
+		}
 		return "admin.location.index";
 	}
 
@@ -198,15 +203,17 @@ public class AdminLocationController {
 				locationCategoriesList2.add(locationCategories);
 			}
 		}
-		List<CityDistrictWard> listJson = readFileJson.getName(location.getCity(), location.getDistrict(),
-				location.getWard());
+		/*
+		 * List<CityDistrictWard> listJson = readFileJson.getName(location.getCity(),
+		 * location.getDistrict(), location.getWard());
+		 */
 		String[] imagePath = GlobalsFunction.splitPathMedia(location.getMediaPath());
 		model.addAttribute("imagePath", imagePath);
 		model.addAttribute("locationCategoriesList1", locationCategoriesList1);
 		model.addAttribute("locationCategoriesList2", locationCategoriesList2);
 		model.addAttribute("locationTypeList", locationTypeService.findAll());
 		model.addAttribute("location", location);
-		model.addAttribute("listJson", listJson);
+		/* model.addAttribute("listJson", listJson); */
 		return "admin.location.edit";
 	}
 
@@ -216,6 +223,9 @@ public class AdminLocationController {
 		if (br.hasErrors()) {
 			return "admin.location.index";
 		}
+		String mediapath = locationService.findLocationId(location.getLocationId()).getMediaPath();
+		location.setMediaPath(mediapath);
+		location.setUsers(new Users(GlobalsFunction.getUsers().getUserId()));
 		if (locationService.update(location)) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE,
 					messageSource.getMessage("success", null, Locale.getDefault()));
