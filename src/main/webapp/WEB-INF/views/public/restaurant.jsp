@@ -62,7 +62,7 @@
                                             <span class="fs-16 text-dark-white">
                               <i class="fas fa-star"></i>
                             </span>
-                                <span class="text-light-black fs-12 rate-data">58 rating</span>
+                                <span class="text-light-black fs-14 rate-data">58 rating</span>
                             </div>
                             <div class="product-review">
                                 <div class="restaurent-details-mob">
@@ -136,7 +136,7 @@
                     <div class="address-details">
                         <div class="address">
                             <div class="delivery-address"> <a href="order-details.html" class="text-light-black">Delivery, ASAP (45–55m)</a>
-                                <div class="delivery-type"> <span class="text-success fs-12 fw-500">No minimun</span><span class="text-light-white">, Free Delivery</span>
+                                <div class="delivery-type"> <span class="text-success fs-14 fw-500">No minimun</span><span class="text-light-white">, Free Delivery</span>
                                 </div>
                             </div>
                             <div class="change-address"> <a href="checkout.html" class="fw-500">Change</a>
@@ -173,7 +173,7 @@
                                             </div>
                                         </div>
                                         <div class="testimonial-caption padding-15">
-                                            <p class="text-light-white text-uppercase no-margin fs-12">Featured</p>
+                                            <p class="text-light-white text-uppercase no-margin fs-14">Featured</p>
                                             <h5 class="fw-600"><a href="restaurant.html" class="text-light-black">GSA King Tomato Farm</a></h5>
                                             <div class="testimonial-user-box">
                                                 <img src="https://via.placeholder.com/40" class="rounded-circle" alt="#">
@@ -220,7 +220,7 @@
                                             </div>
                                         </div>
                                         <div class="testimonial-caption padding-15">
-                                            <p class="text-light-white text-uppercase no-margin fs-12">Featured</p>
+                                            <p class="text-light-white text-uppercase no-margin fs-14">Featured</p>
                                             <h5 class="fw-600"><a href="restaurant.html" class="text-light-black">GSA King Tomato Farm</a></h5>
                                             <div class="testimonial-user-box">
                                                 <img src="https://via.placeholder.com/40" class="rounded-circle" alt="#">
@@ -267,7 +267,7 @@
                                             </div>
                                         </div>
                                         <div class="testimonial-caption padding-15">
-                                            <p class="text-light-white text-uppercase no-margin fs-12">Featured</p>
+                                            <p class="text-light-white text-uppercase no-margin fs-14">Featured</p>
                                             <h5 class="fw-600"><a href="restaurant.html" class="text-light-black">GSA King Tomato Farm</a></h5>
                                             <div class="testimonial-user-box">
                                                 <img src="https://via.placeholder.com/40" class="rounded-circle" alt="#">
@@ -327,7 +327,7 @@
                                             <button type="submit" class="btn-second btn-submit full-width">Save $12 on your first order</button>
                                         </div>
 
-                                        <div class="text-center"> <span class="text-light-black fs-12">*Valid on first order only, for one-time use, subject to foodmart’s verification. Additional terms may apply. By signing up, you agree to receive marketing and
+                                        <div class="text-center"> <span class="text-light-black fs-14">*Valid on first order only, for one-time use, subject to foodmart’s verification. Additional terms may apply. By signing up, you agree to receive marketing and
                         promotional emails and communications form foodmart</span>
                                         </div>
                                     </div>
@@ -389,7 +389,7 @@
                                                                         <span class="text-yellow"><i class="fas fa-star-half-alt"></i></span>
                                                                     </div>
                                                                     <div class="rating-text">
-                                                                        <p class="text-light-white fs-12 title">3845 ratings</p>
+                                                                        <p class="text-light-white fs-14 title">3845 ratings</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -469,7 +469,7 @@
 	                                                                        <span class="text-yellow"><i class="fas fa-star-half-alt"></i></span>
 	                                                                    </div>
 	                                                                    <!-- <div class="rating-text">
-	                                                                        <p class="text-light-white fs-12 title">3845 ratings</p>
+	                                                                        <p class="text-light-white fs-14 title">3845 ratings</p>
 	                                                                    </div> -->
 	                                                                </div>
 	                                                            </div>
@@ -544,7 +544,7 @@
                                                         <a href="javascript:void(0)" onclick="deleteCookieOrder(${orderDTO.productId})" class="text-dark-white"> <i class="far fa-trash-alt"></i>
                                                         </a>
                                                     </div>
-                                                    <div class="price"> <a href="#" class="text-dark-white fw-500">${orderDTO.price}</a>
+                                                    <div class="price"> <a href="#" class="text-dark-white fw-500">${orderDTO.quantity * orderDTO.price}</a>
                                                     </div>
                                                 </div>
                                                 </c:forEach>
@@ -710,7 +710,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-header-left">
-                        <h3 class="text-light-black header-title title">Đánh giá Nhà Hàng 1</h3>
+                        <h3 class="text-light-black header-title title">Đánh giá ${location.locationName}</h3>
                     </div>
                     <div class="restaurent-rating mb-xl-20">
                         <div class="star"> <span class="text-yellow fs-16">
@@ -728,29 +728,29 @@
                             <span class="text-dark-white fs-16">
                 <i class="fas fa-star"></i>
               </span>
-                        </div> <span class="fs-12 text-light-black">58 Ratings</span>
+                        </div> <span class="fs-14 text-light-black">58 Ratings</span>
                     </div>
                     <p class="text-light-black mb-xl-20">Đánh giá từ mọi người</p>
                     <ul>
                         <li>
                             <h6 class="text-light-black mb-1">9</h6>
-                            <span class="text-light-black fs-12 fw-400">Quality</span>
+                            <span class="text-light-black fs-14 fw-400">Quality</span>
                         </li>
                         <li>
                             <h6 class="text-light-black mb-1">8,5</h6>
-                            <span class="text-light-black fs-12 fw-400">Service</span>
+                            <span class="text-light-black fs-14 fw-400">Service</span>
                         </li>
                         <li>
                             <h6 class="text-light-black mb-1">8,5</h6>
-                            <span class="text-light-black fs-12 fw-400">Space</span>
+                            <span class="text-light-black fs-14 fw-400">Space</span>
                         </li>
                         <li>
                             <h6 class="text-light-black mb-1">9</h6>
-                            <span class="text-light-black fs-12 fw-400">Location</span>
+                            <span class="text-light-black fs-14 fw-400">Location</span>
                         </li>
                         <li>
                             <h6 class="text-light-black mb-1">8</h6>
-                            <span class="text-light-black fs-12 fw-400">Price</span>
+                            <span class="text-light-black fs-14 fw-400">Price</span>
                         </li>
                     </ul>
                     <div class="u-line"></div>
@@ -1039,9 +1039,9 @@
                                         </div>
                                     </div>
                                     <div class="product-footer-2">
-                                        <div class="discount"> <span class="text-success fs-12">$3 off</span>
+                                        <div class="discount"> <span class="text-success fs-14">$3 off</span>
                                         </div>
-                                        <div class="discount-coupon"> <span class="text-light-white fs-12">First order only</span>
+                                        <div class="discount-coupon"> <span class="text-light-white fs-14">First order only</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1074,9 +1074,9 @@
                                         </div>
                                     </div>
                                     <div class="product-footer-2">
-                                        <div class="discount"> <span class="text-success fs-12">$3 off</span>
+                                        <div class="discount"> <span class="text-success fs-14">$3 off</span>
                                         </div>
-                                        <div class="discount-coupon"> <span class="text-light-white fs-12">First order only</span>
+                                        <div class="discount-coupon"> <span class="text-light-white fs-14">First order only</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1109,9 +1109,9 @@
                                         </div>
                                     </div>
                                     <div class="product-footer-2">
-                                        <div class="discount"> <span class="text-success fs-12">$3 off</span>
+                                        <div class="discount"> <span class="text-success fs-14">$3 off</span>
                                         </div>
-                                        <div class="discount-coupon"> <span class="text-light-white fs-12">First order only</span>
+                                        <div class="discount-coupon"> <span class="text-light-white fs-14">First order only</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1144,9 +1144,9 @@
                                         </div>
                                     </div>
                                     <div class="product-footer-2">
-                                        <div class="discount"> <span class="text-success fs-12">$3 off</span>
+                                        <div class="discount"> <span class="text-success fs-14">$3 off</span>
                                         </div>
-                                        <div class="discount-coupon"> <span class="text-light-white fs-12">First order only</span>
+                                        <div class="discount-coupon"> <span class="text-light-white fs-14">First order only</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1179,9 +1179,9 @@
                                         </div>
                                     </div>
                                     <div class="product-footer-2">
-                                        <div class="discount"> <span class="text-success fs-12">$3 off</span>
+                                        <div class="discount"> <span class="text-success fs-14">$3 off</span>
                                         </div>
-                                        <div class="discount-coupon"> <span class="text-light-white fs-12">First order only</span>
+                                        <div class="discount-coupon"> <span class="text-light-white fs-14">First order only</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1225,23 +1225,23 @@
                             </div>
                         </div>
                         <script type="text/javascript">
-	                            $(".plus-btn.product${product.productId}").on('click', function () {
-	              			      	var quantity = $("#quantity${product.productId}").val();
-	              			    	var price = ${product.price};
-	              			    	var total = (parseInt(quantity) + 1) * parseInt(price);
-	              			    	$("#totalPriceProduct${product.productId}").text(total);
-	              				});
-	                            $(".minus-btn.product${product.productId}").on('click', function () {
-	              			      	var quantity = $("#quantity${product.productId}").val();
-	              			      	var price =${product.price};
-	              			    	var total = parseInt(price) * (parseInt(quantity) - 1);
-	              			    	if(quantity != 1){
-	              			    		$("#totalPriceProduct${product.productId}").text(total);              			    		
-	              			    	}else{
-	              			    		$("#totalPriceProduct${product.productId}").text(price);
-	              			    	}
-	              				});
-                            </script>
+                         $(".plus-btn.product${product.productId}").on('click', function () {
+           			      	var quantity = $("#quantity${product.productId}").val();
+           			    	var price = ${product.price};
+           			    	var total = (parseInt(quantity) + 1) * parseInt(price);
+           			    	$("#totalPriceProduct${product.productId}").text(total);
+           				});
+                         $(".minus-btn.product${product.productId}").on('click', function () {
+           			      	var quantity = $("#quantity${product.productId}").val();
+           			      	var price =${product.price};
+           			    	var total = parseInt(price) * (parseInt(quantity) - 1);
+           			    	if(quantity != 1){
+           			    		$("#totalPriceProduct${product.productId}").text(total);              			    		
+           			    	}else{
+           			    		$("#totalPriceProduct${product.productId}").text(price);
+           			    	}
+           				});
+                        </script>
                     </div>
                 </div>
                 <div class="modal-footer">

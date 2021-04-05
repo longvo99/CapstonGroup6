@@ -21,10 +21,15 @@ import edu.group6.capston.services.ProductService;
 
 @Controller
 @RequestMapping("public")
-public class PublicOrderController {
+public class PublicOrderController extends PublicAbstractController{
 
 	@Autowired
 	private ProductService productService;
+	
+	@Override
+	public void addCommonObjects(Model model, HttpServletRequest request) {
+		super.addCommonObjects(model, request);
+	}
 
 	@RequestMapping(value = "/addCartAjax", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody List<OrderDTO> addParentComment(Model model, HttpServletRequest request,
@@ -108,6 +113,9 @@ public class PublicOrderController {
 	
 	@GetMapping("/checkout")
 	public String checkout(Model model) {
+		
+		
+		
 		return "public.checkout";
 	}
 	

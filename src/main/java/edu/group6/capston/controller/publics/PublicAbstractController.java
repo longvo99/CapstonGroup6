@@ -48,9 +48,10 @@ public abstract class PublicAbstractController  {
 					if(!cookie.getValue().equals("")) {
 						OrderDTO product = productService.findByProductIdOrder(Integer.valueOf(productId));
 						float total = product.getPrice() * Integer.valueOf(cookie.getValue());
-						OrderDTO order = new OrderDTO(user.getUserId(), Integer.valueOf(productId), product.getName(), total,
+						OrderDTO order = new OrderDTO(user.getUserId(), Integer.valueOf(productId), product.getName(), product.getPrice(),
 								Integer.valueOf(cookie.getValue()));
 						listOrderDTO.add(order);
+						totalCart += total;
 					}
 				}
 			}

@@ -93,14 +93,6 @@ public class LocationDAO {
 		}
 	}
 
-	public List<Location> findTopNewLocationNew() {
-		try (Session session = this.sessionFactory.openSession()) {
-			List<Location> list = session.createQuery("from Location ORDER BY locationId DESC", Location.class).setMaxResults(6)
-			.getResultList();
-			return list;
-		}
-	}
-
 	public List<LocationDTO> findTopRate() {
 		List<LocationDTO> locationList = null;
 		Session session = this.sessionFactory.openSession();
@@ -144,6 +136,57 @@ public class LocationDAO {
 				root.get("location").get("mediaPath"));
 		query.orderBy(builder.desc(root.get("discountId")));
 		locationList = session.createQuery(query).setMaxResults(6).getResultList();
+		transaction.commit();
+		session.close();
+		return locationList;
+	}
+	
+	public List<LocationDTO> findLocationByCategoryId(int categoryId) {
+		List<LocationDTO> locationList = null;
+		Session session = this.sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<LocationDTO> query = builder.createQuery(LocationDTO.class);
+		Root<Location> root = query.from(Location.class);
+		root.join("locationCategory", JoinType.INNER);
+		root.join("locationType", JoinType.INNER);
+		query.multiselect(
+				root.get("locationId"),
+				root.get("locationName"),
+				root.get("openTime"),
+				root.get("closeTime"),
+				root.get("reviewCount"),
+				root.get("locationCategory").get("locationCategoryName"),
+				root.get("locationType").get("locationTypeName"),
+				root.get("mediaPath"));
+		query.where(builder.equal(root.get("locationCategory").get("categoryId"), categoryId));
+		query.orderBy(builder.desc(root.get("locationId")));
+		locationList = session.createQuery(query).getResultList();
+		transaction.commit();
+		session.close();
+		return locationList;
+	}
+	
+	public List<LocationDTO> findTopNewLocationNew(int maxResults) {
+		List<LocationDTO> locationList = null;
+		Session session = this.sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<LocationDTO> query = builder.createQuery(LocationDTO.class);
+		Root<Location> root = query.from(Location.class);
+		root.join("locationCategory", JoinType.INNER);
+		root.join("locationType", JoinType.INNER);
+		query.multiselect(
+				root.get("locationId"),
+				root.get("locationName"),
+				root.get("openTime"),
+				root.get("closeTime"),
+				root.get("reviewCount"),
+				root.get("locationCategory").get("locationCategoryName"),
+				root.get("locationType").get("locationTypeName"),
+				root.get("mediaPath"));
+		query.orderBy(builder.desc(root.get("locationId")));
+		locationList = session.createQuery(query).setMaxResults(maxResults).getResultList();
 		transaction.commit();
 		session.close();
 		return locationList;

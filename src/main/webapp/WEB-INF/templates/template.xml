@@ -39,8 +39,8 @@
 	<definition name="public.orderdetails" extends="templates.public">
 		<put-attribute name="public-content" value="/WEB-INF/views/public/orderdetails.jsp" />
 	</definition>
-	<definition name="public.listview" extends="templates.public">
-		<put-attribute name="public-content" value="/WEB-INF/views/public/listview.jsp" />
+	<definition name="public.category" extends="templates.public">
+		<put-attribute name="public-content" value="/WEB-INF/views/public/category.jsp" />
 	</definition>
 	<definition name="public.contact" extends="templates.public">
 		<put-attribute name="public-content"

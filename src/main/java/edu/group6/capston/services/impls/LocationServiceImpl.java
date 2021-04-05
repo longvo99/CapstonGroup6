@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import edu.group6.capston.daos.LocationDAO;
 import edu.group6.capston.dtos.LocationDTO;
 import edu.group6.capston.models.Location;
-import edu.group6.capston.models.LocationFavorites;
 import edu.group6.capston.services.LocationService;
 
 @Service
@@ -58,8 +57,8 @@ public class LocationServiceImpl implements LocationService {
 	}
 
 	@Override
-	public List<Location> findTopNewLocationNew() {
-		return LocationDAO.findTopNewLocationNew();
+	public List<LocationDTO> findTopNewLocationNew(int maxResults) {
+		return LocationDAO.findTopNewLocationNew(maxResults);
 	}
 
 	@Override
@@ -70,6 +69,11 @@ public class LocationServiceImpl implements LocationService {
 	@Override
 	public List<LocationDTO> findTopDiscount() {
 		return LocationDAO.findTopDiscount();
+	}
+
+	@Override
+	public List<LocationDTO> findLocationByCategoryId(int categoryId) {
+		return LocationDAO.findLocationByCategoryId(categoryId);
 	}
 
 }

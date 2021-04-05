@@ -43,7 +43,7 @@ import edu.group6.capston.utils.UploadFile;
 
 @Controller
 @RequestMapping("public")
-public class PublicController extends PublicAbstractController {
+public class PublicIndexController extends PublicAbstractController {
 
 	@Autowired
 	private LocationService locationService;
@@ -84,7 +84,7 @@ public class PublicController extends PublicAbstractController {
 		model.addAttribute("ratingList", ratingService.findAllRatingLocation());
 		model.addAttribute("minMaxLocation", productService.findMinMaxPriceLocation());
 		model.addAttribute("DiscountTopList", discountService.findTopNewDiscountInfo());
-		model.addAttribute("listLocationTopNew", GlobalsFunction.changeImageLocation(locationService.findTopNewLocationNew()));
+		model.addAttribute("listLocationTopNew", GlobalsFunction.changeImageTopLocation(locationService.findTopNewLocationNew(6)));
 		model.addAttribute("RateTopList", GlobalsFunction.changeImageTopLocation(locationService.findTopRate()));
 		model.addAttribute("LocationDiscountTopList", GlobalsFunction.changeImageTopLocation(locationService.findTopDiscount()));
 		if(request.getSession().getAttribute("userSession") != null) {
@@ -127,9 +127,32 @@ public class PublicController extends PublicAbstractController {
 		return "public.register";
 	}
 	
-	@GetMapping("/listview")
-	public String listview(Model model) {
-		return "public.listview";
+	@GetMapping("/listview/{category}")
+	public String listview(@PathVariable String category, Model model, HttpServletRequest request) {
+		model.addAttribute("DiscountList", discountService.findAll());
+		model.addAttribute("ratingList", ratingService.findAllRatingLocation());
+		model.addAttribute("minMaxLocation", productService.findMinMaxPriceLocation());
+		
+		if(category.equals("new")) {
+			model.addAttribute("listLocation", GlobalsFunction.changeImageTopLocation(locationService.findTopNewLocationNew(12)));
+		}
+		if(category.equals("discount")) {
+			model.addAttribute("listLocation", GlobalsFunction.changeImageTopLocation(locationService.findTopDiscount()));
+		}
+		if(category.contains("category")) {
+			String categoryId = category.substring(8, category.length());
+			model.addAttribute("listLocation", GlobalsFunction.changeImageTopLocation(locationService.findLocationByCategoryId(Integer.valueOf(categoryId))));
+		}
+		if(request.getSession().getAttribute("userSession") != null) {
+			Users user = (Users) request.getSession().getAttribute("userSession");
+			List<LocationFavorites> locationFavoriteList = locationFavoriteService.findLocationFavorite(user.getUserId());
+			if(category.equals("favorite")) {
+				model.addAttribute("listLocation2", GlobalsFunction.changeImageLocationFavorites(locationFavoriteList));
+			}else {
+				model.addAttribute("locationFavoriteList", GlobalsFunction.changeImageLocationFavorites(locationFavoriteList));
+			}
+		}
+		return "public.category";
 	}
 	
 	@RequestMapping(value = "/editLocationFavorite/{locationId}", method = RequestMethod.POST, produces = "application/json")
