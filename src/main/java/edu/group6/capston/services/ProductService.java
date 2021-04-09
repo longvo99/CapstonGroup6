@@ -16,6 +16,7 @@ public interface ProductService {
 	OrderDTO findByProductIdOrder(Integer productId);
 	OrderDTO findByComboIdOrder(Integer productId);
 	List<String> searchProductNameByUserId(int userId);
+	List<String> searchAllProductName();
 	OrderDTO findComboIdOrderDetail(int id);
 	OrderDTO findProductIdOrderDetail(int id);
 }

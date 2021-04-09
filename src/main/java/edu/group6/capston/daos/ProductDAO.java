@@ -133,6 +133,16 @@ public class ProductDAO {
 			return listProducts;
 		}
 	}
+	
+	public List<String> searchAllProductName() {
+		try (Session session = this.sessionFactory.openSession()) {
+			session.beginTransaction();
+			String hql = "select p.name from Product p ";
+			Query query = session.createQuery(hql);
+			List<String> listNameProducts = query.getResultList();
+			return listNameProducts;
+		}
+	}
 
 	public OrderDTO findByComboIdOrder(Integer comboId) {
 		OrderDTO product = null;

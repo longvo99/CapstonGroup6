@@ -227,6 +227,12 @@ public class PublicIndexController extends PublicAbstractController {
 		return "redirect:/public/restaurant/" + locationId;
 	}
 	
+	@RequestMapping(value = "search", method = RequestMethod.GET)
+	@ResponseBody
+	public List<String> searchproduct(HttpServletRequest request) {
+		return productService.searchAllProductName();
+	}
+	
 //	@GetMapping("/shop")
 //	public String shop(Model model) {
 //		return "public.shop";

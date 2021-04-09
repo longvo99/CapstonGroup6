@@ -48,9 +48,9 @@
     <!-- plus and minus  -->
    <%--  <link href="${pageContext.request.contextPath}/resources/public/assets/css/checkout.css" rel="stylesheet"> --%>
     <!-- place -->
-    <script src="/Capston.Group6/resources/admin/assets/vendor/jquery/jquery.min.js"></script> 
-    <link href="/Capston.Group6/resources/admin/assets/css/autocomplete/jquerui.css" rel="stylesheet">
-    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/admin/assets/css/autocomplete/jquery-ui.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/admin/assets/js/jquery.validate.min.js"></script>
     <style type="text/css">
 	.dropdown-submenu {
   		position: relative;
@@ -192,15 +192,65 @@ input[type="file"] {
                                     <!-- search -->
                                     <div class="col-lg-6 col-md-7">
                                         <div class="search-box padding-10">
-                                            <input id="productName" type="text" class="form-control" placeholder="Pizza, Burger, Chinese">
+                                            <input id="productName" name="productName" onKeyDown="getProduct();" type="text" class="form-control" placeholder="nhà hàng, sản phẩm">
                                         </div>
-                   <!--  <script type="text/javascript">
-						$(document).ready(function() {
-							$('#productName').autocomplete({
-								source : '${pageContext.request.contextPath}/public/search'
-							});
-						});
-					</script> -->
+					                   <script>
+										    function getProduct(){
+										    var userName = document.getElementById("productName");
+										    var string = userName.value;
+										    $.ajax({
+											method: 'GET',
+											url: '${pageContext.request.contextPath}/public/search',
+											data: {
+											  str: string
+											},
+											success: function(content) {
+											  console.log("Content: " + content);
+										    var availableTags = content;
+										    function split( val ) {
+												return val.split( /,\s*/ );
+											}
+											function extractLast( term ) {
+												return split( term ).pop();
+											}
+											$( "#productName" )
+										// don't navigate away from the field on tab when selecting an item
+											.bind( "keydown", function( event ) {
+												if ( event.keyCode === $.ui.keyCode.TAB &&
+														$( this ).data( "autocomplete" ).menu.active ) {
+													event.preventDefault();
+												}
+											})
+											.autocomplete({
+												minLength: 0,
+												source: function( request, response ) {
+													// delegate back to autocomplete, but extract the last term
+													response( $.ui.autocomplete.filter(
+														availableTags, extractLast( request.term ) ) );
+												},
+												focus: function() {
+													// prevent value inserted on focus
+													return false;
+												},
+												select: function( event, ui ) {
+													var terms = split( this.value );
+													// remove the current input
+													terms.pop();
+													// add the selected item
+													terms.push( ui.item.value );
+													// add placeholder to get the comma-and-space at the end
+													terms.push( "" );
+													this.value = terms.join( ", " );
+													return false;
+												}
+											});
+											},
+											error: function(xhr, status) {
+										    	console.log("ERROR");
+										    }
+										    });
+										    } 
+										</script>
                                     </div>
                                     <!-- search -->
                                 </div>
