@@ -72,9 +72,9 @@
             editor: I18nEditor, // the editor (parsing and rendering of the input)
             template: // the template of the input
                 '<div class="input-group ${groupClass}">' +
-                '<div class="input-group-prepend"><button style="min-width: ${buttonsWidth}" class="btn btn-decrement ${buttonsClass} btn-minus" type="button">${decrementButton}</button></div>' +
+                '<div class="input-group-prepend"><button style="min-width: ${buttonsWidth}" class="btn btn-decrement ${buttonsClass} btn-minus" onclick="minusQuantity(${orderDTO.productId}, ${orderDTO.price})" type="button">${decrementButton}</button></div>' +
                 '<input type="text" inputmode="decimal" style="text-align: ${textAlign}; width: 70px; font-size: 25px; font-weight: bold;" class="form-control form-control-text-input"/>' +
-                '<div class="input-group-append"><button style="min-width: ${buttonsWidth}" class="btn btn-increment ${buttonsClass} btn-plus" type="button">${incrementButton}</button></div>' +
+                '<div class="input-group-append"><button style="min-width: ${buttonsWidth}" class="btn btn-increment ${buttonsClass} btn-plus" onclick="plusQuantity(${orderDTO.productId}, ${orderDTO.price})" type="button">${incrementButton}</button></div>' +
                 '</div>'
         }
         for (var option in methodOrProps) {

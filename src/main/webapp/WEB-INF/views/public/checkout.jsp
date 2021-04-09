@@ -5,72 +5,91 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-7">
+                <form action="${pageContext.request.contextPath}/public/checkout" method="POST">
                     <div class="main-box padding-20">
                         <div class="row mb-xl-20">
-                            <div class="col-md-8">
+                            <div class="col-md-10">
                                 <div class="section-header-left">
                                     <h3 class="text-light-black header-title fw-700">Xác nhận đơn hàng</h3>
                                 </div>
-                                <h6 class="text-light-black fw-700 fs-14">Xác nhận địa chỉ, số điện thoại, thông tin thanh toán</h6>
-                                <h6 class="text-light-black fw-700 mb-2">Đơn hàng của bạn</h6>
-                                <p class="text-light-green fw-600">Delivery, ASAP (60-70m)</p>
-                                <p>Người nhận: <b>Nguyễn Thanh Hải</b> 
+                                <h6 class="text-light-black fw-700 fs-16">Xác nhận địa chỉ, số điện thoại, thông tin thanh toán</h6>
+                                <h6 class="text-light-black fw-700 mb-2">Địa chỉ của bạn</h6>
+                                <!-- <p class="text-light-green fw-600">Delivery, ASAP (60-70m)</p> -->
+                                <!-- <p>Người nhận: <b>Nguyễn Thanh Hải</b> 
                                 	<a style="margin-left: 10px;" onclick="changedetails()" href="javascript:void(0)" >Change Details</a>
-                                </p>
-                                <div style="width: 250px; display: inline-block;" >
+                                </p> -->
+                                <div style="width: 300px; display: inline-block;" >
                                      <div class="form-group">
                                          <label class="text-light-white fw-700">Số nhà - Tên đường</label>
-                                         <input id="address" value="21 Nguyễn Như Hạnh" type="text" name="#" class="form-control form-control-submit" >
+                                         <input id="address" name="stress" value="${userAddress.stress}" type="text" name="#" class="form-control form-control-submit" >
                                      </div>
                                  </div>
-                                 <div style="width: 200px; display: inline-block;" >
-                                     <div class="form-group">
-                                         <label class="text-light-white fw-700">Phường/Xã</label>
-                                         <input value="Hòa Minh" type="text" name="#" class="form-control form-control-submit" >
-                                     </div>
-                                 </div>
-                                 <div style="width: 250px; display: inline-block;" >
-                                     <div class="form-group">
-                                         <label class="text-light-white fw-700">Quận/Huyện</label>
-                                         <input value="Liên Chiểu" type="text" name="#" class="form-control form-control-submit" >
-                                     </div>
-                                 </div>
-                                 <div style="width: 200px; display: inline-block;" >
-                                     <div class="form-group">
-                                         <label class="text-light-white fw-700">Tỉnh/Thành Phố</label>
-                                         <input value="Đà Nẵng" type="text" name="#" class="form-control form-control-submit" >
-                                     </div>
-                                 </div>
-                                 <div style="width: 250px;" >
+			                    <div style="width: 300px; display: inline-block;" >
+				                    <div class="form-group">
+				                    	<label class="text-light-white fw-700" for="city">Tỉnh/thành</label>
+									   	<select name="country" id="country" class="form-control form-control-submit">
+									    	<option value="000">-Chọn Tỉnh/Thành:-</option>
+									   </select>
+									</div>
+								</div>
+								<div style="width: 300px; display: inline-block;" >
+									<div class="form-group">
+										<label class="text-light-white fw-700" for="district">Quận huyện</label>
+									   	<select name="state" id="state" class="form-control input-lg" ${readonly}>
+									    	<option value="000">-Chọn Quận/Huyện-</option>
+									   </select>
+									</div>
+								</div>
+								<div style="width: 300px; display: inline-block;" >
+									<div class="form-group">
+										<label class="text-light-white fw-700" for="ward">Xã/phường</label>
+									   	<select name="city" id="city" class="form-control input-lg" ${readonly}>
+									    	<option value="000">-Chọn Phường/Xã-</option>
+									   </select>
+									</div>
+								</div>
+								<%-- <div class="form-group">
+			                    	<label for="city">Tỉnh/thành</label>
+								   <select name="city" id="country" class="form-control input-lg" ${readonly}>
+								    	<option value="000">-Chọn Tỉnh/Thành:-</option>
+								   </select>
+								</div>
+								<div class="form-group">
+									<label for="district">Quận huyện</label>
+								   <select name="district" id="state" class="form-control input-lg" ${readonly}>
+								    	<option value="000">-Chọn Quận/Huyện-</option>
+								   </select>
+								</div>
+								<div class="form-group">
+									<label for="ward">Xã/phường</label>
+								   <select name="ward" id="city" class="form-control input-lg" ${readonly}>
+								    	<option value="000">-Chọn Phường/Xã-</option>
+								   </select>
+								</div> --%>
+                                 <div style="width: 300px;" >
                                      <div class="form-group">
                                          <label class="text-light-white fw-700">Số điện thoại</label>
-                                         <input value="0929181251" type="text" name="#" class="form-control form-control-submit" >
+                                         <input value="${sessionScope.userSession.contactPhone}" type="text" name="phone" class="form-control form-control-submit" >
                                      </div>
                                  </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="">
-                                    <img src="https://via.placeholder.com/670x300" class="img-fluid full-width" alt="advertisement-img">
-                                </div>
+                                 <div class="section-header-left">
+                                     <h3 class="text-light-black header-title">Ghi chú</h3>
+                                 </div>
+                                 <div class="form-group">
+                                     <textarea class="form-control form-control-submit" name="note" style="width: 610px;" rows="4"></textarea>
+                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12">
                                 <div class="payment-sec">
-                                    <div class="section-header-left">
-                                        <h3 class="text-light-black header-title">Ghi chú</h3>
-                                    </div>
-                                    <div class="form-group">
-                                        <textarea class="form-control form-control-submit" rows="4"></textarea>
-                                    </div>
-                                    
                                      <div class="section-header-left">
                                         <h3 class="text-light-black header-title">Sử dụng mã giảm giá</h3>
                                     </div>
                                     <div class="card-body no-padding payment-option-tab">
                                         <div class="form-group">
                                             <div class="credit-card promocode p-relative input-group">
-                                                <input type="text" name="#" class="form-control-submit fs-16" placeholder="Nhập mã">
+                                                <input type="text" name="#" class="form-control-submit fs-18" placeholder="Nhập mã">
                                                 <button type="submit" class="btn-second btn-submit ml-1">Áp dụng</button>
                                             </div>
                                         </div>
@@ -110,17 +129,17 @@
                                             <div id="accordion">
                                                 <div class="payment-option-tab">
                                                     <ul class="nav nav-tabs">
-                                                        <li class="nav-item"> <a class="nav-link fw-600 active" data-toggle="tab" href="#newcreditcard">Thẻ tín dụng</a>
-                                                        </li>
-                                                        <li class="nav-item"> <a class="nav-link fw-600" data-toggle="tab" href="#cash">Tiền mặt</a>
+                                                        <!-- <li class="nav-item"> <a class="nav-link fw-600 active" data-toggle="tab" href="#newcreditcard">Thẻ tín dụng</a>
+                                                        </li> --> 
+                                                        <li class="nav-item"> <a class="nav-link fw-600 active" data-toggle="tab" href="#cash">Tiền mặt</a>
                                                         </li>
                                                         <li class="nav-item"> <a class="nav-link fw-600" data-toggle="tab" href="#paypal">PayPal<sup>TM</sup></a>
                                                         </li>
-                                                        <li class="nav-item"> <a class="nav-link fw-600" data-toggle="tab" href="#amexcheckout">Amex Express Checkout</a>
-                                                        </li>
+                                                        <!-- <li class="nav-item"> <a class="nav-link fw-600" data-toggle="tab" href="#amexcheckout">Amex Express Checkout</a>
+                                                        </li> -->
                                                     </ul>
                                                     <div class="tab-content">
-                                                        <div class="tab-pane active" id="newcreditcard">
+                                                        <!-- <div class="tab-pane active" id="newcreditcard">
                                                             <div class="row">
                                                                 <div class="col-md-4">
                                                                     <div class="form-group">
@@ -165,8 +184,8 @@
                                                             <p class="text-center text-light-black no-margin">Bằng cách đặt hàng bạn đồng ý với các  
                                                             	<a href="#">điều khoản sử dụng</a> và <a href="#">quyền riêng tư</a> của FoodMart
                                                             </p>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="cash">
+                                                        </div> -->
+                                                        <div class="tab-pane active" id="cash">
                                                             <p class="text-light-black">Chuẩn bị sẵn tiền mặt khi bạn nhận được đơn đặt hàng của mình.</p>
                                                             <div class="form-group">
                                                                 <button type="submit" class="btn-first green-btn text-custom-white full-width fw-500">Đặt hàng</button>
@@ -238,9 +257,9 @@
                                                             <p class="text-center text-light-black no-margin">By placing your order, you agree to foodmart's <a href="#">terms of use</a> and <a href="#">privacy agreement</a>
                                                             </p>
                                                         </div>
-                                                        <div class="tab-pane fade" id="amexcheckout">
+                                                        <!-- <div class="tab-pane fade" id="amexcheckout">
                                                             <div class="card">
-                                                                <div class="card-header"> <a class="card-link fw-500 fs-14" data-toggle="collapse" href="#saveamex">
+                                                                <div class="card-header"> <a class="card-link fw-500 fs-16" data-toggle="collapse" href="#saveamex">
                                             Saved Card
                                           </a>
                                                                 </div>
@@ -255,7 +274,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="card">
-                                                                <div class="card-header"> <a class="collapsed card-link fw-500 fs-14" data-toggle="collapse" href="#newcardamex">
+                                                                <div class="card-header"> <a class="collapsed card-link fw-500 fs-16" data-toggle="collapse" href="#newcardamex">
                                             Add New Card
                                           </a>
                                                                 </div>
@@ -359,7 +378,7 @@
                                                             </div>
                                                             <p class="text-center text-light-black no-margin">By placing your order, you agree to foodmart's <a href="#">terms of use</a> and <a href="#">privacy agreement</a>
                                                             </p>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                     
                                                 </div>
@@ -370,58 +389,72 @@
                             </div>
                         </div>
                     </div>
+                </form>
                 </div>
                 <div class="col-lg-5">
                     <div class="sidebar">
                         <div class="cart-detail-box">
                             <div class="card">
-                                <div class="card-header padding-15 fw-700">Đơn giao từ
-                                    <p class="text-light-white no-margin fw-500">Nhà Hàng 1</p>
+                                <div class="card-header padding-15 fw-700">Chi tiết đơn hàng
                                 </div>
                                 <div class="card-body no-padding" id="scrollstyle-4">
                                     <div class="cat-product-box">
-                                        <div class="cat-product">
-								            <div style="zoom: 0.5;">
-								            	<input type="number" value="1" min="1" max="999" step="1"/>
-								            </div>
-								            <div class="">
-			                                    <img src="https://via.placeholder.com/50x50" class="img-fluid full-width" alt="advertisement-img">
-			                                </div>
-                                            <div class="cat-name">
-                                                <a href="#">
-                                                    <p class="text-light-green fw-700">
-                                                    	Bánh mì pate
-                                                   </p> 
-                                                   <span class="text-light-white fw-700">size L</span>
-                                                </a>
-                                            </div>
-                                            <div class="delete-btn">
-                                                <a href="#" class="text-dark-white"> <i class="far fa-trash-alt"></i>
-                                                </a>
-                                            </div>
-                                            <div class="price"> <a href="#" class="text-dark-white fw-500">
-                          50,000đ
-                        </a>
-                                            </div>
-                                        </div>
+                                    <c:choose>
+                                    	<c:when test="${not empty listOrderDTO}">
+                                    		<c:forEach items="${listOrderDTO}" var="orderDTO">
+                                            <div class="cat-product" id="cat-product${orderDTO.productId}" style = "box-sizing: border-box;">
+									            <div class="quantity">
+										            <div class="append" style="float: left; margin-right: 10px;">
+						                                <button class="minus-btn" onclick="minusQuantity(${orderDTO.productId}, ${orderDTO.price})" type="button" name="button"> <i class="fas fa-minus"></i></button>
+						                            </div>
+						                            <input type="text" style="width: 50px; float: left; margin-right: 10px;" class="text-center" name="name" id="quantity${orderDTO.productId}" value="${orderDTO.quantity}" readonly="readonly">
+						                            <div class="prepend" style="float: left;">
+						                                <button class="plus-btn" onclick="plusQuantity(${orderDTO.productId}, ${orderDTO.price})" type="button" name="button"><i class="fas fa-plus"></i></button>
+						                            </div> 
+					                           	</div>
+									            <!-- <div class="">
+				                                    <img src="https://via.placeholder.com/50x50" class="img-fluid full-width" alt="advertisement-img">
+				                                </div> -->
+	                                            <div class="cat-name">
+	                                                <a href="#">
+	                                                    <p class="text-light-green fw-700">${orderDTO.name}</p> 
+	                                                   <span class="text-light-white fw-700">size L</span>
+	                                                </a>
+	                                            </div>
+	                                            <div class="delete-btn">
+	                                                <a href="javascript:void(0)" onclick="deleteCookieOrder('${orderDTO.productId}')" class="text-dark-white"> <i class="far fa-trash-alt"></i>
+	                                                </a>
+	                                            </div>
+	                                            <div class="price"> <a href="#" id="totalPriceProduct${orderDTO.productId}" class="text-dark-white fw-500">${orderDTO.quantity * orderDTO.price}</a>
+	                                            </div>
+	                                        </div>
+                                            </c:forEach>
+                                    	</c:when>
+                                    	<c:otherwise>
+                                    		<div class="empty-bag padding-15 fw-700"> 
+	                                      		<a href="#">Đơn hàng rỗng</a>
+	                                      	</div>
+                                    	</c:otherwise>
+                                    </c:choose>
                                     </div>
+                                    <c:if test="${not empty listOrderDTO}">
                                     <div class="item-total">
                                         <div class="total-price border-0 pb-0"> <span class="text-dark-white fw-600">Phí ship:</span>
-                                            <span class="text-dark-white fw-600">+5,000đ</span>
+                                            <span class="text-dark-white fw-600">+ 20,000đ</span>
                                         </div>
-                                         <div class="total-price border-0 pt-0 pb-0"> <span class="text-light-green fw-600">Giảm giá:</span>
+                                         <!-- <div class="total-price border-0 pt-0 pb-0"> <span class="text-light-green fw-600">Giảm giá:</span>
                                             <span class="text-light-green fw-600">-5,000đ</span>
-                                        </div>
-                                        <div class="total-price border-0 "> <span class="text-light-black fw-700">Tổng:</span>
-                                            <span class="text-light-black fw-700">50,000đ</span>
-                                        </div>
+                                        </div> -->
+                                    </div>
+                                    </c:if>
+                                </div>
+                                <c:if test="${not empty listOrderDTO}">
+                                <div class="card-footer p-0 modify-order">
+                                    <div class="total-amount"> <span class="text-custom-white fw-700">TỔNG:</span>
+                                        <span id="totalCartCheckOut" class="text-custom-white fw-700" >${totalCart + 20000}</span>
                                     </div>
                                 </div>
-                                <div class="card-footer p-0 modify-order">
-                                    <a href="#" class="total-amount"> <span class="text-custom-white fw-700">TỔNG:</span>
-                                        <span class="text-custom-white fw-700">50,000đ</span>
-                                    </a>
-                                </div>
+                                </c:if>
                             </div>
                         </div>
                     </div>
@@ -429,20 +462,172 @@
             </div>
         </div>
     </section>
-
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script>
+
 function changedetails() {
-		  var searchInput = $('#address');
-		// Multiply by 2 to ensure the cursor always ends up at the end;
-		// Opera sometimes sees a carriage return as 2 characters.
-		var strLength = searchInput.val().length * 2;
-		searchInput.focus();
-		searchInput[0].setSelectionRange(strLength, strLength);
+	  var searchInput = $('#address');
+	// Multiply by 2 to ensure the cursor always ends up at the end;
+	// Opera sometimes sees a carriage return as 2 characters.
+	var strLength = searchInput.val().length * 2;
+	searchInput.focus();
+	searchInput[0].setSelectionRange(strLength, strLength);
 }
+
+
+function plusQuantity(productId, price) {
+	var quantity = $("#quantity" + productId).val();
+   	var total = (parseInt(quantity) + 1) * parseInt(price);
+   	var totalCartCurr = $("#totalCartCheckOut").text();
+   	var totalCartResult = parseInt(price) + parseInt(totalCartCurr);
+   	$("#totalPriceProduct" + productId).text(total);
+   	$("#totalCartCheckOut").text(totalCartResult);
+   	$.ajax({
+		type : "GET",
+		contentType : "application/json",
+		url : "${pageContext.request.contextPath}/public/addCartAjax",
+		data : {'aProductId': productId, 'aQuantity': parseInt(quantity) + 1 },
+		success: function (data) {
+			var html_code = '';
+			var totalPriceDTO = 0;
+			var sizeCart = 0;
+			$.each( data, function( key, val ) {
+				 sizeCart++;
+				 html_code += "<div class='cat-product'>"
+                 +"<div class='cat-name'>"
+	                     +"<a href='#'>"
+	                         +"<p class='text-light-green'><span class='text-dark-white'>"+ val.quantity +"</span> "+ val.name +"</p>"
+	                     +"</a>"
+	                 +"</div>"
+	                 +"<div class='delete-btn'>"
+	                     +"<a href='javascript:void(0)' onclick='deleteCookieOrder("+ val.productId +")' class='text-dark-white'> <i class='far fa-trash-alt'></i></a>"
+	                 +"</div>"
+	                 +"<div class='price'> <a href='#' class='text-dark-white fw-500'>"+ val.price +"</a></div>"
+	             +"</div>"
+	             totalPriceDTO += parseInt(val.price);
+			 });
+			 $("#cat-product-box").html(html_code);
+			 $("#cat-product-box-topbar").html(html_code);
+			 $("#totalPriceDTO").text(totalPriceDTO);
+			 $("#totalPriceDTOTopBar").text(totalPriceDTO);
+			 $("#sizeCart").text(sizeCart);
+		  }
+  	});
+}
+
+function minusQuantity(productId, price) {
+	var quantity = $("#quantity"+productId).val();
+	var total = parseInt(price) * (parseInt(quantity) - 1);
+	var totalCartCurr = $("#totalCartCheckOut").text();
+	var totalCartResult = parseInt(totalCartCurr) - parseInt(price);
+	if(quantity != 1){
+	$("#totalPriceProduct" + productId).text(total);              			    		
+	}else{
+	$("#totalPriceProduct" + productId).text(price);
+	}
+	$("#totalCartCheckOut").text(totalCartResult);
+	$.ajax({
+		type : "GET",
+		contentType : "application/json",
+		url : "${pageContext.request.contextPath}/public/addCartAjax",
+		data : {'aProductId': productId, 'aQuantity': parseInt(quantity) - 1 },
+		success: function (data) {
+			var html_code = '';
+			var totalPriceDTO = 0;
+			var sizeCart = 0;
+			$.each( data, function( key, val ) {
+				 sizeCart++;
+				 html_code += "<div class='cat-product'>"
+                 +"<div class='cat-name'>"
+	                     +"<a href='#'>"
+	                         +"<p class='text-light-green'><span class='text-dark-white'>"+ val.quantity +"</span> "+ val.name +"</p>"
+	                     +"</a>"
+	                 +"</div>"
+	                 +"<div class='delete-btn'>"
+	                     +"<a href='javascript:void(0)' onclick='deleteCookieOrder("+ val.productId +")' class='text-dark-white'> <i class='far fa-trash-alt'></i></a>"
+	                 +"</div>"
+	                 +"<div class='price'> <a href='#' class='text-dark-white fw-500'>"+ val.price +"</a></div>"
+	             +"</div>"
+	             totalPriceDTO += parseInt(val.price);
+			 });
+			 $("#cat-product-box").html(html_code);
+			 $("#cat-product-box-topbar").html(html_code);
+			 $("#totalPriceDTO").text(totalPriceDTO);
+			 $("#totalPriceDTOTopBar").text(totalPriceDTO);
+			 $("#sizeCart").text(sizeCart);
+		  }
+  	});
+}
+
+
+	$(document).ready(function(){
+	  $.getJSON('${pageContext.request.contextPath}/resources/admin/assets/js/data.json', function(data){
+		  var country_id;
+		  var state_id;
+		  $.each(data, function (index, value) {
+			    var city_id;
+			    if(${userAddress.city} == value.Id){
+			    	$("#country").append('<option selected="selected" rel="' + index + '" value="'+value.Id+'">'+value.Name+'</option>');
+			    } else {
+			    	$("#country").append('<option rel="' + index + '" value="'+value.Id+'">'+value.Name+'</option>');
+			    }
+			   /*  country_id = $("#country").find('option:selected').attr('rel');
+	            console.log("Country INDEX : " + country_id); */
+	            /* $.each(data[country_id].Districts, function (index1, value1) {
+	                 
+	            	if(${location.district} == value1.Id){
+	            		 $("#state").append('<option selected="selected" rel="' + index1 + '" value="'+value1.Id+'">'+value1.Name+'</option>');
+				    } else {
+				    	$("#state").append('<option rel="' + index1 + '" value="'+value1.Id+'">'+value1.Name+'</option>');
+				    }
+	               
+	            });   */
+	            country_id = $("#country").find('option:selected').attr('rel');
+			        $("#country").change(function () {
+			            $("#state, #city").find("option:gt(0)").remove();
+			            $("#state").find("option:first").text("Loading...");
+			            country_id = $(this).find('option:selected').attr('rel');
+			            console.log("Country INDEX : " + country_id);
+			            $.each(data[country_id].Districts, function (index1, value1) {
+			                $("#state").find("option:first").text("-Chọn Quận/Huyện-");
+			                $("#state").append('<option rel="' + index1 + '" value="'+value1.Id+'">'+value1.Name+'</option>');
+			            });
+			            
+			        });
+			        $("#state").change(function () {
+			            $("#city").find("option:gt(0)").remove();
+			            $("#city").find("option:first").text("Loading...");
+			            state_id = $(this).find('option:selected').attr('rel');
+			            console.log("State INDEX : " + state_id);
+			            $.each(data[country_id].Districts[state_id].Wards, function (index2, value2) {
+			                $("#city").find("option:first").text("-Chọn Phường/Xã-");
+			                $("#city").append('<option rel="' + index2 + '" value="'+value2.Id+'">'+value2.Name+'</option>');
+			            });
+			        });     
+			});
+		  $.each(data[country_id].Districts, function (index1, value1) {
+          	if(${userAddress.district} == value1.Id){
+          		 $("#state").append('<option selected="selected" rel="' + index1 + '" value="'+value1.Id+'">'+value1.Name+'</option>');
+			    } else {
+			    	$("#state").append('<option rel="' + index1 + '" value="'+value1.Id+'">'+value1.Name+'</option>');
+			    }
+          }); 
+		  state_id = $("#state").find('option:selected').attr('rel');
+		  $.each(data[country_id].Districts[state_id].Wards, function (index2, value2) {
+          	if(${userAddress.ward} == value2.Id){
+          		$("#city").append('<option selected="selected" rel="' + index2 + '" value="'+value2.Id+'">'+value2.Name+'</option>');
+			    } else {
+			    	$("#city").append('<option rel="' + index2 + '" value="'+value2.Id+'">'+value2.Name+'</option>');
+			    }
+          });
+	 });
+	});
 </script>
-<script src="${pageContext.request.contextPath}/resources/public/assets/js/input-spinner.js"></script>
+<%-- <script src="${pageContext.request.contextPath}/resources/public/assets/js/input-spinner.js"></script>
 <script>
     $("input[type='number']").inputSpinner()
-</script>
+</script> --%>
+
+
+
+
+

@@ -24,17 +24,15 @@ public class OrderDetail {
 	@Column
 	private int orderDetailId;
 	@Column
-	private String currentPrice;
+	private double currentPrice;
 	@Column
-	private String quantity;
+	private int quantity;
 	@Column
 	private String note;
-	@ManyToOne
-	@JoinColumn(name = "productId")
-	private Product product;
-	@ManyToOne
-	@JoinColumn(name = "ProductComboId")
-	private ProductCombo productCombo;
+	@Column
+	private int productId;
+	@Column
+	private int productComboId;
 	@ManyToOne
 	@JoinColumn(name = "orderId")
 	private Orders orders;

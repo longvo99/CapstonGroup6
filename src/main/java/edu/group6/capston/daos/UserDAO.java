@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
-import edu.group6.capston.models.Role;
 import edu.group6.capston.models.Users;
 
 @Repository
@@ -190,5 +189,4 @@ public class UserDAO {
 			} return false;
 		}
 	}
-
 }

@@ -1,6 +1,5 @@
 package edu.group6.capston.services.impls;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import edu.group6.capston.daos.ProductDAO;
 import edu.group6.capston.dtos.LocationDTO;
 import edu.group6.capston.dtos.OrderDTO;
 import edu.group6.capston.models.Product;
-import edu.group6.capston.models.ProductCategory;
 import edu.group6.capston.services.ProductService;
 
 @Service
@@ -67,5 +65,20 @@ public class ProductServiceImpl implements ProductService {
 		 * listStr.add(product.getName()); }
 		 */
 		return ProductDAO.searchProductNameByUserId(userId);
+	}
+
+	@Override
+	public OrderDTO findByComboIdOrder(Integer comboId) {
+		return ProductDAO.findByComboIdOrder(comboId);
+	}
+
+	@Override
+	public OrderDTO findComboIdOrderDetail(int id) {
+		return ProductDAO.findComboIdOrderDetail(id);
+	}
+
+	@Override
+	public OrderDTO findProductIdOrderDetail(int id) {
+		return ProductDAO.findProductIdOrderDetail(id);
 	}
 }

@@ -118,6 +118,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		return UserDAO.findByEmail(email);
 	}
 
+<<<<<<< HEAD
 	@Override
 	public Users findOneByUserId(Integer userId) {
 		return UserDAO.findOneByUserId(userId);
@@ -234,4 +235,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		return UserDAO.setStatusByUserId(id, status);
 	}
 
+=======
+
+	@Override
+	public boolean update(Users user) {
+		// TODO Auto-generated method stub
+		return UserDAO.update(user);
+	}
+>>>>>>> 28c95529c879dd92f3a2b5775ca70cb518e9212e
 }

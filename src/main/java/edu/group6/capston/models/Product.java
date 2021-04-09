@@ -38,5 +38,8 @@ public class Product {
 	@ManyToOne
 	@JoinColumn(name = "locationId")
 	private Location location;
-	
+	public Product(int productId) {
+		super();
+		this.productId = productId;
+	}
 }

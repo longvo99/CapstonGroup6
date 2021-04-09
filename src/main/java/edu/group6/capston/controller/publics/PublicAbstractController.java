@@ -15,6 +15,7 @@ import edu.group6.capston.models.LocationCategory;
 import edu.group6.capston.models.Users;
 import edu.group6.capston.services.LocationCategoriesService;
 import edu.group6.capston.services.ProductService;
+import edu.group6.capston.utils.GlobalsFunction;
 
 public abstract class PublicAbstractController  {
 	
@@ -46,11 +47,20 @@ public abstract class PublicAbstractController  {
 				if (cookie.getName().contains(user.getUsername())) {
 					productId = cookie.getName().substring(0, cookie.getName().lastIndexOf("-"));
 					if(!cookie.getValue().equals("")) {
-						OrderDTO product = productService.findByProductIdOrder(Integer.valueOf(productId));
-						float total = product.getPrice() * Integer.valueOf(cookie.getValue());
-						OrderDTO order = new OrderDTO(user.getUserId(), Integer.valueOf(productId), product.getName(), total,
+						OrderDTO product = null;
+						if(productId.substring(0,1).equals("c")) {
+							String comboId = cookie.getName().substring(1, cookie.getName().lastIndexOf("-"));
+							product = productService.findByComboIdOrder(Integer.valueOf(comboId));
+							product.setPrice(GlobalsFunction.totalPriceCombo(product.getPrice(), product.getRateDiscount()));
+						}else {
+							product = productService.findByProductIdOrder(Integer.valueOf(productId));
+						}
+						double total = product.getPrice() * Integer.valueOf(cookie.getValue());
+						OrderDTO order = new OrderDTO(user.getUserId(), productId , product.getName(), product.getPrice(),
 								Integer.valueOf(cookie.getValue()));
+						
 						listOrderDTO.add(order);
+						totalCart += total;
 					}
 				}
 			}

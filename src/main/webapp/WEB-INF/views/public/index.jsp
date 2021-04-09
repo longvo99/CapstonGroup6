@@ -193,7 +193,7 @@
 						class="img-fluid full-width" alt="image">
 					<div class="category-type overlay padding-15">
 						<button class="category-btn">Địa điểm đang giảm giá</button>
-						<a href="restaurant.html"
+						<a href="${pageContext.request.contextPath}/public/listview/discount"
 							class="btn-first white-btn text-light-black fw-600 full-width">See
 							all</a>
 					</div>
@@ -216,7 +216,7 @@
 						class="img-fluid full-width" alt="image">
 					<div class="category-type overlay padding-15">
 						<button class="category-btn">Địa điểm mới</button>
-						<a href="restaurant.html"
+						<a href="${pageContext.request.contextPath}/public/listview/new"
 							class="btn-first white-btn text-light-black fw-600 full-width">See
 							all</a>
 					</div>
@@ -276,8 +276,8 @@
 												${ratingPoint} </span>
 										</div>
 									</div>
-									<p class="text-light-white">${location.locationType.locationTypeName},
-										${location.locationCategory.locationCategoryName}</p>
+									<p class="text-light-white">${location.locationTypeName},
+										${location.locationCategoryName}</p>
 									<div class="product-details">
 										<div class="price-time">
 											<span class="text-light-black time">
@@ -454,7 +454,7 @@
 								class="img-fluid full-width" alt="image">
 							<div class="category-type overlay padding-15">
 								<button class="category-btn">Địa điểm bạn yêu thích</button>
-								<a href="restaurant.html"
+								<a href="${pageContext.request.contextPath}/public/listview/favorite"
 									class="btn-first white-btn text-light-black fw-600 full-width">See
 									all</a>
 							</div>

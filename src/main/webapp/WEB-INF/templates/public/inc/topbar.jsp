@@ -48,8 +48,8 @@
     <!-- plus and minus  -->
    <%--  <link href="${pageContext.request.contextPath}/resources/public/assets/css/checkout.css" rel="stylesheet"> --%>
     <!-- place -->
-    
-    <link href="${pageContext.request.contextPath}/resources/admin/assets/css/jquery-ui.css" rel="stylesheet">
+    <script src="/Capston.Group6/resources/admin/assets/vendor/jquery/jquery.min.js"></script> 
+    <link href="/Capston.Group6/resources/admin/assets/css/autocomplete/jquerui.css" rel="stylesheet">
     
     <style type="text/css">
 	.dropdown-submenu {
@@ -110,11 +110,11 @@ input[type="file"] {
                 <div class="row">
                     <div class="col-12 mainNavCol">
                         <!-- logo -->
-                        <!-- <div class="logo mainNavCol">
-                            <a href="index.html">
+                        <div class="logo mainNavCol">
+                            <a href="${pageContext.request.contextPath}/public/index">
                                 <img src="https://via.placeholder.com/106x30" class="img-fluid" alt="Logo">
                             </a>
-                        </div> -->
+                        </div>
                         <div style="width: 200px; margin-right: 20px;" class="btn-group">
 		                    <a id="dLabel" role="button" data-toggle="dropdown" class="btn btn-outline-secondary dropdown-toggle"
 		                       href="">
@@ -142,16 +142,14 @@ input[type="file"] {
 				                            <ul class="dropdown-menu">
 				                            	<c:forEach items="${locationCategoriesList2}" var="cat2">
 													<c:if test="${cat2.parentId eq cat1.categoryId}">
+<<<<<<< HEAD
 														<li value="3"><a href="${pageContext.request.contextPath}/public/indexbycat/${cat2.categoryId}" class="dropdown-item" tabindex="-1">${cat2.locationCategoryName}</a></li>
+=======
+														<li value="3"><a href="${pageContext.request.contextPath}/public/listview/category${cat2.categoryId}" class="dropdown-item" tabindex="-1">${cat2.locationCategoryName}</a></li>
+>>>>>>> 28c95529c879dd92f3a2b5775ca70cb518e9212e
 														<li class="dropdown-divider"></li>
 													</c:if>
 												</c:forEach>
-				                                <!-- <li value="3"><a class="dropdown-item" tabindex="-1">Copy Number Gain</a></li>
-				                                <li value="3"><a class="dropdown-item">Copy Number Loss</a></li>
-				                                <li value ="3"><a class="dropdown-item">Deletion</a></li>
-				                                <li value ="3"><a class="dropdown-item">Diplotype</a></li>
-				                                <li value ="3"><a class="dropdown-item">Distinct Chromosome</a></li>
-				                                <li value ="3"><a class="dropdown-item">Duplication</a></li> -->
 				                            </ul>
 				                        </li>
 				                        <li class="dropdown-divider"></li>
@@ -460,10 +458,10 @@ input[type="file"] {
 		                                                        </a>
 		                                                    </div>
 		                                                    <div class="delete-btn">
-		                                                        <a href="javascript:void(0)" onclick="deleteCookieOrder(${orderDTO.productId})" class="text-dark-white"> <i class="far fa-trash-alt"></i>
+		                                                        <a href="javascript:void(0)" onclick="deleteCookieOrder('${orderDTO.productId}')" class="text-dark-white"> <i class="far fa-trash-alt"></i>
 		                                                        </a>
 		                                                    </div>
-		                                                    <div class="price"> <a href="#" class="text-dark-white fw-500">${orderDTO.price}</a>
+		                                                    <div class="price"> <a href="#" class="text-dark-white fw-500">${orderDTO.quantity * orderDTO.price}</a>
 		                                                    </div>
 		                                                </div>
 		                                                </c:forEach>
@@ -483,7 +481,7 @@ input[type="file"] {
 		                                    </div>
 		                                    </c:if>
                                         </div>
-                                        <div class="card-footer padding-15"> <a href="checkout.html" class="btn-first green-btn text-custom-white full-width fw-500">Thanh toán</a>
+                                        <div class="card-footer padding-15"> <a href="${pageContext.request.contextPath}/public/checkout" class="btn-first green-btn text-custom-white full-width fw-500">Thanh toán</a>
                                         </div>
                                     </div>
                                 </div>
@@ -515,8 +513,6 @@ input[type="file"] {
     </div>
     <div class="main-sec"></div>
     <!-- Navigation -->
-
-<script language="JavaScript" src="https://code.jquery.com/jquery-1.11.1.min.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 	$(".btn-group, .dropdown").hover(

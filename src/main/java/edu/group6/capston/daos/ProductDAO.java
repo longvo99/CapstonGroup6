@@ -1,10 +1,10 @@
 package edu.group6.capston.daos;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -16,7 +16,9 @@ import org.springframework.stereotype.Repository;
 
 import edu.group6.capston.dtos.LocationDTO;
 import edu.group6.capston.dtos.OrderDTO;
+import edu.group6.capston.models.ComboDetail;
 import edu.group6.capston.models.Product;
+import edu.group6.capston.models.ProductCombo;
 
 @Repository
 public class ProductDAO {
@@ -130,6 +132,61 @@ public class ProductDAO {
 			 */
 			return listProducts;
 		}
+	}
+
+	public OrderDTO findByComboIdOrder(Integer comboId) {
+		OrderDTO product = null;
+		Session session = this.sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<OrderDTO> query = builder.createQuery(OrderDTO.class);
+		Root<ComboDetail> root = query.from(ComboDetail.class);
+		root.join("product", JoinType.INNER);
+		root.join("productCompo", JoinType.INNER);
+		query.multiselect(
+				root.get("productCompo").get("comboName"),
+				root.get("productCompo").get("rateDiscount"),
+				builder.sum(root.get("product").get("price")));
+		query.where(builder.equal(root.get("productCompo").get("productComboId"), comboId));
+		query.groupBy(root.get("productCompo").get("comboName"), root.get("productCompo").get("rateDiscount"));
+		product = session.createQuery(query).uniqueResult();
+		transaction.commit();
+		session.close();
+		return product;
+	}
+	
+	public OrderDTO findProductIdOrderDetail(Integer id) {
+		OrderDTO product = null;
+		Session session = this.sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<OrderDTO> query = builder.createQuery(OrderDTO.class);
+		Root<Product> root = query.from(Product.class);
+		query.multiselect(
+				root.get("name"),
+				root.get("imagePath"));
+		query.where(builder.equal(root.get("productId"), id));
+		product = session.createQuery(query).uniqueResult();
+		transaction.commit();
+		session.close();
+		return product;
+	}
+	
+	public OrderDTO findComboIdOrderDetail(Integer id) {
+		OrderDTO product = null;
+		Session session = this.sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<OrderDTO> query = builder.createQuery(OrderDTO.class);
+		Root<ProductCombo> root = query.from(ProductCombo.class);
+		query.multiselect(
+				root.get("comboName"),
+				root.get("imagePath"));
+		query.where(builder.equal(root.get("productComboId"), id));
+		product = session.createQuery(query).uniqueResult();
+		transaction.commit();
+		session.close();
+		return product;
 	}
 
 }

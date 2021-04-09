@@ -12,4 +12,5 @@ public interface OrderService {
 	boolean update(Orders locationType);
 	boolean delete(Integer id);
 	List<OrderStatus> findAllOrderStatus();
+	List<Orders> findByUserId(int userId);
 }

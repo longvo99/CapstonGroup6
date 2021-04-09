@@ -2,11 +2,17 @@ package edu.group6.capston.daos;
 
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import edu.group6.capston.dtos.OrderDTO;
 import edu.group6.capston.models.OrderDetail;
 
 @Repository
@@ -21,7 +27,7 @@ public class OrderDetailDAO {
 			return list;
 		}
 	}
-	/*
+
 	public boolean save(OrderDetail OrderDetail) {
 		Session session = this.sessionFactory.openSession();
 		Transaction tx = null;
@@ -36,38 +42,22 @@ public class OrderDetailDAO {
 		}
 	}
 
-	public boolean update(OrderDetail OrderDetail) {
-		try (Session session = this.sessionFactory.openSession()) {
-			Transaction tx = session.beginTransaction();
-			session.update(OrderDetail);
-			tx.commit();
-			session.close();
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
+	public List<OrderDTO> findByOrderDTO(int orderId) {
+		List<OrderDTO> product = null;
+		Session session = this.sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<OrderDTO> query = builder.createQuery(OrderDTO.class);
+		Root<OrderDetail> root = query.from(OrderDetail.class);
+		query.multiselect(
+				root.get("productId"),
+				root.get("productComboId"),
+				root.get("currentPrice"),
+				root.get("quantity"));
+		query.where(builder.equal(root.get("orders").get("orderId"), orderId));
+		product = session.createQuery(query).getResultList();
+		transaction.commit();
+		session.close();
+		return product;
 	}
-
-	public boolean delete(Integer id) {
-		try (Session session = this.sessionFactory.openSession()) {
-			Transaction tx = session.beginTransaction();
-			OrderDetail OrderDetail;
-			OrderDetail = (OrderDetail) session.load(OrderDetail.class, id);
-			session.delete(OrderDetail);
-			// This makes the pending delete to be done
-			session.flush();
-			tx.commit();
-			session.close();
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
-	}
-	*/
-
-	/*
-	 * public Order findById(int id) { Session session =
-	 * this.sessionFactory.openSession(); return session.find(Order.class,
-	 * id); }
-	 */
 }

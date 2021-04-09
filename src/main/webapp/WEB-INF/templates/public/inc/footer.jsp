@@ -232,7 +232,7 @@
     </div>
     <!-- Place all Scripts Here -->
     <!-- jQuery -->
-    <script src="${pageContext.request.contextPath}/resources/public/assets/js/jquery.min.js"></script>
+    <%-- <script src="${pageContext.request.contextPath}/resources/public/assets/js/jquery.min.js"></script> --%>
     <!-- Popper -->
     <script src="${pageContext.request.contextPath}/resources/public/assets/js/popper.min.js"></script>
     <!-- Bootstrap -->
@@ -294,11 +294,11 @@
 		                     +"</a>"
 		                 +"</div>"
 		                 +"<div class='delete-btn'>"
-		                     +"<a href='javascript:void(0)' onclick='deleteCookieOrder("+ val.productId +")' class='text-dark-white'> <i class='far fa-trash-alt'></i></a>"
+		                     +"<a href='javascript:void(0)' onclick=deleteCookieOrder('" + val.productId + "') class='text-dark-white'> <i class='far fa-trash-alt'></i></a>"
 		                 +"</div>"
-		                 +"<div class='price'> <a href='#' class='text-dark-white fw-500'>"+ val.price +"</a></div>"
+		                 +"<div class='price'> <a href='#' class='text-dark-white fw-500'>"+ (parseInt(val.price) * parseInt(val.quantity)) +"</a></div>"
 		             +"</div>"
-		             totalPriceDTO += parseInt(val.price);
+		             totalPriceDTO += (parseInt(val.price) * parseInt(val.quantity));
 				 });
 				 $("#cat-product-box").html(html_code);
 				 $("#cat-product-box-topbar").html(html_code);
@@ -308,6 +308,41 @@
 			  }
 	  	});
 	}
+   	
+	function setCookieOrderCombo(productId) {
+		  var quantity = $("#quantityCombo" + productId).val();
+		  $.ajax({
+				type : "GET",
+				contentType : "application/json",
+				url : "${pageContext.request.contextPath}/public/addCartAjax",
+				data : {'aProductId': 'c' + productId, 'aQuantity': quantity },
+				success: function (data) {
+					var html_code = '';
+					var totalPriceDTO = 0;
+					var sizeCart = 0;
+					$.each( data, function( key, val ) {
+						 sizeCart++;
+						 html_code += "<div class='cat-product'>"
+	                     +"<div class='cat-name'>"
+			                     +"<a href='#'>"
+			                         +"<p class='text-light-green'><span class='text-dark-white'>"+ val.quantity +"</span> "+ val.name +"</p>"
+			                     +"</a>"
+			                 +"</div>"
+			                 +"<div class='delete-btn'>"
+			                     +"<a href='javascript:void(0)' onclick=deleteCookieOrder('" + val.productId + "') class='text-dark-white'> <i class='far fa-trash-alt'></i></a>"
+			                 +"</div>"
+			                 +"<div class='price'> <a href='#' class='text-dark-white fw-500'>"+ (parseInt(val.price) * parseInt(val.quantity)) +"</a></div>"
+			             +"</div>"
+			             totalPriceDTO += (parseInt(val.price) * parseInt(val.quantity));
+					 });
+					 $("#cat-product-box").html(html_code);
+					 $("#cat-product-box-topbar").html(html_code);
+					 $("#totalPriceDTO").text(totalPriceDTO);
+					 $("#totalPriceDTOTopBar").text(totalPriceDTO);
+					 $("#sizeCart").text(sizeCart);
+				  }
+		  	});
+		}
 	
 	function deleteCookieOrder(productId) {
 		  $.ajax({
@@ -328,17 +363,19 @@
 			                     +"</a>"
 			                 +"</div>"
 			                 +"<div class='delete-btn'>"
-			                     +"<a href='javascript:void(0)' onclick='deleteCookieOrder("+ val.productId +")' class='text-dark-white'> <i class='far fa-trash-alt'></i></a>"
+			                     +"<a href='javascript:void(0)' onclick=deleteCookieOrder('" + val.productId + "') class='text-dark-white'> <i class='far fa-trash-alt'></i></a>"
 			                 +"</div>"
-			                 +"<div class='price'> <a href='#' class='text-dark-white fw-500'>"+ val.price +"</a></div>"
+			                 +"<div class='price'> <a href='#' class='text-dark-white fw-500'>"+ (parseInt(val.price) * parseInt(val.quantity)) +"</a></div>"
 			             +"</div>"
-			             totalPriceDTO += parseInt(val.price);
+			             totalPriceDTO += (parseInt(val.price) * parseInt(val.quantity));
 					 });
 					 $("#cat-product-box").html(html_code);
 					 $("#cat-product-box-topbar").html(html_code);
 					 $("#totalPriceDTO").text(totalPriceDTO);
 					 $("#totalPriceDTOTopBar").text(totalPriceDTO);
 					 $("#sizeCart").text(sizeCart);
+					 $('#cat-product' + productId).hide();
+					 $("#totalCartCheckOut").text(totalPriceDTO + 20000);
 				  }
 		  	});
 		}

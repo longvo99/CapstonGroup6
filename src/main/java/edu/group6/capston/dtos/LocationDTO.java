@@ -52,4 +52,17 @@ public class LocationDTO {
 		this.maxPrice = maxPrice;
 	}
 	
+	public LocationDTO(int locationId, String locationName, String openTime, String closeTime,
+			Integer reviewCount, String locationCategoryName, String locationTypeName, String mediaPath) {
+		super();
+		this.locationId = locationId;
+		this.locationName = locationName;
+		this.openTime = openTime;
+		this.closeTime = closeTime;
+		this.reviewCount = reviewCount;
+		this.locationCategoryName = locationCategoryName;
+		this.locationTypeName = locationTypeName;
+		this.mediaPath = mediaPath;
+	}
+	
 }
