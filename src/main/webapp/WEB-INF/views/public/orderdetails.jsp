@@ -107,10 +107,14 @@
 	                                  	 	 		}
 	                                  	 	 	 });
                                     			$.each(data[country_id].Districts, function (index1, value1) {
-                                    				alert(value1.Id);
-                                    				if(${userAddress.district} == value1.Id){
+                                    				if('${userAddress.district}' == value1.Id){
 	                                  	 	 			result += (value1.Name + ", ");
 	                                  	 	 			state_id = index1;
+	                                  	 	 		}
+                                    			});
+                                    			$.each(data[country_id].Districts[state_id].Wards, function (index2, value2) {
+                                    				if(${userAddress.ward} == value2.Id){
+	                                  	 	 			result += value2.Name;
 	                                  	 	 		}
                                     			});
                                     			$("#resultAdress").text(result);

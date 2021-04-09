@@ -152,6 +152,8 @@ public class PublicOrderController extends PublicAbstractController{
 	public String checkout(Model model, HttpServletRequest request) {
 		Users user = (Users) request.getSession().getAttribute("userSession");
 		model.addAttribute("userAddress", GlobalsFunction.AddressUser(user.getContactAddress()));
+		System.out.println("aaaa" + GlobalsFunction.AddressUser(user.getContactAddress()).getDistrict());
+		System.out.println("bbbb" + GlobalsFunction.AddressUser(user.getContactAddress()).getWard());
 		return "public.checkout";
 	}
 	
