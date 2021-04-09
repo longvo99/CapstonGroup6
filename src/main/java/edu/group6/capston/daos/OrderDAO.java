@@ -79,6 +79,13 @@ public class OrderDAO {
 		}
 	}
 
+	public List<Orders> findByUserId(int userId) {
+		try (Session session = this.sessionFactory.openSession()) {
+			List<Orders> list = session.createQuery("from Orders WHERE userId = " + userId, Orders.class).list();
+			return list;
+		}
+	}
+
 	/*
 	 * public Order findById(int id) { Session session =
 	 * this.sessionFactory.openSession(); return session.find(Order.class,

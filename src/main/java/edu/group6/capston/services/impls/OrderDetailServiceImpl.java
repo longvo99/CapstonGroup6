@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.group6.capston.daos.OrderDetailDAO;
+import edu.group6.capston.dtos.OrderDTO;
 import edu.group6.capston.models.OrderDetail;
 import edu.group6.capston.services.OrderDetailService;
 
@@ -41,4 +42,15 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 		return false;
 	}
 	*/
+
+	@Override
+	public boolean save(OrderDetail orderDetail) {
+		return orderDetailDAO.save(orderDetail);
+	}
+
+	@Override
+	public List<OrderDTO> findOrderDTO(int orderId) {
+		// TODO Auto-generated method stub
+		return orderDetailDAO.findByOrderDTO(orderId);
+	}
 }

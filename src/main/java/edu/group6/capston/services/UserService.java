@@ -6,14 +6,11 @@ import edu.group6.capston.models.Users;;
 
 public interface UserService {
 	List<Users> findAll();
-	/*
-	 * int add(User user); int edit(UserDTO user, int id); int delete(int id);
-	 * UserDTO findUserId(int id); List<Role> findRoleAll(); int totalRow();
-	 */
 	List<Users> findByRoleName(String roleName);
 	Users getProfile(Users users);
 	boolean save(Users user);
 	Users findByUsername(String username);
 	Users findByUsersId(int i);
 	Users findByEmail(String email);
+	boolean update(Users user);
 }

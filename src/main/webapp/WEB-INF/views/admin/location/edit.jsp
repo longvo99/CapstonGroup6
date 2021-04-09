@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/templates/tags/taglib.jsp" %>
 	<sec:authentication var="userDetail" property="principal" />
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
    	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/admin/assets/js/image-uploader.min.js"></script>
 	<div id="content-wrapper" class="d-flex flex-column">
       <div id="content">

@@ -107,4 +107,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	public Users findByEmail(String email) {
 		return UserDAO.findByEmail(email);
 	}
+
+
+	@Override
+	public boolean update(Users user) {
+		// TODO Auto-generated method stub
+		return UserDAO.update(user);
+	}
 }

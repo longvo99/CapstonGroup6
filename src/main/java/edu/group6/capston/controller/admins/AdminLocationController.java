@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import edu.group6.capston.dtos.CityDistrictWard;
 import edu.group6.capston.dtos.ImageUpload;
 import edu.group6.capston.models.Location;
 import edu.group6.capston.models.LocationCategory;
@@ -34,7 +33,6 @@ import edu.group6.capston.services.LocationTypeService;
 import edu.group6.capston.utils.GlobalsConstant;
 import edu.group6.capston.utils.GlobalsFunction;
 import edu.group6.capston.utils.UploadFile;
-import edu.group6.capston.utils.readFileJson;
 
 @Controller
 @RequestMapping("admin/location")

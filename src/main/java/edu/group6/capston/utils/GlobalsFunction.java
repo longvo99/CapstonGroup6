@@ -8,16 +8,14 @@ import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import edu.group6.capston.daos.UserDAO;
 import edu.group6.capston.dtos.LocationDTO;
-import edu.group6.capston.models.Location;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Service;
-
-import edu.group6.capston.daos.UserDAO;
+import edu.group6.capston.dtos.UserAddress;
 import edu.group6.capston.models.CustomUserDetails;
+import edu.group6.capston.models.Location;
 import edu.group6.capston.models.LocationFavorites;
 import edu.group6.capston.models.Users;
 
@@ -162,5 +160,25 @@ public class GlobalsFunction {
 	 * //locationFavorites.setLocation(locationFavorites.getLocation()).setMediaPath
 	 * (image)); } }
 	 */
+
+	public static UserAddress AddressUser(String address) {
+		UserAddress userAddress = null;
+		if (address != null) {
+			String[] string = address.split("-");
+			userAddress = new UserAddress(string[0], string[1], string[2], string[3]);
+		} else {
+			userAddress = new UserAddress("", "0", "0", "0");
+		}
+		return userAddress;
+	}
+
+	public static String AddressUser(UserAddress address) {
+		return address.getStress() + "-" + address.getCity() + "-" + address.getDistrict() + "-" + address.getWard();
+	}
+
+	public static double totalPriceCombo(double price, int rateDiscount) {
+		double total = price + (price * rateDiscount / 100);
+		return total;
+	}
 
 }

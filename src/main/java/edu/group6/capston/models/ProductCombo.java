@@ -31,4 +31,8 @@ public class ProductCombo {
 	private String description;
 	@Column
 	private String imagePath;
+	public ProductCombo(int productComboId) {
+		super();
+		this.productComboId = productComboId;
+	}
 }

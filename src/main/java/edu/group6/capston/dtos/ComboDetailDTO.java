@@ -41,4 +41,6 @@ public class ComboDetailDTO {
 		this.productImagePath = productImagePath;
 		this.price = price;
 	}
+	
+	
 }

@@ -541,7 +541,7 @@
                                                         </a>
                                                     </div>
                                                     <div class="delete-btn">
-                                                        <a href="javascript:void(0)" onclick="deleteCookieOrder(${orderDTO.productId})" class="text-dark-white"> <i class="far fa-trash-alt"></i>
+                                                        <a href="javascript:void(0)" onclick="deleteCookieOrder('${orderDTO.productId}')" class="text-dark-white"> <i class="far fa-trash-alt"></i>
                                                         </a>
                                                     </div>
                                                     <div class="price"> <a href="#" class="text-dark-white fw-500">${orderDTO.quantity * orderDTO.price}</a>
@@ -564,7 +564,7 @@
                                     </div>
                                     </c:if>
                                 </div>
-                                <div class="card-footer padding-15"> <a href="checkout.html " class="btn-first green-btn text-custom-white full-width fw-500">Proceed to Checkout</a>
+                                <div class="card-footer padding-15"> <a href="${pageContext.request.contextPath}/public/checkout" class="btn-first green-btn text-custom-white full-width fw-500">Thanh toán</a>
                                 </div>
                             </div>
                         </div>
@@ -1270,7 +1270,7 @@
                             <div class="input-group-append">
                                 <button class="minus-btn combo${comboDetail.productComboId}" type="button" name="button"> <i class="fas fa-minus"></i></button>
                             </div>
-                            <input type="text" class="text-center" name="quantity" id="quantity${comboDetail.productComboId}" value="1" readonly="readonly">
+                            <input type="text" class="text-center" name="quantity" id="quantityCombo${comboDetail.productComboId}" value="1" readonly="readonly">
                             <div class="input-group-prepend">
                                 <button class="plus-btn combo${comboDetail.productComboId}" type="button" name="button"><i class="fas fa-plus"></i></button>
                             </div>
@@ -1286,13 +1286,13 @@
                             </div>
                             <script type="text/javascript">
 	                            $(".plus-btn.combo${comboDetail.productComboId}").on('click', function () {
-	              			      	var quantity = $("#quantity${comboDetail.productComboId}").val();
+	              			      	var quantity = $("#quantityCombo${comboDetail.productComboId}").val();
 	              			    	var price = ${totalPrice + (totalPrice*comboDetail.rateDiscount/100)};
 	              			    	var total = (parseInt(quantity) + 1) * parseInt(price);
 	              			    	$("#totalPrice${comboDetail.productComboId}").text(total);
 	              				});
 	                            $(".minus-btn.combo${comboDetail.productComboId}").on('click', function () {
-	              			      	var quantity = $("#quantity${comboDetail.productComboId}").val();
+	              			      	var quantity = $("#quantityCombo${comboDetail.productComboId}").val();
 	              			      	var price = ${totalPrice + (totalPrice*comboDetail.rateDiscount/100)};
 	              			    	var priceCurr = $("#totalPrice${comboDetail.productComboId}").text();
 	              			    	var total = parseInt(price) * (parseInt(quantity) - 1);
@@ -1337,7 +1337,7 @@
                 	</c:forEach>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn-second btn-submit center">ĐẶT HÀNG</button>
+                    <button class="btn-second btn-submit center" onclick="setCookieOrderCombo(${comboDetail.productComboId})" data-dismiss="modal">ĐẶT HÀNG</button>
                 </div>
             </div>
         </div>

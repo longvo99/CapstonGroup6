@@ -48,8 +48,8 @@
     <!-- plus and minus  -->
    <%--  <link href="${pageContext.request.contextPath}/resources/public/assets/css/checkout.css" rel="stylesheet"> --%>
     <!-- place -->
-    
-    <link href="${pageContext.request.contextPath}/resources/admin/assets/css/jquery-ui.css" rel="stylesheet">
+    <script src="/Capston.Group6/resources/admin/assets/vendor/jquery/jquery.min.js"></script> 
+    <link href="/Capston.Group6/resources/admin/assets/css/autocomplete/jquerui.css" rel="stylesheet">
     
     <style type="text/css">
 	.dropdown-submenu {
@@ -454,7 +454,7 @@ input[type="file"] {
 		                                                        </a>
 		                                                    </div>
 		                                                    <div class="delete-btn">
-		                                                        <a href="javascript:void(0)" onclick="deleteCookieOrder(${orderDTO.productId})" class="text-dark-white"> <i class="far fa-trash-alt"></i>
+		                                                        <a href="javascript:void(0)" onclick="deleteCookieOrder('${orderDTO.productId}')" class="text-dark-white"> <i class="far fa-trash-alt"></i>
 		                                                        </a>
 		                                                    </div>
 		                                                    <div class="price"> <a href="#" class="text-dark-white fw-500">${orderDTO.quantity * orderDTO.price}</a>
@@ -509,8 +509,6 @@ input[type="file"] {
     </div>
     <div class="main-sec"></div>
     <!-- Navigation -->
-
-<script language="JavaScript" src="https://code.jquery.com/jquery-1.11.1.min.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 	$(".btn-group, .dropdown").hover(

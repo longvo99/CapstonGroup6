@@ -100,4 +100,16 @@ public class UserDAO{
 	      return null;
 	    }
 	}
+
+	public boolean update(Users user) {
+		try (Session session = this.sessionFactory.openSession()) {
+			Transaction tx = session.beginTransaction();
+			session.update(user);
+			tx.commit();
+			session.close();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 }
