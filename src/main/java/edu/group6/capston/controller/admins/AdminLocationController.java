@@ -79,60 +79,56 @@ public class AdminLocationController {
 		String mediaPath = "";
 		for (MultipartFile file : filess) {
 			String fileName = UploadFile.upload(file, request);
-			if( fileName != "") {
-				mediaPath += fileName + ";" ;
+			if (fileName != "") {
+				mediaPath += fileName + ";";
 			}
 		}
-		if(mediaPath != "" && oldImages == null) {
+		if (mediaPath != "" && oldImages == null) {
 			location.setMediaPath(mediaPath);
-		} else
-			if(mediaPath == "" && oldImages != null) {
+		} else if (mediaPath == "" && oldImages != null) {
+			String[] mediaPathArr = GlobalsFunction.splitPathMedia(location.getMediaPath());
+			for (int i = 0; i < mediaPathArr.length; i++) {
+				if (oldImages.contains(String.valueOf(i)) == true) {
+					mediaPath += mediaPathArr[i] + ";";
+				} else {
+					UploadFile.del(mediaPathArr[i], request);
+				}
+			}
+			location.setMediaPath(mediaPath);
+		} else if (mediaPath != "" && oldImages != null) {
+			if (oldImages.lastIndexOf("0") != 0) {
+				oldImages = oldImages.substring(0, oldImages.lastIndexOf("0") - 1);
 				String[] mediaPathArr = GlobalsFunction.splitPathMedia(location.getMediaPath());
+				String str = "";
 				for (int i = 0; i < mediaPathArr.length; i++) {
-					if(oldImages.contains(String.valueOf(i)) == true) {
-						mediaPath += mediaPathArr[i] + ";" ;
+					if (oldImages.contains(String.valueOf(i)) == true) {
+						str += mediaPathArr[i] + ";";
 					} else {
 						UploadFile.del(mediaPathArr[i], request);
 					}
 				}
-				location.setMediaPath(mediaPath);
-			} else
-				if(mediaPath != "" && oldImages != null) {
-					if (oldImages.lastIndexOf("0") != 0) {
-						oldImages = oldImages.substring(0, oldImages.lastIndexOf("0") - 1);
-						String[] mediaPathArr = GlobalsFunction.splitPathMedia(location.getMediaPath());
-						String str = "";
-						for (int i = 0; i < mediaPathArr.length; i++) {
-							if(oldImages.contains(String.valueOf(i)) == true) {
-								str += mediaPathArr[i] + ";" ;
-							} else {
-								UploadFile.del(mediaPathArr[i], request);
-							}
-						}
-						location.setMediaPath(str + mediaPath);
-					} else {
-						String[] mediaPathArr = GlobalsFunction.splitPathMedia(location.getMediaPath());
-						for (int i = 0; i < mediaPathArr.length; i++) {
-								UploadFile.del(mediaPathArr[i], request);
-						}
-						location.setMediaPath(mediaPath);
-					}
-				} else if(mediaPath == "" && oldImages == null) {
-					String[] mediaPathArr = GlobalsFunction.splitPathMedia(location.getMediaPath());
-					for (int i = 0; i < mediaPathArr.length; i++) {
-							UploadFile.del(mediaPathArr[i], request);
-					}
-					location.setMediaPath(mediaPath);
+				location.setMediaPath(str + mediaPath);
+			} else {
+				String[] mediaPathArr = GlobalsFunction.splitPathMedia(location.getMediaPath());
+				for (int i = 0; i < mediaPathArr.length; i++) {
+					UploadFile.del(mediaPathArr[i], request);
 				}
-		
-			if (locationService.update(location)) {
-				rd.addFlashAttribute(GlobalsConstant.MESSAGE,
-						messageSource.getMessage("success", null, Locale.getDefault()));
-				rd.addFlashAttribute("success", true);
-				return "redirect:/admin/location/image/" + locationId;
+				location.setMediaPath(mediaPath);
 			}
+		} else if (mediaPath == "" && oldImages == null) {
+			String[] mediaPathArr = GlobalsFunction.splitPathMedia(location.getMediaPath());
+			for (int i = 0; i < mediaPathArr.length; i++) {
+				UploadFile.del(mediaPathArr[i], request);
+			}
+			location.setMediaPath(mediaPath);
+		}
+
+		if (locationService.update(location)) {
+			rd.addFlashAttribute(GlobalsConstant.MESSAGE,
+					messageSource.getMessage("success", null, Locale.getDefault()));
+			return "redirect:/admin/location/image/" + locationId;
+		}
 		rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
-		rd.addFlashAttribute("error", true);
 		return "admin.location.image";
 	}
 
@@ -176,10 +172,10 @@ public class AdminLocationController {
 				}
 			}
 			location.setMediaPath(mediaPath);
+			location.setUsers(new Users(GlobalsFunction.getUsers().getUserId()));
 			if (locationService.save(location)) {
 				rd.addFlashAttribute(GlobalsConstant.MESSAGE,
 						messageSource.getMessage("success", null, Locale.getDefault()));
-				rd.addFlashAttribute("success", true);
 				return "redirect:/admin/location/index";
 			}
 		}

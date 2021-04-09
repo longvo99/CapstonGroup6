@@ -12,31 +12,6 @@
               <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
             </ol>
           </div>
-
-<p>${users.username}aaa</p>
-		    		<%-- <c:if test="${not empty lists}">
-		    		<p>bbbbb</p>
-									<c:forEach items="lists" var="local">
-									<p>${local.locationName}</p>
-					          </c:forEach>
-					</c:if>	
-					<c:if test="${empty lists}">
-							<p>cccccc</p>
-					</c:if>	 --%>
-					 <c:choose>
-         <c:when test = "${not empty list}">
-            <c:forEach items="list" var="local">
-				<p>${local.locationId}</p>
-          </c:forEach>
-         </c:when>
-         <c:when test = "${empty list}">
-            Salary is very good.
-         </c:when>
-         <c:otherwise>
-            No comment sir...
-         </c:otherwise>
-      </c:choose>
-
           <div class="row mb-3">
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">

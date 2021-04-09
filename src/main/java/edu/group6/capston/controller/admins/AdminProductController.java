@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import edu.group6.capston.models.Location;
 import edu.group6.capston.models.Product;
 import edu.group6.capston.services.ProductCategoryService;
 import edu.group6.capston.services.ProductService;
@@ -100,6 +101,7 @@ public class AdminProductController {
 			filename = productService.findByProductId(product.getProductId()).getImagePath();
 		}
 		product.setImagePath(filename);
+		product.setLocation(new Location(productService.findByProductId(product.getProductId()).getLocation().getLocationId()));
 		if (productService.update(product)) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE,
 					messageSource.getMessage("success", null, Locale.getDefault()));

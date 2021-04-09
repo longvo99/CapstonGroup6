@@ -142,7 +142,7 @@ input[type="file"] {
 				                            <ul class="dropdown-menu">
 				                            	<c:forEach items="${locationCategoriesList2}" var="cat2">
 													<c:if test="${cat2.parentId eq cat1.categoryId}">
-														<li value="3"><a class="dropdown-item" tabindex="-1">${cat2.locationCategoryName}</a></li>
+														<li value="3"><a href="${pageContext.request.contextPath}/public/indexbycat/${cat2.categoryId}" class="dropdown-item" tabindex="-1">${cat2.locationCategoryName}</a></li>
 														<li class="dropdown-divider"></li>
 													</c:if>
 												</c:forEach>

@@ -8,7 +8,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-sm-3">
+		<%-- <div class="col-sm-3">
 			<!--left col-->
 			<div class="text-center">
 				<c:set var="avatarPath" value="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" />
@@ -45,9 +45,9 @@
 				</div>
 			</div> -->
 
-		</div>
+		</div> --%>
 		<!--/col-3-->
-		<div class="col-sm-9">
+		<div class="col-lg-12">
 			<div class="tab-content">
 				<div class="tab-pane active" id="home">
 					<form class="form" action="##" method="post" id="registrationForm">

@@ -18,5 +18,7 @@ public interface LocationService {
 	List<LocationDTO> findTopDiscount();
 	Location findByUserId(int userId);
 	List<Location> findAllByUserId(int userId);
+	int updateImage(Location location);
+	List<Location> findAllByCategory(Integer categoryId);
 	
 }

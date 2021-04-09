@@ -168,7 +168,7 @@ public class AdminDiscountController {
 			throws IllegalStateException, IOException {
 		if (br.hasErrors()) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
-			return "aadmin.discount.edit";
+			return "admin.discount.edit";
 		}
 		String filename = UploadFile.upload(file, request);
 		if (!"".equals(filename)) {

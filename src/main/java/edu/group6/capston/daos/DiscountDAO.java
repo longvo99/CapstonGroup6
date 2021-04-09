@@ -91,10 +91,12 @@ public class DiscountDAO {
 
 	public int delete(List<Integer> listDiscountId1) {
 		try (Session session = this.sessionFactory.openSession()) {
-			session.beginTransaction();
-			Query q = session.createQuery("DELETE FROM DiscountInfo WHERE discountId IN (:list)");
-			q.setParameter("list", listDiscountId1); 
-			return q.executeUpdate();
+			Transaction tx  = session.beginTransaction();
+			Query query = session.createQuery("DELETE FROM DiscountInfo WHERE discountId IN (:list)");
+			query.setParameter("list", listDiscountId1); 
+			int i = query.executeUpdate();
+			tx.commit();
+			return i;
 		}
 	}
 }

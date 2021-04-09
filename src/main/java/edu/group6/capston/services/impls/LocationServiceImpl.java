@@ -4,14 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.group6.capston.daos.LocationDAO;
 import edu.group6.capston.dtos.LocationDTO;
 import edu.group6.capston.models.Location;
-import edu.group6.capston.models.LocationFavorites;
 import edu.group6.capston.services.LocationService;
 
 @Service
+@Transactional
 public class LocationServiceImpl implements LocationService {
 	@Autowired
 	private LocationDAO LocationDAO;
@@ -79,6 +80,16 @@ public class LocationServiceImpl implements LocationService {
 	@Override
 	public List<Location> findAllByUserId(int userId) {
 		return LocationDAO.findAllByUserId(userId);
+	}
+
+	@Override
+	public int updateImage(Location location) {
+		return LocationDAO.updateImage(location);
+	}
+
+	@Override
+	public List<Location> findAllByCategory(Integer categoryId) {
+		return LocationDAO.findAllByCategory(categoryId);
 	}
 
 }

@@ -94,6 +94,18 @@ public class PublicController extends PublicAbstractController {
 		}
 		return "public.index";
 	}
+	
+	@GetMapping("/indexbycat/{categoryId}")
+	public String indexbycat(@PathVariable Integer categoryId, Model model, HttpServletRequest request) {
+		model.addAttribute("DiscountList", discountService.findAll());
+		model.addAttribute("listLocationByCat",locationService.findAllByCategory(categoryId));
+		if(request.getSession().getAttribute("userSession") != null) {
+			Users user = (Users) request.getSession().getAttribute("userSession");
+			List<LocationFavorites> locationFavoriteList = locationFavoriteService.findLocationFavorite(user.getUserId());
+			model.addAttribute("locationFavoriteList", GlobalsFunction.changeImageLocationFavorites(locationFavoriteList));
+		}
+		return "public.indexbycat";
+	}
 
 	@GetMapping("/restaurant/{locationId}")
 	public String productdetail(@PathVariable Integer locationId, Model model, HttpServletRequest request) {
@@ -110,6 +122,7 @@ public class PublicController extends PublicAbstractController {
 			comment.setCurrentTime(GlobalsFunction.findDifference(comment.getCurrentTime()));
 		}
 		model.addAttribute("commentListParent", commentListParent);
+		System.out.println(commentListParent);
 		List<Comment> commentListChild = commentService.findAllCommentByParentCommentId(locationId);
 		for (Comment comment : commentListChild) {
 			comment.setCurrentTime(GlobalsFunction.findDifference(comment.getCurrentTime()));

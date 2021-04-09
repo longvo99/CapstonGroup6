@@ -27,35 +27,26 @@
               <div class="col-lg-12">
                 <div class="login-form">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">LOGIN</h1>
+                    <h1 class="h4 text-gray-900 mb-4">QUÊN MẬT KHẨU</h1>
                   </div>
-                  <c:if test="${not empty param['msg']}">
-	                	<p style="color:red;">Sai tên đăng nhập hoặc mật khẩu</p>
+                  <c:if test="${not empty error}">
+	                	<p style="color:red;">${error}</p>
 	              </c:if>
-	              <c:if test="${not empty changepass}">
-	                	<p style="color:red;">Bạn đã đổi mật khẩu thành công!</p>
+	              <c:if test="${not empty message}">
+	                	<p style="color:green;">${message}</p>
 	              </c:if>
-	              <c:if test="${not empty param['error']}">
-				    <p class="text-danger">${SPRING_SECURITY_LAST_EXCEPTION.message}</p>
-				  </c:if>
-                  <form action="${pageContext.request.contextPath}/auth/login" name='loginForm' class="user" method="POST">
-                    <div class="form-group">
-                      <input type="text" class="form-control" name="username" id="username" aria-describedby="username" placeholder="Enter username">
+                  <form action="${pageContext.request.contextPath}/forgot_password" name='forgotPasswordForm' class="" method="POST">
+                    <div class="form-group text-center">
+                    	<p>Truy cập email của bạn để nhận link đổi mật khẩu!</p>
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                      <input type="text" name="username" class="form-control" placeholder="Nhập tên tài khoản!" required autofocus/>
                     </div>
                     <div class="form-group">
-                      <div class="custom-control custom-checkbox small" style="line-height: 1.5rem;">
-                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                        <label class="custom-control-label" for="customCheck">Remember Me</label>
-                      </div>
+                      <input type="email" name="email" class="form-control" placeholder="Nhập email đã đăng ký!" required autofocus/>
                     </div>
                     <div class="form-group">
-                      <button type="submit" class="btn btn-primary btn-block">Login</button>
-                    </div>
-                    <div>
-                    	<a href="${pageContext.request.contextPath}/forgot_password" >Forgot your password?</a>
+                      <button type="submit" class="btn btn-primary btn-block">GỬI</button>
                     </div>
                     <!-- <hr>
                     <a href="https://indrijunanda.github.io/RuangAdmin/index.html" class="btn btn-google btn-block">
