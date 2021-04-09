@@ -9,6 +9,12 @@
 	<name>CapstonGroup6 Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
+	<!-- <properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+	</properties> -->
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -189,6 +195,18 @@
 			<groupId>com.googlecode.json-simple</groupId>
 			<artifactId>json-simple</artifactId>
 			<version>1.1.1</version>
+		</dependency>
+		<!-- -->
+		<!-- SEND MAIL -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>5.0.2.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4</version>
 		</dependency>
 		<!-- -->
 	</dependencies>

@@ -1,6 +1,5 @@
 package edu.group6.capston.controller.admins;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,20 +20,20 @@ import edu.group6.capston.services.UserService;
 @Controller
 @RequestMapping("admin")
 public class AdminIndexController {
-	
+
 	@Autowired
 	MessageSource messageSource;
-	
+
 	@Autowired
 	private LocationService locationService;
 	
 	@Autowired
-	private UserService userService;
-	
-	@Autowired
 	private RoleService roleService;
-	
-	@RequestMapping(value ="/index")
+
+	@Autowired
+	private UserService userService;
+
+	@RequestMapping(value = "/index")
 	public String Index(Model model, HttpServletRequest request) {
 		request.getSession().setAttribute("roleList", roleService.findAll());
 		model.addAttribute("locationCount", locationService.locationCount());

@@ -27,35 +27,18 @@
               <div class="col-lg-12">
                 <div class="login-form">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">LOGIN</h1>
+                    <h1 class="h4 text-gray-900 mb-4">ĐẶT LẠI MẬT KHẨU CỦA BẠN</h1>
                   </div>
-                  <c:if test="${not empty param['msg']}">
-	                	<p style="color:red;">Sai tên đăng nhập hoặc mật khẩu</p>
-	              </c:if>
-	              <c:if test="${not empty changepass}">
-	                	<p style="color:red;">Bạn đã đổi mật khẩu thành công!</p>
-	              </c:if>
-	              <c:if test="${not empty param['error']}">
-				    <p class="text-danger">${SPRING_SECURITY_LAST_EXCEPTION.message}</p>
-				  </c:if>
-                  <form action="${pageContext.request.contextPath}/auth/login" name='loginForm' class="user" method="POST">
+                  <form action="${pageContext.request.contextPath}/reset_password" name='forgotPasswordForm' class="" method="POST">
+                    <input type="hidden" name="token" value="${token}" />
                     <div class="form-group">
-                      <input type="text" class="form-control" name="username" id="username" aria-describedby="username" placeholder="Enter username">
+                      <input type="password" name="password" id="password" class="form-control" placeholder="Enter your new password" required autofocus />
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                    	<input type="password" class="form-control" placeholder="Confirm your new password" required/>
                     </div>
                     <div class="form-group">
-                      <div class="custom-control custom-checkbox small" style="line-height: 1.5rem;">
-                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                        <label class="custom-control-label" for="customCheck">Remember Me</label>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <button type="submit" class="btn btn-primary btn-block">Login</button>
-                    </div>
-                    <div>
-                    	<a href="${pageContext.request.contextPath}/forgot_password" >Forgot your password?</a>
+                      <button type="submit" class="btn btn-primary btn-block">Change Password</button>
                     </div>
                     <!-- <hr>
                     <a href="https://indrijunanda.github.io/RuangAdmin/index.html" class="btn btn-google btn-block">

@@ -44,6 +44,7 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>Category</th>
+                        <th>Type</th>
                         <th class="center text-center">Chức năng</th>
                       </tr>
                     </thead>
@@ -53,88 +54,52 @@
 							<td>${location.locationId}</td>
 							<td>${location.locationName}</td>
 							<td>${location.locationCategory.locationCategoryName}</td>
+							<td>${location.locationType.locationTypeName}</td>
 							<td class="center text-center">
 								<a href="${pageContext.request.contextPath}/admin/location/edit/${location.locationId}" class="btn btn-sm btn-success"><i class="fa fa-edit">Chi tiết</i></a>
 								<c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
 			                  		<a href="${pageContext.request.contextPath}/admin/location/image/${location.locationId}" class="btn btn-sm btn-primary"><i class="fa fa-edit">Hình ảnh</i></a>
 			                  	</c:if>
-                                <a href="${pageContext.request.contextPath}/admin/product/index/${location.locationId}" class="btn btn-sm btn-primary"><i class="fa fa-edit">Sản phẩm</i></a>
+                                <a href="${pageContext.request.contextPath}/admin/product/index/${location.locationId}" class="btn btn-sm btn-warning"><i class="fa fa-edit">Sản phẩm</i></a>
                                 <a href="${pageContext.request.contextPath}/admin/location/delete"  class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa không');"><i class="fas fa-trash"> Xóa </i></a>
+                                <c:if test="${userDetail.user.role.roleId eq 'ADMIN'}">
+			                  		<a href="" data-toggle="modal" data-target="#exampleModalCenter${location.locationId}" class="btn btn-sm btn-info"><i class="fa fa-edit"> Liên hệ </i></a>
+			                  		<!-- Modal Center -->
+							          <div class="modal fade" id="exampleModalCenter${location.locationId}" tabindex="-1" role="dialog"
+							            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+							            <div class="modal-dialog modal-dialog-centered" role="document">
+							              <div class="modal-content">
+							                <div class="modal-header">
+							                  <h5 class="modal-title" id="exampleModalCenterTitle">Gửi liên hệ cho: <strong>${location.locationName}</strong> </h5>
+							                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							                    <span aria-hidden="true">&times;</span>
+							                  </button>
+							                </div>
+							                <div class="modal-body">
+							                	<div class="comment-form">
+													<form role="form" action="${pageContext.request.contextPath}/mail" method="post">
+														<div class="form-group form-inline">
+														  <div class="form-group col-lg-6 col-md-12 name">
+														    <input type="text" class="form-control" name="tieude" id="tieude" placeholder="Tiêu đề" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Tiêu đề'" required="true">
+														  </div>
+														  <div class="form-group col-lg-6 col-md-12 email">
+														    <input readonly="readonly" type="text" class="form-control" name="email" id="email" value="${location.locationEmail}">
+														  </div>										
+														</div>
+														<div class="form-group">
+															<textarea class="form-control mb-10" id="message" rows="5" name="message" placeholder="Nội dung" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nội dung'" required=""></textarea>
+														</div>
+														<input type="submit" value="Gửi" name="submit" class="btn btn-primary"/>
+													</form>
+												</div>
+							                </div>
+							              </div>
+							            </div>
+							          </div>
+			         			 	<!-- Modal Center -->
+			                  	</c:if>
 							</td>
 						</tr>
-						<!-- Modal Center -->
-			         <%--  <div class="modal fade" id="exampleModalCenter${location.locationId}" tabindex="-1" role="dialog"
-			            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-			            <div class="modal-dialog modal-dialog-centered" role="document">
-			              <div class="modal-content">
-			                <div class="modal-header">
-			                  <h5 class="modal-title" id="exampleModalCenterTitle">Chi tiết địa điểm: <strong></strong> </h5>
-			                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			                    <span aria-hidden="true">&times;</span>
-			                  </button>
-			                </div>
-			                <div class="modal-body">
-			                	<div class="comment-form">
-				                	<form action="${pageContext.request.contextPath}/admin/location/edit" method="POST">
-										<div class="form-group">
-					                      <label for="name">Location ID</label>
-					                      <input class="form-control mb-3" type="text" value="${location.locationId}" id="locationId" name="locationId">
-					                    </div>
-										<div class="form-group">
-					                      <label for="name">Location Name</label>
-					                      <input class="form-control mb-3" type="text" value="${location.locationName}" id="locationName" name="locationName">
-					                    </div>
-					                    <div class="form-group">
-					                      <label for="address">Address</label>
-					                      <input class="form-control mb-3" type="text" value="${location.address}" id="address" name="address">
-					                    </div>
-					                    <div class="form-group">
-					                      <label for="opentime">Open Time</label>
-					                      <input class="form-control mb-3" type="text" value="${location.openTime}" id="opentime" name="opentime">
-					                    </div>
-					                    <div class="form-group">
-					                      <label for="closetime">Close Time</label>
-					                      <input class="form-control mb-3" type="text" value="${location.closeTime}" id="closetime" name="closetime">
-					                    </div>
-					                    <div class="form-group">
-					                      <label for="locationcategory">Location Category</label>
-					                      <input class="form-control mb-3" type="text" value="${location.locationCategoryName}" id="locationcategory" name="locationcategory">
-					                    </div>
-					                    <div class="form-group">
-					                      <label for="locationtype">Location Type</label>
-					                      <input class="form-control mb-3" type="text" value="${location.locationTypeName}" id="locationtype" name="locationtype">
-					                    </div>
-					                    <div class="form-group">
-					                      <label for="country">Nước</label>
-					                      <select class="form-control" name="country">
-					                      	<option value="Việt Nam">Việt Nam</option>
-					                      </select>
-					                    </div>
-					                    <div class="form-group">
-					                    	<label for="country">Tỉnh/thành</label>
-										   <select name="city" id="city" class="form-control input-lg">
-										    <option value="">Select tỉnh/thành</option>
-										   </select>
-										</div>
-										<div class="form-group">
-											<label for="country">Quận huyện</label>
-										   <select name="district" id="district" class="form-control input-lg">
-										    <option value="">Select</option>
-										   </select>
-										</div>
-										<div class="form-group">
-											<label for="country">Xã/phường</label>
-										   <select name="ward" id="ward" class="form-control input-lg">
-										    <option value="">Select</option>
-										   </select>
-										</div>
-									</form>
-								</div>
-			                </div>
-			              </div>
-			            </div>
-			          </div> --%>
-			          <!-- Modal Center -->
 			          </c:forEach>
                     </tbody>
                   </table>

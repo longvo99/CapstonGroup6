@@ -10,6 +10,7 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -177,6 +178,24 @@ public class LocationDAO {
 	public List<Location> findAllByUserId(int userId) {
 		try (Session session = this.sessionFactory.openSession()) {
 			return session.createQuery("FROM Location WHERE users.userId = " + userId, Location.class).list();
+		}
+	}
+
+	public int updateImage(Location location) {
+		try (Session session = this.sessionFactory.openSession()) {
+			String hql = "update Location set mediaPath = '"+ location.getMediaPath() +"' where locationId = " + location.getLocationId();
+			Query query = session.createQuery(hql);
+			/*
+			 * query.setParameter("mediaPath", location.getMediaPath());
+			 * query.setParameter("locationId", location.getLocationId());
+			 */
+			return query.executeUpdate(); 
+		}
+	}
+
+	public List<Location> findAllByCategory(Integer categoryId) {
+		try (Session session = this.sessionFactory.openSession()) {
+			return session.createQuery("FROM Location WHERE locationCategory.categoryId = " + categoryId, Location.class).list();
 		}
 	}
 	

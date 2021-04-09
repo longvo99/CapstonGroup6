@@ -52,11 +52,11 @@
                     </div>
                     <div class="form-group">
                       <label for="opentime">Open Time</label>
-                      <input class="form-control mb-3" type="text" value="${location.openTime}" id="openTime" name="openTime" ${readonly}>
+                      <input class="form-control mb-3" type="time" value="${location.openTime}" id="openTime" name="openTime" ${readonly}>
                     </div>
                     <div class="form-group">
                       <label for="closetime">Close Time</label>
-                      <input class="form-control mb-3" type="text" value="${location.closeTime}" id="closeTime" name="closeTime" ${readonly}>
+                      <input class="form-control mb-3" type="time" value="${location.closeTime}" id="closeTime" name="closeTime" ${readonly}>
                     </div>
                     <div class="form-group">
                       <label for="locationcategory">Location Category</label>

@@ -19,4 +19,10 @@ public interface LocationService {
 	List<LocationDTO> findLocationByCategoryId(int categoryId);
 	Location findByUserId(int userId);
 	List<Location> findAllByUserId(int userId);
+<<<<<<< HEAD
+	int updateImage(Location location);
+	List<Location> findAllByCategory(Integer categoryId);
+	
+=======
+>>>>>>> 28c95529c879dd92f3a2b5775ca70cb518e9212e
 }

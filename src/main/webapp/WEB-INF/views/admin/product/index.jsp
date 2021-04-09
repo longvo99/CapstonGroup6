@@ -60,7 +60,7 @@
 							<td>${product.productCategory.productCategoryName}</td>
 							<td class="center text-center">
 								<a href="" data-toggle="modal" data-target="#exampleModalCenter${product.productId}" class="btn btn-sm btn-success"><i class="fa fa-edit">Detail</i></a>
-								<c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
+								<c:if test="${userDetail.user.role.roleId eq 'ADMIN'}">
 			                  		<a href="${pageContext.request.contextPath}/admin/product/edit/${product.productId}" class="btn btn-sm btn-primary"><i class="fa fa-edit">Edit</i></a>
                                 	<a href="${urlDel}" title="Xóa" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Xóa</a>
 			                  	</c:if>

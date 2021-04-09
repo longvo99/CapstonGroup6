@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import edu.group6.capston.controller.admins.CustomLoginFailureHandler;
+import edu.group6.capston.controller.admins.CustomLoginSuccessHandler;
 import edu.group6.capston.services.impls.UserServiceImpl;
  
 @Configuration
@@ -17,18 +19,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private UserServiceImpl userServiceImpl;
+	
+	@Autowired
+    private CustomLoginFailureHandler loginFailureHandler;
+     
+    @Autowired
+    private CustomLoginSuccessHandler loginSuccessHandler;
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        // Password encoder, để Spring Security sử dụng mã hóa mật khẩu người dùng
+        // Password encoder, Ä‘á»ƒ Spring Security sá»­ dá»¥ng mÃ£ hÃ³a máº­t kháº©u ngÆ°á»�i dÃ¹ng
         return new BCryptPasswordEncoder();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
-        auth.userDetailsService(userServiceImpl) // Cung cáp userservice cho spring security
-            .passwordEncoder(bCryptPasswordEncoder()); // cung cấp password encoder
+        auth.userDetailsService(userServiceImpl) // Cung cÃ¡p userservice cho spring security
+            .passwordEncoder(bCryptPasswordEncoder()); // cung cáº¥p password encoder
     }
 
     @Override
@@ -40,8 +48,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		loginPage("/auth/login").
 		usernameParameter("username").
 		passwordParameter("password").
-		defaultSuccessUrl("/admin/index").
-		failureUrl("/auth/login?msg=Error").	
+		failureHandler(loginFailureHandler).
+		successHandler(loginSuccessHandler).
 		loginProcessingUrl("/auth/login").
 		and().logout().
 		logoutUrl("/auth/logout").

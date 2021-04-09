@@ -22,7 +22,7 @@
  <!-- JVALIDATE -->
   <script src="${pageContext.request.contextPath}/resources/admin/assets/js/jquery.validate.min.js"></script>
   <!-- CKEDITOR -->
-  <script src="${pageContext.request.contextPath}/lib/ckeditor/ckeditor.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
   <style type="text/css">
 		#form .form-group label span.error {color: red; font-size: 20px;} 
 		#form .form-group label span.label {
@@ -126,12 +126,23 @@
         <div id="collapsePage" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Quản lý nhân sự</h6>
-            <c:if test="${ not empty sessionScope.roleList}">
-            	<c:forEach items="${sessionScope.roleList}" var="role">
-            		<a class="collapse-item" href="${pageContext.request.contextPath}/admin/user/${role.roleId}">${role.roleName}</a>
-            	</c:forEach>
+            <%@include file="/WEB-INF/templates/tags/taglib.jsp" %>
+            <sec:authentication var="userDetail" property="principal" />
+            <c:if test="${not empty sessionScope.roleList}">
+            	<c:if test="${userDetail.user.role.roleId eq 'ADMIN'}">
+            		<c:forEach items="${sessionScope.roleList}" var="role">
+            			<a class="collapse-item" href="${pageContext.request.contextPath}/admin/user/${role.roleId}">${role.roleName}</a>
+            		</c:forEach>
+            		<a class="collapse-item" href="${pageContext.request.contextPath}/admin/role/index">Quản lý Chức vụ</a>
+            	</c:if>
+            	<c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
+            		<c:forEach items="${sessionScope.roleList}" var="role">
+            			<c:if test="${userDetail.user.role.roleId eq role.roleId}">
+            				<a class="collapse-item" href="${pageContext.request.contextPath}/admin/user/${role.roleId}">Quản lý hồ sơ cá nhân</a>
+            			</c:if>
+            		</c:forEach>
+            	</c:if>
             </c:if>
-            <a class="collapse-item" href="${pageContext.request.contextPath}/admin/role/index">Quản lý Chức vụ</a>
           </div>
         </div>
       </li>

@@ -1,6 +1,7 @@
 package edu.group6.capston.models;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -55,6 +56,12 @@ public class Users {
 	@ManyToOne
 	@JoinColumn(name = "roleId")
 	private Role role;
+	@Column(name = "failedAttempt")
+	private int failedAttempt;
+	@Column
+	private Date lockTime;
+	@Column
+	private String resetPasswordToken;
 	public Users(String username, String contactName, String contactEmail, Timestamp joinDate, boolean banned,
 			boolean hide, Role role) {
 		super();
