@@ -32,6 +32,7 @@ import edu.group6.capston.models.Users;
 import edu.group6.capston.services.ComboDetailService;
 import edu.group6.capston.services.CommentService;
 import edu.group6.capston.services.DiscountService;
+import edu.group6.capston.services.LocationCategoriesService;
 import edu.group6.capston.services.LocationFavoriteService;
 import edu.group6.capston.services.LocationService;
 import edu.group6.capston.services.LocationTypeService;
@@ -47,6 +48,9 @@ public class PublicIndexController extends PublicAbstractController {
 
 	@Autowired
 	private LocationService locationService;
+	
+	@Autowired
+	private LocationCategoriesService categoryService;
 	
 	@Autowired
 	private LocationFavoriteService locationFavoriteService;
@@ -95,18 +99,6 @@ public class PublicIndexController extends PublicAbstractController {
 		return "public.index";
 	}
 	
-	@GetMapping("/indexbycat/{categoryId}")
-	public String indexbycat(@PathVariable Integer categoryId, Model model, HttpServletRequest request) {
-		model.addAttribute("DiscountList", discountService.findAll());
-		model.addAttribute("listLocationByCat",locationService.findAllByCategory(categoryId));
-		if(request.getSession().getAttribute("userSession") != null) {
-			Users user = (Users) request.getSession().getAttribute("userSession");
-			List<LocationFavorites> locationFavoriteList = locationFavoriteService.findLocationFavorite(user.getUserId());
-			model.addAttribute("locationFavoriteList", GlobalsFunction.changeImageLocationFavorites(locationFavoriteList));
-		}
-		return "public.indexbycat";
-	}
-
 	@GetMapping("/restaurant/{locationId}")
 	public String productdetail(@PathVariable Integer locationId, Model model, HttpServletRequest request) {
 		Location location = locationService.findLocationId(locationId);
@@ -147,23 +139,28 @@ public class PublicIndexController extends PublicAbstractController {
 		model.addAttribute("minMaxLocation", productService.findMinMaxPriceLocation());
 		
 		if(category.equals("new")) {
+			model.addAttribute("nameCategory","Địa điểm mới");
 			model.addAttribute("listLocation", GlobalsFunction.changeImageTopLocation(locationService.findTopNewLocationNew(12)));
 		}
 		if(category.equals("discount")) {
+			model.addAttribute("nameCategory","Địa điểm giảm giá");
 			model.addAttribute("listLocation", GlobalsFunction.changeImageTopLocation(locationService.findTopDiscount()));
 		}
 		if(category.contains("category")) {
 			String categoryId = category.substring(8, category.length());
+			model.addAttribute("nameCategory", categoryService.findNameCategory(Integer.valueOf(categoryId)).getLocationCategoryName());
 			model.addAttribute("listLocation", GlobalsFunction.changeImageTopLocation(locationService.findLocationByCategoryId(Integer.valueOf(categoryId))));
 		}
 		if(request.getSession().getAttribute("userSession") != null) {
 			Users user = (Users) request.getSession().getAttribute("userSession");
 			List<LocationFavorites> locationFavoriteList = locationFavoriteService.findLocationFavorite(user.getUserId());
+			model.addAttribute("nameCategory","Địa điểm yêu thích");
 			if(category.equals("favorite")) {
 				model.addAttribute("listLocation2", GlobalsFunction.changeImageLocationFavorites(locationFavoriteList));
 			}else {
 				model.addAttribute("locationFavoriteList", GlobalsFunction.changeImageLocationFavorites(locationFavoriteList));
 			}
+			
 		}
 		return "public.category";
 	}

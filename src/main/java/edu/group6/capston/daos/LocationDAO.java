@@ -185,10 +185,6 @@ public class LocationDAO {
 		try (Session session = this.sessionFactory.openSession()) {
 			String hql = "update Location set mediaPath = '"+ location.getMediaPath() +"' where locationId = " + location.getLocationId();
 			Query query = session.createQuery(hql);
-			/*
-			 * query.setParameter("mediaPath", location.getMediaPath());
-			 * query.setParameter("locationId", location.getLocationId());
-			 */
 			return query.executeUpdate(); 
 		}
 	}

@@ -152,8 +152,6 @@ public class PublicOrderController extends PublicAbstractController{
 	public String checkout(Model model, HttpServletRequest request) {
 		Users user = (Users) request.getSession().getAttribute("userSession");
 		model.addAttribute("userAddress", GlobalsFunction.AddressUser(user.getContactAddress()));
-		System.out.println("aaaa" + GlobalsFunction.AddressUser(user.getContactAddress()).getDistrict());
-		System.out.println("bbbb" + GlobalsFunction.AddressUser(user.getContactAddress()).getWard());
 		return "public.checkout";
 	}
 	
@@ -199,7 +197,6 @@ public class PublicOrderController extends PublicAbstractController{
 					
 					listOrderDTO.add(order);
 					totalCart += total;
-					
 					//remote cookie
 					Cookie cookieDel = new Cookie(cookie.getName(), "");
 					cookieDel.setMaxAge(0);
@@ -209,6 +206,7 @@ public class PublicOrderController extends PublicAbstractController{
 		}
 		
 		Orders order = new Orders(0, GlobalsFunction.getCurrentTime(), new OrderStatus(1, ""), user, totalCart, userAddress.getNote(), "", GlobalsConstant.priceShip , GlobalsFunction.AddressUser(userAddress));
+		
 		if(orderService.save(order) == false) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
 			return "redirect:/public/checkout";
@@ -231,7 +229,7 @@ public class PublicOrderController extends PublicAbstractController{
 	public String orderdetails(Model model, HttpServletRequest request) {
 		Users user = (Users) request.getSession().getAttribute("userSession");
 		List<Orders> listOrder = orderService.findByUserId(user.getUserId());
-		Orders order = orderService.findByOrderId(listOrder.get(listOrder.size() - 1).getOrderId());
+		Orders order = orderService.findByOrderId(listOrder.get(0).getOrderId());
 		List<OrderDTO> listOrderDTO = orderDetailService.findOrderDTO(listOrder.get(listOrder.size() - 1).getOrderId());
 		UserAddress userAddress =  GlobalsFunction.AddressUser(user.getContactAddress());
 		for (OrderDTO orderDTO : listOrderDTO) {

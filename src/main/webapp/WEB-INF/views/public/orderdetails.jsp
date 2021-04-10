@@ -10,8 +10,8 @@
                     <div class="tracking-sec">
                         <div class="tracking-details padding-20 p-relative">
                             <h5 class="text-light-black fw-600">Mã đơn hàng: ${order.orderId}</h5>
-                            <span class="text-light-white">Thời gian giao hàng ước tính</span>
-                            <h2 class="text-light-black fw-700 no-margin">9:00pm-9:10pm</h2>
+                            <!-- <span class="text-light-white">Thời gian giao hàng ước tính</span>
+                            <h2 class="text-light-black fw-700 no-margin">9:00pm-9:10pm</h2> -->
                             <div id="add-listing-tab" class="step-app">
                                 <ul class="step-steps">
                                 <c:if test="${order.orderStatus.orderStatusId eq 5}">
@@ -101,7 +101,7 @@
                                     			var country_id;
                    							  	var state_id; 
                                     			$.each(data, function (index, value) {
-	                                  	 	 		if(${userAddress.city} == value.Id){
+	                                  	 	 		if('${userAddress.city}' == value.Id){
 	                                  	 	 			result += (value.Name + ", ");
 	                                  	 	 			country_id = index;
 	                                  	 	 		}
@@ -113,7 +113,7 @@
 	                                  	 	 		}
                                     			});
                                     			$.each(data[country_id].Districts[state_id].Wards, function (index2, value2) {
-                                    				if(${userAddress.ward} == value2.Id){
+                                    				if('${userAddress.ward}' == value2.Id){
 	                                  	 	 			result += value2.Name;
 	                                  	 	 		}
                                     			});
@@ -138,9 +138,9 @@
                         <div class="u-line mb-xl-20">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <h5 class="text-light-black fw-600 title">Đơn hàng của bạn <span><a href="#" class="fs-12">In biên lai</a></span></h5>
+                                    <%-- <h5 class="text-light-black fw-600 title">Đơn hàng của bạn <span><a href="#" class="fs-12">In biên lai</a></span></h5>
                                     <p class="title text-light-white">${order.orderTime} <span class="text-light-black">Order #123456789012345</span>
-                                    </p>
+                                    </p> --%>
                                 </div>
                                 <div class="col-lg-12">
                                 	<c:set var="total" value="0" />
@@ -201,6 +201,7 @@
 													<tr class="row100 head">
 														<th class="cell100 column1">ID</th>
 														<th class="cell100 column2">Thời gian</th>
+														<th class="cell100 column2">Tổng tiền</th>
 														<th class="cell100 column3">Trạng thái đơn hàng</th>
 														<th class="cell100 column4">Xem chi tiết</th>
 													</tr>
@@ -210,6 +211,7 @@
 													<tr class="row100 body">
 														<td class="cell100 column1">${order.orderId}</td>
 														<td class="cell100 column2">${order.orderTime}</td>
+														<td class="cell100 column2">${order.totalPrice}</td>
 														<td class="cell100 column3">${order.orderStatus.statusName}</td>
 														<td class="cell100 column4"><i class="fa fa-eye" style="font-size:24px"></i></td>
 													</tr>
@@ -217,6 +219,7 @@
 												</tbody>
 											</table>
 										</div>
+									</div>
                                 </div>
                             </div>
                         </div>

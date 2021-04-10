@@ -21,4 +21,9 @@ public class LocationCategoriesServiceImpl implements LocationCategoriesService 
 	public List<LocationCategory> findAll() {
 		return locationCategoryDAO.findAll();
 	}
+
+	@Override
+	public LocationCategory findNameCategory(Integer valueOf) {
+		return locationCategoryDAO.findNameCategory(valueOf);
+	}
 }

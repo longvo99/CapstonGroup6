@@ -73,17 +73,17 @@
 		<div class="row">
 			<div class="col-12">
 				<div class="section-header-left">
-					<h3 class="text-light-black header-title title"> Buffet </h3>
+					<h3 class="text-light-black header-title title"> ${nameCategory} </h3>
 				</div>
 			</div>
 		</div>
 		<!-- advertisement banner-->
 		<div class="row">
-			<div class="col-lg-9 col-md-8">
+			<div class="col-lg-12 col-md-12">
 				<div class="row">
 					<c:if test="${not empty listLocation}">
 					<c:forEach items="${listLocation}" var="location">
-						<div class="col-lg-4 col-md-6 col-sm-6">
+						<div class="col-lg-3 col-md-6 col-sm-6">
 							<div class="product-box mb-xl-20">
 								<div class="product-img">
 									<a
