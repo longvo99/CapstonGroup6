@@ -48,9 +48,10 @@
     <!-- plus and minus  -->
    <%--  <link href="${pageContext.request.contextPath}/resources/public/assets/css/checkout.css" rel="stylesheet"> --%>
     <!-- place -->
-    <script src="/Capston.Group6/resources/admin/assets/vendor/jquery/jquery.min.js"></script> 
-    <link href="/Capston.Group6/resources/admin/assets/css/autocomplete/jquerui.css" rel="stylesheet">
-    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/admin/assets/css/autocomplete/jquery-ui.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/admin/assets/js/jquery.validate.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/assets/css/autocomplete/base/jquery.ui.all.css">
     <style type="text/css">
 	.dropdown-submenu {
   		position: relative;
@@ -142,11 +143,7 @@ input[type="file"] {
 				                            <ul class="dropdown-menu">
 				                            	<c:forEach items="${locationCategoriesList2}" var="cat2">
 													<c:if test="${cat2.parentId eq cat1.categoryId}">
-<<<<<<< HEAD
-														<li value="3"><a href="${pageContext.request.contextPath}/public/indexbycat/${cat2.categoryId}" class="dropdown-item" tabindex="-1">${cat2.locationCategoryName}</a></li>
-=======
 														<li value="3"><a href="${pageContext.request.contextPath}/public/listview/category${cat2.categoryId}" class="dropdown-item" tabindex="-1">${cat2.locationCategoryName}</a></li>
->>>>>>> 28c95529c879dd92f3a2b5775ca70cb518e9212e
 														<li class="dropdown-divider"></li>
 													</c:if>
 												</c:forEach>
@@ -192,15 +189,79 @@ input[type="file"] {
                                     <!-- search -->
                                     <div class="col-lg-6 col-md-7">
                                         <div class="search-box padding-10">
-                                            <input id="productName" type="text" class="form-control" placeholder="Pizza, Burger, Chinese">
+                                            <input class="form-control mb-3" type="text" onKeyDown="getProduct();" name="productName" id="productName"  placeholder="nhà hàng, sản phẩm">
                                         </div>
-                   <!--  <script type="text/javascript">
-						$(document).ready(function() {
-							$('#productName').autocomplete({
-								source : '${pageContext.request.contextPath}/public/search'
-							});
-						});
-					</script> -->
+					                   <style type="text/css">
+										.ui-autocomplete {
+											max-height: 200px;
+											overflow-y: auto;
+											/* prevent horizontal scrollbar */
+											overflow-x: hidden;
+										}
+										/* IE 6 doesn't support max-height
+										 * we use height instead, but this forces the menu to always be this tall
+										 */
+										* html .ui-autocomplete {
+											height: 200px;
+										}
+										</style>
+					                   <script>
+										    function getProduct(){
+										    var userName = document.getElementById("productName");
+										    var string = userName.value;
+										    $.ajax({
+											method: 'GET',
+											url: '${pageContext.request.contextPath}/public/search',
+											data: {
+											  str: string
+											},
+											success: function(content) {
+											  console.log("Content: " + content);
+										    var availableTags = content;
+										    function split( val ) {
+												return val.split( /,\s*/ );
+											}
+											function extractLast( term ) {
+												return split( term ).pop();
+											}
+											$( "#productName" )
+										// don't navigate away from the field on tab when selecting an item
+											.bind( "keydown", function( event ) {
+												if ( event.keyCode === $.ui.keyCode.TAB &&
+														$( this ).data( "autocomplete" ).menu.active ) {
+													event.preventDefault();
+												}
+											})
+											.autocomplete({
+												minLength: 2,
+												source: function( request, response ) {
+													// delegate back to autocomplete, but extract the last term
+													response( $.ui.autocomplete.filter(
+														availableTags, extractLast( request.term ) ) );
+												},
+												focus: function() {
+													// prevent value inserted on focus
+													return false;
+												},
+												select: function( event, ui ) {
+													var terms = split( this.value );
+													// remove the current input
+													terms.pop();
+													// add the selected item
+													terms.push( ui.item.value );
+													// add placeholder to get the comma-and-space at the end
+													terms.push( "" );
+													this.value = terms.join( ", " );
+													return false;
+												}
+											});
+											},
+											error: function(xhr, status) {
+										    	console.log("ERROR");
+										    }
+										    });
+										    } 
+										</script>
                                     </div>
                                     <!-- search -->
                                 </div>

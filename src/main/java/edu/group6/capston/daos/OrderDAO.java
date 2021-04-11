@@ -81,7 +81,7 @@ public class OrderDAO {
 
 	public List<Orders> findByUserId(int userId) {
 		try (Session session = this.sessionFactory.openSession()) {
-			List<Orders> list = session.createQuery("from Orders WHERE userId = " + userId, Orders.class).list();
+			List<Orders> list = session.createQuery("from Orders WHERE userId = " + userId + " ORDER BY OrderId DESC", Orders.class).list();
 			return list;
 		}
 	}

@@ -27,7 +27,7 @@
 			                    <div style="width: 300px; display: inline-block;" >
 				                    <div class="form-group">
 				                    	<label class="text-light-white fw-700" for="city">Tỉnh/thành</label>
-									   	<select name="country" id="country" class="form-control form-control-submit">
+									   	<select name="city" id="country" class="form-control form-control-submit">
 									    	<option value="000">-Chọn Tỉnh/Thành:-</option>
 									   </select>
 									</div>
@@ -35,7 +35,7 @@
 								<div style="width: 300px; display: inline-block;" >
 									<div class="form-group">
 										<label class="text-light-white fw-700" for="district">Quận huyện</label>
-									   	<select name="state" id="state" class="form-control input-lg" ${readonly}>
+									   	<select name="district" id="state" class="form-control input-lg" ${readonly}>
 									    	<option value="000">-Chọn Quận/Huyện-</option>
 									   </select>
 									</div>
@@ -43,7 +43,7 @@
 								<div style="width: 300px; display: inline-block;" >
 									<div class="form-group">
 										<label class="text-light-white fw-700" for="ward">Xã/phường</label>
-									   	<select name="city" id="city" class="form-control input-lg" ${readonly}>
+									   	<select name="ward" id="city" class="form-control input-lg" ${readonly}>
 									    	<option value="000">-Chọn Phường/Xã-</option>
 									   </select>
 									</div>
@@ -55,7 +55,7 @@
 							  var state_id;
 							  $.each(data, function (index, value) {
 								    var city_id;
-								    if(06 == value.Id){
+								    if('${userAddress.district}' == value.Id){
 								    	$("#country").append('<option selected="selected" rel="' + index + '" value="'+value.Id+'">'+value.Name+'</option>');
 								    } else {
 								    	$("#country").append('<option rel="' + index + '" value="'+value.Id+'">'+value.Name+'</option>');
@@ -103,7 +103,7 @@
 					            }); 
 							  state_id = $("#state").find('option:selected').attr('rel');
 							  $.each(data[country_id].Districts[state_id].Wards, function (index2, value2) {
-					            	if(01861 == value2.Id){
+					            	if('${userAddress.ward}' == value2.Id){
 					            		$("#city").append('<option selected="selected" rel="' + index2 + '" value="'+value2.Id+'">'+value2.Name+'</option>');
 								    } else {
 								    	$("#city").append('<option rel="' + index2 + '" value="'+value2.Id+'">'+value2.Name+'</option>');
@@ -112,24 +112,6 @@
 						 });
 						});
 			</script>
-								<%-- <div class="form-group">
-			                    	<label for="city">Tỉnh/thành</label>
-								   <select name="city" id="country" class="form-control input-lg" ${readonly}>
-								    	<option value="000">-Chọn Tỉnh/Thành:-</option>
-								   </select>
-								</div>
-								<div class="form-group">
-									<label for="district">Quận huyện</label>
-								   <select name="district" id="state" class="form-control input-lg" ${readonly}>
-								    	<option value="000">-Chọn Quận/Huyện-</option>
-								   </select>
-								</div>
-								<div class="form-group">
-									<label for="ward">Xã/phường</label>
-								   <select name="ward" id="city" class="form-control input-lg" ${readonly}>
-								    	<option value="000">-Chọn Phường/Xã-</option>
-								   </select>
-								</div> --%>
                                  <div style="width: 300px;" >
                                      <div class="form-group">
                                          <label class="text-light-white fw-700">Số điện thoại</label>

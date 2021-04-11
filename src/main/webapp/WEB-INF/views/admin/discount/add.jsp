@@ -196,8 +196,10 @@
 						  	</label>
 						</div>
 						<div id="collapseTwo" class="collapse">
-								<input class="form-control mb-3" type="text" onKeyDown="getProduct();" name="productName" id="productName" placeholder="Nhập sản phẩm cần tìm" >
-			       		</div>
+											<input class="form-control mb-3" type="text"
+												onKeyDown="getProduct();" name="productName"
+												id="productName" placeholder="Nhập sản phẩm cần tìm">
+										</div>
                     </div>
 					</c:if>	
                     <div class="form-group">

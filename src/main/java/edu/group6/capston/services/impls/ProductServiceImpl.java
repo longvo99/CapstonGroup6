@@ -59,14 +59,14 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	public List<String> searchProductNameByUserId(int userId) {
-		/*
-		 * List<String> listStr = new ArrayList<>(); List<Product> list =
-		 * ProductDAO.findAllByIdUser(userId); for (Product product : list) {
-		 * listStr.add(product.getName()); }
-		 */
 		return ProductDAO.searchProductNameByUserId(userId);
 	}
 
+	public List<String> searchAllProductName() {
+		return ProductDAO.searchAllProductName();
+	}
+	
+	
 	@Override
 	public OrderDTO findByComboIdOrder(Integer comboId) {
 		return ProductDAO.findByComboIdOrder(comboId);

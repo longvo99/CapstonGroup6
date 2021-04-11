@@ -54,7 +54,6 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public List<Orders> findByUserId(int userId) {
-		// TODO Auto-generated method stub
 		return orderDAO.findByUserId(userId);
 	}
 
