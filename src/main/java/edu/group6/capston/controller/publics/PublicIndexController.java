@@ -114,7 +114,6 @@ public class PublicIndexController extends PublicAbstractController {
 			comment.setCurrentTime(GlobalsFunction.findDifference(comment.getCurrentTime()));
 		}
 		model.addAttribute("commentListParent", commentListParent);
-		System.out.println(commentListParent);
 		List<Comment> commentListChild = commentService.findAllCommentByParentCommentId(locationId);
 		for (Comment comment : commentListChild) {
 			comment.setCurrentTime(GlobalsFunction.findDifference(comment.getCurrentTime()));
@@ -166,7 +165,6 @@ public class PublicIndexController extends PublicAbstractController {
 			}else {
 				model.addAttribute("locationFavoriteList", GlobalsFunction.changeImageLocationFavorites(locationFavoriteList));
 			}
-			
 		}
 		return "public.category";
 	}

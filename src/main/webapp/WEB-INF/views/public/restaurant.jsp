@@ -520,7 +520,7 @@
                                         		<c:forEach items="${listOrderDTO}" var="orderDTO">
                                         		<div class="cat-product">
                                                     <div class="cat-name">
-                                                        <a href="#">
+                                                        <a href="${pageContext.request.contextPath}/public/restaurant/${orderDTO.locationId}">
                                                             <p class="text-light-green"><span class="text-dark-white">${orderDTO.quantity}</span> ${orderDTO.name}</p>
                                                         </a>
                                                     </div>

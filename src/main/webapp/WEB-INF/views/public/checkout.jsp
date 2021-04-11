@@ -49,68 +49,57 @@
 									</div>
 								</div>
 								<script>
-									$(document).ready(function(){
-										  $.getJSON('${pageContext.request.contextPath}/resources/admin/assets/js/data.json', function(data){
-											  var country_id;
-											  var state_id;
-											  $.each(data, function (index, value) {
-												    var city_id;
-												    if('${userAddress.district}' == value.Id){
-												    	$("#country").append('<option selected="selected" rel="' + index + '" value="'+value.Id+'">'+value.Name+'</option>');
-												    } else {
-												    	$("#country").append('<option rel="' + index + '" value="'+value.Id+'">'+value.Name+'</option>');
-												    }
-												   /*  country_id = $("#country").find('option:selected').attr('rel');
-										            console.log("Country INDEX : " + country_id); */
-										            /* $.each(data[country_id].Districts, function (index1, value1) {
-										                 
-										            	if(${location.district} == value1.Id){
-										            		 $("#state").append('<option selected="selected" rel="' + index1 + '" value="'+value1.Id+'">'+value1.Name+'</option>');
-													    } else {
-													    	$("#state").append('<option rel="' + index1 + '" value="'+value1.Id+'">'+value1.Name+'</option>');
-													    }
-										               
-										            });   */
-										            country_id = $("#country").find('option:selected').attr('rel');
-												        $("#country").change(function () {
-												            $("#state, #city").find("option:gt(0)").remove();
-												            $("#state").find("option:first").text("Loading...");
-												            country_id = $(this).find('option:selected').attr('rel');
-												            console.log("Country INDEX : " + country_id);
-												            $.each(data[country_id].Districts, function (index1, value1) {
-												                $("#state").find("option:first").text("-Chọn Quận/Huyện-");
-												                $("#state").append('<option rel="' + index1 + '" value="'+value1.Id+'">'+value1.Name+'</option>');
-												            });
-												            
-												        });
-												        $("#state").change(function () {
-												            $("#city").find("option:gt(0)").remove();
-												            $("#city").find("option:first").text("Loading...");
-												            state_id = $(this).find('option:selected').attr('rel');
-												            console.log("State INDEX : " + state_id);
-												            $.each(data[country_id].Districts[state_id].Wards, function (index2, value2) {
-												                $("#city").find("option:first").text("-Chọn Phường/Xã-");
-												                $("#city").append('<option rel="' + index2 + '" value="'+value2.Id+'">'+value2.Name+'</option>');
-												            });
-												        });     
-												});
-											  $.each(data[country_id].Districts, function (index1, value1) {
-												  if('${userAddress.district}' == value1.Id){
-									            		 $("#state").append('<option selected="selected" rel="' + index1 + '" value="'+value1.Id+'">'+value1.Name+'</option>');
-												    } else {
-												    	$("#state").append('<option rel="' + index1 + '" value="'+value1.Id+'">'+value1.Name+'</option>');
-												    }
-									            }); 
-											  state_id = $("#state").find('option:selected').attr('rel');
-											  $.each(data[country_id].Districts[state_id].Wards, function (index2, value2) {
-									            	if('${userAddress.ward}' == value2.Id){
-									            		$("#city").append('<option selected="selected" rel="' + index2 + '" value="'+value2.Id+'">'+value2.Name+'</option>');
-												    } else {
-												    	$("#city").append('<option rel="' + index2 + '" value="'+value2.Id+'">'+value2.Name+'</option>');
-												    }
-									            });
-										 });
-										});
+								$(document).ready(function(){
+									  $.getJSON('${pageContext.request.contextPath}/resources/admin/assets/js/data.json', function(data){
+										  var country_id;
+										  var state_id;
+										  $.each(data, function (index, value) {
+											    var city_id;
+											    if('${userAddress.city}' == value.Id){
+											    	$("#country").append('<option selected="selected" rel="' + index + '" value="'+value.Id+'">'+value.Name+'</option>');
+											    } else {
+											    	$("#country").append('<option rel="' + index + '" value="'+value.Id+'">'+value.Name+'</option>');
+											    }
+									            country_id = $("#country").find('option:selected').attr('rel');
+											        $("#country").change(function () {
+											            $("#state, #city").find("option:gt(0)").remove();
+											            $("#state").find("option:first").text("Loading...");
+											            country_id = $(this).find('option:selected').attr('rel');
+											            console.log("Country INDEX : " + country_id);
+											            $.each(data[country_id].Districts, function (index1, value1) {
+											                $("#state").find("option:first").text("-Chọn Quận/Huyện-");
+											                $("#state").append('<option rel="' + index1 + '" value="'+value1.Id+'">'+value1.Name+'</option>');
+											            });
+											            
+											        });
+											        $("#state").change(function () {
+											            $("#city").find("option:gt(0)").remove();
+											            $("#city").find("option:first").text("Loading...");
+											            state_id = $(this).find('option:selected').attr('rel');
+											            console.log("State INDEX : " + state_id);
+											            $.each(data[country_id].Districts[state_id].Wards, function (index2, value2) {
+											                $("#city").find("option:first").text("-Chọn Phường/Xã-");
+											                $("#city").append('<option rel="' + index2 + '" value="'+value2.Id+'">'+value2.Name+'</option>');
+											            });
+											        });     
+											});
+										  $.each(data[country_id].Districts, function (index1, value1) {
+								            	if('${userAddress.district}' == value1.Id){
+								            		 $("#state").append('<option selected="selected" rel="' + index1 + '" value="'+value1.Id+'">'+value1.Name+'</option>');
+											    } else {
+											    	$("#state").append('<option rel="' + index1 + '" value="'+value1.Id+'">'+value1.Name+'</option>');
+											    }
+								            }); 
+										  state_id = $("#state").find('option:selected').attr('rel');
+										  $.each(data[country_id].Districts[state_id].Wards, function (index2, value2) {
+								            	if('${userAddress.ward}' == value2.Id){
+								            		$("#city").append('<option selected="selected" rel="' + index2 + '" value="'+value2.Id+'">'+value2.Name+'</option>');
+											    } else {
+											    	$("#city").append('<option rel="' + index2 + '" value="'+value2.Id+'">'+value2.Name+'</option>');
+											    }
+								            });
+									 });
+									});
 							</script>
                                  <div style="width: 300px;" >
                                      <div class="form-group">
@@ -451,11 +440,11 @@
                                             <div class="cat-product" id="cat-product${orderDTO.productId}" style = "box-sizing: border-box;">
 									            <div class="quantity">
 										            <div class="append" style="float: left; margin-right: 10px;">
-						                                <button class="minus-btn" onclick="minusQuantity(${orderDTO.productId}, ${orderDTO.price})" type="button" name="button"> <i class="fas fa-minus"></i></button>
+						                                <button class="minus-btn" onclick="minusQuantity('${orderDTO.productId}', ${orderDTO.price})" type="button" name="button"> <i class="fas fa-minus"></i></button>
 						                            </div>
 						                            <input type="text" style="width: 50px; float: left; margin-right: 10px;" class="text-center" name="name" id="quantity${orderDTO.productId}" value="${orderDTO.quantity}" readonly="readonly">
 						                            <div class="prepend" style="float: left;">
-						                                <button class="plus-btn" onclick="plusQuantity(${orderDTO.productId}, ${orderDTO.price})" type="button" name="button"><i class="fas fa-plus"></i></button>
+						                                <button class="plus-btn" onclick="plusQuantity('${orderDTO.productId}', ${orderDTO.price})" type="button" name="button"><i class="fas fa-plus"></i></button>
 						                            </div> 
 					                           	</div>
 									            <!-- <div class="">

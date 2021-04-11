@@ -5,25 +5,16 @@ import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.group6.capston.dtos.OrderDTO;
-import edu.group6.capston.dtos.ProductDTO;
 import edu.group6.capston.models.LocationCategory;
 import edu.group6.capston.models.Users;
-import edu.group6.capston.services.DiscountService;
 import edu.group6.capston.services.LocationCategoriesService;
-import edu.group6.capston.services.LocationService;
 import edu.group6.capston.services.ProductService;
-import edu.group6.capston.services.RatingService;
 import edu.group6.capston.utils.GlobalsFunction;
 
 public abstract class PublicAbstractController  {
@@ -47,7 +38,7 @@ public abstract class PublicAbstractController  {
 			}
 		}
 		Users user = (Users) request.getSession().getAttribute("userSession");
-		if(request.getSession().getAttribute("userSession") != null) {
+		if(user != null) {
 			List<OrderDTO> listOrderDTO = new ArrayList<>();
 			Cookie[] cookies = request.getCookies();
 			float totalCart = 0;
@@ -66,7 +57,7 @@ public abstract class PublicAbstractController  {
 						}
 						double total = product.getPrice() * Integer.valueOf(cookie.getValue());
 						OrderDTO order = new OrderDTO(user.getUserId(), productId , product.getName(), product.getPrice(),
-								Integer.valueOf(cookie.getValue()));
+								Integer.valueOf(cookie.getValue()), product.getLocationId());
 						
 						listOrderDTO.add(order);
 						totalCart += total;

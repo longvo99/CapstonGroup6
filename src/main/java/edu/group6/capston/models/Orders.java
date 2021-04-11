@@ -44,4 +44,7 @@ public class Orders {
 	private String shipPrice;
 	@Column
 	private String recieverAddress;
+	@ManyToOne
+	@JoinColumn(name = "locationId")
+	private Location location;
 }

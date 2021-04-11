@@ -179,7 +179,7 @@ input[type="file"] {
                                 <div class="row">
                                     <!-- location picker -->
                                     <div class="col-lg-6 col-md-5">
-                                        <a href="#" class="delivery-add p-relative"> <!-- <span class="icon"><i class="fas fa-map-marker-alt"></i></span> -->
+                                        <a href="${pageContext.request.contextPath}/admin/location/add" class="delivery-add p-relative"> <!-- <span class="icon"><i class="fas fa-map-marker-alt"></i></span> -->
                                             <span class="address">Tạo địa điểm mới</span>
                                         </a>
                                         <!-- <div class="location-picker">
@@ -537,7 +537,7 @@ input[type="file"] {
                                         </div>
 	                                        <div class="card-footer padding-15"> <a href="${pageContext.request.contextPath}/public/checkout" class="btn-first green-btn text-custom-white full-width fw-500">Thanh toán</a>
 	                                        </div>
-                                        	<div class="card-footer padding-15"> <a href="${pageContext.request.contextPath}/public/orderDetail" class="btn-first green-btn text-custom-white full-width fw-500">Đơn hàng đã đặt</a>
+                                        	<div class="card-footer padding-15"> <a href="${pageContext.request.contextPath}/public/orderdetails" class="btn-first green-btn text-custom-white full-width fw-500">Đơn hàng đã đặt</a>
 	                                        </div>
                                     </div>
                                 </div>

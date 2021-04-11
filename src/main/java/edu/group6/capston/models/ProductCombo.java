@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -33,9 +31,6 @@ public class ProductCombo {
 	private String description;
 	@Column
 	private String imagePath;
-	@ManyToOne
-	@JoinColumn(name = "locationId")
-	private Location location;
 	public ProductCombo(int productComboId) {
 		super();
 		this.productComboId = productComboId;

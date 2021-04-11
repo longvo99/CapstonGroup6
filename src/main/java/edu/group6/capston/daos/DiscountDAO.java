@@ -1,6 +1,5 @@
 package edu.group6.capston.daos;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -92,6 +91,7 @@ public class DiscountDAO {
 	public int delete(List<Integer> listDiscountId1) {
 		try (Session session = this.sessionFactory.openSession()) {
 			Transaction tx  = session.beginTransaction();
+			@SuppressWarnings("rawtypes")
 			Query query = session.createQuery("DELETE FROM DiscountInfo WHERE discountId IN (:list)");
 			query.setParameter("list", listDiscountId1); 
 			int i = query.executeUpdate();

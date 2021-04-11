@@ -30,15 +30,15 @@ public class ComboDetailDAO{
 		CriteriaQuery<ComboDetailDTO> query = builder.createQuery(ComboDetailDTO.class);
 		Root<ComboDetail> root = query.from(ComboDetail.class);
 		root.join("product", JoinType.INNER);
-		root.join("productCompo", JoinType.INNER);
+		root.join("productCombo", JoinType.INNER);
 		query.distinct(true);
 		query.multiselect(
-				root.get("productCompo").get("productComboId"),
-				root.get("productCompo").get("comboName"),
-				root.get("productCompo").get("orderCount"),
-				root.get("productCompo").get("rateDiscount"),
-				root.get("productCompo").get("description"),
-				root.get("productCompo").get("imagePath"));
+				root.get("productCombo").get("productComboId"),
+				root.get("productCombo").get("comboName"),
+				root.get("productCombo").get("orderCount"),
+				root.get("productCombo").get("rateDiscount"),
+				root.get("productCombo").get("description"),
+				root.get("productCombo").get("imagePath"));
 		query.where(builder.equal(root.get("product").get("location").get("locationId"), locationId));
 		locationList = session.createQuery(query).getResultList();
 		transaction.commit();
@@ -54,11 +54,11 @@ public class ComboDetailDAO{
 		CriteriaQuery<ComboDetailDTO> query = builder.createQuery(ComboDetailDTO.class);
 		Root<ComboDetail> root = query.from(ComboDetail.class);
 		root.join("product", JoinType.INNER);
-		root.join("productCompo", JoinType.INNER);
+		root.join("productCombo", JoinType.INNER);
 		query.distinct(true);
 		query.multiselect(
 				root.get("product").get("productId"),
-				root.get("productCompo").get("productComboId"),
+				root.get("productCombo").get("productComboId"),
 				root.get("product").get("name"),
 				root.get("product").get("imagePath"),
 				root.get("product").get("price"));

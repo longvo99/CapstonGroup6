@@ -100,23 +100,6 @@ public class ProductDAO {
 		return locationList;
 	}
 	
-	public OrderDTO findByProductIdOrder(Integer productId) {
-		OrderDTO product = null;
-		Session session = this.sessionFactory.openSession();
-		Transaction transaction = session.beginTransaction();
-		CriteriaBuilder builder = session.getCriteriaBuilder();
-		CriteriaQuery<OrderDTO> query = builder.createQuery(OrderDTO.class);
-		Root<Product> root = query.from(Product.class);
-		query.multiselect(
-				root.get("name"),
-				root.get("price"));
-		query.where(builder.equal(root.get("productId"), productId));
-		product = session.createQuery(query).uniqueResult();
-		transaction.commit();
-		session.close();
-		return product;
-	}
-
 	public List<String> searchProductNameByUserId(int userId) {
 		try (Session session = this.sessionFactory.openSession()) {
 			session.beginTransaction();
@@ -124,14 +107,10 @@ public class ProductDAO {
 					+ "inner join p.location "
 					+ "inner join p.location.users "
 					+ "where p.location.users.userId = " + userId;
+			@SuppressWarnings("rawtypes")
 			Query query = session.createQuery(hql);
-//			query.setParameter("userId", userId);
-			//List<Product> listProducts = query.list();
-			/* List<Object[]> listResult = query.list(); */
+			@SuppressWarnings("unchecked")
 			List<String> listProducts = query.getResultList();
-			/*
-			 * for (Object[] aRow : listResult) { listProducts.add((Product) aRow[0]); }
-			 */
 			return listProducts;
 		}
 	}
@@ -154,6 +133,24 @@ public class ProductDAO {
 		return product;
 	}
 
+	public OrderDTO findByProductIdOrder(Integer productId) {
+		OrderDTO product = null;
+		Session session = this.sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<OrderDTO> query = builder.createQuery(OrderDTO.class);
+		Root<Product> root = query.from(Product.class);
+		query.multiselect(
+				root.get("location").get("locationId"),
+				root.get("name"),
+				root.get("price"));
+		query.where(builder.equal(root.get("productId"), productId));
+		product = session.createQuery(query).uniqueResult();
+		transaction.commit();
+		session.close();
+		return product;
+	}
+	
 	public OrderDTO findByComboIdOrder(Integer comboId) {
 		OrderDTO product = null;
 		Session session = this.sessionFactory.openSession();
@@ -162,13 +159,14 @@ public class ProductDAO {
 		CriteriaQuery<OrderDTO> query = builder.createQuery(OrderDTO.class);
 		Root<ComboDetail> root = query.from(ComboDetail.class);
 		root.join("product", JoinType.INNER);
-		root.join("productCompo", JoinType.INNER);
+		root.join("productCombo", JoinType.INNER);
 		query.multiselect(
-				root.get("productCompo").get("comboName"),
-				root.get("productCompo").get("rateDiscount"),
+				root.get("product").get("location").get("locationId"),
+				root.get("productCombo").get("comboName"),
+				root.get("productCombo").get("rateDiscount"),
 				builder.sum(root.get("product").get("price")));
-		query.where(builder.equal(root.get("productCompo").get("productComboId"), comboId));
-		query.groupBy(root.get("productCompo").get("comboName"), root.get("productCompo").get("rateDiscount"));
+		query.where(builder.equal(root.get("productCombo").get("productComboId"), comboId));
+		query.groupBy(root.get("product").get("location").get("locationId"), root.get("productCombo").get("comboName"), root.get("productCombo").get("rateDiscount"));
 		product = session.createQuery(query).uniqueResult();
 		transaction.commit();
 		session.close();

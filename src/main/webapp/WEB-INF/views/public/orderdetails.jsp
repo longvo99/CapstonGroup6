@@ -9,7 +9,7 @@
                 <div class="col-md-12">
                     <div class="tracking-sec">
                         <div class="tracking-details padding-20 p-relative">
-                            <h5 class="text-light-black fw-600">Mã đơn hàng: ${order.orderId}</h5>
+                            <h5 class="text-light-black fw-600">Mã đơn hàng: ${order.orderId} - Địa điểm: ${order.location.locationName}</h5>
                             <!-- <span class="text-light-white">Thời gian giao hàng ước tính</span>
                             <h2 class="text-light-black fw-700 no-margin">9:00pm-9:10pm</h2> -->
                             <div id="add-listing-tab" class="step-app">
@@ -213,7 +213,7 @@
 														<td class="cell100 column2">${order.orderTime}</td>
 														<td class="cell100 column2">${order.totalPrice}</td>
 														<td class="cell100 column3">${order.orderStatus.statusName}</td>
-														<td class="cell100 column4"><i class="fa fa-eye" style="font-size:24px"></i></td>
+														<td class="cell100 column4"><a href="${pageContext.request.contextPath}/public/orderdetails/${order.orderId}"><i class="fa fa-eye" style="font-size:24px"></i></a></td>
 													</tr>
 												</c:forEach>
 												</tbody>
