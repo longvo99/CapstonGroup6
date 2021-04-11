@@ -157,75 +157,62 @@ public class PublicOrderController extends PublicAbstractController{
 		return "public.checkout";
 	}
 	
-	@PostMapping("/checkout")
-	public String checkout(@Valid @ModelAttribute("userAddress") UserAddress userAddress, Model model, HttpServletRequest request, BindingResult br,
-			RedirectAttributes rd, HttpServletResponse response) {
-		if (br.hasErrors()) {
-			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
-			return "redirect:/public/checkout";
-		}
-		
-		Users user = (Users) request.getSession().getAttribute("userSession");
-		if(user != null) {
-			if(user.getContactAddress() == null) {
-				user.setContactAddress(GlobalsFunction.AddressUser(userAddress));
-				user.setContactPhone(userAddress.getPhone());
-				if(usersService.update(user) == false) {
-					rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
-					return "redirect:/public/checkout";
-				}
-			}
-		}
-		
-		Cookie[] cookies = request.getCookies();
-		float totalCart = 0;
-		String productId ="";
-		List<OrderDTO> listOrderDTO = new ArrayList<>();
-		for (Cookie cookie : cookies) {
-			if (cookie.getName().contains(user.getUsername())) {
-				productId = cookie.getName().substring(0, cookie.getName().lastIndexOf("-"));
-				if(!cookie.getValue().equals("")) {
-					OrderDTO product = null;
-					if(productId.substring(0,1).equals("c")) {
-						String comboId = cookie.getName().substring(1, cookie.getName().lastIndexOf("-"));
-						product = productService.findByComboIdOrder(Integer.valueOf(comboId));
-						product.setPrice(GlobalsFunction.totalPriceCombo(product.getPrice(), product.getRateDiscount()));
-					}else {
-						product = productService.findByProductIdOrder(Integer.valueOf(productId));
-					}
-					double total = product.getPrice() * Integer.valueOf(cookie.getValue());
-					OrderDTO order = new OrderDTO(user.getUserId(), productId , product.getName(), product.getPrice(),
-							Integer.valueOf(cookie.getValue()));
-					
-					listOrderDTO.add(order);
-					totalCart += total;
-					
-					//remote cookie
-					Cookie cookieDel = new Cookie(cookie.getName(), "");
-					cookieDel.setMaxAge(0);
-			        response.addCookie(cookieDel);
-				}
-			}
-		}
-		
-		Orders order = new Orders(0, GlobalsFunction.getCurrentTime(), new OrderStatus(1, ""), user, totalCart, userAddress.getNote(), "", GlobalsConstant.priceShip , GlobalsFunction.AddressUser(userAddress));
-		if(orderService.save(order) == false) {
-			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
-			return "redirect:/public/checkout";
-		}
-		
-		for (OrderDTO orderDTO : listOrderDTO) {
-			OrderDetail orderDetail = null;
-			if(orderDTO.getProductId().contains("c")) {
-				int id = Integer.valueOf(orderDTO.getProductId().substring(1, orderDTO.getProductId().length()));
-				orderDetail = new OrderDetail(0, orderDTO.getPrice(), orderDTO.getQuantity(), userAddress.getNote(), 0, id , order);
-			}else {
-				orderDetail = new OrderDetail(0, orderDTO.getPrice(), orderDTO.getQuantity(), userAddress.getNote(), Integer.valueOf(orderDTO.getProductId()), 0, order);
-			}
-			orderDetailService.save(orderDetail);
-		}
-		return "redirect:/public/orderdetails";
-	}
+	/*
+	 * @PostMapping("/checkout") public String
+	 * checkout(@Valid @ModelAttribute("userAddress") UserAddress userAddress, Model
+	 * model, HttpServletRequest request, BindingResult br, RedirectAttributes rd,
+	 * HttpServletResponse response) { if (br.hasErrors()) {
+	 * rd.addFlashAttribute(GlobalsConstant.MESSAGE,
+	 * messageSource.getMessage("error", null, Locale.getDefault())); return
+	 * "redirect:/public/checkout"; }
+	 * 
+	 * Users user = (Users) request.getSession().getAttribute("userSession");
+	 * if(user != null) { if(user.getContactAddress() == null) {
+	 * user.setContactAddress(GlobalsFunction.AddressUser(userAddress));
+	 * user.setContactPhone(userAddress.getPhone()); if(usersService.update(user) ==
+	 * false) { rd.addFlashAttribute(GlobalsConstant.MESSAGE,
+	 * messageSource.getMessage("error", null, Locale.getDefault())); return
+	 * "redirect:/public/checkout"; } } }
+	 * 
+	 * Cookie[] cookies = request.getCookies(); float totalCart = 0; String
+	 * productId =""; List<OrderDTO> listOrderDTO = new ArrayList<>(); for (Cookie
+	 * cookie : cookies) { if (cookie.getName().contains(user.getUsername())) {
+	 * productId = cookie.getName().substring(0, cookie.getName().lastIndexOf("-"));
+	 * if(!cookie.getValue().equals("")) { OrderDTO product = null;
+	 * if(productId.substring(0,1).equals("c")) { String comboId =
+	 * cookie.getName().substring(1, cookie.getName().lastIndexOf("-")); product =
+	 * productService.findByComboIdOrder(Integer.valueOf(comboId));
+	 * product.setPrice(GlobalsFunction.totalPriceCombo(product.getPrice(),
+	 * product.getRateDiscount())); }else { product =
+	 * productService.findByProductIdOrder(Integer.valueOf(productId)); } double
+	 * total = product.getPrice() * Integer.valueOf(cookie.getValue()); OrderDTO
+	 * order = new OrderDTO(user.getUserId(), productId , product.getName(),
+	 * product.getPrice(), Integer.valueOf(cookie.getValue()));
+	 * 
+	 * listOrderDTO.add(order); totalCart += total;
+	 * 
+	 * //remote cookie Cookie cookieDel = new Cookie(cookie.getName(), "");
+	 * cookieDel.setMaxAge(0); response.addCookie(cookieDel); } } }
+	 * 
+	 * Orders order = new Orders(0, GlobalsFunction.getCurrentTime(), new
+	 * OrderStatus(1, ""), user, totalCart, userAddress.getNote(), "",
+	 * GlobalsConstant.priceShip , GlobalsFunction.AddressUser(userAddress));
+	 * if(orderService.save(order) == false) {
+	 * rd.addFlashAttribute(GlobalsConstant.MESSAGE,
+	 * messageSource.getMessage("error", null, Locale.getDefault())); return
+	 * "redirect:/public/checkout"; }
+	 * 
+	 * for (OrderDTO orderDTO : listOrderDTO) { OrderDetail orderDetail = null;
+	 * if(orderDTO.getProductId().contains("c")) { int id =
+	 * Integer.valueOf(orderDTO.getProductId().substring(1,
+	 * orderDTO.getProductId().length())); orderDetail = new OrderDetail(0,
+	 * orderDTO.getPrice(), orderDTO.getQuantity(), userAddress.getNote(), 0, id ,
+	 * order); }else { orderDetail = new OrderDetail(0, orderDTO.getPrice(),
+	 * orderDTO.getQuantity(), userAddress.getNote(),
+	 * Integer.valueOf(orderDTO.getProductId()), 0, order); }
+	 * orderDetailService.save(orderDetail); } return
+	 * "redirect:/public/orderdetails"; }
+	 */
 	
 	@GetMapping("/orderdetails")
 	public String orderdetails(Model model, HttpServletRequest request) {

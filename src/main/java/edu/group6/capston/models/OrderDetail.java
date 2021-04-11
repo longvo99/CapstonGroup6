@@ -29,10 +29,12 @@ public class OrderDetail {
 	private int quantity;
 	@Column
 	private String note;
-	@Column
-	private int productId;
-	@Column
-	private int productComboId;
+	@ManyToOne
+	@JoinColumn(name = "productId")
+	private Product product;
+	@ManyToOne
+	@JoinColumn(name = "productComboId")
+	private ProductCombo productCombo;
 	@ManyToOne
 	@JoinColumn(name = "orderId")
 	private Orders orders;

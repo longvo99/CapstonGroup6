@@ -27,6 +27,6 @@ public class ComboDetail {
 	@JoinColumn(name = "productId")
 	private Product product;
 	@ManyToOne
-	@JoinColumn(name = "productCompoId")
-	private ProductCombo productCompo;
+	@JoinColumn(name = "productComboId")
+	private ProductCombo productCombo;
 }

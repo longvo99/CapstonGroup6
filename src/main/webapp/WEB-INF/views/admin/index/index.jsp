@@ -36,7 +36,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-uppercase mb-1">QUẢN LÝ ĐẶT HÀNG</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">Có 5 đơn hàng mới</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">Có ${newOrderCount} đơn hàng mới</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-shopping-cart fa-2x text-success"></i>

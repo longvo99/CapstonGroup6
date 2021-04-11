@@ -57,4 +57,9 @@ public class OrderServiceImpl implements OrderService {
 		// TODO Auto-generated method stub
 		return orderDAO.findByUserId(userId);
 	}
+
+	@Override
+	public long newOrderCount() {
+		return orderDAO.newOrderCount();
+	}
 }

@@ -57,7 +57,7 @@
 	<!-- <meta name="apple-mobile-web-app-title" content="CodePen"> -->
 	<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link type="text/css" rel="stylesheet" href="https://www.codehim.com/demo/jquery-image-uploader-preview-and-delete/dist/image-uploader.min.css">
-    <link href="${pageContext.request.contextPath}/resources/admin/assets/css/autocomplete/jquerui.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/admin/assets/css/autocomplete/jquery-ui.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
