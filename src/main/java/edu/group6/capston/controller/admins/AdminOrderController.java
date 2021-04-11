@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.group6.capston.models.Orders;
-import edu.group6.capston.services.OrderService;
 import edu.group6.capston.services.OrderDetailService;
+import edu.group6.capston.services.OrderService;
 import edu.group6.capston.utils.GlobalsConstant;
 
 @Controller
@@ -43,7 +43,6 @@ public class AdminOrderController {
 	
 	@RequestMapping(value ="/detail/{orderId}")
 	public String detail(@PathVariable Integer orderId, Model model) {
-		model.addAttribute("order" , OrderService.findByOrderId(orderId));
 		model.addAttribute("orderStatus" , OrderService.findAllOrderStatus());
 		model.addAttribute("orderDetailList" , OrderDetailService.findByOrderId(orderId));
 		return "admin.order.orderDetail";
@@ -54,15 +53,13 @@ public class AdminOrderController {
 			HttpServletRequest request, Model model) throws UnsupportedEncodingException {
 		if (br.hasErrors()) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
-			return "admin.order.index";
+			return "redirect:/admin/order/index";
 		}
 		if (OrderService.update(Orders)) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("success", null, Locale.getDefault()));
-			rd.addFlashAttribute("success", true);
 			return "redirect:/admin/order/index";
 		}
 		rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
-		rd.addFlashAttribute("error", true);
 		return "redirect:/admin/order/index";
 	}
 }

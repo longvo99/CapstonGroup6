@@ -56,4 +56,9 @@ public class OrderServiceImpl implements OrderService {
 	public List<Orders> findByUserId(int userId) {
 		return orderDAO.findByUserId(userId);
 	}
+
+	@Override
+	public long newOrderCount() {
+		return orderDAO.newOrderCount();
+	}
 }

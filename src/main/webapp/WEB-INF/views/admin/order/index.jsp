@@ -11,20 +11,11 @@
             </ol>
           </div>
           <!-- Row -->
-	      <span id="result">
 	      	<c:if test="${not empty msg}">
-               	<c:if test="${success eq true}">
 					<div class="alert alert-success">
 						<strong>${msg}</strong>
 					</div>
-				</c:if>
-				<c:if test="${error eq true}">
-					<div class="alert alert-danger">
-						<strong>${msg}</strong>
-					</div>
-				</c:if>
 			</c:if>
-	      </span>
           <div class="row">
             <!-- DataTable with Hover -->
             <div class="col-lg-12">
@@ -47,7 +38,23 @@
 							<td>${order.orderId}</td>
 							<td>${order.users.contactName}</td>
 							<td>${order.orderTime}</td>
-							<td>${order.orderStatus.statusName}</td>
+							<c:choose>
+								<c:when test="${order.orderStatus.orderStatusId eq 1}">
+									<td style="color:red; font-weight:bold;" >${order.orderStatus.statusName}...</td>
+								</c:when>
+								<c:when test="${order.orderStatus.orderStatusId eq 2}">
+									<td style="color:#0000b3; font-weight:bold;" >${order.orderStatus.statusName}</td>
+								</c:when>
+								<c:when test="${order.orderStatus.orderStatusId eq 3}">
+									<td style="color:#0000b3; font-weight:bold;" >${order.orderStatus.statusName} <i style='font-size:24px' class='fas'>&#xf21c;</i></td>
+								</c:when>
+								<c:when test="${order.orderStatus.orderStatusId eq 4}">
+									<td style="color:#258e25; font-weight:bold;" >${order.orderStatus.statusName} <i class="fa fa-check" style="font-size:24px"></i></td>
+								</c:when>
+								<c:otherwise>
+									<td style="font-weight:bold; text-decoration: line-through; font-weight:bold;" >${order.orderStatus.statusName}</td>
+								</c:otherwise>
+							</c:choose>
 							<td class="center text-center">
 								<a href="${pageContext.request.contextPath}/admin/order/detail/${order.orderId}"  class="btn btn-success" ><i class="fa fa-edit">Chi tiết</i></a>
 							</td>

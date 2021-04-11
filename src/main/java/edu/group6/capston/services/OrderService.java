@@ -13,4 +13,5 @@ public interface OrderService {
 	boolean delete(Integer id);
 	List<OrderStatus> findAllOrderStatus();
 	List<Orders> findByUserId(int userId);
+	long newOrderCount();
 }

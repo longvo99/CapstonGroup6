@@ -29,66 +29,63 @@
 								action="${pageContext.request.contextPath}/admin/order/edit"
 								method="post" id="form">
 								<div class="comment-form">
+								<c:set var="obj" value="${orderDetailList.get(0)}" ></c:set>
 									<div class="form-group">
 										<label for="name">ID đơn hàng</label> <input class="form-control mb-3"
-											type="text" value="${order.orderId}" id="orderId"
+											type="text" value="${obj.orders.orderId}" id="orderId"
 											name="orderId" readonly>
 									</div>
-									<div class="form-group">
-										<label for="name">Thời gian</label> <input
-											class="form-control mb-3" type="text"
-											value="${order.orderTime}" id="orderTime" name="orderTime" readonly>
-									</div>
-									<div class="form-group">
-										<label for="name">ID người đặt hàng</label> <input
-											class="form-control mb-3" type="text"
-											value="${order.users.userId}" id="users.userId" name="users.userId" readonly>
-									</div>
+									<input type="hidden" value="${obj.orders.users.userId}" name="users.userId">
+									<input type="hidden" value="${obj.orders.shipDistance}" name="shipDistance">
 									<div class="form-group">
 										<label for="name">Người đặt</label> <input
 											class="form-control mb-3" type="text"
-											value="${order.users.contactName}" id="users.contactName" name="users.contactName" readonly>
+											value="${obj.orders.users.contactName}" id="users.contactName" name="users.contactName" readonly>
 									</div>
 									<div class="form-group">
-										<label for="name">Tổng tiền</label> <input
+										<label for="name">Số điện thoại</label> <input
 											class="form-control mb-3" type="text"
-											value="${order.totalPrice}" id="orderTime" name="totalPrice" readonly>
-									</div>
-									<div class="form-group">
-										<label for="name">Khoảng cách (Kilometer)</label> <input
-											class="form-control mb-3" type="text"
-											value="${order.shipDistance}" id="shipDistance" name="shipDistance" readonly>
-									</div>
-									<div class="form-group">
-										<label for="name">Phí ship</label> <input
-											class="form-control mb-3" type="text"
-											value="${order.shipPrice}" id="shipPrice" name="shipPrice" readonly>
+											value="${obj.orders.users.contactPhone}" id="users.contactName" name="users.contactName" readonly>
 									</div>
 									<div class="form-group">
 										<label for="name">Địa chỉ giao hàng</label> <input
 											class="form-control mb-3" type="text"
-											value="${order.recieverAddress}" id="recieverAddress" name="recieverAddress" readonly>
+											value="${obj.orders.recieverAddress}" id="recieverAddress" name="recieverAddress" readonly>
+									</div>
+									<div class="form-group">
+										<label for="name">Tổng tiền + ship</label> <input
+											class="form-control mb-3" type="text"
+											value="${obj.orders.totalPrice}" id="orderTime" name="totalPrice" readonly>
+									</div>
+									<div class="form-group">
+										<label for="name">Thời gian đặt</label> <input
+											class="form-control mb-3" type="text"
+											value="${obj.orders.orderTime}" id="orderTime" name="orderTime" readonly>
+									</div>
+									<div class="form-group">
+										<label for="name">Phí ship</label> <input
+											class="form-control mb-3" type="text"
+											value="${obj.orders.shipPrice}" id="shipPrice" name="shipPrice" readonly>
 									</div>
 									<div class="form-group">
 										<label for="name">Ghi chú</label> <input
 											class="form-control mb-3" type="text"
-											value="${order.note}" id="note" name="note" readonly>
+											value="${obj.orders.note}" id="note" name="note" readonly>
 									</div>
-									
 									<table class="table align-items-center table-flush table-hover" >
 					                    <thead class="thead-light">
 					                      <tr>
-					                        <th>ID</th>
 					                        <th>Tên sản phẩm</th>
 					                        <th>Giá tiền</th>
 					                        <th>Số lượng</th>
-					                        <th>Ghi chú</th>
+					                        <th>Của nhà hàng</th>
+					                        <th>Địa chỉ nhà hàng</th>
+					                        <th>Sđt nhà hàng</th>
 					                      </tr>
 					                    </thead>
 					                    <tbody>
 					                      <c:forEach items="${orderDetailList}" var="orderDetail">
 											<tr class="odd gradeX">
-												<td>${orderDetail.orderDetailId}</td>
 												<c:choose>
 													<c:when test="${not empty orderDetail.product.productId}">
 														<td>${orderDetail.product.name}</td>
@@ -99,18 +96,40 @@
 												</c:choose>
 												<td>${orderDetail.currentPrice}</td>
 												<td>${orderDetail.quantity}</td>
-												<td>${orderDetail.note}</td>
+												<c:choose>
+													<c:when test="${not empty orderDetail.product.productId}">
+														<td>${orderDetail.product.location.locationName}</td>
+														<td>${orderDetail.product.location.address}</td>
+														<td>${orderDetail.product.location.locationPhone}</td>
+													</c:when>
+													<c:otherwise>
+														<td>${orderDetail.productCombo.location.locationName}</td>
+														<td>${orderDetail.productCombo.location.address}</td>
+														<td>${orderDetail.productCombo.location.locationPhone}</td>
+													</c:otherwise>
+												</c:choose>
 											</tr>
 								          </c:forEach>
 					                    </tbody>
 					                  </table>
 									<div class="form-group">
 										<label for="orderStatus.orderStatusId">Trạng thái</label> 
-										<select	class="form-control" id="orderStatus" name="orderStatus.orderStatusId">
+										<c:if test="${obj.orders.orderStatus.orderStatusId eq 4 || obj.orders.orderStatus.orderStatusId eq 5}">
+											<c:set var="disabled" value="disabled='disabled'" />
+										</c:if>
+										<select ${disabled} class="form-control" id="orderStatus" name="orderStatus.orderStatusId">
 											<c:if test="${not empty orderStatus}">
 												<c:forEach items="${orderStatus}" var="orderStatus">
 													<c:choose>
-														<c:when test="${orderStatus.orderStatusId eq order.orderStatus.orderStatusId }">
+														<c:when test="${orderStatus.orderStatusId eq obj.orders.orderStatus.orderStatusId }">
+															<c:set var="selected" value="selected='selected'" />
+														</c:when>
+														<c:otherwise>
+															<c:set var="selected" value="" />
+														</c:otherwise>
+													</c:choose>
+													<c:choose>
+														<c:when test="${orderStatus.orderStatusId eq obj.orders.orderStatus.orderStatusId }">
 															<c:set var="selected" value="selected='selected'" />
 														</c:when>
 														<c:otherwise>
@@ -122,9 +141,11 @@
 											</c:if>
 										</select>
 									</div>
+									<c:if test="${obj.orders.orderStatus.orderStatusId ne 4 && obj.orders.orderStatus.orderStatusId ne 5}">
 									<div class="form-group">
 										<button type="submit" class="btn btn-primary" name="submit">Cập nhập</button>
 									</div>
+									</c:if>
 								</div>
 							</form>
 						</div>

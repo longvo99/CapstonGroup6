@@ -86,6 +86,13 @@ public class OrderDAO {
 		}
 	}
 
+	public long newOrderCount() {
+		try (Session session = this.sessionFactory.openSession()) {
+			long count = (long) session.createQuery("select count(*) from Orders where orderStatus.orderStatusId = 1").uniqueResult();
+			return count;
+		}
+	}
+
 	/*
 	 * public Order findById(int id) { Session session =
 	 * this.sessionFactory.openSession(); return session.find(Order.class,
