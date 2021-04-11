@@ -200,4 +200,24 @@ public class LocationDAO {
 			return session.createQuery("FROM Location WHERE userId = " + userId, Location.class).uniqueResult();
 		}
 	}
+
+	public List<LocationDTO> searchLocation(String search) {
+		List<LocationDTO> locationList = null;
+		Session session = this.sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<LocationDTO> query = builder.createQuery(LocationDTO.class);
+		Root<Location> root = query.from(Location.class);
+		root.join("locationCategory", JoinType.INNER);
+		root.join("locationType", JoinType.INNER);
+		query.multiselect(root.get("locationId"), root.get("locationName"), root.get("openTime"), root.get("closeTime"),
+				root.get("reviewCount"), root.get("locationCategory").get("locationCategoryName"),
+				root.get("locationType").get("locationTypeName"), root.get("mediaPath"));
+		query.where(builder.like(root.get("locationName"), "%" + search + "%"));
+		query.orderBy(builder.desc(root.get("locationId")));
+		locationList = session.createQuery(query).setMaxResults(12).getResultList();
+		transaction.commit();
+		session.close();
+		return locationList;
+	}
 }

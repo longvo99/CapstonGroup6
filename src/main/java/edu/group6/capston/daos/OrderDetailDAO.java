@@ -50,8 +50,8 @@ public class OrderDetailDAO {
 		CriteriaQuery<OrderDTO> query = builder.createQuery(OrderDTO.class);
 		Root<OrderDetail> root = query.from(OrderDetail.class);
 		query.multiselect(
-				root.get("productId"),
-				root.get("productComboId"),
+				root.get("product").get("productId"),
+				root.get("productCombo").get("productComboId"),
 				root.get("currentPrice"),
 				root.get("quantity"));
 		query.where(builder.equal(root.get("orders").get("orderId"), orderId));

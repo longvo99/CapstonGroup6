@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import edu.group6.capston.daos.ProductDAO;
 import edu.group6.capston.dtos.LocationDTO;
 import edu.group6.capston.dtos.OrderDTO;
+import edu.group6.capston.dtos.ProductDTO;
 import edu.group6.capston.models.Product;
 import edu.group6.capston.services.ProductService;
 
@@ -62,8 +63,8 @@ public class ProductServiceImpl implements ProductService {
 		return ProductDAO.searchProductNameByUserId(userId);
 	}
 
-	public List<String> searchAllProductName() {
-		return ProductDAO.searchAllProductName();
+	public List<ProductDTO> searchAllProductName(String search) {
+		return ProductDAO.searchAllProductName(search);
 	}
 	
 	

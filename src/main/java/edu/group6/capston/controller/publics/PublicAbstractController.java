@@ -38,7 +38,7 @@ public abstract class PublicAbstractController  {
 			}
 		}
 		Users user = (Users) request.getSession().getAttribute("userSession");
-		if(request.getSession().getAttribute("userSession") != null) {
+		if(user != null) {
 			List<OrderDTO> listOrderDTO = new ArrayList<>();
 			Cookie[] cookies = request.getCookies();
 			float totalCart = 0;
@@ -57,7 +57,7 @@ public abstract class PublicAbstractController  {
 						}
 						double total = product.getPrice() * Integer.valueOf(cookie.getValue());
 						OrderDTO order = new OrderDTO(user.getUserId(), productId , product.getName(), product.getPrice(),
-								Integer.valueOf(cookie.getValue()));
+								Integer.valueOf(cookie.getValue()), product.getLocationId());
 						
 						listOrderDTO.add(order);
 						totalCart += total;

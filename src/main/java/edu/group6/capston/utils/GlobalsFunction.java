@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import edu.group6.capston.daos.UserDAO;
 import edu.group6.capston.dtos.LocationDTO;
+import edu.group6.capston.dtos.ProductDTO;
 import edu.group6.capston.dtos.UserAddress;
 import edu.group6.capston.models.CustomUserDetails;
 import edu.group6.capston.models.Location;
@@ -98,6 +99,17 @@ public class GlobalsFunction {
 			}
 		}
 		return findTopRate;
+	}
+	
+	public static List<ProductDTO> changeImageSearchLocation(List<ProductDTO> listLocation) {
+		String image = "";
+		for (ProductDTO location : listLocation) {
+			image = location.getImagePath();
+			String[] mediaPath = splitPathMedia(image);
+			image = mediaPath[0];
+			location.setImagePath(image);
+		}
+		return listLocation;
 	}
 
 	public static String findDifference(String end_date) {

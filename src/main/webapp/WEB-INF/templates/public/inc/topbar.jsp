@@ -18,6 +18,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="#">
     <link rel="apple-touch-icon-precomposed" href="#">
     <link rel="shortcut icon" href="#">
+    <link href="${pageContext.request.contextPath}/resources/public/assets/img/logoTitle.png" rel="icon">
     <!-- Bootstrap -->
     <link href="${pageContext.request.contextPath}/resources/public/assets/css/bootstrap.min.css" rel="stylesheet">
     <!-- Fontawesome -->
@@ -48,10 +49,10 @@
     <!-- plus and minus  -->
    <%--  <link href="${pageContext.request.contextPath}/resources/public/assets/css/checkout.css" rel="stylesheet"> --%>
     <!-- place -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/admin/assets/css/autocomplete/jquery-ui.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/public/assets/css/autocomplete/jquery-ui.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/admin/assets/js/jquery.validate.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin/assets/css/autocomplete/base/jquery.ui.all.css">
+    <link href="${pageContext.request.contextPath}/resources/public/assets/css/autocomplete/jquery-ui.css" rel="stylesheet">
     <style type="text/css">
 	.dropdown-submenu {
   		position: relative;
@@ -113,7 +114,7 @@ input[type="file"] {
                         <!-- logo -->
                         <div class="logo mainNavCol">
                             <a href="${pageContext.request.contextPath}/public/index">
-                                <img src="https://via.placeholder.com/106x30" class="img-fluid" alt="Logo">
+                                <img style="width: 106px; height: 30px;" src="${pageContext.request.contextPath}/resources/public/assets/img/logo.png" class="img-fluid" alt="Logo">
                             </a>
                         </div>
                         <div style="width: 200px; margin-right: 20px;" class="btn-group">
@@ -174,11 +175,11 @@ input[type="file"] {
                 		</div>
                         <!-- logo -->
                         <div class="main-search mainNavCol">
-                            <form class="main-search search-form full-width">
+                            <form action="${pageContext.request.contextPath}/public/search" method="POST" class="main-search search-form full-width">
                                 <div class="row">
                                     <!-- location picker -->
                                     <div class="col-lg-6 col-md-5">
-                                        <a href="#" class="delivery-add p-relative"> <!-- <span class="icon"><i class="fas fa-map-marker-alt"></i></span> -->
+                                        <a href="${pageContext.request.contextPath}/admin/location/add" class="delivery-add p-relative"> <!-- <span class="icon"><i class="fas fa-map-marker-alt"></i></span> -->
                                             <span class="address">Tạo địa điểm mới</span>
                                         </a>
                                         <!-- <div class="location-picker">
@@ -189,7 +190,7 @@ input[type="file"] {
                                     <!-- search -->
                                     <div class="col-lg-6 col-md-7">
                                         <div class="search-box padding-10">
-                                            <input class="form-control mb-3" type="text" onKeyDown="getProduct();" name="productName" id="productName"  placeholder="nhà hàng, sản phẩm">
+                                            <input class="form-control mb-3" type="text" name="search" id="productName"  placeholder="nhà hàng, sản phẩm">
                                         </div>
 					                   <style type="text/css">
 										.ui-autocomplete {
@@ -205,63 +206,55 @@ input[type="file"] {
 											height: 200px;
 										}
 										</style>
-					                   <script>
-										    function getProduct(){
-										    var userName = document.getElementById("productName");
-										    var string = userName.value;
-										    $.ajax({
-											method: 'GET',
-											url: '${pageContext.request.contextPath}/public/search',
-											data: {
-											  str: string
-											},
-											success: function(content) {
-											  console.log("Content: " + content);
-										    var availableTags = content;
-										    function split( val ) {
-												return val.split( /,\s*/ );
-											}
-											function extractLast( term ) {
-												return split( term ).pop();
-											}
-											$( "#productName" )
-										// don't navigate away from the field on tab when selecting an item
-											.bind( "keydown", function( event ) {
-												if ( event.keyCode === $.ui.keyCode.TAB &&
-														$( this ).data( "autocomplete" ).menu.active ) {
-													event.preventDefault();
-												}
-											})
-											.autocomplete({
-												minLength: 2,
-												source: function( request, response ) {
-													// delegate back to autocomplete, but extract the last term
-													response( $.ui.autocomplete.filter(
-														availableTags, extractLast( request.term ) ) );
-												},
-												focus: function() {
-													// prevent value inserted on focus
-													return false;
-												},
-												select: function( event, ui ) {
-													var terms = split( this.value );
-													// remove the current input
-													terms.pop();
-													// add the selected item
-													terms.push( ui.item.value );
-													// add placeholder to get the comma-and-space at the end
-													terms.push( "" );
-													this.value = terms.join( ", " );
-													return false;
-												}
-											});
-											},
-											error: function(xhr, status) {
-										    	console.log("ERROR");
-										    }
-										    });
-										    } 
-										</script>
+										<script type="text/javascript">
+										$(document).ready(function () {
+									        $('#productName').autocomplete({
+									            source: function (request, response) {
+									                $.ajax({
+									                    url: "${pageContext.request.contextPath}/public/search",
+									                    data: { searchText: request.term },
+									                    dataType: "json",
+									                    success: function (data) {
+									                        response($.map(data, function (item) {
+									                            return {
+									                                value: item.productName,
+									                                avatar: item.imagePath,
+									                                locationId: item.locationId
+									                            };
+									                        }))
+									                    }
+									                })
+									            },
+									        }).data("ui-autocomplete")._renderItem = function (ul, item) {
+									        	var inner_html = '<div><a href="${pageContext.request.contextPath}/public/restaurant/' + item.locationId +'"><div class="list_item_container"><div class="image"><img src="${pageContext.request.contextPath}/resources/admin/assets/img/uploads/' + item.avatar + '"></div><div class="label"><p style="margin-left: 50px;">' + item.label + '</p></div></div></a></div>';
+									            return $("<li class='ui-autocomplete-row'></li>")
+									                    .data("ui-autocomplete-item", item)
+									                    .append(inner_html)
+									                    .appendTo(ul);
+									        };
+									    });
+										$("button").click(function(){
+										    $("li").unbind();
+										  });
+										</script>  
+										<style type="text/css">
+									      .ui-autocomplete-row
+									      {
+									        padding:8px;
+									        background-color: #f4f4f4;
+									        border-bottom:1px solid #ccc;
+									        font-weight:bold;
+									      }
+									      .ui-autocomplete-row:hover
+									      {
+									        background-color: #ddd;
+									      }
+									      .image{
+									      	width: 40px;
+									      	height: 40px;
+									      	float:left;
+									      }
+									    </style>
                                     </div>
                                     <!-- search -->
                                 </div>
@@ -458,11 +451,11 @@ input[type="file"] {
                                             </a>
                                         </li> 
                                     </ul>-->
-                                    <div class="user-footer"><a href="${pageContext.request.contextPath}/public/logout">Sign Out</a></div>
+                                    <div class="user-footer"><a href="${pageContext.request.contextPath}/public/logout">Đăng xuất</a></div>
                                 </div>
                                 </c:when>
                                 <c:otherwise>
-                                	<img src="https://via.placeholder.com/30" class="rounded-circle" alt="userimg"><span> <a href="${pageContext.request.contextPath}/public/login"> Đăng nhập </a></span>
+                                	<img src="https://via.placeholder.com/30" class="rounded-circle" alt="userimg"><span> <a href="${pageContext.request.contextPath}/auth/login"> Đăng nhập </a></span>
                                 </c:otherwise>
                             </c:choose>  
                             </div>
@@ -542,8 +535,10 @@ input[type="file"] {
 		                                    </div>
 		                                    </c:if>
                                         </div>
-                                        <div class="card-footer padding-15"> <a href="${pageContext.request.contextPath}/public/checkout" class="btn-first green-btn text-custom-white full-width fw-500">Thanh toán</a>
-                                        </div>
+	                                        <div class="card-footer padding-15"> <a href="${pageContext.request.contextPath}/public/checkout" class="btn-first green-btn text-custom-white full-width fw-500">Thanh toán</a>
+	                                        </div>
+                                        	<div class="card-footer padding-15"> <a href="${pageContext.request.contextPath}/public/orderdetails" class="btn-first green-btn text-custom-white full-width fw-500">Đơn hàng đã đặt</a>
+	                                        </div>
                                     </div>
                                 </div>
                             </div>

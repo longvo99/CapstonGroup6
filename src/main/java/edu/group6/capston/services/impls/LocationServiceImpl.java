@@ -94,4 +94,9 @@ public class LocationServiceImpl implements LocationService {
 		return LocationDAO.findLocationByCategoryId(categoryId);
 	}
 
+	@Override
+	public List<LocationDTO> searchLocation(String productName) {
+		return LocationDAO.searchLocation(productName);
+	}
+
 }

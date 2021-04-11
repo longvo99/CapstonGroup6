@@ -42,4 +42,13 @@ public class Product {
 		super();
 		this.productId = productId;
 	}
+	
+	public Product(int locationId, String name, String imagePath) {
+		super();
+		this.location.setLocationId(locationId);
+		this.name = name;
+		this.imagePath = imagePath;
+	}
+	
+	
 }

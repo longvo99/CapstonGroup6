@@ -11,7 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link href="https://indrijunanda.github.io/RuangAdmin/img/logo/logo.png" rel="icon">
+  <link href="${pageContext.request.contextPath}/resources/public/assets/img/logoTitle.png" rel="icon">
   <title>RuangAdmin - Login</title>
   <link href="${pageContext.request.contextPath}/resources/admin/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="${pageContext.request.contextPath}/resources/admin/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -27,7 +27,7 @@
               <div class="col-lg-12">
                 <div class="login-form">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">LOGIN</h1>
+                    <h1 class="h4 text-gray-900 mb-4">ĐĂNG NHẬP</h1>
                   </div>
                   <c:if test="${not empty param['msg']}">
 	                	<p style="color:red;">Sai tên đăng nhập hoặc mật khẩu</p>
@@ -40,10 +40,10 @@
 				  </c:if>
                   <form action="${pageContext.request.contextPath}/auth/login" name='loginForm' class="user" method="POST">
                     <div class="form-group">
-                      <input type="text" class="form-control" name="username" id="username" aria-describedby="username" placeholder="Enter username">
+                      <input type="text" class="form-control" name="username" id="username" aria-describedby="username" placeholder="Tên đăng nhập">
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                      <input type="password" class="form-control" name="password" id="password" placeholder="Mật khẩu">
                     </div>
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small" style="line-height: 1.5rem;">
@@ -52,18 +52,19 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <button type="submit" class="btn btn-primary btn-block">Login</button>
+                      <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
                     </div>
                     <div>
-                    	<a href="${pageContext.request.contextPath}/forgot_password" >Forgot your password?</a>
+                    	<a href="${pageContext.request.contextPath}/forgot_password" >Quên mật khẩu?</a>
                     </div>
-                    <!-- <hr>
-                    <a href="https://indrijunanda.github.io/RuangAdmin/index.html" class="btn btn-google btn-block">
-                      <i class="fab fa-google fa-fw"></i> Login with Google
+                     <hr>
+                    <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/Capston.Group6/public/login-google&response_type=code&client_id=620272103683-kgo588qtq63in5a2orb96nq10tlbskld.apps.googleusercontent.com&approval_prompt=force" class="btn btn-google btn-block">
+                      <i class="fab fa-google fa-fw"></i> Đăng nhập tài khoản Google
                     </a>
-                    <a href="https://indrijunanda.github.io/RuangAdmin/index.html" class="btn btn-facebook btn-block">
+                    
+                    <!-- <a href="https://indrijunanda.github.io/RuangAdmin/index.html" class="btn btn-facebook btn-block">
                       <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                    </a> -->
+                    </a>  -->
                   </form>
                   <hr>
                  <!--  <div class="text-center">

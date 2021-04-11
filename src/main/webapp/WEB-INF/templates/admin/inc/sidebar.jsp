@@ -10,7 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link href="${pageContext.request.contextPath}/resources/admin/assets/img/logo/logo.png" rel="icon">
+  <link href="${pageContext.request.contextPath}/resources/public/assets/img/logoTitle.png" rel="icon">
   <title>RuangAdmin - Dashboard</title>
   <link href="${pageContext.request.contextPath}/resources/admin/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="${pageContext.request.contextPath}/resources/admin/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">

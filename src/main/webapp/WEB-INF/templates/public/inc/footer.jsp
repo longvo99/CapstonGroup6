@@ -259,7 +259,7 @@
    	</c:if>
    	<script>
    	function editLocationFavorite(locationId) {
-   			var userId =  ${userId};
+   			var userId = ${userId};
    			if(userId == 0){
    				return alert("Bạn hãy đăng nhập để thực hiện thao tác này!!!");
    			}else{

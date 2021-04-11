@@ -117,7 +117,7 @@
                         </ul>
                         <div class="${circletag}">
                         	<c:set var="heartLNew" value="013-heart-1.svg" />
-                        	<c:if test="${not empty locationFavoriteList}">
+                        	<c:if test="${not empty locationFavorite}">
                         		<c:set var="heartLNew" value="010-heart.svg" />
                         	</c:if>
                             <img onclick="editLocationFavorite(${location.locationId})" src="${pageContext.request.contextPath}/resources/public/assets/img/svg/${heartLNew}" alt="tag">
@@ -133,7 +133,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="address-details">
+                    <!-- <div class="address-details">
                         <div class="address">
                             <div class="delivery-address"> <a href="order-details.html" class="text-light-black">Delivery, ASAP (45–55m)</a>
                                 <div class="delivery-type"> <span class="text-success fs-14 fw-500">No minimun</span><span class="text-light-white">, Free Delivery</span>
@@ -143,7 +143,7 @@
                             </div>
                         </div>
                         <p class="text-light-white no-margin">description</p>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -153,7 +153,7 @@
     <section class="section-padding restaurent-meals bg-light-theme">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-xl-3 col-lg-3">
+                <%-- <div class="col-xl-3 col-lg-3">
                     <div class="advertisement-slider swiper-container h-auto mb-xl-20 mb-md-40">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
@@ -336,21 +336,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-6 col-lg-6">
+                a --%>
+                <div style="margin-left: 200px;" class="col-xl-6 col-lg-6">
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="promocodeimg mb-xl-20 p-relative">
-                                <img src="https://via.placeholder.com/1100x115" class="img-fluid full-width" alt="promocode">
-                                <div class="promocode-text">
-                                    <div class="promocode-text-content">
-                                        <h5 class="text-custom-white mb-2 fw-600">Get $10 off your first order!</h5>
-                                        <p class="text-custom-white no-margin">Spend $15 or more and get $10 off your first delivery order.</p>
-                                    </div>
-                                    <div class="promocode-btn"> <a href="#">Get Deal</a>
-                                    </div>
-                                </div>
-                                <div class="overlay overlay-bg"></div>
-                            </div>
                         </div>
                         <div class="col-lg-12 restaurent-meal-head mb-md-40">
                             <div class="card">
@@ -377,11 +366,11 @@
                                                                         <h6 class="mb-2" data-toggle="modal" data-target="#restaurent-product${product.productId}"><a href="javascript:void(0)" class="text-light-black fw-600">${product.name}</a></h6>
                                                                         <%-- <p class="text-light-white">${product.price}</p> --%>
                                                                     </div>
-                                                                    <div class="restaurent-product-label"> <span class="rectangle-tag bg-gradient-red text-custom-white">Sale</span>
-                                                                        <!-- <span class="rectangle-tag bg-dark text-custom-white">Combo</span> -->
-                                                                    </div>
+                                                                    <!-- <div class="restaurent-product-label"> <span class="rectangle-tag bg-gradient-red text-custom-white">Sale</span>
+                                                                        <span class="rectangle-tag bg-dark text-custom-white">Combo</span>
+                                                                    </div> -->
                                                                 </div>
-                                                                <div class="restaurent-product-rating">
+                                                               <!--  <div class="restaurent-product-rating">
                                                                     <div class="ratings"> <span class="text-yellow"><i class="fas fa-star"></i></span>
                                                                         <span class="text-yellow"><i class="fas fa-star"></i></span>
                                                                         <span class="text-yellow"><i class="fas fa-star"></i></span>
@@ -391,7 +380,7 @@
                                                                     <div class="rating-text">
                                                                         <p class="text-light-white fs-14 title">3845 ratings</p>
                                                                     </div>
-                                                                </div>
+                                                                </div> -->
                                                             </div>
                                                             <div class="restaurent-product-caption-box"> <span class="text-light-white">${product.describe}</span>
                                                             </div>
@@ -413,9 +402,6 @@
                                                                         <img src="${pageContext.request.contextPath}/resources/public/assets/img/svg/009-lemon.svg" alt="tag">
                                                                       </span>
                                                                 </div> 
-                                                                    <span class="circle-tag">
-                                                                        <img src="${pageContext.request.contextPath}/resources/public/assets/img/svg/010-heart.svg" alt="tag">
-                                                                    </span>
                                                                 <div class="restaurent-product-price">
                                                                     <h6 class="text-success fw-600 no-margin">${product.price} VNĐ</h6>
                                                                 </div>
@@ -491,9 +477,7 @@
 	                                                                    <span class="text-custom-white square-tag">
 	                                    <img src="${pageContext.request.contextPath}/resources/public/assets/img/svg/009-lemon.svg" alt="tag">
 	                                  </span>
-	                                                                </div> <span class="circle-tag">
-	                                  <img src="${pageContext.request.contextPath}/resources/public/assets/img/svg/013-heart-1.svg" alt="tag">
-	                                </span>
+	                                                                </div> 
 	                                                                <div class="restaurent-product-price">
 	                                                                    <h6 class="text-success fw-600 no-margin"></h6>
 	                                                                </div>
@@ -536,7 +520,7 @@
                                         		<c:forEach items="${listOrderDTO}" var="orderDTO">
                                         		<div class="cat-product">
                                                     <div class="cat-name">
-                                                        <a href="#">
+                                                        <a href="${pageContext.request.contextPath}/public/restaurant/${orderDTO.locationId}">
                                                             <p class="text-light-green"><span class="text-dark-white">${orderDTO.quantity}</span> ${orderDTO.name}</p>
                                                         </a>
                                                     </div>
@@ -617,7 +601,7 @@
                 <div class="col-md-6">
                     <div class="restaurent-schdule">
                         <div class="card">
-                            <div class="card-header text-light-white fw-700 fs-16">Hours</div>
+                            <div class="card-header text-light-white fw-700 fs-16">Giờ mở cửa: </div>
                             <div class="card-body">
                                 <div class="schedule-box">
                                     <div class="day text-light-black">Hôm nay</div>
@@ -1000,7 +984,7 @@
     </section>
     <!-- restaurent reviews -->
     <!-- offer near -->
-    <section class="fresh-deals section-padding">
+    <!-- <section class="fresh-deals section-padding">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -1187,7 +1171,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Add Arrows -->
+                        Add Arrows
                         <div class="swiper-button-next"></div>
                         <div class="swiper-button-prev"></div>
                     </div>
@@ -1195,7 +1179,7 @@
             </div>
         </div>
     </section>
-    <!-- offer near -->
+     --><!-- offer near -->
    
     <!-- product popup -->
     <c:forEach items="${product}" var="product">
@@ -1441,7 +1425,7 @@ $(document).on("change", ".file_multi_video", function(evt) {
                	);
             },
             error: function (e) {
-            	alert("error");
+            	alert("Bạn cần phải đăng nhập để thực hiện thao tác này");
             }
 		});
 	}
