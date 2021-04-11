@@ -93,6 +93,12 @@ public class OrderDAO {
 		}
 	}
 
+	public List<Orders> findAllByStatusId(int statusId) {
+		try (Session session = this.sessionFactory.openSession()) {
+			return session.createQuery("from Orders WHERE orderStatus.orderStatusId = " + statusId, Orders.class).list();
+		}
+	}
+
 	/*
 	 * public Order findById(int id) { Session session =
 	 * this.sessionFactory.openSession(); return session.find(Order.class,

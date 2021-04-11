@@ -27,9 +27,9 @@
               <!-- Form Basic -->
               <div class="card mb-4">
                 <div class="card-body">
-                  <form role="form" method="post"  name="form-example-1" id="form-example-1" enctype="multipart/form-data">
+                  <form role="form" method="post"  name="form" id="form" enctype="multipart/form-data">
                   	<div class="form-group">
-                      <label for="name">Location Name</label>
+                      <label for="locationName">Location Name</label>
                       <input class="form-control mb-3" type="text" value="" id="locationName" name="locationName">
                     </div>
                     <div class="form-group">
@@ -37,11 +37,11 @@
                       <input class="form-control mb-3" type="text" value="" id="address" name="address">
                     </div>
                     <div class="form-group">
-                      <label for="opentime">Open Time</label>
+                      <label for="openTime">Open Time</label>
                       <input class="form-control mb-3" type="time" value="" id="openTime" name="openTime">
                     </div>
                     <div class="form-group">
-                      <label for="closetime">Close Time</label>
+                      <label for="closeTime">Close Time</label>
                       <input class="form-control mb-3" type="time" value="" id="closeTime" name="closeTime">
                     </div>
                     <div class="form-group">
@@ -73,25 +73,25 @@
                     
                     <div>
                     <div class="form-group">
-                      <label for="country">Nước</label>
+                      <label for="">Nước</label>
                       <select class="form-control" name="country">
                       	<option value="Việt Nam">Việt Nam</option>
                       </select>
                     </div>
                     <div class="form-group">
-                    	<label for="city">Tỉnh/thành</label>
+                    	<label for="country">Tỉnh/thành</label>
 					   <select name="city" id="country" class="form-control input-lg">
 					    	<option value="000">-Chọn Tỉnh/Thành:-</option>
 					   </select>
 					</div>
 					<div class="form-group">
-						<label for="district">Quận huyện</label>
+						<label for="state">Quận huyện</label>
 					   <select name="district" id="state" class="form-control input-lg">
 					    	<option value="000">-Chọn Quận/Huyện-</option>
 					   </select>
 					</div>
 					<div class="form-group">
-						<label for="ward">Xã/phường</label>
+						<label for="city">Xã/phường</label>
 					   <select name="ward" id="city" class="form-control input-lg">
 					    	<option value="000">-Chọn Phường/Xã-</option>
 					   </select>
@@ -210,3 +210,64 @@
         </div>
         <!---Container Fluid-->
       </div>
+<script src="${pageContext.request.contextPath}/resources/admin/assets/js/jquery.validate.min.js"></script>
+<script type="text/javascript">
+$.validator.addMethod("valueNotEquals", function(value, element, arg){
+	  return arg !== value;
+	 }, "Value must not equal arg.");
+	$().ready(function() {
+		var validator = $("#form").validate({
+			errorPlacement: function(error, element){
+				$(element).closest("form").find("label[for='" + element.attr("id") + "']").append(error);
+			},
+			errorElement: "span",
+			ignore: [],
+			rules:{
+				locationName: {                      //lay name
+					required:true,
+				},
+				address: {                      
+					required:true,
+				},
+				openTime: {                      
+					required:true,
+				},
+				closeTime: {                      
+					required:true,
+				},
+				city: {                      
+					valueNotEquals: "000",
+				},
+				district: {                      
+					valueNotEquals: "000",
+				},
+				ward: {                      
+					valueNotEquals: "000",
+				},
+			},
+			messages: {
+				locationName: {
+					required: " (Mời nhập)",
+				},
+				address: {
+					required: " (Mời nhập)",
+				},
+				openTime: {
+					required: " (Mời nhập)",
+				},
+				closeTime: {
+					required: " (Mời nhập)",
+				},
+				city: {
+					valueNotEquals: " (Mời nhập)",
+				},
+				district: {
+					valueNotEquals: " (Mời nhập)",
+				},
+				ward: {
+					valueNotEquals: " (Mời nhập)",
+				},
+			},
+		});
+	});
+</script>

@@ -81,8 +81,8 @@
             <div class="col-xl-8 col-lg-7 mb-4">
               <div class="card">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Đơn hàng mới</h6>
-                  <a class="m-0 float-right btn btn-danger btn-sm" href="#">Xem thêm <i
+                  <h6 class="m-0 font-weight-bold text-primary">Đơn hàng mới </h6>
+                  <a class="m-0 float-right btn btn-danger btn-sm" href="${pageContext.request.contextPath}/admin/order/neworder">Xem thêm <i
                       class="fas fa-chevron-right"></i></a>
                 </div>
                 <div class="table-responsive">
@@ -93,45 +93,41 @@
                         <th>Người đặt</th>
                         <th>Tổng tiền</th>
                         <th>Thời gian đặt</th>
-                        <th></th>
+                        <th>Chức năng</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td><a href="#">01</a></td>
-                        <td>Nguyễn Văn A</td>
-                        <td>200.000</td>
-                        <td><span class="badge badge-success">08:30</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary">Chi tiết</a></td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">02</a></td>
-                        <td>Nguyễn Văn B</td>
-                        <td>200.000</td>
-                        <td><span class="badge badge-success">08:35</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary">Chi tiết</a></td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">03</a></td>
-                        <td>Nguyễn Văn C</td>
-                        <td>200.000</td>
-                        <td><span class="badge badge-success">08:40</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary">Chi tiết</a></td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">04</a></td>
-                        <td>Nguyễn Văn D</td>
-                        <td>200.000</td>
-                        <td><span class="badge badge-success">08:50</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary">Chi tiết</a></td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">05</a></td>
-                        <td>Nguyễn Văn E</td>
-                        <td>200.000</td>
-                        <td><span class="badge badge-success">09:00</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary">Chi tiết</a></td>
-                      </tr>
+                    <c:if test="${not empty newOrderList}">
+                    <c:choose>
+                    	<c:when test="${newOrderList.size() gt 5}">
+                    		<c:forEach begin="0" end="4" var="obj" items="${newOrderList}" >
+	                    		<tr>
+			                        <td>${obj.orderId}</td>
+			                        <td>${obj.users.username}</td>
+			                        <td><fmt:formatNumber value="${obj.totalPrice}" type="number"/></td>
+			                        <td><span class="badge badge-success"><fmt:formatDate pattern = "HH:mm (dd-MM-yyyy)"  value = "${obj.orderTime}" /></span></td>
+			                        <td><a href="${pageContext.request.contextPath}/admin/order/detail/${obj.orderId}" class="btn btn-sm btn-primary">Chi tiết</a></td>
+	                      		</tr>
+                    		</c:forEach>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<c:forEach  var="obj" items="${newOrderList}" >
+	                    		<tr>
+			                        <td>${obj.orderId}</td>
+			                        <td>${obj.users.username}</td>
+			                        <td><fmt:formatNumber value="${obj.totalPrice}" type="number"/></td>
+			                        <td><span class="badge badge-success"><fmt:formatDate pattern = "HH:mm (dd-MM-yyyy)"  value = "${obj.orderTime}" /></span></td>
+			                        <td><a href="${pageContext.request.contextPath}/admin/order/detail/${obj.orderId}" class="btn btn-sm btn-primary">Chi tiết</a></td>
+	                      		</tr>
+                    		</c:forEach>
+                    	</c:otherwise>
+                    </c:choose>
+                    </c:if>
+                    <c:if test="${empty newOrderList}">
+                    	<tr>
+	             	  		<td colspan="5" align="center">Chưa có đơn hàng mới nào!</td>
+					 	</tr>
+                    </c:if>
                     </tbody>
                   </table>
                 </div>

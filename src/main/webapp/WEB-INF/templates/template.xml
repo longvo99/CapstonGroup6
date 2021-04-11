@@ -83,7 +83,10 @@
 	<definition name="admin.user.profile" extends="templates.admin">
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/user/profile.jsp" />
 	</definition>
-	
+	<!-- ADMIN STATISTICAL  -->
+	<definition name="admin.statistical.index" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/statistical/index.jsp" />
+	</definition>
 	<!-- ADMIN PRODUCT  -->
 	<definition name="admin.product.index" extends="templates.admin">
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/product/index.jsp" />
@@ -122,6 +125,9 @@
 	</definition>
 	<definition name="admin.order.orderDetail" extends="templates.admin">
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/order/detail.jsp" />
+	</definition>
+	<definition name="admin.order.neworder" extends="templates.admin">
+		<put-attribute name="admin-content" value="/WEB-INF/views/admin/order/neworder.jsp" />
 	</definition>
 	
 	<!-- ADMIN ERROR  -->

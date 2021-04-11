@@ -14,4 +14,5 @@ public interface OrderService {
 	List<OrderStatus> findAllOrderStatus();
 	List<Orders> findByUserId(int userId);
 	long newOrderCount();
+	List<Orders> findAllByStatusId(int statusId);
 }

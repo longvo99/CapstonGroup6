@@ -113,6 +113,12 @@
           <span>Quản lý liên hệ</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="${pageContext.request.contextPath}/admin/statistical/index">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Thống kê</span>
+        </a>
+      </li>
       <hr class="sidebar-divider">
       <div class="sidebar-heading">
         Thông tin

@@ -61,4 +61,9 @@ public class OrderServiceImpl implements OrderService {
 	public long newOrderCount() {
 		return orderDAO.newOrderCount();
 	}
+
+	@Override
+	public List<Orders> findAllByStatusId(int statusId) {
+		return orderDAO.findAllByStatusId(statusId);
+	}
 }

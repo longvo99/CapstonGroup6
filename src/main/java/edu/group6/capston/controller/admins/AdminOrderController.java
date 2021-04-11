@@ -40,6 +40,11 @@ public class AdminOrderController {
 		model.addAttribute("orderList" , OrderService.findAll());
 		return "admin.order.index";
 	}
+	@RequestMapping(value ="/neworder")
+	public String neworder(Model model) {
+		model.addAttribute("newOrderList" , OrderService.findAllByStatusId(1));
+		return "admin.order.neworder";
+	}
 	
 	@RequestMapping(value ="/detail/{orderId}")
 	public String detail(@PathVariable Integer orderId, Model model) {
