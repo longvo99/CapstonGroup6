@@ -41,7 +41,6 @@ public class LocationFavariteServiceImpl implements LocationFavoriteService {
 
 	@Override
 	public LocationFavorites findLocationFavorite(int userId, int locationId) {
-		// TODO Auto-generated method stub
-		return locationFavoriteDAO.findLocationFavorites(locationId, userId);
+		return locationFavoriteDAO.findLocationFavorites(userId, locationId);
 	}
 }

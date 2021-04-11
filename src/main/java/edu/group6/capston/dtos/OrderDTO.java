@@ -58,4 +58,11 @@ public class OrderDTO {
 		this.price = price;
 		this.quantity = quantity;
 	}
+
+	public OrderDTO(int userId, String name, String imagePath) {
+		super();
+		this.userId = userId;
+		this.name = name;
+		this.imagePath = imagePath;
+	}
 }

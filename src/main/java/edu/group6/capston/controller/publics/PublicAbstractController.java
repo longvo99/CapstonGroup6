@@ -5,16 +5,25 @@ import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.group6.capston.dtos.OrderDTO;
+import edu.group6.capston.dtos.ProductDTO;
 import edu.group6.capston.models.LocationCategory;
 import edu.group6.capston.models.Users;
+import edu.group6.capston.services.DiscountService;
 import edu.group6.capston.services.LocationCategoriesService;
+import edu.group6.capston.services.LocationService;
 import edu.group6.capston.services.ProductService;
+import edu.group6.capston.services.RatingService;
 import edu.group6.capston.utils.GlobalsFunction;
 
 public abstract class PublicAbstractController  {

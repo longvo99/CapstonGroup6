@@ -80,7 +80,7 @@ public class PublicIndexController extends PublicAbstractController {
 	public void addCommonObjects(Model model, HttpServletRequest request) {
 		super.addCommonObjects(model, request);
 	}
-
+	
 	@GetMapping("/index")
 	public String index(Model model, HttpServletRequest request) {
 		model.addAttribute("locationTypeList", locationTypeService.findAll());
@@ -123,6 +123,12 @@ public class PublicIndexController extends PublicAbstractController {
 		if(request.getSession().getAttribute("userSession") != null) {
 			Users user = (Users) request.getSession().getAttribute("userSession");
 			model.addAttribute("locationFavoriteList", locationFavoriteService.findLocationFavorite(user.getUserId(), locationId));
+		}
+		
+		if(request.getSession().getAttribute("userSession") != null) {
+			Users user = (Users) request.getSession().getAttribute("userSession");
+			LocationFavorites locationFavorite = locationFavoriteService.findLocationFavorite(user.getUserId() , locationId);
+			model.addAttribute("locationFavorite", locationFavorite);
 		}
 		return "public.restaurant";
 	}
@@ -223,13 +229,6 @@ public class PublicIndexController extends PublicAbstractController {
 		rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
 		return "redirect:/public/restaurant/" + locationId;
 	}
-	
-	@RequestMapping(value = "search", method = RequestMethod.GET)
-	@ResponseBody
-	public List<String> searchproduct(HttpServletRequest request) {
-		return productService.searchAllProductName();
-	}
-	
 //	@GetMapping("/shop")
 //	public String shop(Model model) {
 //		return "public.shop";

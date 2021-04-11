@@ -194,8 +194,7 @@
 					<div class="category-type overlay padding-15">
 						<button class="category-btn">Địa điểm đang giảm giá</button>
 						<a href="${pageContext.request.contextPath}/public/listview/discount"
-							class="btn-first white-btn text-light-black fw-600 full-width">See
-							all</a>
+							class="btn-first white-btn text-light-black fw-600 full-width">Xem thêm</a>
 					</div>
 				</div>
 			</div>
@@ -217,8 +216,7 @@
 					<div class="category-type overlay padding-15">
 						<button class="category-btn">Địa điểm mới</button>
 						<a href="${pageContext.request.contextPath}/public/listview/new"
-							class="btn-first white-btn text-light-black fw-600 full-width">See
-							all</a>
+							class="btn-first white-btn text-light-black fw-600 full-width">Xem thêm</a>
 					</div>
 				</div>
 			</div>
@@ -455,8 +453,7 @@
 							<div class="category-type overlay padding-15">
 								<button class="category-btn">Địa điểm bạn yêu thích</button>
 								<a href="${pageContext.request.contextPath}/public/listview/favorite"
-									class="btn-first white-btn text-light-black fw-600 full-width">See
-									all</a>
+									class="btn-first white-btn text-light-black fw-600 full-width">Xem thêm</a>
 							</div>
 						</div>
 					</div>

@@ -16,7 +16,9 @@ import org.springframework.stereotype.Repository;
 
 import edu.group6.capston.dtos.LocationDTO;
 import edu.group6.capston.dtos.OrderDTO;
+import edu.group6.capston.dtos.ProductDTO;
 import edu.group6.capston.models.ComboDetail;
+import edu.group6.capston.models.Location;
 import edu.group6.capston.models.Product;
 import edu.group6.capston.models.ProductCombo;
 
@@ -134,14 +136,22 @@ public class ProductDAO {
 		}
 	}
 	
-	public List<String> searchAllProductName() {
-		try (Session session = this.sessionFactory.openSession()) {
-			session.beginTransaction();
-			String hql = "select p.name from Product p ";
-			Query query = session.createQuery(hql);
-			List<String> listNameProducts = query.getResultList();
-			return listNameProducts;
-		}
+	public List<ProductDTO> searchAllProductName(String search) {
+		List<ProductDTO> product = null;
+		Session session = this.sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<ProductDTO> query = builder.createQuery(ProductDTO.class);
+		Root<Location> root = query.from(Location.class);
+		query.multiselect(
+				root.get("locationId"),
+				root.get("locationName"),
+				root.get("mediaPath"));
+		query.where(builder.like(root.get("locationName"), "%" + search + "%"));
+		product = session.createQuery(query).setMaxResults(3).getResultList();
+		transaction.commit();
+		session.close();
+		return product;
 	}
 
 	public OrderDTO findByComboIdOrder(Integer comboId) {
