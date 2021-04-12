@@ -209,7 +209,7 @@ input[type="file"] {
                                     <!-- search -->
                                     <div class="col-lg-6 col-md-7">
                                         <div class="search-box padding-10">
-                                            <input class="form-control mb-3" type="text" name="search" id="productName"  placeholder="nhà hàng, sản phẩm">
+                                            <input class="form-control mb-3" type="text" name="search" id="productName"  placeholder="Nhà hàng...">
                                         </div>
 					                   <style type="text/css">
 										.ui-autocomplete {

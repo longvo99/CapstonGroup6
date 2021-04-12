@@ -1,7 +1,5 @@
 package edu.group6.capston.controller.admins;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import edu.group6.capston.models.Orders;
 import edu.group6.capston.services.LocationService;
 import edu.group6.capston.services.OrderService;
 import edu.group6.capston.services.RoleService;

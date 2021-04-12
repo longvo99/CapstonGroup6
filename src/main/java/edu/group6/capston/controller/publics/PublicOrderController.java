@@ -190,11 +190,7 @@ public class PublicOrderController extends PublicAbstractController {
 		model.addAttribute("userAddress", GlobalsFunction.AddressUser(user.getContactAddress()));
 		return "public.checkout";
 	}
-<<<<<<< Updated upstream
 	
-=======
-
->>>>>>> Stashed changes
 	@PostMapping("/checkout")
 	public String checkout(@Valid @ModelAttribute("userAddress") UserAddress userAddress, Model model,
 			HttpServletRequest request, BindingResult br, RedirectAttributes rd, HttpServletResponse response) {
