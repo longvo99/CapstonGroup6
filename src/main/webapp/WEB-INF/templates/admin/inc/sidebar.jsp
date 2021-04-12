@@ -63,6 +63,7 @@
 <body id="page-top">
   <div id="wrapper">
     <!-- Sidebar -->
+   	<c:if test="${sessionScope.userSession.role.roleId ne 'CUSTOMER' }">
     <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${pageContext.request.contextPath}/admin/index">
         <div class="sidebar-brand-icon">
@@ -155,4 +156,5 @@
       <hr class="sidebar-divider">
       <div class="version" id="version-ruangadmin"></div>
     </ul>
+    </c:if>
     <!-- Sidebar -->

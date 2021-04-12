@@ -2,6 +2,18 @@
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/templates/tags/taglib.jsp" %>
 <sec:authentication var="userDetail" property="principal" />
+	<c:choose>
+		<c:when test="${not empty sessionScope.userSession}">
+			<c:set var="addUrl" value="${pageContext.request.contextPath}/public/product/add" />
+			<c:set var="editUrl" value="${pageContext.request.contextPath}/public/product/edit" />
+			<c:set var="deleteUrl" value="${pageContext.request.contextPath}/public/product/delete" />
+		</c:when>
+		<c:otherwise>
+			<c:set var="addUrl" value="${pageContext.request.contextPath}/admin/product/add" />
+			<c:set var="editUrl" value="${pageContext.request.contextPath}/admin/product/edit" />
+			<c:set var="deleteUrl" value="${pageContext.request.contextPath}/admin/product/delete" />
+		</c:otherwise>
+	</c:choose>
 	<div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h2 class="m-0 font-weight-bold text-primary">Quản lý sản phẩm</h2>
@@ -32,8 +44,10 @@
               <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <div class="col-sm-10">
+                  	<c:if test="${empty sessionScope.userSession}">
                   	<c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
-	               		<a href="${pageContext.request.contextPath}/admin/product/add/${locationId}" class="btn btn-success btn-md"><i class="fa fa-plus-square"> Thêm </i></a>
+	               		<a href="${addUrl}/${locationId}" class="btn btn-success btn-md"><i class="fa fa-plus-square"> Thêm </i></a>
+	               	</c:if>
 	               	</c:if>
                   </div>
                 </div>
@@ -52,7 +66,6 @@
                     </thead>
                     <tbody>
                       <c:forEach items="${productList}" var="product">
-						<c:set var="urlDel" value="${pageContext.request.contextPath}/admin/product/del/${product.productId}" />
 						<tr class="odd gradeX">
 							<td>${product.productId}</td>
 							<td>${product.name}</td>
@@ -60,9 +73,11 @@
 							<td>${product.productCategory.productCategoryName}</td>
 							<td class="center text-center">
 								<a href="" data-toggle="modal" data-target="#exampleModalCenter${product.productId}" class="btn btn-sm btn-success"><i class="fa fa-edit">Detail</i></a>
+								<c:if test="${empty sessionScope.userSession}">
 								<c:if test="${userDetail.user.role.roleId eq 'ADMIN'}">
-			                  		<a href="${pageContext.request.contextPath}/admin/product/edit/${product.productId}" class="btn btn-sm btn-primary"><i class="fa fa-edit">Edit</i></a>
-                                	<a href="${urlDel}" title="Xóa" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Xóa</a>
+			                  		<a href="${editUrl}/${product.productId}" class="btn btn-sm btn-primary"><i class="fa fa-edit">Edit</i></a>
+                                	<a href="${deleteUrl}/${product.productId}" title="Xóa" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Xóa</a>
+			                  	</c:if>
 			                  	</c:if>
 							</td>
 						</tr>
@@ -78,7 +93,7 @@
 			                  </button>
 			                </div>
 			                <div class="modal-body">
-				                <form role="form" action="${pageContext.request.contextPath}/admin/product/edit/${product.productId}" method="post" id="form">
+				                <form role="form" action="${editUrl}/${product.productId}" method="post" id="form">
 				                	<div class="comment-form">
 				                		<div class="form-group">
 					                      <label for="name">ID</label>
@@ -110,10 +125,12 @@
 											  <img src="${pageContext.request.contextPath}/resources/admin/assets/img/uploads/${product.imagePath}" class="img-thumbnail">
 											</div>
 									    </div>
+									    <c:if test="${empty sessionScope.userSession}">
 									    <c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
 			                  				<div class="form-group">
 					                      		<input class="form-control mb-3" type="submit" value="SỬA">
 					                    	</div>
+			                  			</c:if>
 			                  			</c:if>
 									</div>
 								</form>
@@ -128,7 +145,7 @@
                   </c:if>
                   <c:if test="${empty productList}">
 					<tr>
-						<td colspan="4" align="center">Chưa có người dùng nào!</td>
+						<td colspan="4" align="center">Chưa có sản phẩm nào!</td>
 					</tr>
 				  </c:if>
 						<!-- <tr>

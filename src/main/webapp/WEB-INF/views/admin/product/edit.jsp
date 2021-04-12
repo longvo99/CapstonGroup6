@@ -7,7 +7,7 @@
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="m-0 font-weight-bold text-primarys">Thêm mới loại địa điểm</h1>
+            <h1 class="m-0 font-weight-bold text-primarys">Chỉnh sửa sản phẩm</h1>
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="./">Trang chủ</a></li>
               <li class="breadcrumb-item active" aria-current="page">Forms</li>
@@ -23,7 +23,11 @@
 			</c:if>
               <div class="card mb-4">
                 <div class="card-body">
-                  <form role="form" action="${pageContext.request.contextPath}/admin/product/edit" method="post" id="form" enctype="multipart/form-data">
+                  <c:set var="actionUrl" value="${pageContext.request.contextPath}/admin/product/edit" />
+                  <c:if test="${not empty sessionScope.userSession}">
+                  		<c:set var="actionUrl" value="${pageContext.request.contextPath}/public/product/edit" />
+                  </c:if>
+                  <form role="form" action="${actionUrl}" method="post" id="form" enctype="multipart/form-data">
                   	<div class="form-group">
                       <label for="name">ID sản phẩm</label>
                       <input class="form-control mb-3" type="text" value="${product.productId}" id="productId" name="productId" readonly>

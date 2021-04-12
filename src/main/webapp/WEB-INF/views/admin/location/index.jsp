@@ -2,6 +2,22 @@
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/templates/tags/taglib.jsp" %>
 	<sec:authentication var="userDetail" property="principal" />
+	<c:choose>
+		<c:when test="${not empty sessionScope.userSession}">
+			<c:set var="addUrl" value="${pageContext.request.contextPath}/public/location/add" />
+			<c:set var="editUrl" value="${pageContext.request.contextPath}/public/location/edit" />
+			<c:set var="imageUrl" value="${pageContext.request.contextPath}/public/location/image" />
+			<c:set var="deleteUrl" value="${pageContext.request.contextPath}/public/location/delete" />
+			<c:set var="productUrl" value="${pageContext.request.contextPath}/public/product/index" />
+		</c:when>
+		<c:otherwise>
+			<c:set var="addUrl" value="${pageContext.request.contextPath}/admin/location/add" />
+			<c:set var="editUrl" value="${pageContext.request.contextPath}/admin/location/edit" />
+			<c:set var="imageUrl" value="${pageContext.request.contextPath}/admin/location/image" />
+			<c:set var="deleteUrl" value="${pageContext.request.contextPath}/admin/location/delete" />
+			<c:set var="productUrl" value="${pageContext.request.contextPath}/admin/product/index" />
+		</c:otherwise>
+	</c:choose>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -33,7 +49,7 @@
               <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <div class="col-sm-10">
-                  	<a href="${pageContext.request.contextPath}/admin/location/add" class="btn btn-success btn-md"><i class="fa fa-plus-square"> Thêm </i></a>
+                  	<a href="${addUrl}" class="btn btn-success btn-md"><i class="fa fa-plus-square"> Thêm </i></a>
                   </div>
                 </div>
                 <div class="table-responsive p-3">
@@ -56,12 +72,15 @@
 							<td>${location.locationCategory.locationCategoryName}</td>
 							<td>${location.locationType.locationTypeName}</td>
 							<td class="center text-center">
-								<a href="${pageContext.request.contextPath}/admin/location/edit/${location.locationId}" class="btn btn-sm btn-success"><i class="fa fa-edit">Chi tiết</i></a>
+								<a href="${editUrl}/${location.locationId}" class="btn btn-sm btn-success"><i class="fa fa-edit">Chi tiết</i></a>
+								<c:if test="${empty sessionScope.userSession}">
 								<c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
 			                  		<a href="${pageContext.request.contextPath}/admin/location/image/${location.locationId}" class="btn btn-sm btn-primary"><i class="fa fa-edit">Hình ảnh</i></a>
 			                  	</c:if>
-                                <a href="${pageContext.request.contextPath}/admin/product/index/${location.locationId}" class="btn btn-sm btn-warning"><i class="fa fa-edit">Sản phẩm</i></a>
-                                <a href="${pageContext.request.contextPath}/admin/location/delete"  class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa không');"><i class="fas fa-trash"> Xóa </i></a>
+			                  	</c:if>
+                                <a href="${productUrl}/${location.locationId}" class="btn btn-sm btn-warning"><i class="fa fa-edit">Sản phẩm</i></a>
+                                <a href="${deleteUrl}"  class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa không');"><i class="fas fa-trash"> Xóa </i></a>
+                                <c:if test="${empty sessionScope.userSession}">
                                 <c:if test="${userDetail.user.role.roleId eq 'ADMIN'}">
 			                  		<a href="" data-toggle="modal" data-target="#exampleModalCenter${location.locationId}" class="btn btn-sm btn-info"><i class="fa fa-edit"> Liên hệ </i></a>
 			                  		<!-- Modal Center -->
@@ -97,6 +116,7 @@
 							            </div>
 							          </div>
 			         			 	<!-- Modal Center -->
+			                  	</c:if>
 			                  	</c:if>
 							</td>
 						</tr>

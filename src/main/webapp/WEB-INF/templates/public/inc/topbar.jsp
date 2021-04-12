@@ -4,7 +4,6 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -179,12 +178,32 @@ input[type="file"] {
                                 <div class="row">
                                     <!-- location picker -->
                                     <div class="col-lg-6 col-md-5">
-                                        <a href="${pageContext.request.contextPath}/admin/location/add" class="delivery-add p-relative"> <!-- <span class="icon"><i class="fas fa-map-marker-alt"></i></span> -->
+                                        <a href="#" class="delivery-add p-relative"> <span class="icon"><i class="fas fa-map-marker-alt"></i></span>
                                             <span class="address">Tạo địa điểm mới</span>
                                         </a>
-                                        <!-- <div class="location-picker">
-                                            <input type="text" class="form-control" placeholder="Enter a new address">
-                                        </div> -->
+                                        <div class="location-picker">
+                                        	<ul class="create-location">
+                                        		<li><a href="${pageContext.request.contextPath}/public/location/add">Tạo địa điểm mới</a></li>
+                                        		<li><a href="${pageContext.request.contextPath}/public/location/index">Địa điểm đã tạo</a></li>
+                                        	</ul>
+                                        </div>
+                                        <style type="text/css">
+                                        	.create-location li{
+                                        		display: block;
+											    width: 200px;
+											    height: calc(1.5em + .75rem + 2px);
+											    padding: .375rem .75rem;
+											    font-size: 1rem;
+											    font-weight: 400;
+											    line-height: 1.5;
+											    color: #495057;
+											    background-color: #fff;
+											    background-clip: padding-box;
+											    border: 1px solid #ced4da;
+											    border-radius: .25rem;
+											    transition: border-color .15s
+                                        	}
+                                        </style>
                                     </div>
                                     <!-- location picker -->
                                     <!-- search -->
@@ -558,7 +577,7 @@ input[type="file"] {
                                 </div>
                                 <div class="filter-btn">
                                     <button type="button"><i class="fas fa-filter text-light-green fs-18"></i>
-                  </button> <span class="text-light-green">Filter</span>
+                  					</button> <span class="text-light-green">Filter</span>
                                 </div>
                             </div>
                         </div>

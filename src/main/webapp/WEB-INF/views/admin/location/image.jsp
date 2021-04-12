@@ -28,7 +28,11 @@
               <!-- Form Basic -->
               <div class="card mb-4">
                 <div class="card-body">
-                  <form role="form" method="post" action="${pageContext.request.contextPath}/admin/location/image/edit/${locationId}"  name="form-example-1" id="form-example-1" enctype="multipart/form-data">
+                  <c:set var="actionUrl" value="${pageContext.request.contextPath}/admin/location/image/edit" />
+                  <c:if test="${not empty sessionScope.userSession}">
+                  		<c:set var="actionUrl" value="${pageContext.request.contextPath}/public/location/image/edit" />
+                  </c:if>
+                  <form role="form" method="post" action="${actionUrl}/${locationId}"  name="form-example-1" id="form-example-1" enctype="multipart/form-data">
                     <div class="input-field">
 				        <label class="active">Hình ảnh</label>
 				        <div class="input-images" style="padding-top: .5rem;"></div>

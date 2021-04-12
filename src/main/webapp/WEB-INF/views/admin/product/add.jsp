@@ -23,7 +23,11 @@
 			</c:if>
               <div class="card mb-4">
                 <div class="card-body">
-                  <form role="form" action="${pageContext.request.contextPath}/admin/product/add" method="post" id="form" enctype="multipart/form-data">
+                  <c:set var="actionUrl" value="${pageContext.request.contextPath}/admin/product/add" />
+                  <c:if test="${not empty sessionScope.userSession}">
+                  		<c:set var="actionUrl" value="${pageContext.request.contextPath}/public/product/add" />
+                  </c:if>
+                  <form role="form" action="${actionUrl}" method="post" id="form" enctype="multipart/form-data">
                   	<div class="form-group">
                       <label for="name">Tên sản phẩm</label>
                       <input class="form-control mb-3" type="text" value="${product.name}" id="name" name="name">

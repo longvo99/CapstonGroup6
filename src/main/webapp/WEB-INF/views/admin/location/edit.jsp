@@ -34,9 +34,15 @@
               <!-- Form Basic -->
               <div class="card mb-4">
                 <div class="card-body">
-                  <form action="${pageContext.request.contextPath}/admin/location/edit" role="form" method="post"  name="form-example-1" id="form-example-1" enctype="multipart/form-data">
+                  <c:set var="actionUrl" value="${pageContext.request.contextPath}/admin/location/edit" />
+                  <c:if test="${not empty sessionScope.userSession}">
+                  		<c:set var="actionUrl" value="${pageContext.request.contextPath}/public/location/edit" />
+                  </c:if>
+                  <form action="${actionUrl}" role="form" method="post"  name="form-example-1" id="form-example-1" enctype="multipart/form-data">
+                  <c:if test="${empty sessionScope.userSession}">
                   <c:if test="${userDetail.user.role.roleId eq 'ADMIN'}">
                   	<c:set var="readonly" value="readonly='readonly'" ></c:set>
+                  </c:if>
                   </c:if>
                   	<div class="form-group">
                       <label for="name">Location ID</label>
@@ -190,43 +196,6 @@
 						 });
 						});
 			</script>
-                    <%-- <div class="form-group">
-                      <label for="country">Nước</label>
-                      <select class="form-control" name="country" readonly>
-                      	<option value="Việt Nam">Việt Nam</option>
-                      </select>
-                    </div>
-                    <c:forEach items="${listJson}" var="json">
-                    	<c:choose>
-                    		<c:when test="${json.id eq location.city}">
-                    			<c:set var="cityName" value="${json.name}" />
-                    		</c:when>
-                    		<c:when test="${json.id eq location.district}">
-                    			<c:set var="districtName" value="${json.name}" />
-                    		</c:when>
-                    		<c:when test="${json.id eq location.ward}">
-                    			<c:set var="wardName" value="${json.name}" />
-                    		</c:when>
-                    	</c:choose>
-                    </c:forEach>
-                    <div class="form-group">
-                    	<label for="country">Tỉnh/thành</label>
-					    <select name="" id="" class="form-control input-lg" readonly>
-					    	<option value="${location.city}">${cityName}</option>
-					    </select>
-					</div>
-					<div class="form-group">
-						<label for="country">Quận huyện</label>
-					   <select name="district" id="district" class="form-control input-lg" readonly>
-					    <option value="${location.district}">${districtName}</option>
-					   </select>
-					</div>
-					<div class="form-group">
-						<label for="country">Xã/phường</label>
-					   <select name="ward" id="ward" class="form-control input-lg" readonly>
-					    <option value="${location.ward}">${wardName}</option>
-					   </select>
-					</div> --%>
 					<div class="form-group">
 						<label for="country">Người tạo</label>
 						<input readonly="readonly" class="form-control mb-3" type="text" value="${location.users.username}" id="user.username" name="user.username">
@@ -235,8 +204,10 @@
 				        <label class="active">Hình ảnh</label>
 				        <div style="pointer-events:none; background-color: #e6e6ff;" class="input-images" style="padding-top: .5rem;" ></div>
 				    </div>
+				    <c:if test="${empty sessionScope.userSession}">
 				    <c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
                   		<c:set var="readonly1" value="readonly='readonly'" ></c:set>
+                  	</c:if>
                   	</c:if>
 				    <div class="form-group">
 						<label for="country">Trạng Thái</label>
@@ -262,67 +233,7 @@
 				      	    preloadedInputName: 'image'
 				      	});
 					
-					/* $(document).ready(function(){
-						 load_json_data('city');
-						 function load_json_data(id, parent_id)
-						 {
-						  var html_code = '';
-						  $.getJSON('${pageContext.request.contextPath}/resources/admin/assets/js/city_district_ward.json', function(data){
-						   $.each(data, function(key, value){
-						    if(id == 'city')
-						    {
-						     if(value.parent_id == '0')
-						     {
-						      html_code += '<option value="'+value.id+'">'+value.name+'</option>';
-						     }
-						    }
-						    else
-						    {
-						     if(value.parent_id == parent_id)
-						     {
-						      html_code += '<option value="'+value.id+'">'+value.name+'</option>';
-						     }
-						    }
-						   });
-						   $('#'+id).html(html_code);
-						  });
-						 }
-						 $(document).on('change', '#city', function(){
-						  var city_id = $(this).val();
-						  if(city_id != '')
-						  {
-						   load_json_data('district', city_id);
-						  }
-						  else
-						  {
-						   $('#district').html('<option value="">Select</option>');
-						   $('#ward').html('<option value="">Select</option>');
-						  }
-						 });
-						 $(document).on('change', '#district', function(){
-						  var district_id = $(this).val();
-						  if(district_id != '')
-						  {
-						   load_json_data('ward', district_id);
-						  }
-						  else
-						  {
-						   $('#ward').html('<option value="">Select</option>');
-						  }
-						 });
-						}); */
 					</script>
-                    <!-- <div class="form-group">
-	                  <label for="picture">Hình ảnh</label>
-	                  <input type="file" name="picture" />
-                    </div> -->
-                    <!-- <div class="input-field">
-				        <label class="active">Photos</label>
-				        <div class="input-images" style="padding-top: .5rem;"></div>
-				    </div>
-				    <script type="text/javascript">
-				    	$('.input-images').imageUploader();
-				    </script> -->
                     <button type="submit" class="btn btn-primary" name="submit">Cập nhập</button>
                   </form>
                 </div>
