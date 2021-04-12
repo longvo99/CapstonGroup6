@@ -135,11 +135,10 @@ public class AdminDiscountController {
 			discountInfo.setValueRule(Integer.parseInt(request.getParameter("valueRule1")));
 		}
 		if (!GlobalsFunction.getUsers().getRole().getRoleId().equals("ADMIN")) {
-			int locationId = locationService.findByUserId(GlobalsFunction.getUsers().getUserId()).getLocationId();
+			int locationId = 0;//locationService.findAllByUserId(GlobalsFunction.getUsers().getUserId()).getLocationId();
 			discountInfo.setLocation(new Location(locationId));
 		}
 		if (discountService.save(discountInfo)) {
-			System.out.println(UploadFile.getDirPath(request));
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE,
 					messageSource.getMessage("success", null, Locale.getDefault()));
 			return "redirect:/admin/discount/index";
@@ -216,7 +215,7 @@ public class AdminDiscountController {
 			discountInfo.setValueRule(Integer.parseInt(request.getParameter("valueRule1")));
 		}
 		if (!GlobalsFunction.getUsers().getRole().getRoleId().equals("ADMIN")) {
-			int locationId = locationService.findByUserId(GlobalsFunction.getUsers().getUserId()).getLocationId();
+			int locationId = 0;//locationService.findAllByUserId(GlobalsFunction.getUsers().getUserId()).getLocationId();
 			discountInfo.setLocation(new Location(locationId));
 		}
 		if (discountService.update(discountInfo)) {

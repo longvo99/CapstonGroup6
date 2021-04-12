@@ -195,12 +195,6 @@ public class LocationDAO {
 		}
 	}
 	
-	public Location findByUserId(int userId) {
-		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("FROM Location WHERE userId = " + userId, Location.class).uniqueResult();
-		}
-	}
-
 	public List<LocationDTO> searchLocation(String search) {
 		List<LocationDTO> locationList = null;
 		Session session = this.sessionFactory.openSession();

@@ -73,10 +73,6 @@ public class LocationServiceImpl implements LocationService {
 		return LocationDAO.findTopDiscount();
 	}
 
-	public Location findByUserId(int userId) {
-		return LocationDAO.findByUserId(userId);
-	}
-
 	@Override
 	public List<Location> findAllByUserId(int userId) {
 		return LocationDAO.findAllByUserId(userId);
