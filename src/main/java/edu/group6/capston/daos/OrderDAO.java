@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -96,6 +97,29 @@ public class OrderDAO {
 	public List<Orders> findAllByStatusId(int statusId) {
 		try (Session session = this.sessionFactory.openSession()) {
 			return session.createQuery("from Orders WHERE orderStatus.orderStatusId = " + statusId, Orders.class).list();
+		}
+	}
+
+	public List<String> revenueByYear(int year) {
+		try (Session session = this.sessionFactory.openSession()) {
+			session.beginTransaction();
+			String hql = "SELECT SUM(totalPrice) from Orders "
+					   + "WHERE YEAR(orderTime) = " + year
+					   + " GROUP BY MONTH(orderTime)";
+			Query query = session.createQuery(hql);
+			List<String> list = query.getResultList();
+			return list;
+		}
+	}
+
+	public double largesttotalPrice(int year) {
+		try (Session session = this.sessionFactory.openSession()) {
+			session.beginTransaction();
+			String hql = "SELECT SUM(totalPrice) from Orders "
+					   + "WHERE YEAR(orderTime) = " + year
+					   + " GROUP BY MONTH(orderTime) "
+					   + "ORDER BY SUM(totalPrice) DESC";
+			return (double) session.createQuery(hql).setMaxResults(1).uniqueResult();
 		}
 	}
 

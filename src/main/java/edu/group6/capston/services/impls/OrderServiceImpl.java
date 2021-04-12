@@ -66,4 +66,14 @@ public class OrderServiceImpl implements OrderService {
 	public List<Orders> findAllByStatusId(int statusId) {
 		return orderDAO.findAllByStatusId(statusId);
 	}
+
+	@Override
+	public List<String> revenueByYear(int year) {
+		return orderDAO.revenueByYear(year);
+	}
+
+	@Override
+	public double largesttotalPrice(int year) {
+		return orderDAO.largesttotalPrice(year);
+	}
 }
