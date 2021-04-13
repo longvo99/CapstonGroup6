@@ -138,7 +138,14 @@
             <c:if test="${not empty sessionScope.roleList}">
             	<c:if test="${userDetail.user.role.roleId eq 'ADMIN'}">
             		<c:forEach items="${sessionScope.roleList}" var="role">
-            			<a class="collapse-item" href="${pageContext.request.contextPath}/admin/user/${role.roleId}">${role.roleName}</a>
+            			<c:choose>
+            				<c:when test="${userDetail.user.role.roleId eq role.roleId}">
+            					<a class="collapse-item" href="${pageContext.request.contextPath}/admin/user/${role.roleId}">Quản lý hồ sơ cá nhân</a>
+            				</c:when>
+            				<c:otherwise>
+            					<a class="collapse-item" href="${pageContext.request.contextPath}/admin/user/${role.roleId}">${role.roleName}</a>
+            				</c:otherwise>
+            			</c:choose>
             		</c:forEach>
             		<a class="collapse-item" href="${pageContext.request.contextPath}/admin/role/index">Quản lý Chức vụ</a>
             	</c:if>

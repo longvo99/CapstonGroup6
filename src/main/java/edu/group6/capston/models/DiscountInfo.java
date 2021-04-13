@@ -20,8 +20,8 @@ import lombok.NoArgsConstructor;
 @Data
 public class DiscountInfo {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int discountId;
 	@Column
 	private String title;

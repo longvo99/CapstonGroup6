@@ -38,6 +38,7 @@
                         <th class="center text-center">ID</th>
                         <th class="center text-center">Tiêu đề</th>
                         <th class="center text-center">Tên nhà hàng</th>
+                        <th class="center text-center">Địa chỉ</th>
                         <th class="center text-center">Chức năng</th>
 						<th>
      						<label><input type="checkbox" id="select_all"/> Selecct All</label>
@@ -50,6 +51,7 @@
 							<td>${discount.discountId}</td>
 							<td>${discount.title}</td>
 							<td>${discount.location.locationName}</td>
+							<td>${discount.location.address}</td>
 							<td class="center text-center">
 								<a href="" data-toggle="modal" data-target="#exampleModalCenter${discount.discountId}" class="btn btn-sm btn-primary"><i class="fa fa-edit"> Chi tiết </i></a>
 								<c:if test="${userDetail.user.role.roleId eq discount.users.role.roleId}">

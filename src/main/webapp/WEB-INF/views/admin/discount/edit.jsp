@@ -206,6 +206,7 @@
                     </div>
 					</c:if>	
 					<c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
+					<input type="hidden" name="locati" value="${discount.location.locationId}">
 					<c:choose>
                     	<c:when test="${fn:contains(discount.value, 'allproduct')}">
                     		<c:set value="checked='checked'" var="checked1" ></c:set>

@@ -97,6 +97,14 @@
 					   </select>
 					</div>
       				</div>
+      				<div class="form-group">
+						<label for="locationPhone">Số điện thoại</label>
+						<input class="form-control mb-3" type="text" value="${location.locationPhone}" id="locationPhone" name="locationPhone">
+					</div>
+					<div class="form-group">
+						<label for="locationEmail">Email</label>
+						<input class="form-control mb-3" type="text" value="${location.locationEmail}" id="locationEmail" name="locationEmail">
+					</div>
 			<script>
 					$(document).ready(function(){
 						  $.getJSON('${pageContext.request.contextPath}/resources/admin/assets/js/data.json', function(data){
