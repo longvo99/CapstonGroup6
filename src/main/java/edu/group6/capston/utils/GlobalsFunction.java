@@ -74,8 +74,10 @@ public class GlobalsFunction {
 			String[] mediaPath = splitPathMedia(image);
 			image = mediaPath[0];
 			location.setMediaPath(image);
-			location.setCloseTime(location.getCloseTime().substring(0, 5));
-			location.setOpenTime(location.getOpenTime().substring(0, 5));
+			if (location.getOpenTime() != null || location.getCloseTime() != null) {
+				location.setCloseTime(location.getCloseTime().substring(0, 5));
+				location.setOpenTime(location.getOpenTime().substring(0, 5));
+			}
 		}
 		return list;
 	}
@@ -100,7 +102,7 @@ public class GlobalsFunction {
 		}
 		return findTopRate;
 	}
-	
+
 	public static List<ProductDTO> changeImageSearchLocation(List<ProductDTO> listLocation) {
 		String image = "";
 		for (ProductDTO location : listLocation) {
@@ -113,7 +115,6 @@ public class GlobalsFunction {
 	}
 
 	public static String findDifference(String end_date) {
-
 		// SimpleDateFormat converts the
 		// string format to date object
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

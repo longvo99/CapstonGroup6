@@ -8,6 +8,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 @Configuration
 public class BeanConfig {
+	
 	@Bean
 	public ResourceBundleMessageSource messageSource() {
 		ResourceBundleMessageSource source = new ResourceBundleMessageSource();

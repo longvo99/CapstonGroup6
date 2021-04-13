@@ -42,30 +42,11 @@
     <footer class="section-padding bg-light-theme pt-0 u-line bg-black">
         <div class="u-line instagram-slider swiper-container">
             <ul class="hm-list hm-instagram swiper-wrapper">
-                <li class="swiper-slide">
-                    <a href="#"><img src="https://via.placeholder.com/250x200" alt="instagram"></a>
-                </li>
-                <li class="swiper-slide">
-                    <a href="#"><img src="https://via.placeholder.com/250x200" alt="instagram"></a>
-                </li>
-                <li class="swiper-slide">
-                    <a href="#"><img src="https://via.placeholder.com/250x200" alt="instagram"></a>
-                </li>
-                <li class="swiper-slide">
-                    <a href="#"><img src="https://via.placeholder.com/250x200" alt="instagram"></a>
-                </li>
-                <li class="swiper-slide">
-                    <a href="#"><img src="https://via.placeholder.com/250x200" alt="instagram"></a>
-                </li>
-                <li class="swiper-slide">
-                    <a href="#"><img src="https://via.placeholder.com/250x200" alt="instagram"></a>
-                </li>
-                <li class="swiper-slide">
-                    <a href="#"><img src="https://via.placeholder.com/250x200" alt="instagram"></a>
-                </li>
-                <li class="swiper-slide">
-                    <a href="#"><img src="https://via.placeholder.com/250x200" alt="instagram"></a>
-                </li>
+                <c:forEach items="${imageLocation}" var="image">
+                	<li class="swiper-slide">
+	                    <a href="${pageContext.request.contextPath}/public/restaurant/${image.locationId}"><img style="width: 250px; height: 200px;" src="${pageContext.request.contextPath}/resources/admin/assets/img/uploads/${image.mediaPath}" alt="instagram"></a>
+	                </li>
+                </c:forEach>
             </ul>
         </div>
         <div class="container-fluid">

@@ -14,6 +14,7 @@ import edu.group6.capston.dtos.OrderDTO;
 import edu.group6.capston.models.LocationCategory;
 import edu.group6.capston.models.Users;
 import edu.group6.capston.services.LocationCategoriesService;
+import edu.group6.capston.services.LocationService;
 import edu.group6.capston.services.ProductService;
 import edu.group6.capston.utils.GlobalsFunction;
 
@@ -24,6 +25,9 @@ public abstract class PublicAbstractController  {
 	
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private LocationService locationService;
 	
 	@ModelAttribute
 	public void addCommonObjects(Model model, HttpServletRequest request) {
@@ -68,6 +72,8 @@ public abstract class PublicAbstractController  {
 			model.addAttribute("totalCart", totalCart);
 			model.addAttribute("listOrderDTO", listOrderDTO);
 		}
+		
+		model.addAttribute("imageLocation",GlobalsFunction.changeImageLocation(locationService.findImageLocation()));
 		model.addAttribute("locationCategoriesList1", locationCategoriesList1);
 		model.addAttribute("locationCategoriesList2", locationCategoriesList2);
 	}

@@ -21,4 +21,5 @@ public interface LocationService {
 	int updateImage(Location location);
 	List<Location> findAllByCategory(Integer categoryId);
 	List<LocationDTO> searchLocation(String productName);
+	List<Location> findImageLocation();
 }

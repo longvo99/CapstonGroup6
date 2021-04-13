@@ -95,4 +95,9 @@ public class LocationServiceImpl implements LocationService {
 		return LocationDAO.searchLocation(productName);
 	}
 
+	@Override
+	public List<Location> findImageLocation() {
+		return LocationDAO.findImageLocation();
+	}
+
 }
