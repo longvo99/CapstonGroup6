@@ -200,6 +200,14 @@
 						<label for="country">Người tạo</label>
 						<input readonly="readonly" class="form-control mb-3" type="text" value="${location.users.username}" id="user.username" name="user.username">
 					</div>
+					<div class="form-group">
+						<label for="locationPhone">Số điện thoại</label>
+						<input ${readonly} class="form-control mb-3" type="text" value="${location.locationPhone}" id="locationPhone" name="locationPhone">
+					</div>
+					<div class="form-group">
+						<label for="locationEmail">Email</label>
+						<input ${readonly} class="form-control mb-3" type="text" value="${location.locationEmail}" id="locationEmail" name="locationEmail">
+					</div>
 					<div class="input-field">
 				        <label class="active">Hình ảnh</label>
 				        <div style="pointer-events:none; background-color: #e6e6ff;" class="input-images" style="padding-top: .5rem;" ></div>

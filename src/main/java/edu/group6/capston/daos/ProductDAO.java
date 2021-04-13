@@ -207,4 +207,17 @@ public class ProductDAO {
 		return product;
 	}
 
+	public List<String> searchProductNameByLocationId(List<Integer> locationIdList) {
+		try (Session session = this.sessionFactory.openSession()) {
+			session.beginTransaction();
+			String hql = "select p.name from Product p "
+					+ "where location.locationId IN (:list)";
+			@SuppressWarnings("rawtypes")
+			Query query = session.createQuery(hql);
+			query.setParameter("list", locationIdList); 
+			@SuppressWarnings("unchecked")
+			List<String> listProducts = query.getResultList();
+			return listProducts;
+		}
+	}
 }

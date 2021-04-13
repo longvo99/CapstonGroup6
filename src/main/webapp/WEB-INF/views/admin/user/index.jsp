@@ -5,7 +5,14 @@
 	<div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
           <c:if test="${userDetail.user.role.roleId eq 'ADMIN'}">
-				<h2 class="m-0 font-weight-bold text-primary">Quản lý ${roleName}</h2>
+          		<c:choose>
+          			<c:when test="${roleName eq 'ADMIN'}">
+          				<h2 class="m-0 font-weight-bold text-primary">Quản lý hồ sơ cá nhân</h2>
+          			</c:when>
+          			<c:otherwise>
+          				<h2 class="m-0 font-weight-bold text-primary">Quản lý ${roleName}</h2>
+          			</c:otherwise>
+          		</c:choose>
        	 </c:if>
        	 <c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
 				<h2 class="m-0 font-weight-bold text-primary">Quản lý hồ sơ cá nhân</h2>
@@ -29,7 +36,9 @@
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <div class="col-sm-10">
                   <c:if test="${userDetail.user.role.roleId eq 'ADMIN'}">
+                  	<c:if test="${roleName ne 'ADMIN'}">
                   		<a href="${pageContext.request.contextPath}/admin/user/add" class="btn btn-success btn-md"><i class="fa fa-plus-square"> Thêm </i></a>
+                  	</c:if>
                   </c:if>
                   </div>
                 </div>

@@ -2,6 +2,7 @@ package edu.group6.capston.controller.admins;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -72,6 +73,10 @@ public class AdminDiscountController {
 	@GetMapping(value = "/add")
 	public String Add(Model model) {
 		model.addAttribute("discountRuleList", discountRuleService.findAll());
+		if (!GlobalsFunction.getUsers().getRole().getRoleId().equals("ADMIN")) {
+			model.addAttribute("locationByUserIdList",
+					locationService.findAllByUserId(GlobalsFunction.getUsers().getUserId()));
+		}
 		return "admin.discount.add";
 	}
 
@@ -84,7 +89,12 @@ public class AdminDiscountController {
 	@RequestMapping(value = "searchproduct", method = RequestMethod.GET)
 	@ResponseBody
 	public List<String> searchproduct(HttpServletRequest request) {
-		return productService.searchProductNameByUserId(GlobalsFunction.getUsers().getUserId());
+		String[] numberStrs = request.getParameter("str").split(",");
+		List<Integer> locationIdList = new ArrayList<Integer>();
+		for (int i = 0; i < numberStrs.length; i++) {
+			locationIdList.add(Integer.parseInt(numberStrs[i]));
+		}
+		return productService.searchProductNameByLocationId(locationIdList);
 	}
 
 	@PostMapping(value = "/add")
@@ -115,7 +125,7 @@ public class AdminDiscountController {
 			;
 		}
 		if (GlobalsFunction.getUsers().getRole().getRoleId().equals("POSTER")) {
-			switch (request.getParameter("optradio")) {
+			switch (request.getParameter("optradio1")) {
 			case "allproduct":
 				discountInfo.setValue("allproduct");
 				break;
@@ -135,18 +145,33 @@ public class AdminDiscountController {
 			discountInfo.setValueRule(Integer.parseInt(request.getParameter("valueRule1")));
 		}
 		if (!GlobalsFunction.getUsers().getRole().getRoleId().equals("ADMIN")) {
-			int locationId = 0;//locationService.findAllByUserId(GlobalsFunction.getUsers().getUserId()).getLocationId();
-			discountInfo.setLocation(new Location(locationId));
-		}
-		if (discountService.save(discountInfo)) {
-			rd.addFlashAttribute(GlobalsConstant.MESSAGE,
-					messageSource.getMessage("success", null, Locale.getDefault()));
+			List<DiscountInfo> list1 = new ArrayList<>();
+			DiscountInfo obj = null;
+			List<String> strList = Arrays.asList(request.getParameterValues("check[]"));//lisst ID location
+			for (String string : strList) {
+				obj = new DiscountInfo(0, discountInfo.getTitle(), discountInfo.getCode(), 
+						discountInfo.getDescription(), discountInfo.getRateDiscount(), discountInfo.getValue(), 
+						discountInfo.getMediaPath(), discountInfo.getStartDate(), discountInfo.getEndDate(), 
+						discountInfo.getUsers(), discountInfo.getLimitedUse(), discountInfo.getLimitedPerUser(), 
+						discountInfo.getDiscountRule(), discountInfo.getValueRule(), new Location(Integer.valueOf(string.trim())));
+				list1.add(obj);
+			}
+			for (DiscountInfo obj1 : list1) {
+				discountService.save(obj1);
+			}
+			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("success", null, Locale.getDefault()));
 			return "redirect:/admin/discount/index";
+		} else {
+			if (discountService.save(discountInfo)) {
+				rd.addFlashAttribute(GlobalsConstant.MESSAGE,
+						messageSource.getMessage("success", null, Locale.getDefault()));
+				return "redirect:/admin/discount/index";
+			}
+			UploadFile.del(filename, request);
+			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
+			model.addAttribute("DiscountInfo", discountInfo);
+			return "admin.discount.add";
 		}
-		UploadFile.del(filename, request);
-		rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
-		model.addAttribute("DiscountInfo", discountInfo);
-		return "admin.discount.add";
 	}
 
 	@GetMapping("edit/{discountId}")
@@ -215,7 +240,7 @@ public class AdminDiscountController {
 			discountInfo.setValueRule(Integer.parseInt(request.getParameter("valueRule1")));
 		}
 		if (!GlobalsFunction.getUsers().getRole().getRoleId().equals("ADMIN")) {
-			int locationId = 0;//locationService.findAllByUserId(GlobalsFunction.getUsers().getUserId()).getLocationId();
+			int locationId = Integer.valueOf(request.getParameter("locati"));
 			discountInfo.setLocation(new Location(locationId));
 		}
 		if (discountService.update(discountInfo)) {
@@ -233,7 +258,7 @@ public class AdminDiscountController {
 		List<Integer> listDiscountId1 = new ArrayList<Integer>();
 		String[] listDiscountId = str.split(",");
 		for (String discountId : listDiscountId) {
-			// Nên xem phần này ở project about me 
+			// Nên xem phần này ở project about me
 			DiscountInfo discountInfo = discountService.findOne(Integer.valueOf(discountId));
 			String mediaPath = discountInfo.getMediaPath();
 			if (!"".equals(mediaPath)) {

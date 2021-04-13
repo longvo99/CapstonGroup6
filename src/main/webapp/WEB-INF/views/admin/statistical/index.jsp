@@ -35,6 +35,7 @@
                       <a class="dropdown-item" href="#">Năm 2021</a>
                     </div>
                   </div>
+                   <h3><a href="${pageContext.request.contextPath}/admin/statistical/downloadExcel">Download Excel Document</a></h3>
                 </div>
               </div>
             </div>

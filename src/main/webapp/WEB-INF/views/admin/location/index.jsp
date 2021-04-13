@@ -49,7 +49,11 @@
               <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <div class="col-sm-10">
-                  	<a href="${addUrl}" class="btn btn-success btn-md"><i class="fa fa-plus-square"> Thêm </i></a>
+                  <c:if test="${empty sessionScope.userSession}">
+				  <c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
+	                	<a href="${addUrl}" class="btn btn-success btn-md"><i class="fa fa-plus-square"> Thêm </i></a>
+	              </c:if>
+	              </c:if>
                   </div>
                 </div>
                 <div class="table-responsive p-3">

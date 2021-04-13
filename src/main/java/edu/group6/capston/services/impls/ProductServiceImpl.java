@@ -59,10 +59,6 @@ public class ProductServiceImpl implements ProductService {
 		return ProductDAO.findByProductIdOrder(productId);
 	}
 
-	public List<String> searchProductNameByUserId(int userId) {
-		return ProductDAO.searchProductNameByUserId(userId);
-	}
-
 	public List<ProductDTO> searchAllProductName(String search) {
 		return ProductDAO.searchAllProductName(search);
 	}
@@ -81,5 +77,10 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public OrderDTO findProductIdOrderDetail(int id) {
 		return ProductDAO.findProductIdOrderDetail(id);
+	}
+
+	@Override
+	public List<String> searchProductNameByLocationId(List<Integer> locationIdList) {
+		return ProductDAO.searchProductNameByLocationId(locationIdList);
 	}
 }

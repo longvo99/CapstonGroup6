@@ -74,7 +74,7 @@
 							<td class="center text-center">
 								<a href="" data-toggle="modal" data-target="#exampleModalCenter${product.productId}" class="btn btn-sm btn-success"><i class="fa fa-edit">Detail</i></a>
 								<c:if test="${empty sessionScope.userSession}">
-								<c:if test="${userDetail.user.role.roleId eq 'ADMIN'}">
+								<c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
 			                  		<a href="${editUrl}/${product.productId}" class="btn btn-sm btn-primary"><i class="fa fa-edit">Edit</i></a>
                                 	<a href="${deleteUrl}/${product.productId}" title="Xóa" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Xóa</a>
 			                  	</c:if>

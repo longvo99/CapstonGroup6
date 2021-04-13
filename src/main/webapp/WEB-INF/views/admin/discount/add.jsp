@@ -176,15 +176,45 @@
 					</c:if>	
 					<c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
 					<div class="form-group">
-                    	<label for="optradio" >Áp dụng cho</label>
+                    	<label for="" >Chọn cơ sở: (<input type="checkbox" id="select_all"/> Chọn hết:) </label>
+                    	<c:if test="${not empty locationByUserIdList}">
+                    		<c:forEach var="location" items="${locationByUserIdList}" >
+                    			<div class="form-check">
+					  				<label class="form-check-label">
+				      					<input type="checkbox" class="checkbox" name="check[]" id="customCheck1" value="${location.locationId}" style="zoom: 1.5;"> ${location.address}
+									</label>
+								</div>
+                    		</c:forEach>
+                    	</c:if>
+                    	<script type="text/javascript">
+						  $("#select_all").change(function(){  //"select all" change 
+							    var status = this.checked; // "select all" checked status
+							    $('.checkbox').each(function(){ //iterate all listed checkbox items
+							        this.checked = status; //change ".checkbox" checked status
+							    });
+							});
+							$('.checkbox').change(function(){ //".checkbox" change 
+							    //uncheck "select all", if one of the listed checkbox item is unchecked
+							    if(this.checked == false){ //if this item is unchecked
+							        $("#select_all")[0].checked = false; //change "select all" checked status to false
+							    }
+							    //check "select all" if all checkbox items are checked
+							    if ($('.checkbox:checked').length == $('.checkbox').length ){ 
+							        $("#select_all")[0].checked = true; //change "select all" checked status to true
+							    }
+							});
+						  </script>
+                    </div>
+					<div class="form-group">
+                    	<label for="optradio1" >Áp dụng cho</label>
                       	<div class="form-check">
 					  		<label class="form-check-label">
-				      			<input type="radio" class="form-check-input" value="allproduct" id="optradio" name="optradio">Tất cả sản phẩm
+				      			<input type="radio" class="form-check-input" value="allproduct" id="optradio1" name="optradio1">Tất cả sản phẩm
 							</label>
 						</div>
 						<div class="form-check">
 						  	<label class="form-check-label">
-						    	<input type="radio" class="form-check-input" value="category" id="optradio" name="optradio">Danh mục sản phẩm
+						    	<input type="radio" class="form-check-input" value="category" id="optradio1" name="optradio1">Danh mục sản phẩm
 						  	</label>
 						</div>
 						<div id="collapseOne" class="collapse">
@@ -192,7 +222,7 @@
 			       		</div>
 						<div class="form-check">
 						  	<label class="form-check-label">
-						    	<input type="radio" class="form-check-input" value="product" id="optradio" name="optradio">Sản phẩm
+						    	<input type="radio" class="form-check-input" value="product" id="optradio1" name="optradio1">Sản phẩm
 						  	</label>
 						</div>
 						<div id="collapseTwo" class="collapse">
@@ -302,14 +332,46 @@
     } 
 </script>
 <script>
-    function getProduct(){
+$('[name="optradio1"]').on('change', function(){
+	var checkbox = document.getElementsByName('check[]'); //Trả về 1 mảng do các checkbox cùng tên vs nhau
+    var kt = true; 
+    for (var i = 0; i < checkbox.length; i++){ // Lặp qua từng checkbox để lấy giá trị
+        if (checkbox[i].checked == true){
+            kt = true; break;
+        } else {kt = false;}
+    }
+    if(kt == false){
+    	$('[name="optradio1"]').prop('checked', false);
+    	$('#collapseOne').collapse('hide');
+    	$('#collapseTwo').collapse('hide');
+    	return alert("Mời bạn chọn cơ sở!");
+    } 
+    if($(this).val()  === "category"){
+    	$('#collapseOne').collapse('show')
+  	}else{
+     	$('#collapseOne').collapse('hide')
+  	}
+	if($(this).val()  === "product"){
+    	$('#collapseTwo').collapse('show')
+  	}else{
+     	$('#collapseTwo').collapse('hide')
+  	}
+});
+function getProduct(){
+	var checkbox = document.getElementsByName('check[]');
+	var str = "";
+	for (var i = 0; i < checkbox.length; i++){
+        if (checkbox[i].checked == true){
+            str += checkbox[i].value + ",";
+        } 
+    }
     var userName = document.getElementById("productName");
     var string = userName.value;
     $.ajax({
 	method: 'GET',
 	url: '${pageContext.request.contextPath}/admin/discount/searchproduct',
 	data: {
-	  str: string
+	  str: str
 	},
 	success: function(content) {
 	  console.log("Content: " + content);
@@ -504,6 +566,9 @@ $.validator.addMethod("valueNotEquals", function(value, element, arg){
 				optradio: {                      
 					required:true,
 				},
+				optradio1: {                      
+					required:true,
+				},
 				typeDiscount: {                      
 					valueNotEquals: "default",
 				},
@@ -543,6 +608,9 @@ $.validator.addMethod("valueNotEquals", function(value, element, arg){
 					required: " (Mời nhập)",
 				},
 				optradio: {
+					required: " (Mời chọn)",
+				},
+				optradio1: {
 					required: " (Mời chọn)",
 				},
 				typeDiscount: {

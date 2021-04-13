@@ -9,7 +9,8 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import edu.group6.capston.models.DiscountInfo;;
+import edu.group6.capston.models.DiscountInfo;
+import edu.group6.capston.models.Location;;
 
 @Repository
 public class DiscountDAO {
@@ -99,4 +100,17 @@ public class DiscountDAO {
 			return i;
 		}
 	}
+
+	/*
+	 * public boolean save(DiscountInfo discountInfo, List<String> strList) {
+	 * Session session = this.sessionFactory.openSession(); Transaction tx = null;
+	 * try { tx = session.beginTransaction(); System.out.println(strList); for (int
+	 * j = 0; j < strList.size(); j++) { discountInfo.setLocation(new
+	 * Location(Integer.valueOf(strList.get(j).trim())));
+	 * System.out.println(discountInfo); session.save(discountInfo); if (j % 20 ==
+	 * 0) { //20, same as the JDBC batch size //flush a batch of inserts and release
+	 * memory: session.flush(); session.clear(); } } tx.commit(); session.close();
+	 * return true; } catch (Exception e) { if(tx != null && tx.isActive())
+	 * tx.rollback(); return false; } }
+	 */
 }

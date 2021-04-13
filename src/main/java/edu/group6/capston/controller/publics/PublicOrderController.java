@@ -78,11 +78,11 @@ public class PublicOrderController extends PublicAbstractController {
 		Cookie cookieProductId = new Cookie(nameCookie, quantity);
 		cookieProductId.setMaxAge(365 * 24 * 60 * 60);
 		response.addCookie(cookieProductId);
-		
+
 		List<OrderDTO> listOrderDTO = new ArrayList<>();
 		OrderDTO product = null;
 		OrderDTO order = null;
-		
+
 		if (productId.substring(0, 1).equals("c")) {
 			String comboId = productId.substring(1, productId.length());
 			product = productService.findByComboIdOrder(Integer.valueOf(comboId));
@@ -190,11 +190,7 @@ public class PublicOrderController extends PublicAbstractController {
 		model.addAttribute("userAddress", GlobalsFunction.AddressUser(user.getContactAddress()));
 		return "public.checkout";
 	}
-<<<<<<< Updated upstream
-	
-=======
 
->>>>>>> Stashed changes
 	@PostMapping("/checkout")
 	public String checkout(@Valid @ModelAttribute("userAddress") UserAddress userAddress, Model model,
 			HttpServletRequest request, BindingResult br, RedirectAttributes rd, HttpServletResponse response) {
@@ -254,7 +250,7 @@ public class PublicOrderController extends PublicAbstractController {
 					Check = true;
 				}
 			}
-			if(!Check) {
+			if (!Check) {
 				total = orderDTO.getPrice() * Integer.valueOf(orderDTO.getQuantity());
 				totalCart += total;
 				Orders order = new Orders(0, GlobalsFunction.getCurrentTime(), new OrderStatus(1, ""), user, totalCart,
@@ -263,26 +259,27 @@ public class PublicOrderController extends PublicAbstractController {
 				listOrders.add(order);
 			}
 		}
-		
+
 		for (Orders orders : listOrders) {
 			orderService.save(orders);
 		}
-		
+
 		for (OrderDTO orderDTO : listOrderDTO) {
 			OrderDetail orderDetail = null;
 			if (orderDTO.getProductId().contains("c")) {
 				int id = Integer.valueOf(orderDTO.getProductId().substring(1, orderDTO.getProductId().length()));
 				for (Orders orders : listOrders) {
 					if (orders.getLocation().getLocationId() == orderDTO.getLocationId()) {
-						orderDetail = new OrderDetail(0, orderDTO.getPrice(), orderDTO.getQuantity(), userAddress.getNote(),
-								null, new ProductCombo(id), orders);
+						orderDetail = new OrderDetail(0, orderDTO.getPrice(), orderDTO.getQuantity(),
+								userAddress.getNote(), null, new ProductCombo(id), orders);
 					}
 				}
 			} else {
 				for (Orders orders : listOrders) {
 					if (orders.getLocation().getLocationId() == orderDTO.getLocationId()) {
-						orderDetail = new OrderDetail(0, orderDTO.getPrice(), orderDTO.getQuantity(), userAddress.getNote(),
-								new Product(Integer.valueOf(orderDTO.getProductId())), null, orders);
+						orderDetail = new OrderDetail(0, orderDTO.getPrice(), orderDTO.getQuantity(),
+								userAddress.getNote(), new Product(Integer.valueOf(orderDTO.getProductId())), null,
+								orders);
 					}
 				}
 			}
@@ -291,23 +288,24 @@ public class PublicOrderController extends PublicAbstractController {
 		return "redirect:/public/orderdetails";
 	}
 
-	@GetMapping({"/orderdetails", "/orderdetails/{orderId}"})
-	public String orderdetails(Model model, HttpServletRequest request, @PathVariable(required = false, name = "orderId") Integer orderId) {
+	@GetMapping({ "/orderdetails", "/orderdetails/{orderId}" })
+	public String orderdetails(Model model, HttpServletRequest request,
+			@PathVariable(required = false, name = "orderId") Integer orderId) {
 		Users user = (Users) request.getSession().getAttribute("userSession");
 		List<Orders> listOrder = orderService.findByUserId(user.getUserId());
 		Orders order = null;
 		List<OrderDTO> listOrderDTO = null;
-		if(orderId != null) {
+		if (orderId != null) {
 			order = orderService.findByOrderId(orderId);
 			listOrderDTO = orderDetailService.findOrderDTO(orderId);
-		}else {
-			if(listOrder.size() > 0) {
+		} else {
+			if (listOrder.size() > 0) {
 				order = orderService.findByOrderId(listOrder.get(0).getOrderId());
 				listOrderDTO = orderDetailService.findOrderDTO(listOrder.get(0).getOrderId());
 			}
 		}
 		UserAddress userAddress = GlobalsFunction.AddressUser(user.getContactAddress());
-		if(listOrderDTO != null) {
+		if (listOrderDTO != null) {
 			for (OrderDTO orderDTO : listOrderDTO) {
 				if (!"null".equals(orderDTO.getProductComboId())) {
 					OrderDTO orderNew = productService
@@ -315,7 +313,8 @@ public class PublicOrderController extends PublicAbstractController {
 					orderDTO.setImagePath(orderNew.getImagePath());
 					orderDTO.setName(orderNew.getName());
 				} else {
-					OrderDTO orderNew = productService.findProductIdOrderDetail(Integer.valueOf(orderDTO.getProductId()));
+					OrderDTO orderNew = productService
+							.findProductIdOrderDetail(Integer.valueOf(orderDTO.getProductId()));
 					orderDTO.setImagePath(orderNew.getImagePath());
 					orderDTO.setName(orderNew.getName());
 				}
