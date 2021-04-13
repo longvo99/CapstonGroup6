@@ -60,4 +60,9 @@ public class Location{
 		super();
 		this.locationId = locationId;
 	}
+	public Location(int locationId, String mediaPath) {
+		super();
+		this.locationId = locationId;
+		this.mediaPath = mediaPath;
+	}
 }

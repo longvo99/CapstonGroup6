@@ -1403,14 +1403,14 @@ $(document).on("change", ".file_multi_video", function(evt) {
 			success: function (data) {
 				$('#demo' + commentId).collapse('hide');
                	$('#replyComment' + commentId).html(
-               			+"<div class='media-block'>"
+               			"<div class='media-block'>"
                			+"<a class='media-left' href='#'>"
 							+"<img class='img-circle img-sm' alt='Profile Picture' src='${pageContext.request.contextPath}/resources/admin/assets/img/uploads/${sessionScope.userSession.avatarPath}'>"
 						+"</a>"
 						+"<div class='media-body'>"
 							+"<div class='mar-btm'>"
 								+"<a href='#' class='btn-link text-semibold media-heading box-inline'>"
-								+"</a>"
+								+"${nameUser}</a>"
 								+"<p class='text-muted text-sm'>"
 									+"<i class='fa fa-mobile fa-lg'></i> 0 phút trước"
 								+"</p>"

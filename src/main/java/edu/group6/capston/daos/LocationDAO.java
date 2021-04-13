@@ -214,4 +214,20 @@ public class LocationDAO {
 		session.close();
 		return locationList;
 	}
+
+	public List<Location> findImageLocation() {
+		List<Location> locationList = null;
+		Session session = this.sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<Location> query = builder.createQuery(Location.class);
+		Root<Location> root = query.from(Location.class);
+		query.multiselect(root.get("locationId"), 
+				root.get("mediaPath"));
+		query.orderBy(builder.desc(root.get("locationId")));
+		locationList = session.createQuery(query).setMaxResults(12).getResultList();
+		transaction.commit();
+		session.close();
+		return locationList;
+	}
 }
