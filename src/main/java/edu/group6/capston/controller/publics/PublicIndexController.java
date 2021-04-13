@@ -129,6 +129,10 @@ public class PublicIndexController extends PublicAbstractController {
 			LocationFavorites locationFavorite = locationFavoriteService.findLocationFavorite(user.getUserId() , locationId);
 			model.addAttribute("locationFavorite", locationFavorite);
 		}
+		
+		model.addAttribute("countRating", commentService.findCountCommentByLocationId(locationId));
+		model.addAttribute("pointRating", ratingService.findAVGRating(locationId));
+		
 		return "public.restaurant";
 	}
 
@@ -227,44 +231,5 @@ public class PublicIndexController extends PublicAbstractController {
 		rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
 		return "redirect:/public/restaurant/" + locationId;
 	}
-//	@GetMapping("/shop")
-//	public String shop(Model model) {
-//		return "public.shop";
-//	}
-//
-//	@GetMapping("/contact")
-//	public String contact(Model model) {
-//		return "public.contact";
-//	}
-//
-//	@GetMapping("/productdetail")
-//	public String productdetail(Model model) {
-//		model.addAttribute("linkanh", "DSC_3005.jpg");
-//		return "public.productdetail";
-//	}
-//
-//	@PostMapping("/productdetail")
-//	public String productdetail(@Valid @ModelAttribute("comment") Comment comment, BindingResult rs,
-//			HttpServletRequest request, @RequestParam(value = "images[]") MultipartFile[] files,
-//
-//			@RequestParam(value = "file[]") MultipartFile file,
-//
-//			@RequestParam(value = "location", required = false) Integer location, RedirectAttributes rd)
-//			throws IllegalStateException, IOException {
-//
-//		for (MultipartFile obj : files) {
-//			String fileName = UploadFile.upload(obj, request);
-//			System.out.println(fileName);
-//		}
-//		String fileVideo = UploadFile.upload(file, request);
-//		System.out.println(location);
-//		System.out.println(UploadFile.getDirPath(request));
-//		return "public.productdetail";
-//	}
-//
-//	@GetMapping("/cart")
-//	public String cart(Model model) {
-//		return "public.cart";
-//	}
 
 }

@@ -11,4 +11,5 @@ public interface CommentService {
 	boolean delete(Comment comment);
 	List<Comment> findAllCommentByLocationId(Integer locationId);
 	List<Comment> findAllCommentByParentCommentId(Integer locationId);
+	Long findCountCommentByLocationId(Integer locationId);
 }

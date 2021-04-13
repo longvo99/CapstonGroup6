@@ -13,6 +13,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import edu.group6.capston.dtos.CommentDTO;
 import edu.group6.capston.dtos.LocationDTO;
 import edu.group6.capston.models.Rating;
 
@@ -52,5 +53,24 @@ public class RatingDAO{
 		} catch (Exception e) {
 			return false;
 		}
+	}
+
+	public List<CommentDTO> findAVGRating(Integer locationId) {
+		List<CommentDTO> locationList = null;
+		Session session = this.sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<CommentDTO> query = builder.createQuery(CommentDTO.class);
+		Root<Rating> root = query.from(Rating.class);
+		root.join("comment", JoinType.INNER);
+		query.multiselect(
+				root.get("criteria"),
+				builder.avg(root.get("point")));
+		query.where(builder.equal(root.get("comment").get("location").get("locationId"), locationId));
+		query.groupBy(root.get("criteria"));
+		locationList = session.createQuery(query).getResultList();
+		transaction.commit();
+		session.close();
+		return locationList;
 	}
 }

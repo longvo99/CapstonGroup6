@@ -32,8 +32,12 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public List<Comment> findAllCommentByParentCommentId(Integer locationId) {
-		// TODO Auto-generated method stub
 		return commentDAO.findAllCommentByParentCommentId(locationId);
+	}
+
+	@Override
+	public Long findCountCommentByLocationId(Integer locationId) {
+		return commentDAO.findCountCommentByLocationId(locationId);
 	}
 
 	

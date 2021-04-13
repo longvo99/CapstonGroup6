@@ -57,4 +57,11 @@ public class CommentDAO{
 			return list;
 		}
 	}
+
+	public long findCountCommentByLocationId(Integer locationId) {
+		try (Session session = this.sessionFactory.openSession()) {
+			long count = (long) session.createQuery("select count(*) from Comment WHERE ParentCommentId = 0 AND LocationId = " + locationId).uniqueResult();
+			return count;
+		}
+	}
 }

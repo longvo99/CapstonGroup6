@@ -62,7 +62,7 @@
                                             <span class="fs-16 text-dark-white">
                               <i class="fas fa-star"></i>
                             </span>
-                                <span class="text-light-black fs-14 rate-data">58 rating</span>
+                                <span class="text-light-black fs-14 rate-data">${countRating} đánh giá</span>
                             </div>
                             <div class="product-review">
                                 <div class="restaurent-details-mob">
@@ -712,15 +712,17 @@
                             <span class="text-dark-white fs-16">
                 <i class="fas fa-star"></i>
               </span>
-                        </div> <span class="fs-14 text-light-black">58 Ratings</span>
+                        </div> <span class="fs-14 text-light-black">${countRating} đánh giá</span>
                     </div>
-                    <p class="text-light-black mb-xl-20">Đánh giá từ mọi người</p>
+                    <h4 class="text-light-black mb-xl-20">Đánh giá từ mọi người</h4>
                     <ul>
-                        <li>
-                            <h6 class="text-light-black mb-1">9</h6>
-                            <span class="text-light-black fs-14 fw-400">Quality</span>
-                        </li>
-                        <li>
+                    	<c:forEach items="${pointRating}" var="pointRating">
+                    	<li>
+                            <h6 class="text-light-black mb-1"><b>${pointRating.avgPoint}</b></h6>
+                            <span class="text-light-black fs-14 fw-400">${pointRating.content}</span>
+                        </li>	
+                    	</c:forEach>
+                       <!--  <li>
                             <h6 class="text-light-black mb-1">8,5</h6>
                             <span class="text-light-black fs-14 fw-400">Service</span>
                         </li>
@@ -735,91 +737,11 @@
                         <li>
                             <h6 class="text-light-black mb-1">8</h6>
                             <span class="text-light-black fs-14 fw-400">Price</span>
-                        </li>
+                        </li> -->
                     </ul>
                     <div class="u-line"></div>
                 </div>
-                <div style="width: 100%; 
-                			border: 1px solid black; 
-                			padding: 15px;
-                			margin: 15px;
-                			background-color: #ffffcc;" 
-                			id="reviews">
-					<p>
-						<b>Write Your Review</b>
-					</p>
-					<form role="form" action="${pageContext.request.contextPath}/public/restaurant/comment/${location.locationId}" enctype="multipart/form-data" method="post">
-						<div class="form-group">
-							<input type="text" class="form-control mb-10" name="title"
-								id="title" placeholder="Title" onfocus="this.placeholder = ''"
-								onblur="this.placeholder = 'Title'" required="true">
-						</div>
-						<div class="form-group">
-							<textarea class="form-control mb-10" id="content" rows="5"
-								name="content" placeholder="Content"
-								onfocus="this.placeholder = ''"
-								onblur="this.placeholder = 'Content'" required="true"></textarea>
-						</div>
-						<hr />
-						<div class="input-field">
-							<label class="active">Photos</label>
-							<div class="input-images" style="padding-top: .5rem;"></div>
-						</div>
-						<!-- <div class="input-field">
-					        <label class="active">Photos</label>
-					        <div class="input-images-2" style="padding-top: .5rem;"></div>
-					    </div> -->
-						<hr />
-						<div>
-							<h5>Videos</h5>
-							<video id="myVideo" width="400" controls>
-								<source src="" id="video_here">
-							</video>
-							<br /> <input style="display: inline-block;" type="file"
-								name="video" class="file_multi_video" accept="video/*">
-							<button style="display: inline-block;" id="btn-file-reset-id"
-								type="button">Reset file</button>
-						</div>
-						<hr />
-						<div>
-							<h5>Rating</h5>
-							<p>
-								<label style="display: inline-block; width: 80px;">Nhà hàng:</label>
-								<input style="display: inline-block;" type="range"
-									name="location" class="slider" min="1" max="10" value="5">
-								<span style="display: inline-block;" class="slider_label"></span>
-							</p>
-							<p>
-								<label style="display: inline-block; width: 80px;">Giá cả:</label>
-								<input style="display: inline-block;" type="range"
-									name="price" class="slider" min="1" max="10" value="5">
-								<span style="display: inline-block;" class="slider_label"></span>
-							</p>
-							<p>
-								<label style="display: inline-block; width: 80px;">Chất lượng:</label>
-								<input style="display: inline-block;" type="range"
-									name="quality" class="slider" min="1" max="10" value="5">
-								<span style="display: inline-block;" class="slider_label"></span>
-							</p>
-							<p>
-								<label style="display: inline-block; width: 80px;">Dịch vụ:</label>
-								<input style="display: inline-block;" type="range"
-									name="service" class="slider" min="1" max="10" value="5">
-								<span style="display: inline-block;" class="slider_label"></span>
-							</p>
-							<p>
-								<label style="display: inline-block; width: 80px;">Không gian: </label>
-								<input style="display: inline-block;" type="range"
-									name="space" class="slider" min="1" max="10" value="5">
-								<span style="display: inline-block;" class="slider_label"></span>
-							</p>
-						</div>
-						<input type="submit" value="Submit" name="submit"
-							class="btn btn-primary pull-left" />
-					</form>
-				</div>
-				<!-- Comment  -->
-				<div style="margin-left: 15px;" class="section-header-left">
+                <div style="margin-left: 15px;" class="section-header-left">
                     <h3 class="text-light-black header-title title">DANH SÁCH BÌNH LUẬN</h3>
                 </div>
 				<div class="container bootdey comments">
@@ -979,6 +901,88 @@
 					</div>
 				</div>
 				<!-- Comment  -->
+				<hr />
+                <div style="width: 100%; 
+                			border: 1px solid black; 
+                			padding: 15px;
+                			margin: 15px;
+                			background-color: #ffffcc;" 
+                			id="reviews">
+					<p>
+						<b>Write Your Review</b>
+					</p>
+					<form role="form" action="${pageContext.request.contextPath}/public/restaurant/comment/${location.locationId}" enctype="multipart/form-data" method="post">
+						<div class="form-group">
+							<input type="text" class="form-control mb-10" name="title"
+								id="title" placeholder="Title" onfocus="this.placeholder = ''"
+								onblur="this.placeholder = 'Title'" required="true">
+						</div>
+						<div class="form-group">
+							<textarea class="form-control mb-10" id="content" rows="5"
+								name="content" placeholder="Content"
+								onfocus="this.placeholder = ''"
+								onblur="this.placeholder = 'Content'" required="true"></textarea>
+						</div>
+						<hr />
+						<div class="input-field">
+							<label class="active">Photos</label>
+							<div class="input-images" style="padding-top: .5rem;"></div>
+						</div>
+						<!-- <div class="input-field">
+					        <label class="active">Photos</label>
+					        <div class="input-images-2" style="padding-top: .5rem;"></div>
+					    </div> -->
+						<hr />
+						<div>
+							<h5>Videos</h5>
+							<video id="myVideo" width="400" controls>
+								<source src="" id="video_here">
+							</video>
+							<br /> <input style="display: inline-block;" type="file"
+								name="video" class="file_multi_video" accept="video/*">
+							<button style="display: inline-block;" id="btn-file-reset-id"
+								type="button">Reset file</button>
+						</div>
+						<hr />
+						<div>
+							<h5>Rating</h5>
+							<p>
+								<label style="display: inline-block; width: 80px;">Nhà hàng:</label>
+								<input style="display: inline-block;" type="range"
+									name="location" class="slider" min="1" max="10" value="5">
+								<span style="display: inline-block;" class="slider_label"></span>
+							</p>
+							<p>
+								<label style="display: inline-block; width: 80px;">Giá cả:</label>
+								<input style="display: inline-block;" type="range"
+									name="price" class="slider" min="1" max="10" value="5">
+								<span style="display: inline-block;" class="slider_label"></span>
+							</p>
+							<p>
+								<label style="display: inline-block; width: 80px;">Chất lượng:</label>
+								<input style="display: inline-block;" type="range"
+									name="quality" class="slider" min="1" max="10" value="5">
+								<span style="display: inline-block;" class="slider_label"></span>
+							</p>
+							<p>
+								<label style="display: inline-block; width: 80px;">Dịch vụ:</label>
+								<input style="display: inline-block;" type="range"
+									name="service" class="slider" min="1" max="10" value="5">
+								<span style="display: inline-block;" class="slider_label"></span>
+							</p>
+							<p>
+								<label style="display: inline-block; width: 80px;">Không gian: </label>
+								<input style="display: inline-block;" type="range"
+									name="space" class="slider" min="1" max="10" value="5">
+								<span style="display: inline-block;" class="slider_label"></span>
+							</p>
+						</div>
+						<input type="submit" value="Submit" name="submit"
+							class="btn btn-primary pull-left" />
+					</form>
+				</div>
+				<!-- Comment  -->
+				
             </div>
         </div>
     </section>
