@@ -2,6 +2,11 @@ package edu.group6.capston.daos;
 
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Root;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -9,7 +14,8 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import edu.group6.capston.models.DiscountInfo;;
+import edu.group6.capston.models.DiscountInfo;
+import edu.group6.capston.models.DiscountLimitedUse;;
 
 @Repository
 public class DiscountDAO {
@@ -49,7 +55,7 @@ public class DiscountDAO {
 			return false;
 		}
 	}
-
+	
 	public boolean delete(Integer id) {
 		try (Session session = this.sessionFactory.openSession()) {
 			Transaction tx = session.beginTransaction();
@@ -68,7 +74,7 @@ public class DiscountDAO {
 
 	public List<DiscountInfo> findTopNewDiscountInfo() {
 		try (Session session = this.sessionFactory.openSession()) {
-			List<DiscountInfo> list = session.createQuery("from DiscountInfo ORDER BY DiscountId DESC", DiscountInfo.class).setMaxResults(3).getResultList();
+			List<DiscountInfo> list = session.createQuery("SELECT DISTINCT a from DiscountInfo a ORDER BY DiscountId DESC", DiscountInfo.class).setMaxResults(3).getResultList();
 			return list;
 		}
 	}
@@ -97,7 +103,66 @@ public class DiscountDAO {
 
 	public List<DiscountInfo> findBylocationId(int locationId) {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("FROM DiscountInfo WHERE locationId = " + locationId + " AND GETDATE() < Convert(datetime, endDate)", DiscountInfo.class).list();
+			return session.createQuery("FROM DiscountInfo WHERE locationId = " + locationId + " AND limitedPerUser > 0 AND GETDATE() < Convert(datetime, endDate)", DiscountInfo.class).list();
 		}
+	}
+
+	public int limitedPerUser(String discountId) {
+		try (Session session = this.sessionFactory.openSession()) {
+			int count = (int) session.createQuery("select limitedPerUser from DiscountInfo WHERE discountId = " + discountId).uniqueResult();
+			return count;
+		}
+	}
+
+	public DiscountLimitedUse findDiscountLimitedUse(String discountId, int userId) {
+		try (Session session = this.sessionFactory.openSession()) {
+			return session.createQuery("FROM DiscountLimitedUse WHERE discountId = " + discountId + " AND userId = " + userId, DiscountLimitedUse.class).uniqueResult();
+		}
+	}
+
+	public boolean updateDiscountLimitedUse(DiscountLimitedUse discountLimitedUse) {
+		try (Session session = this.sessionFactory.openSession()) {
+			Transaction tx = session.beginTransaction();
+			session.update(discountLimitedUse);
+			tx.commit();
+			session.close();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	public boolean saveDiscountLimitedUse(DiscountLimitedUse discountLimitedUse) {
+		Session session = this.sessionFactory.openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			session.persist(discountLimitedUse);
+			tx.commit();
+			session.close();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	public List<DiscountLimitedUse> findDiscountLimitedUseByLocationId(int locationId, int userId) {
+		List<DiscountLimitedUse> locationList = null;
+		Session session = this.sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<DiscountLimitedUse> query = builder.createQuery(DiscountLimitedUse.class);
+		Root<DiscountLimitedUse> root = query.from(DiscountLimitedUse.class);
+		root.join("discountInfo", JoinType.INNER);
+		query.distinct(true);
+		query.multiselect(
+				root.get("discountInfo").get("discountId"),
+				root.get("limitedPerUser"));
+		query.where(builder.equal(root.get("discountInfo").get("location").get("locationId"), locationId));
+		query.where(builder.equal(root.get("userId"), userId));
+		locationList = session.createQuery(query).getResultList();
+		transaction.commit();
+		session.close();
+		return locationList;
 	}
 }

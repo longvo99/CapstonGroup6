@@ -25,6 +25,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.group6.capston.dtos.OrderDTO;
 import edu.group6.capston.dtos.UserAddress;
+import edu.group6.capston.models.DiscountInfo;
+import edu.group6.capston.models.DiscountLimitedUse;
 import edu.group6.capston.models.Location;
 import edu.group6.capston.models.OrderDetail;
 import edu.group6.capston.models.OrderStatus;
@@ -44,7 +46,6 @@ import edu.group6.capston.utils.GlobalsFunction;
 @Controller
 @RequestMapping("public")
 public class PublicOrderController extends PublicAbstractController {
-
 	@Autowired
 	private ProductService productService;
 
@@ -59,10 +60,10 @@ public class PublicOrderController extends PublicAbstractController {
 
 	@Autowired
 	private OrderStatusService orderStatusService;
-	
+
 	@Autowired
 	private DiscountService discountService;
-
+	
 	@Autowired
 	MessageSource messageSource;
 
@@ -101,7 +102,8 @@ public class PublicOrderController extends PublicAbstractController {
 		Cookie[] cookies = request.getCookies();
 		for (Cookie cookie : cookies) {
 			if (cookie.getName().contains(user.getUsername())) {
-				if (!cookie.getName().equalsIgnoreCase(nameCookie)) {
+				if (!cookie.getName().equalsIgnoreCase(nameCookie)
+						&& !cookie.getName().contains("Discount-" + user.getUsername())) {
 					productId = cookie.getName().substring(0, cookie.getName().lastIndexOf("-"));
 					if (productId.substring(0, 1).equals("c")) {
 						String comboId = cookie.getName().substring(1, cookie.getName().lastIndexOf("-"));
@@ -114,11 +116,11 @@ public class PublicOrderController extends PublicAbstractController {
 					}
 					order = new OrderDTO(user.getUserId(), productId, product.getName(), product.getPrice(),
 							Integer.valueOf(cookie.getValue()), product.getLocationId());
-					if(order1.getLocationId() != product.getLocationId()) {
+					if (order1.getLocationId() != product.getLocationId()) {
 						Cookie cookieDel = new Cookie(cookie.getName(), "");
 						cookieDel.setMaxAge(0);
 						response.addCookie(cookieDel);
-					}else {
+					} else {
 						listOrderDTO.add(order);
 					}
 				}
@@ -146,7 +148,8 @@ public class PublicOrderController extends PublicAbstractController {
 		for (Cookie cookie : cookies) {
 			if (cookie.getName().contains(user.getUsername())) {
 				productId = cookie.getName().substring(0, cookie.getName().lastIndexOf("-"));
-				if (!cookie.getName().equalsIgnoreCase(nameCookie)) {
+				if (!cookie.getName().equalsIgnoreCase(nameCookie)
+						&& !cookie.getName().contains("Discount-" + user.getUsername())) {
 					if (productId.substring(0, 1).equals("c")) {
 						String comboId = cookie.getName().substring(1, cookie.getName().lastIndexOf("-"));
 						product = productService.findByComboIdOrder(Integer.valueOf(comboId));
@@ -175,7 +178,8 @@ public class PublicOrderController extends PublicAbstractController {
 			for (Cookie cookie : cookies) {
 				if (cookie.getName().contains(user.getUsername())) {
 					productId = cookie.getName().substring(0, cookie.getName().lastIndexOf("-"));
-					if (!cookie.getValue().equals("")) {
+					if (!cookie.getValue().equals("")
+							&& !cookie.getName().contains("Discount-" + user.getUsername())) {
 						OrderDTO product = null;
 						if (productId.substring(0, 1).equals("c")) {
 							String comboId = cookie.getName().substring(1, cookie.getName().lastIndexOf("-"));
@@ -193,9 +197,20 @@ public class PublicOrderController extends PublicAbstractController {
 					}
 				}
 			}
-			if(listOrderDTO.size() > 0) {
-				model.addAttribute("totalOrderedPrice", orderService.findTotalOrderedPricelocationId(listOrderDTO.get(0).getLocationId(), user.getUserId()));
-				model.addAttribute("listDiscount", discountService.findBylocationId(listOrderDTO.get(0).getLocationId()));
+			if (listOrderDTO.size() > 0) {
+				List<DiscountInfo> listDiscountInfo = discountService.findBylocationId(listOrderDTO.get(0).getLocationId());
+				List<DiscountLimitedUse> listDiscountLimitedUseByLocationId = discountService.findDiscountLimitedUseByLocationId(listOrderDTO.get(0).getLocationId(), user.getUserId());
+				for (DiscountInfo discountInfo : listDiscountInfo) {
+					for (DiscountLimitedUse discountLimitedUse : listDiscountLimitedUseByLocationId) {
+						if(discountInfo.getDiscountId() == discountLimitedUse.getDiscountInfo().getDiscountId() 
+								&& discountInfo.getLimitedPerUser() == discountLimitedUse.getLimitedPerUser()) {
+							listDiscountInfo.remove(discountInfo);
+						}
+					}
+				}
+				model.addAttribute("totalOrderedPrice", orderService
+						.findTotalOrderedPricelocationId(listOrderDTO.get(0).getLocationId(), user.getUserId()));
+				model.addAttribute("listDiscount", listDiscountInfo);
 			}
 			model.addAttribute("sizeCart", listOrderDTO.size());
 			model.addAttribute("totalCart", totalCart);
@@ -212,6 +227,7 @@ public class PublicOrderController extends PublicAbstractController {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
 			return "redirect:/public/checkout";
 		}
+
 		Users user = (Users) request.getSession().getAttribute("userSession");
 		if (user != null) {
 			if (user.getContactAddress() == null) {
@@ -224,10 +240,12 @@ public class PublicOrderController extends PublicAbstractController {
 				}
 			}
 		}
-		// remote cookie
+
 		Cookie[] cookies = request.getCookies();
+		float totalCart = 0;
 		String productId = "";
 		List<OrderDTO> listOrderDTO = new ArrayList<>();
+		int rateDiscount = 0;
 		for (Cookie cookie : cookies) {
 			if (cookie.getName().contains(user.getUsername())) {
 				productId = cookie.getName().substring(0, cookie.getName().lastIndexOf("-"));
@@ -238,12 +256,31 @@ public class PublicOrderController extends PublicAbstractController {
 						product = productService.findByComboIdOrder(Integer.valueOf(comboId));
 						product.setPrice(
 								GlobalsFunction.totalPriceCombo(product.getPrice(), product.getRateDiscount()));
+					} else if (cookie.getName().contains("Discount-" + user.getUsername())) {
+						rateDiscount = Integer.valueOf(cookie.getValue());
+						String discountId = cookie.getName().substring(0, cookie.getName().lastIndexOf("#"));
+						DiscountInfo discountInfo = discountService.findOne(Integer.valueOf(discountId));
+						discountInfo.setLimitedUse(discountInfo.getLimitedUse() - 1);
+						discountService.update(discountInfo);
+						if(discountService.findDiscountLimitedUse(discountId, user.getUserId()) != null) {
+							DiscountLimitedUse discountLimitedUse = discountService.findDiscountLimitedUse(discountId, user.getUserId());
+							discountLimitedUse.setLimitedPerUser(discountLimitedUse.getLimitedPerUser() + 1);
+							discountService.updateDiscountLimitedUse(discountLimitedUse);
+						}else {
+							DiscountLimitedUse discountLimitedUse = new DiscountLimitedUse(0, Integer.valueOf(discountId), user.getUserId(), 1);
+							discountService.saveDiscountLimitedUse(discountLimitedUse);
+						}
 					} else {
 						product = productService.findByProductIdOrder(Integer.valueOf(productId));
 					}
+					double total = 0;
+					if(!cookie.getName().contains("Discount-" + user.getUsername())) {
+						total = product.getPrice() * Integer.valueOf(cookie.getValue());
 					OrderDTO order = new OrderDTO(user.getUserId(), productId, product.getName(), product.getPrice(),
 							Integer.valueOf(cookie.getValue()), product.getLocationId());
 					listOrderDTO.add(order);
+					}
+					totalCart += total;
 					// remote cookie
 					Cookie cookieDel = new Cookie(cookie.getName(), "");
 					cookieDel.setMaxAge(0);
@@ -251,51 +288,29 @@ public class PublicOrderController extends PublicAbstractController {
 				}
 			}
 		}
-		List<Orders> listOrders = new ArrayList<>();
-		for (OrderDTO orderDTO : listOrderDTO) {
-			float totalCart = 0;
-			double total = 0;
-			boolean Check = false;
-			for (Orders orders : listOrders) {
-				if (orders.getLocation().getLocationId() == orderDTO.getLocationId()) {
-					total = orderDTO.getPrice() * Integer.valueOf(orderDTO.getQuantity());
-					totalCart += total;
-					orders.setTotalPrice(totalCart + orders.getTotalPrice());
-					Check = true;
-				}
-			}
-			if (!Check) {
-				total = orderDTO.getPrice() * Integer.valueOf(orderDTO.getQuantity());
-				totalCart += total;
-				Orders order = new Orders(0, GlobalsFunction.getCurrentTime(), new OrderStatus(1, ""), user, totalCart,
-						userAddress.getNote(), "", GlobalsConstant.priceShip, GlobalsFunction.AddressUser(userAddress),
-						new Location(orderDTO.getLocationId()));
-				listOrders.add(order);
-			}
+		if(rateDiscount > 100) {
+			totalCart -= rateDiscount;
+		}else {
+			totalCart -= ((totalCart * rateDiscount) / 100);
 		}
-
-		for (Orders orders : listOrders) {
-			orderService.save(orders);
+		
+		Orders order = new Orders(0, GlobalsFunction.getCurrentTime(), new OrderStatus(1, ""), user, totalCart,
+				userAddress.getNote(), "", GlobalsConstant.priceShip, GlobalsFunction.AddressUser(userAddress),
+				new Location(listOrderDTO.get(0).getLocationId()));
+		if (orderService.save(order) == false) {
+			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
+			return "redirect:/public/checkout";
 		}
 
 		for (OrderDTO orderDTO : listOrderDTO) {
 			OrderDetail orderDetail = null;
 			if (orderDTO.getProductId().contains("c")) {
 				int id = Integer.valueOf(orderDTO.getProductId().substring(1, orderDTO.getProductId().length()));
-				for (Orders orders : listOrders) {
-					if (orders.getLocation().getLocationId() == orderDTO.getLocationId()) {
-						orderDetail = new OrderDetail(0, orderDTO.getPrice(), orderDTO.getQuantity(),
-								userAddress.getNote(), null, new ProductCombo(id), orders);
-					}
-				}
+				orderDetail = new OrderDetail(0, orderDTO.getPrice(), orderDTO.getQuantity(), userAddress.getNote(),
+						null, new ProductCombo(id), order);
 			} else {
-				for (Orders orders : listOrders) {
-					if (orders.getLocation().getLocationId() == orderDTO.getLocationId()) {
-						orderDetail = new OrderDetail(0, orderDTO.getPrice(), orderDTO.getQuantity(),
-								userAddress.getNote(), new Product(Integer.valueOf(orderDTO.getProductId())), null,
-								orders);
-					}
-				}
+				orderDetail = new OrderDetail(0, orderDTO.getPrice(), orderDTO.getQuantity(), userAddress.getNote(),
+						new Product(Integer.valueOf(orderDTO.getProductId())), null, order);
 			}
 			orderDetailService.save(orderDetail);
 		}
@@ -342,5 +357,24 @@ public class PublicOrderController extends PublicAbstractController {
 		model.addAttribute("userAddress", userAddress);
 		return "public.orderdetails";
 	}
-	
+
+	@RequestMapping(value = "/applyDiscount", method = RequestMethod.GET, produces = "application/json")
+	public @ResponseBody void applyDiscount(Model model, HttpServletRequest request, HttpServletResponse response) {
+		Users user = (Users) request.getSession().getAttribute("userSession");
+		String rateDiscount = request.getParameter("arateDiscount");
+		String discountId = request.getParameter("aDiscountId");
+		String nameCookie = discountId + "#Discount-" + user.getUsername();
+		Cookie[] cookies = request.getCookies();
+		for (Cookie cookie2 : cookies) {
+			if (cookie2.getName().contains("Discount-" + user.getUsername())) {
+				Cookie cookieDel = new Cookie(cookie2.getName(), "");
+				cookieDel.setMaxAge(0);
+				response.addCookie(cookieDel);
+			}
+		}
+		Cookie cookieProductId = new Cookie(nameCookie, rateDiscount);
+		cookieProductId.setMaxAge(365 * 24 * 60 * 60);
+		response.addCookie(cookieProductId);
+	}
+
 }

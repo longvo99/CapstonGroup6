@@ -123,6 +123,7 @@ public class LocationDAO {
 		CriteriaQuery<LocationDTO> query = builder.createQuery(LocationDTO.class);
 		Root<DiscountInfo> root = query.from(DiscountInfo.class);
 		root.join("location", JoinType.INNER);
+		query.distinct(true);
 		query.multiselect(root.get("discountId"), root.get("location").get("locationId"),
 				root.get("location").get("locationName"), root.get("location").get("openTime"),
 				root.get("location").get("closeTime"), root.get("location").get("reviewCount"),

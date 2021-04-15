@@ -50,7 +50,7 @@ public abstract class PublicAbstractController  {
 			for (Cookie cookie : cookies) {
 				if (cookie.getName().contains(user.getUsername())) {
 					productId = cookie.getName().substring(0, cookie.getName().lastIndexOf("-"));
-					if(!cookie.getValue().equals("")) {
+					if(!cookie.getValue().equals("") && !cookie.getName().contains("Discount-" + user.getUsername())) {
 						OrderDTO product = null;
 						if(productId.substring(0,1).equals("c")) {
 							String comboId = cookie.getName().substring(1, cookie.getName().lastIndexOf("-"));
