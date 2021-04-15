@@ -63,7 +63,7 @@
 <body id="page-top">
   <div id="wrapper">
     <!-- Sidebar -->
-   	<c:if test="${sessionScope.userSession.role.roleId ne 'CUSTOMER' }">
+   	
     <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${pageContext.request.contextPath}/admin/index">
         <div class="sidebar-brand-icon">
@@ -90,24 +90,37 @@
         <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Quản lý Locations</h6>
-            <a class="collapse-item" href="${pageContext.request.contextPath}/admin/location/index">Địa điểm</a>
+            <c:set var="urlL" value="${pageContext.request.contextPath}/public/location/index" />
+	      	<c:if test="${sessionScope.userSession.role.roleId ne 'CUSTOMER' }">
+	      		<c:set var="urlL" value="${pageContext.request.contextPath}/admin/location/index" />
+	      	</c:if>
+            <a class="collapse-item" href="${urlL}">Địa điểm</a>
+            <c:if test="${sessionScope.userSession.role.roleId ne 'CUSTOMER' }">
             <a class="collapse-item" href="${pageContext.request.contextPath}/admin/locationType/index">Kiểu địa điểm</a>
             <a class="collapse-item" href="${pageContext.request.contextPath}/admin/locationCategory/index">Phân loại địa điểm</a>
+          	</c:if>
           </div>
         </div>
       </li>
+      <c:if test="${sessionScope.userSession.role.roleId ne 'CUSTOMER' }">
       <li class="nav-item">
         <a class="nav-link" href="${pageContext.request.contextPath}/admin/order/index">
           <i class="fab fa-fw fa-wpforms"></i>
           <span>Quản lý đặt hàng</span>
         </a>
       </li>
+      </c:if>
       <li class="nav-item">
-        <a class="nav-link" href="${pageContext.request.contextPath}/admin/discount/index">
+      	<c:set var="urlD" value="${pageContext.request.contextPath}/public/discount/index" />
+      	<c:if test="${sessionScope.userSession.role.roleId ne 'CUSTOMER' }">
+      		<c:set var="urlD" value="${pageContext.request.contextPath}/admin/discount/index" />
+      	</c:if>
+        <a class="nav-link" href="${urlD}">
           <i class="fab fa-fw fa-wpforms"></i>
           <span>Quản lý giảm giá</span>
         </a>
       </li>
+      <c:if test="${sessionScope.userSession.role.roleId ne 'CUSTOMER' }">
       <li class="nav-item">
         <a class="nav-link" href="${pageContext.request.contextPath}/admin/contact/index">
           <i class="fab fa-fw fa-wpforms"></i>
@@ -162,6 +175,7 @@
       </li>
       <hr class="sidebar-divider">
       <div class="version" id="version-ruangadmin"></div>
+      </c:if>
     </ul>
-    </c:if>
+    
     <!-- Sidebar -->

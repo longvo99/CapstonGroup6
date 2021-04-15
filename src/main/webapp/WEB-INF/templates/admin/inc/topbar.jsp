@@ -167,7 +167,11 @@
             	<span class="ml-2 d-none d-lg-inline text-white small">${pageContext.request.userPrincipal.name}</span>
               </a>
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/user/${userDetail.user.role.roleId}">
+                <c:set var="urlA" value="${pageContext.request.contextPath}/user/profile/${sessionScope.userSession.username}" />
+                <c:if test="${empty sessionScope.userSession}">
+                	<c:set var="urlA" value="${pageContext.request.contextPath}/admin/user/${userDetail.user.role.roleId}" />
+                </c:if>
+                <a class="dropdown-item" href="${urlA}">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Profile
                 </a>

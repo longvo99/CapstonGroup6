@@ -1,15 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/templates/tags/taglib.jsp" %>
-<c:set var="contextPath" value="${pageContext.request.contextPath}/admin/discount"/>
 <sec:authentication var="userDetail" property="principal" />
+<c:choose>
+	<c:when test="${not empty sessionScope.userSession}">
+		<c:set var="addUrl" value="${pageContext.request.contextPath}/public/discount/add" />
+		<c:set var="editUrl" value="${pageContext.request.contextPath}/public/discount/edit" />
+		<c:set var="deleteUrl" value="${pageContext.request.contextPath}/public/discount/del" />
+	</c:when>
+	<c:otherwise>
+		<c:set var="addUrl" value="${pageContext.request.contextPath}/admin/discount/add" />
+		<c:set var="editUrl" value="${pageContext.request.contextPath}/admin/discount/edit" />
+		<c:set var="deleteUrl" value="${pageContext.request.contextPath}/admin/discount/del" />
+	</c:otherwise>
+</c:choose>
 	<div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h2 class="m-0 font-weight-bold text-primary">Quản lý giảm giá</h2>
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="./">Home</a></li>
-              <li class="breadcrumb-item">Tables</li>
-              <li class="breadcrumb-item active" aria-current="page">DataTables</li>	
+              <c:set var="actionIndex" value="${pageContext.request.contextPath}/admin/index" />
+              <c:if test="${not empty sessionScope.userSession}">
+              		<c:set var="actionIndex" value="${pageContext.request.contextPath}/public/index" />
+              </c:if>
+              <li class="breadcrumb-item"><a href="${actionIndex}">Trang chủ</a></li>
             </ol>
           </div>
           <!-- Row -->
@@ -24,7 +37,7 @@
               <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <div class="col-sm-10">
-                  	<a href="${contextPath}/add" class="btn btn-success btn-md"><i class="fa fa-plus-square"> Thêm </i></a>
+                  	<a href="${addUrl}" class="btn btn-success btn-md"><i class="fa fa-plus-square"> Thêm </i></a>
                   </div>
                   <div style="margin-right: 40px;">
                   	<a href="javascript:void(0)" id="btnDel" class="btn btn-danger btn-md"><i class="fas fa-trash"> Xóa </i></a>
@@ -54,14 +67,24 @@
 							<td>${discount.location.address}</td>
 							<td class="center text-center">
 								<a href="" data-toggle="modal" data-target="#exampleModalCenter${discount.discountId}" class="btn btn-sm btn-primary"><i class="fa fa-edit"> Chi tiết </i></a>
+								<c:if test="${empty sessionScope.userSession}">
 								<c:if test="${userDetail.user.role.roleId eq discount.users.role.roleId}">
-									<a href="${contextPath}/edit/${discount.discountId}" class="btn btn-sm btn-warning"><i class="fa fa-edit"> Sửa </i></a>
+									<a href="${editUrl}/${discount.discountId}" class="btn btn-sm btn-warning"><i class="fa fa-edit"> Sửa </i></a>
 								</c:if>	
+								</c:if>
+								<c:if test="${not empty sessionScope.userSession}">
+									<a href="${editUrl}/${discount.discountId}" class="btn btn-sm btn-warning"><i class="fa fa-edit"> Sửa </i></a>
+								</c:if>
 							</td>
 							<td class="center text-center">
+								<c:if test="${empty sessionScope.userSession}">
 								<c:if test="${userDetail.user.role.roleId eq discount.users.role.roleId}">
 									<input type="checkbox" class="checkbox" name="check[]" id="customCheck1" value="${discount.discountId}" style="zoom: 1.5;">
 								</c:if>	
+								</c:if>
+								<c:if test="${not empty sessionScope.userSession}">
+									<input type="checkbox" class="checkbox" name="check[]" id="customCheck1" value="${discount.discountId}" style="zoom: 1.5;">
+								</c:if>
             				</td>
 						</tr>
 						<!-- Modal Center -->
@@ -94,10 +117,10 @@
 					                      <label for="name">Mô tả</label>
 					                      <textarea disabled="disabled" class="form-control mb-3" rows="3">${discount.description}</textarea>
 					                    </div>
-					                    <div class="form-group">
+					                   <%--  <div class="form-group">
 					                      <label for="address">Mã giảm giá</label>
 					                      <input disabled="disabled" class="form-control mb-3" type="text" value="${discount.code}">
-					                    </div>
+					                    </div> --%>
 					                    <div class="form-group">
 					                      <label for="address">Áp dụng cho</label>
 					                      <textarea disabled="disabled" class="form-control mb-3" rows="3">${discount.value}</textarea>
@@ -160,7 +183,7 @@
                   </c:if>
                   <c:if test="${empty discountList}">
 						<tr>
-							<td colspan="4" align="center">Chưa có địa điểm nào!</td>
+							<td colspan="4" align="center">Chưa có giảm giá nào!</td>
 						</tr>
 				  </c:if>
                 </div>
@@ -211,7 +234,7 @@
 	                   str += checkbox[i].value + ",";
 	               } 
 	           }
-			window.location.href = "${pageContext.request.contextPath}/admin/discount/del/" + str;
+			window.location.href = "${deleteUrl}/" + str;
        } else {return;}
    };
 </script>

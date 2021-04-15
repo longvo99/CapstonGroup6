@@ -32,6 +32,7 @@ import edu.group6.capston.models.Orders;
 import edu.group6.capston.models.Product;
 import edu.group6.capston.models.ProductCombo;
 import edu.group6.capston.models.Users;
+import edu.group6.capston.services.DiscountService;
 import edu.group6.capston.services.OrderDetailService;
 import edu.group6.capston.services.OrderService;
 import edu.group6.capston.services.OrderStatusService;
@@ -58,6 +59,9 @@ public class PublicOrderController extends PublicAbstractController {
 
 	@Autowired
 	private OrderStatusService orderStatusService;
+	
+	@Autowired
+	private DiscountService discountService;
 
 	@Autowired
 	MessageSource messageSource;
@@ -90,9 +94,9 @@ public class PublicOrderController extends PublicAbstractController {
 		} else {
 			product = productService.findByProductIdOrder(Integer.valueOf(productId));
 		}
-		order = new OrderDTO(user.getUserId(), productId, product.getName(), product.getPrice(),
+		OrderDTO order1 = new OrderDTO(user.getUserId(), productId, product.getName(), product.getPrice(),
 				Integer.valueOf(quantity), product.getLocationId());
-		listOrderDTO.add(order);
+		listOrderDTO.add(order1);
 
 		Cookie[] cookies = request.getCookies();
 		for (Cookie cookie : cookies) {
@@ -110,7 +114,13 @@ public class PublicOrderController extends PublicAbstractController {
 					}
 					order = new OrderDTO(user.getUserId(), productId, product.getName(), product.getPrice(),
 							Integer.valueOf(cookie.getValue()), product.getLocationId());
-					listOrderDTO.add(order);
+					if(order1.getLocationId() != product.getLocationId()) {
+						Cookie cookieDel = new Cookie(cookie.getName(), "");
+						cookieDel.setMaxAge(0);
+						response.addCookie(cookieDel);
+					}else {
+						listOrderDTO.add(order);
+					}
 				}
 			}
 		}
@@ -183,6 +193,10 @@ public class PublicOrderController extends PublicAbstractController {
 					}
 				}
 			}
+			if(listOrderDTO.size() > 0) {
+				model.addAttribute("totalOrderedPrice", orderService.findTotalOrderedPricelocationId(listOrderDTO.get(0).getLocationId(), user.getUserId()));
+				model.addAttribute("listDiscount", discountService.findBylocationId(listOrderDTO.get(0).getLocationId()));
+			}
 			model.addAttribute("sizeCart", listOrderDTO.size());
 			model.addAttribute("totalCart", totalCart);
 			model.addAttribute("listOrderDTO", listOrderDTO);
@@ -190,11 +204,7 @@ public class PublicOrderController extends PublicAbstractController {
 		model.addAttribute("userAddress", GlobalsFunction.AddressUser(user.getContactAddress()));
 		return "public.checkout";
 	}
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> 0b8c3e94e0b4af58973f2857b798b10219b2e389
 	@PostMapping("/checkout")
 	public String checkout(@Valid @ModelAttribute("userAddress") UserAddress userAddress, Model model,
 			HttpServletRequest request, BindingResult br, RedirectAttributes rd, HttpServletResponse response) {
@@ -332,4 +342,5 @@ public class PublicOrderController extends PublicAbstractController {
 		model.addAttribute("userAddress", userAddress);
 		return "public.orderdetails";
 	}
+	
 }

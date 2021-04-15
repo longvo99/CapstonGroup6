@@ -1,4 +1,4 @@
-package edu.group6.capston.controller.admins;
+package edu.group6.capston.controller.publics;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,12 +35,11 @@ import edu.group6.capston.services.LocationService;
 import edu.group6.capston.services.ProductCategoryService;
 import edu.group6.capston.services.ProductService;
 import edu.group6.capston.utils.GlobalsConstant;
-import edu.group6.capston.utils.GlobalsFunction;
 import edu.group6.capston.utils.UploadFile;
 
 @Controller
-@RequestMapping("admin/discount")
-public class AdminDiscountController {
+@RequestMapping("public/discount")
+public class PublicDiscountController {
 
 	@Autowired
 	MessageSource messageSource;
@@ -59,23 +58,25 @@ public class AdminDiscountController {
 
 	@Autowired
 	private ProductService productService;
-
+	
 	@RequestMapping(value = "/index")
-	public String Index(Model model) {
-		if (GlobalsFunction.getUsers().getRole().getRoleId().equals("ADMIN")) {
-			model.addAttribute("discountList", discountService.findAll());
-		} else {
-			model.addAttribute("discountList", discountService.findAllByUserId(GlobalsFunction.getUsers().getUserId()));
+	public String Index(Model model, HttpServletRequest request) {
+		Users user = null;
+		if(request.getSession().getAttribute("userSession") != null) {
+			user = (Users) request.getSession().getAttribute("userSession");
+			model.addAttribute("discountList", discountService.findAllByUserId(user.getUserId()));
 		}
 		return "admin.discount.index";
 	}
 
 	@GetMapping(value = "/add")
-	public String Add(Model model) {
+	public String Add(Model model, HttpServletRequest request) {
 		model.addAttribute("discountRuleList", discountRuleService.findAll());
-		if (!GlobalsFunction.getUsers().getRole().getRoleId().equals("ADMIN")) {
+		Users user = null;
+		if(request.getSession().getAttribute("userSession") != null) {
+			user = (Users) request.getSession().getAttribute("userSession");
 			model.addAttribute("locationByUserIdList",
-					locationService.findAllByUserId(GlobalsFunction.getUsers().getUserId()));
+					locationService.findAllByUserId(user.getUserId()));
 		}
 		return "admin.discount.add";
 	}
@@ -102,13 +103,13 @@ public class AdminDiscountController {
 			MultipartFile file, RedirectAttributes rd, @RequestParam(required = false) String condition, Model model)
 			throws IllegalStateException, IOException {
 		if (br.hasErrors()) {
-			/* System.out.println(br.getFieldError()); */
 			return "admin.discount.add";
 		}
+		Users user = (Users) request.getSession().getAttribute("userSession");
 		String filename = UploadFile.upload(file, request);
 		discountInfo.setMediaPath(filename);
-		discountInfo.setUsers(new Users(GlobalsFunction.getUsers().getUserId()));
-		if (GlobalsFunction.getUsers().getRole().getRoleId().equals("ADMIN")) {
+		discountInfo.setUsers(new Users(user.getUserId()));
+		if (user.getRole().getRoleId().equals("ADMIN")) {
 			switch (request.getParameter("optradio")) {
 			case "allproduct":
 				discountInfo.setValue("alldistrict");
@@ -122,27 +123,26 @@ public class AdminDiscountController {
 				discountInfo.setValue("someward:".concat(someward));
 				break;
 			}
-			;
 		}
 		/*
-		 * if (!GlobalsFunction.getUsers().getRole().getRoleId().equals("ADMIN")) {
-		 * switch (request.getParameter("optradio1")) { case "allproduct":
+		 * if (!user.getRole().getRoleId().equals("ADMIN")) { switch
+		 * (request.getParameter("optradio1")) { case "allproduct":
 		 * discountInfo.setValue("allproduct"); break; case "category": String
 		 * categoryName = request.getParameter("categoryName").trim();
 		 * discountInfo.setValue("category:".concat(categoryName)); break; case
 		 * "product": String productName = request.getParameter("productName").trim();
-		 * discountInfo.setValue("product:".concat(productName)); break; } ; }
+		 * discountInfo.setValue("product:".concat(productName)); break; } }
 		 */
 		if (condition != null) {
 			discountInfo.setDiscountRule(new DiscountRule(Integer.parseInt(request.getParameter("discountRule1"))));
 			discountInfo.setValueRule(Integer.parseInt(request.getParameter("valueRule1")));
 		}
-		if (!GlobalsFunction.getUsers().getRole().getRoleId().equals("ADMIN")) {
+		if (!user.getRole().getRoleId().equals("ADMIN")) {
 			List<DiscountInfo> list1 = new ArrayList<>();
 			DiscountInfo obj = null;
 			List<String> strList = Arrays.asList(request.getParameterValues("check[]"));//lisst ID location
 			for (String string : strList) {
-				obj = new DiscountInfo(0, discountInfo.getTitle(),
+				obj = new DiscountInfo(0, discountInfo.getTitle(), 
 						discountInfo.getDescription(), discountInfo.getRateDiscount(), discountInfo.getValue(), 
 						discountInfo.getMediaPath(), discountInfo.getStartDate(), discountInfo.getEndDate(), 
 						discountInfo.getUsers(), discountInfo.getLimitedUse(), discountInfo.getLimitedPerUser(), 
@@ -153,12 +153,12 @@ public class AdminDiscountController {
 				discountService.save(obj1);
 			}
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("success", null, Locale.getDefault()));
-			return "redirect:/admin/discount/index";
+			return "redirect:/public/discount/index";
 		} else {
 			if (discountService.save(discountInfo)) {
 				rd.addFlashAttribute(GlobalsConstant.MESSAGE,
 						messageSource.getMessage("success", null, Locale.getDefault()));
-				return "redirect:/admin/discount/index";
+				return "redirect:/public/discount/index";
 			}
 			UploadFile.del(filename, request);
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
@@ -174,7 +174,7 @@ public class AdminDiscountController {
 			model.addAttribute("discount", discountService.findOne(discountId));
 		} catch (Exception e) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
-			return "redirect:/admin/discount/index";
+			return "redirect:/public/discount/index";
 		}
 		return "admin.discount.edit";
 	}
@@ -194,9 +194,10 @@ public class AdminDiscountController {
 		} else {
 			filename = discountService.findOne(discountInfo.getDiscountId()).getMediaPath();
 		}
+		Users user = (Users) request.getSession().getAttribute("userSession");
 		discountInfo.setMediaPath(filename);
-		discountInfo.setUsers(new Users(GlobalsFunction.getUsers().getUserId()));
-		if (GlobalsFunction.getUsers().getRole().getRoleId().equals("ADMIN")) {
+		discountInfo.setUsers(new Users(user.getUserId()));
+		if (user.getRole().getRoleId().equals("ADMIN")) {
 			switch (request.getParameter("optradio")) {
 			case "allproduct":
 				discountInfo.setValue("alldistrict");
@@ -212,7 +213,7 @@ public class AdminDiscountController {
 			}
 			;
 		}
-		if (!GlobalsFunction.getUsers().getRole().getRoleId().equals("ADMIN")) {
+		if (!user.getRole().getRoleId().equals("ADMIN")) {
 			switch (request.getParameter("optradio")) {
 			case "allproduct":
 				discountInfo.setValue("allproduct");
@@ -226,21 +227,19 @@ public class AdminDiscountController {
 				discountInfo.setValue("product:".concat(productName));
 				break;
 			}
-			;
 		}
 		if (condition != null) {
 			discountInfo.setDiscountRule(new DiscountRule(Integer.parseInt(request.getParameter("discountRule1"))));
 			discountInfo.setValueRule(Integer.parseInt(request.getParameter("valueRule1")));
 		}
-		if (!GlobalsFunction.getUsers().getRole().getRoleId().equals("ADMIN")) {
+		if (!user.getRole().getRoleId().equals("ADMIN")) {
 			int locationId = Integer.valueOf(request.getParameter("locati"));
 			discountInfo.setLocation(new Location(locationId));
 		}
 		if (discountService.update(discountInfo)) {
-			System.out.println(UploadFile.getDirPath(request));
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE,
 					messageSource.getMessage("success", null, Locale.getDefault()));
-			return "redirect:/admin/discount/index";
+			return "redirect:/public/discount/index";
 		}
 		rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
 		return "admin.discount.edit";

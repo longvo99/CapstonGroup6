@@ -18,7 +18,11 @@
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h2 class="m-0 font-weight-bold text-primary">Quản lý sản phẩm</h2>
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="./">Trang chủ</a></li>
+              <c:set var="actionIndex" value="${pageContext.request.contextPath}/admin/index" />
+              <c:if test="${not empty sessionScope.userSession}">
+              		<c:set var="actionIndex" value="${pageContext.request.contextPath}/public/index" />
+              </c:if>
+              <li class="breadcrumb-item"><a href="${actionIndex}">Trang chủ</a></li>
               <li class="breadcrumb-item">Bảng</li>
               <li class="breadcrumb-item active" aria-current="page">DataTables</li>
             </ol>
@@ -49,6 +53,9 @@
 	               		<a href="${addUrl}/${locationId}" class="btn btn-success btn-md"><i class="fa fa-plus-square"> Thêm </i></a>
 	               	</c:if>
 	               	</c:if>
+	               	<c:if test="${not empty sessionScope.userSession}">
+	                	<a href="${addUrl}/${locationId}" class="btn btn-success btn-md"><i class="fa fa-plus-square"> Thêm </i></a>
+	                </c:if>
                   </div>
                 </div>
                 

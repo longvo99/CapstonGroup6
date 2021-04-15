@@ -26,8 +26,6 @@ public class DiscountInfo {
 	@Column
 	private String title;
 	@Column
-	private String code;
-	@Column
 	private String description;
 	@Column
 	private int rateDiscount;

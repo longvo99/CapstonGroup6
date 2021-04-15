@@ -13,7 +13,11 @@
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="m-0 font-weight-bold text-primarys">Edit discount</h1>
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="./">Home</a></li>
+              <c:set var="actionIndex" value="${pageContext.request.contextPath}/admin/index" />
+              <c:if test="${not empty sessionScope.userSession}">
+              		<c:set var="actionIndex" value="${pageContext.request.contextPath}/public/index" />
+              </c:if>
+              <li class="breadcrumb-item"><a href="${actionIndex}">Trang chủ</a></li>
               <li class="breadcrumb-item active" aria-current="page">Forms</li>
             </ol>
           </div>
@@ -27,7 +31,8 @@
               <!-- Form Basic -->
               <div class="card mb-4">
                 <div class="card-body">
-                  <form action="${pageContext.request.contextPath}/admin/discount/edit" role="form" method="POST" name="form" id="form" enctype="multipart/form-data">
+                  <c:set var="actionUrl" value="${pageContext.request.contextPath}/admin/user/edit" />
+                  <form action="${actionUrl}" role="form" method="POST" name="form" id="form" enctype="multipart/form-data">
                  	<div class="form-group">
                       <label for="title">Id</label>
                       <input readonly="readonly" class="form-control mb-3" type="text" value="${discount.discountId}" id="discountId" name="discountId">
@@ -91,6 +96,7 @@
 						   });
 						</script>
                     </div>
+                    <c:if test="${empty sessionScope.userSession}">
                     <c:if test="${userDetail.user.role.roleId eq 'ADMIN'}">
                     <c:choose>
                     	<c:when test="${fn:contains(discount.value, 'alldistrict')}">
@@ -205,6 +211,40 @@
 			       		</div>
                     </div>
 					</c:if>	
+					</c:if>
+					<c:if test="${not empty sessionScope.userSession}">
+					<div class="form-group">
+                    	<label for="" >Chọn cơ sở: (<input type="checkbox" id="select_all"/> Chọn hết:) </label>
+                    	<c:if test="${not empty locationByUserIdList}">
+                    		<c:forEach var="location" items="${locationByUserIdList}" >
+                    			<div class="form-check">
+					  				<label class="form-check-label">
+				      					<input type="checkbox" class="checkbox" name="check[]" id="customCheck1" value="${location.locationId}" style="zoom: 1.5;"> ${location.address}
+									</label>
+								</div>
+                    		</c:forEach>
+                    	</c:if>
+                    	<script type="text/javascript">
+						  $("#select_all").change(function(){  //"select all" change 
+							    var status = this.checked; // "select all" checked status
+							    $('.checkbox').each(function(){ //iterate all listed checkbox items
+							        this.checked = status; //change ".checkbox" checked status
+							    });
+							});
+							$('.checkbox').change(function(){ //".checkbox" change 
+							    //uncheck "select all", if one of the listed checkbox item is unchecked
+							    if(this.checked == false){ //if this item is unchecked
+							        $("#select_all")[0].checked = false; //change "select all" checked status to false
+							    }
+							    //check "select all" if all checkbox items are checked
+							    if ($('.checkbox:checked').length == $('.checkbox').length ){ 
+							        $("#select_all")[0].checked = true; //change "select all" checked status to true
+							    }
+							});
+						  </script>
+                    </div>
+					</c:if>
+					<c:if test="${empty sessionScope.userSession}">
 					<c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
 					<input type="hidden" name="locati" value="${discount.location.locationId}">
 					<c:choose>
@@ -247,6 +287,7 @@
 			       		</div>
                     </div>
 					</c:if>	
+					</c:if>
 					<c:if test="${discount.discountRule.ruleId ne null}">
 						<c:set var="onoff" value="checked='checked'"></c:set>
 						<c:set value="show" var="show4" ></c:set>
@@ -305,13 +346,19 @@
                     	</div>
                     	</c:if>
                     </div>
+<c:set var="urlSearchProduct" value="${pageContext.request.contextPath}/public/discount/searchproduct" />
+<c:set var="urlSearchCategory" value="${pageContext.request.contextPath}/public/discount/searchcategory" />
+<c:if test="${not empty sessionScope.userSession}">
+	<c:set var="urlSearchProduct" value="${pageContext.request.contextPath}/admin/discount/searchproduct" />
+	<c:set var="urlSearchCategory" value="${pageContext.request.contextPath}/admin/discount/searchcategory" />
+</c:if>
 <script>
     function getCategory(){
     var userName = document.getElementById("categoryName");
     var string = userName.value;
     $.ajax({
 	method: 'GET',
-	url: '${pageContext.request.contextPath}/admin/discount/searchcategory',
+	url: '${urlSearchCategory}',
 	data: {
 	  str: string
 	},
@@ -368,7 +415,7 @@
     var string = userName.value;
     $.ajax({
 	method: 'GET',
-	url: '${pageContext.request.contextPath}/admin/discount/searchproduct',
+	url: '${urlSearchProduct}',
 	data: {
 	  str: string
 	},

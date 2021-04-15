@@ -59,4 +59,9 @@ public class DiscountServiceImpl implements DiscountService {
 	public int delete(List<Integer> listDiscountId1) {
 		return discountDAO.delete(listDiscountId1);
 	}
+
+	@Override
+	public List<DiscountInfo> findBylocationId(int locationId) {
+		return discountDAO.findBylocationId(locationId);
+	}
 }

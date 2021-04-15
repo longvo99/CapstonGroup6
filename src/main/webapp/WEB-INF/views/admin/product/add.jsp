@@ -9,7 +9,11 @@
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="m-0 font-weight-bold text-primarys">Thêm mới loại địa điểm</h1>
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="./">Trang chủ</a></li>
+              <c:set var="actionIndex" value="${pageContext.request.contextPath}/admin/index" />
+              <c:if test="${not empty sessionScope.userSession}">
+              		<c:set var="actionIndex" value="${pageContext.request.contextPath}/public/index" />
+              </c:if>
+              <li class="breadcrumb-item"><a href="${actionIndex}">Trang chủ</a></li>
               <li class="breadcrumb-item active" aria-current="page">Forms</li>
             </ol>
           </div>
@@ -52,7 +56,7 @@
                     </div>
                     <div class="form-group">
                       <label for="name">Id địa điểm</label>
-                      <input class="form-control mb-3" type="text" value="${locationId}" id="locationId" name="locationId" readonly>
+                      <input class="form-control mb-3" type="text" value="${locationId}" id="locationId" name="location.locationId" readonly>
                     </div>
                     <div class="form-group">
                     	<label for="name">Upload hình ảnh</label>

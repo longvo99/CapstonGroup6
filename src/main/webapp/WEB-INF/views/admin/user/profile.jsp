@@ -50,7 +50,11 @@
 		<div class="col-lg-12">
 			<div class="tab-content">
 				<div class="tab-pane active" id="home">
-					<form class="form" action="##" method="post" id="registrationForm">
+				  <c:set var="actionUrl" value="${pageContext.request.contextPath}/admin/user/edit" />
+                  <c:if test="${not empty sessionScope.userSession}">
+                  		<c:set var="actionUrl" value="${pageContext.request.contextPath}/user/edit" />
+                  </c:if>
+					<form class="form" action="${actionUrl}" method="post" id="registrationForm">
 						<div class="form-group">
 							<div class="col-xs-6">
 								<label for="first_name"> Họ và Tên </label> 

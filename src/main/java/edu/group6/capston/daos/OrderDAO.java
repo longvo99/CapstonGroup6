@@ -100,15 +100,15 @@ public class OrderDAO {
 		}
 	}
 
-	public List<String> revenueByYear(int year) {
+	public List<Object[]> revenueByYear(int year) {
 		try (Session session = this.sessionFactory.openSession()) {
 			session.beginTransaction();
-			String hql = "SELECT SUM(totalPrice) from Orders "
+			String hql = "SELECT MONTH(orderTime), SUM(totalPrice) from Orders "
 					   + "WHERE YEAR(orderTime) = " + year
-					   + " GROUP BY MONTH(orderTime)";
+					   + " GROUP BY MONTH(orderTime) ORDER BY MONTH(orderTime)";
 			Query query = session.createQuery(hql);
-			List<String> list = query.getResultList();
-			return list;
+			List<Object[]> listResult = query.getResultList();
+			return listResult;
 		}
 	}
 
@@ -123,9 +123,15 @@ public class OrderDAO {
 		}
 	}
 
-	/*
-	 * public Order findById(int id) { Session session =
-	 * this.sessionFactory.openSession(); return session.find(Order.class,
-	 * id); }
-	 */
+	public double findTotalOrderedPricelocationId(int locationId, int userId) {
+		try (Session session = this.sessionFactory.openSession()) {
+			session.beginTransaction();
+			String hql = "SELECT SUM(totalPrice) from Orders "
+					   + "WHERE locationId = " + locationId
+					   + " AND userId = " + userId
+					   + " AND OrderStatusId = 4";
+			return (double) session.createQuery(hql).setMaxResults(1).uniqueResult();
+		}
+	}
+
 }

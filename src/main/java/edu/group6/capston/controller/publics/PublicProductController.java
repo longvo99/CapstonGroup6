@@ -69,8 +69,10 @@ public class PublicProductController {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE,
 					messageSource.getMessage("success", null, Locale.getDefault()));
 			rd.addFlashAttribute("success", true);
-			return "redirect:/public/product/index/"+product.getLocation().getLocationId();
+			return "redirect:/public/product/index/"+ product.getLocation().getLocationId();
 		}
+		
+		System.out.println(product);
 		rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
 		rd.addFlashAttribute("error", true);
 		model.addAttribute("product", product);

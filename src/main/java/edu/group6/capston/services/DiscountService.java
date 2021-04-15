@@ -13,4 +13,5 @@ public interface DiscountService {
 	List<DiscountInfo> findAllByUserId(int userId);
 	DiscountInfo findOne(Integer discountId);
 	int delete(List<Integer> listDiscountId1);
+	List<DiscountInfo> findBylocationId(int locationId);
 }

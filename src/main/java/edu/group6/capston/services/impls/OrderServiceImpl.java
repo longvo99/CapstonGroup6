@@ -68,12 +68,17 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<String> revenueByYear(int year) {
+	public List<Object[]> revenueByYear(int year) {
 		return orderDAO.revenueByYear(year);
 	}
 
 	@Override
 	public double largesttotalPrice(int year) {
 		return orderDAO.largesttotalPrice(year);
+	}
+
+	@Override
+	public double findTotalOrderedPricelocationId(int locationId, int userId) {
+		return orderDAO.findTotalOrderedPricelocationId(locationId, userId);
 	}
 }

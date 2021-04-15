@@ -23,7 +23,11 @@
               <!-- Form Basic -->
               <div class="card mb-4">
                 <div class="card-body">
-                  <form action="${pageContext.request.contextPath}/admin/user/edit" role="form" method="post"  name="form" id="form" enctype="multipart/form-data">
+                  <c:set var="actionUrl" value="${pageContext.request.contextPath}/admin/user/edit" />
+                  <c:if test="${not empty sessionScope.userSession}">
+                  		<c:set var="actionUrl" value="${pageContext.request.contextPath}/user/edit" />
+                  </c:if>
+                  <form action="${actionUrl}" role="form" method="post"  name="form" id="form" enctype="multipart/form-data">
                   	<div class="form-group">
                       <label for="userId">ID</label>
                       <input class="form-control mb-3" type="text" value="${user.userId}" id="userId" name="userId" readonly="readonly">
@@ -48,9 +52,91 @@
                       <input class="form-control mb-3" type="text" value="${user.contactEmail}" id="contactEmail" name="contactEmail" ${readonly}>
                     </div>
                     <div class="form-group">
-                      <label for="contactAddress">Địa chỉ</label>
-                      <input class="form-control mb-3" type="text" value="${user.contactAddress}" id="contactAddress" name="contactAddress" ${readonly}>
+                        <label class="text-light-white fw-700">Số nhà - Tên đường</label>
+                        <input id="address" name="stress" value="${userAddress.stress}" type="text" name="#" class="form-control form-control-submit" >
                     </div>
+                    <div class="form-group">
+                    	<label for="city">Tỉnh/thành</label>
+					   <select name="city" id="country" class="form-control input-lg" ${readonly}>
+					    	<option value="000">-Chọn Tỉnh/Thành:-</option>
+					   </select>
+					</div>
+					<div class="form-group">
+						<label for="district">Quận huyện</label>
+					   <select name="district" id="state" class="form-control input-lg" ${readonly}>
+					    	<option value="000">-Chọn Quận/Huyện-</option>
+					   </select>
+					</div>
+					<div class="form-group">
+						<label for="ward">Xã/phường</label>
+					   <select name="ward" id="city" class="form-control input-lg" ${readonly}>
+					    	<option value="000">-Chọn Phường/Xã-</option>
+					   </select>
+					</div>
+			<script>
+					$(document).ready(function(){
+						  $.getJSON('${pageContext.request.contextPath}/resources/admin/assets/js/data.json', function(data){
+							  var country_id;
+							  var state_id;
+							  $.each(data, function (index, value) {
+								    var city_id;
+								    if('${userAddress.city}' == value.Id){
+								    	$("#country").append('<option selected="selected" rel="' + index + '" value="'+value.Id+'">'+value.Name+'</option>');
+								    } else {
+								    	$("#country").append('<option rel="' + index + '" value="'+value.Id+'">'+value.Name+'</option>');
+								    }
+								   /*  country_id = $("#country").find('option:selected').attr('rel');
+						            console.log("Country INDEX : " + country_id); */
+						            /* $.each(data[country_id].Districts, function (index1, value1) {
+						                 
+						            	if(${location.district} == value1.Id){
+						            		 $("#state").append('<option selected="selected" rel="' + index1 + '" value="'+value1.Id+'">'+value1.Name+'</option>');
+									    } else {
+									    	$("#state").append('<option rel="' + index1 + '" value="'+value1.Id+'">'+value1.Name+'</option>');
+									    }
+						               
+						            });   */
+						            country_id = $("#country").find('option:selected').attr('rel');
+								        $("#country").change(function () {
+								            $("#state, #city").find("option:gt(0)").remove();
+								            $("#state").find("option:first").text("Loading...");
+								            country_id = $(this).find('option:selected').attr('rel');
+								            console.log("Country INDEX : " + country_id);
+								            $.each(data[country_id].Districts, function (index1, value1) {
+								                $("#state").find("option:first").text("-Chọn Quận/Huyện-");
+								                $("#state").append('<option rel="' + index1 + '" value="'+value1.Id+'">'+value1.Name+'</option>');
+								            });
+								            
+								        });
+								        $("#state").change(function () {
+								            $("#city").find("option:gt(0)").remove();
+								            $("#city").find("option:first").text("Loading...");
+								            state_id = $(this).find('option:selected').attr('rel');
+								            console.log("State INDEX : " + state_id);
+								            $.each(data[country_id].Districts[state_id].Wards, function (index2, value2) {
+								                $("#city").find("option:first").text("-Chọn Phường/Xã-");
+								                $("#city").append('<option rel="' + index2 + '" value="'+value2.Id+'">'+value2.Name+'</option>');
+								            });
+								        });     
+								});
+							  $.each(data[country_id].Districts, function (index1, value1) {
+					            	if('${userAddress.district}' == value1.Id){
+					            		 $("#state").append('<option selected="selected" rel="' + index1 + '" value="'+value1.Id+'">'+value1.Name+'</option>');
+								    } else {
+								    	$("#state").append('<option rel="' + index1 + '" value="'+value1.Id+'">'+value1.Name+'</option>');
+								    }
+					            }); 
+							  state_id = $("#state").find('option:selected').attr('rel');
+							  $.each(data[country_id].Districts[state_id].Wards, function (index2, value2) {
+					            	if('${userAddress.ward}' == value2.Id){
+					            		$("#city").append('<option selected="selected" rel="' + index2 + '" value="'+value2.Id+'">'+value2.Name+'</option>');
+								    } else {
+								    	$("#city").append('<option rel="' + index2 + '" value="'+value2.Id+'">'+value2.Name+'</option>');
+								    }
+					            });
+						 });
+						});
+			</script>
                     <div class="form-group">
                       <label for="dateOfBirth1">Ngày sinh</label>
                       <input class="form-control mb-3" type="date" value="${fn:substring(user.dateOfBirth, 0, fn:indexOf(user.dateOfBirth, ' '))}" id="dateOfBirth1" name="dateOfBirth1" ${readonly}>
@@ -66,12 +152,27 @@
 		              			<option value="Nam">Nam</option>
 		              			<option selected="selected" value="Nữ">Nữ</option>
 		              		</c:if>
+		              		<c:choose>
+		              			<c:when test="${user.gender eq 'Nam'}">
+			              			<option selected="selected" value="Nam">Nam</option>
+			              			<option value="Nữ">Nữ</option>
+			              		</c:when>
+			              		<c:when test="${user.gender eq 'Nữ'}">
+			              			<option value="Nam">Nam</option>
+			              			<option selected="selected" value="Nữ">Nữ</option>
+			              		</c:when>
+			              		<c:otherwise>
+			              			<option value="Nam">Nam</option>
+			              			<option selected="selected" value="Nữ">Nữ</option>
+			              		</c:otherwise>
+		              		</c:choose>
 		              </select>
                     </div>
                     <div class="form-group">
                       <label for="description">Mô tả</label>
                       <textarea name="description" id="description" class="form-control mb-3" rows="3">${user.description}</textarea>
                    	</div>
+					<c:if test="${empty sessionScope.userSession}">
 					<div class="custom-control custom-switch">
                       <input type="checkbox" name="checkbox" id="checkbox" class="custom-control-input">
                       <label class="custom-control-label" for="checkbox"><strong>Đổi mật khẩu</strong></label>
@@ -82,6 +183,7 @@
              		  <label for="repassword">Nhập lại mật khẩu</label>
              		  <input class="form-control mb-3" type="password" value="" id="repassword" name="repassword">
            	 	    </div>
+           	 	    </c:if>
                    	<script type="text/javascript">
 						$('#checkbox').change(function(){ 
 						    if(this.checked == true){

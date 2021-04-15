@@ -11,9 +11,11 @@ encoding//src/main/java/edu/group6/capston/controller/admins/CustomLoginFailureH
 encoding//src/main/java/edu/group6/capston/controller/admins/ForgotPasswordController.java=UTF-8
 encoding//src/main/java/edu/group6/capston/controller/auths/LoginController.java=UTF-8
 encoding//src/main/java/edu/group6/capston/controller/publics/PublicAbstractController.java=UTF-8
+encoding//src/main/java/edu/group6/capston/controller/publics/PublicDiscountController.java=UTF-8
 encoding//src/main/java/edu/group6/capston/controller/publics/PublicIndexController.java=UTF-8
 encoding//src/main/java/edu/group6/capston/controller/publics/PublicLocationController.java=UTF-8
 encoding//src/main/java/edu/group6/capston/controller/publics/PublicSearchController.java=UTF-8
+encoding//src/main/java/edu/group6/capston/controller/publics/PublicUserController.java=UTF-8
 encoding//src/main/java/edu/group6/capston/daos/DiscountDAO.java=UTF-8
 encoding//src/main/java/edu/group6/capston/dtos/LocationDTO.java=UTF-8
 encoding//src/main/java/edu/group6/capston/mail/MainApp.java=UTF-8

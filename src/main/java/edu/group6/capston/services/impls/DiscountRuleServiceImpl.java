@@ -21,5 +21,4 @@ public class DiscountRuleServiceImpl implements DiscountRuleService{
 	public List<DiscountRule> findAll() {
 		return discountRuleDAO.findAll();
 	}
-
 }

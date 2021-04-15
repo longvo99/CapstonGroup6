@@ -117,44 +117,89 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <div class="payment-sec">
+                            	<c:if test="${ not empty listDiscount}">
+                                	<div class="payment-sec">
                                      <div class="section-header-left">
                                         <h3 class="text-light-black header-title">Sử dụng mã giảm giá</h3>
                                     </div>
-                                    <div class="card-body no-padding payment-option-tab">
-                                        <div class="form-group">
-                                            <div class="credit-card promocode p-relative input-group">
-                                                <input type="text" name="#" class="form-control-submit fs-18" placeholder="Nhập mã">
-                                                <button type="submit" class="btn-second btn-submit ml-1">Áp dụng</button>
-                                            </div>
-                                        </div>
                                     </div>
-                                    <!-- <div class="driver-tip-sec mb-xl-20">
-	                                    <div class="tab-content">
-	                                        <div class="tab-pane active" id="tipnewcard">
-	                                            <div class="row">
-	                                                <div class="col-md-6">
-	                                                    <div class="tip-percentage">
-	                                                        <form>
-	                                                            <label class="radio-inline text-light-green fw-600">
-												                  <input type="radio" name="tip-percentage" checked> <span>15%</span>
-												                </label>
-	                                                            <label class="radio-inline text-light-green fw-600">
-												                  <input type="radio" name="tip-percentage"> <span>25%</span>
-												                </label>
-	                                                            <label class="radio-inline text-light-green fw-600">
-												                  <input type="radio" name="tip-percentage"> <span>25%</span>
-												                </label>
-	                                                            <label class="radio-inline text-light-green fw-600">
-												                  <input type="radio" name="tip-percentage"> <span>30%</span>
-												                </label>
-	                                                        </form>
-	                                                    </div>
-	                                                </div>
-	                                            </div>
-	                                        </div>
-	                                    </div>
-	                                </div> -->
+                                    <div class="col-lg-12">
+                                    <c:forEach items="${listDiscount}" var="discount">
+	                                     <div class="restaurent-product-list">
+	                                     	
+		                                    <div class="restaurent-product-detail">
+		                    						<div class="restaurent-product-img">
+		                                             <img style="width: 125px; height: 125px;" src="${pageContext.request.contextPath}/resources/admin/assets/img/uploads/${discount.mediaPath}" class="img-fluid" alt="#">
+		                                         </div>
+		                                         <div class="restaurent-product-left">
+		                                             <div class="restaurent-product-title-box">
+		                                                 <div class="restaurent-product-box">
+		                                                 <c:set var="rateDiscountA" value="%"/>
+		                                                 <c:if test="${discount.rateDiscount gt 100}">
+		                                                 	<c:set var="rateDiscountA" value="VNĐ"/>
+		                                                 </c:if>
+		                                                 <div class="restaurent-product-label"> <span class="rectangle-tag bg-gradient-red text-custom-white"><fmt:formatNumber value="${discount.rateDiscount}" type="number"/>${rateDiscountA}</span>
+		                                                         <!-- <span class="rectangle-tag bg-dark text-custom-white">Combo</span> -->
+		                                                     </div>
+		                                                     <div style="margin-left: 10px;" class="restaurent-product-title">
+		                                                         <h6 class="mb-2" data-toggle="modal" data-target="#restaurent-combo">
+		                                                         <a href="javascript:void(0)" class="text-light-black fw-600">Điều kiện:${discount.discountRule.ruleContent} tối thiểu là : ${discount.valueRule}</a></h6>
+		                                                         <!-- <p class="text-light-white">600-700 Cal.</p> -->
+		                                                     </div>
+		                                                 </div>
+		                                                 <div class="restaurent-product-rating">
+		                                                 </div>
+		                                             </div>
+		                                             			 <c:set var="content" value=""/>
+			                                             			 <c:choose>
+			                                             			 	<c:when test = "${discount.value eq 'allproduct'}">
+																	 	 <c:set var="content" value="Tất cả sản phẩm"/>
+																	 </c:when>
+																	 <c:otherwise>
+																	 	 <c:set var="content" value="${fn:substring(discount.value, 8, fn:length(discount.value)-1)}" />
+																	 </c:otherwise>
+		                                             			 </c:choose>
+		                                             <div class="restaurent-product-caption-box"> <span class="text-light-white">Sản phẩm áp dụng:${content}</span>
+		                                             </div>
+		                                             <div class="restaurent-tags-price">
+		                                                 <div class="restaurent-product-price">
+		                                                 	<c:if test="${discount.discountRule.ruleId = 2}">
+		                                                 	<c:choose>
+		                                                 		<c:when test="${totalOrderedPrice >= discount.valueRule}">
+		                                                 			<button onclick="applyDiscount(${discount.rateDiscount})" class="btn btn-primary btn-sm shadow-none">Áp dụng</button>
+		                                                 		</c:when>
+		                                                 		<c:otherwise>
+		                                                 			<button disabled="disabled" class="btn btn-danger btn-sm shadow-none">Áp dụng</button>
+		                                                 		</c:otherwise>
+		                                                 	</c:choose>
+		                                                 	</c:if>
+		                                                    <span>HSD: ${discount.endDate}</span>
+		                                                 </div>
+		                                             </div>
+		                                         </div>
+		                                     </div>
+                                     	</div>
+                                     	</c:forEach>
+                                     </div>
+                                     <script type="text/javascript">
+	                                     function applyDiscount(rateDiscount) {
+	                                 		var totalCart = ${totalCart};
+	                                 		var result = totalCart + (rateDiscount * totalCart)/100;
+	                                 		var formatRateDiscount = '%';
+	                                 		if(rateDiscount > 100){
+	                                 			formatRateDiscount = 'VNĐ';
+	                                 		}
+	                                 		$("#totalCartCheckOut").text(result);
+	                                 		$("#saleRateDiscount").html(
+	                                 				"<span class='text-light-green fw-600'>Giảm giá:</span>"
+	                                                +"<span class='text-light-green fw-600'>-" + rateDiscount + "</span>"	
+	                                 		);
+	                                 		
+	                                 		
+	                                 		
+	                                     }
+                                     </script>
+                                     </c:if>
                                 	<br>                         
                                     <div class="section-header-left">
                                         <h3 class="text-light-black header-title">Thông tin thanh toán</h3>
@@ -229,7 +274,7 @@
                                                             	<a href="#">điều khoản sử dụng</a> và <a href="#">quyền riêng tư</a> của FoodMart
                                                             </p>
                                                         </div>
-                                                        <div class="tab-pane fade" id="paypal">
+                                                        <!-- <div class="tab-pane fade" id="paypal">
                                                             <p class="text-light-black">Please review your order and make any necessary changes before checking out with PayPal.</p>
                                                             <div class="section-header-left">
                                                                 <h3 class="text-light-black header-title">Add a tip for your driver</h3>
@@ -291,7 +336,7 @@
                                                             </div>
                                                             <p class="text-center text-light-black no-margin">By placing your order, you agree to foodmart's <a href="#">terms of use</a> and <a href="#">privacy agreement</a>
                                                             </p>
-                                                        </div>
+                                                        </div> -->
                                                         <!-- <div class="tab-pane fade" id="amexcheckout">
                                                             <div class="card">
                                                                 <div class="card-header"> <a class="card-link fw-500 fs-16" data-toggle="collapse" href="#saveamex">
@@ -423,9 +468,8 @@
                                 </div>
                             </div>
                         </div>
+                    </form>
                     </div>
-                </form>
-                </div>
                 <div class="col-lg-5">
                     <div class="sidebar">
                         <div class="cart-detail-box">
@@ -477,9 +521,8 @@
                                         <div class="total-price border-0 pb-0"> <span class="text-dark-white fw-600">Phí ship:</span>
                                             <span class="text-dark-white fw-600">+ 20,000đ</span>
                                         </div>
-                                         <!-- <div class="total-price border-0 pt-0 pb-0"> <span class="text-light-green fw-600">Giảm giá:</span>
-                                            <span class="text-light-green fw-600">-5,000đ</span>
-                                        </div> -->
+                                        <div id="saleRateDiscount" class="total-price border-0 pt-0 pb-0"> 
+                                        </div>
                                     </div>
                                     </c:if>
                                 </div>
@@ -494,6 +537,8 @@
                         </div>
                     </div>
                 </div>
+                </div>
+                
             </div>
         </div>
     </section>

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import edu.group6.capston.models.DiscountRule;
-import edu.group6.capston.models.Location;
 
 @Repository
 public class DiscountRuleDAO {
@@ -19,6 +18,12 @@ public class DiscountRuleDAO {
 	public List<DiscountRule> findAll() {
 		try (Session session = this.sessionFactory.openSession()) {
 			return session.createQuery("from DiscountRule", DiscountRule.class).list();
+		}
+	}
+
+	public List<DiscountRule> findBylocationId(int locationId) {
+		try (Session session = this.sessionFactory.openSession()) {
+			return session.createQuery("from DiscountRule WHERE locationId = " + locationId, DiscountRule.class).list();
 		}
 	}
 

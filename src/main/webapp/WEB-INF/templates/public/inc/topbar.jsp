@@ -397,7 +397,7 @@ input[type="file"] {
                             <div class="user-details p-relative">
                             <c:choose>
                             	<c:when test="${not empty sessionScope.userSession}">
-                                <a href="#" class="text-light-white fw-500">
+                                <a href="${pageContext.request.contextPath}/user/profile/${sessionScope.userSession.username}" class="text-light-white fw-500">
                                 	<c:set var="avatarPath" value="" />
                                 	<c:choose> 
                                 		<c:when test="${not empty sessionScope.userSession.avatarPath}">

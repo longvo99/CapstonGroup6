@@ -54,6 +54,9 @@
 	                	<a href="${addUrl}" class="btn btn-success btn-md"><i class="fa fa-plus-square"> Thêm </i></a>
 	              </c:if>
 	              </c:if>
+                <c:if test="${not empty sessionScope.userSession}">
+                	<a href="${addUrl}" class="btn btn-success btn-md"><i class="fa fa-plus-square"> Thêm </i></a>
+                </c:if>
                   </div>
                 </div>
                 <div class="table-responsive p-3">

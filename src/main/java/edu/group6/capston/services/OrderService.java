@@ -15,6 +15,7 @@ public interface OrderService {
 	List<Orders> findByUserId(int userId);
 	long newOrderCount();
 	List<Orders> findAllByStatusId(int statusId);
-	List<String> revenueByYear(int year);
+	List<Object[]> revenueByYear(int year);
 	double largesttotalPrice(int year);
+	double findTotalOrderedPricelocationId(int locationId, int userId);
 }

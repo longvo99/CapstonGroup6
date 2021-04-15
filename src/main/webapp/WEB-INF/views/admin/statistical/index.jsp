@@ -30,9 +30,9 @@
                       Chọn năm
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="#">Năm 2019</a>
-                      <a class="dropdown-item" href="#">Năm 2020</a>
-                      <a class="dropdown-item" href="#">Năm 2021</a>
+                      <a class="dropdown-item" href="${pageContext.request.contextPath}/index/2019">Năm 2019</a>
+                      <a class="dropdown-item" href="${pageContext.request.contextPath}/index/2020">Năm 2020</a>
+                      <a class="dropdown-item" href="${pageContext.request.contextPath}/index/2021">Năm 2021</a>
                     </div>
                   </div>
                    <h3><a href="${pageContext.request.contextPath}/admin/statistical/downloadExcel">Download Excel Document</a></h3>
@@ -49,7 +49,7 @@
       <script type="text/javascript">
 window.onload = function() {
 	var totalPriceList = ${totalPriceList};
-	var largesttotalPrice = ${largesttotalPrice}
+	var largesttotalPrice = ${largesttotalPrice};
 	Chart.defaults.global.defaultFontFamily = 'Arial', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 	Chart.defaults.global.defaultFontColor = '#858796';
 	function number_format(number, decimals, dec_point, thousands_sep) {

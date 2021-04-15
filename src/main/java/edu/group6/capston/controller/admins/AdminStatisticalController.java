@@ -1,11 +1,13 @@
 package edu.group6.capston.controller.admins;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,9 +31,22 @@ public class AdminStatisticalController {
 
 	@RequestMapping(value = "/index")
 	public String Index(Model model) {
-		model.addAttribute("totalPriceList", orderService.revenueByYear(2021));
+		List<Object[]> listResult = orderService.revenueByYear(2021);
+		List<String> totalPriceList = new ArrayList<String>();
+		for (int i = 0; i < 12; i++) {
+			totalPriceList.add("0");
+		}
+		if(listResult.size() < 12) {
+			for (int i = 1; i <= 12; i++) {
+				for (Object[] obj : listResult) {
+					if(obj[0].equals(i)) {
+						totalPriceList.set(i-1, String.valueOf(obj[1]));break;
+					} 
+				}
+			}
+		}
+		model.addAttribute("totalPriceList", totalPriceList);
 		model.addAttribute("largesttotalPrice", orderService.largesttotalPrice(2021));
-		System.out.println(orderService.largesttotalPrice(2021));
 		return "admin.statistical.index";
 	}
 
