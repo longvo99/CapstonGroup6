@@ -79,11 +79,11 @@
 							<td>${product.price}</td>
 							<td>${product.productCategory.productCategoryName}</td>
 							<td class="center text-center">
-								<a href="" data-toggle="modal" data-target="#exampleModalCenter${product.productId}" class="btn btn-sm btn-success"><i class="fa fa-edit">Detail</i></a>
+								<a href="" data-toggle="modal" data-target="#exampleModalCenter${product.productId}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="CHI TIẾT"><i class="fas fa-info-circle"></i></a>
 								<c:if test="${empty sessionScope.userSession}">
 								<c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
-			                  		<a href="${editUrl}/${product.productId}" class="btn btn-sm btn-primary"><i class="fa fa-edit">Edit</i></a>
-                                	<a href="${deleteUrl}/${product.productId}" title="Xóa" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Xóa</a>
+			                  		<a href="${editUrl}/${product.productId}" class="btn btn-sm btn-primary" title="SỬA"><i class="fa fa-edit"></i></a>
+                                	<a href="${deleteUrl}/${product.productId}" class="btn btn-sm btn-danger" title="XÓA"><i class="fas fa-trash"></i></a>
 			                  	</c:if>
 			                  	</c:if>
 							</td>

@@ -32,6 +32,7 @@ public class AdminIndexController {
 	public String Index(Model model, HttpServletRequest request) {
 		request.getSession().setAttribute("roleList", roleService.findAll());
 		model.addAttribute("locationCount", locationService.locationCount());
+		model.addAttribute("unapprovedLocationList", locationService.unapprovedLocationList());
 		model.addAttribute("newOrderCount", orderService.newOrderCount());
 		model.addAttribute("newOrderList" , orderService.findAllByStatusId(1));
 		return "admin.index";

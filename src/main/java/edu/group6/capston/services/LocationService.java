@@ -22,4 +22,5 @@ public interface LocationService {
 	List<Location> findAllByCategory(Integer categoryId);
 	List<LocationDTO> searchLocation(String productName);
 	List<Location> findImageLocation();
+	List<Location> unapprovedLocationList();
 }

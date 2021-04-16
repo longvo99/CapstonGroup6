@@ -191,7 +191,7 @@
                     		<c:forEach var="location" items="${locationByUserIdList}" >
                     			<div class="form-check">
 					  				<label class="form-check-label">
-				      					<input type="checkbox" class="checkbox" name="check[]" id="customCheck1" value="${location.locationId}" style="zoom: 1.5;"> ${location.address}
+				      					<input type="checkbox" class="checkbox" name="check[]" value="${location.locationId}" style="zoom: 1.5;"> ${location.address}
 									</label>
 								</div>
                     		</c:forEach>
@@ -220,15 +220,26 @@
 					<c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
 					<div class="form-group">
                     	<label for="" >Chọn cơ sở: (<input type="checkbox" id="select_all"/> Chọn hết:) </label>
+                    	<input class="form-control" id="myInput" type="text" placeholder="Nhập tên cần tìm..">
+                    	<div style="height:200px; overflow-y: scroll; width: 500px; margin-top: 10px;">
+                    	<ul id="myList">
                     	<c:if test="${not empty locationByUserIdList}">
                     		<c:forEach var="location" items="${locationByUserIdList}" >
-                    			<div class="form-check">
-					  				<label class="form-check-label">
-				      					<input type="checkbox" class="checkbox" name="check[]" id="customCheck1" value="${location.locationId}" style="zoom: 1.5;"> ${location.address}
-									</label>
-								</div>
+				      			<li><input type="checkbox" class="checkbox" name="check[]" value="${location.locationId}" style="zoom: 1.5;"> ${location.address}</li>
                     		</c:forEach>
                     	</c:if>
+                    	</ul>
+                    	</div>
+                    	<script>
+							$(document).ready(function(){
+							  $("#myInput").on("keyup", function() {
+							    var value = $(this).val().toLowerCase();
+							    $("#myList li").filter(function() {
+							      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+							    });
+							  });
+							});
+						</script>
                     	<script type="text/javascript">
 						  $("#select_all").change(function(){  //"select all" change 
 							    var status = this.checked; // "select all" checked status

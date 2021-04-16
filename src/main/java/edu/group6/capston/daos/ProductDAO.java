@@ -1,5 +1,6 @@
 package edu.group6.capston.daos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Repository;
 import edu.group6.capston.dtos.LocationDTO;
 import edu.group6.capston.dtos.OrderDTO;
 import edu.group6.capston.dtos.ProductDTO;
+import edu.group6.capston.dtos.ProductDTO2;
 import edu.group6.capston.models.ComboDetail;
 import edu.group6.capston.models.Location;
 import edu.group6.capston.models.Product;
@@ -217,6 +219,45 @@ public class ProductDAO {
 			query.setParameter("list", locationIdList); 
 			@SuppressWarnings("unchecked")
 			List<String> listProducts = query.getResultList();
+			return listProducts;
+		}
+	}
+
+	public List<ProductDTO2> findAllByLocationId(Integer locationId) {
+		List<ProductDTO2> listProducts = new ArrayList<ProductDTO2>();
+		try (Session session = this.sessionFactory.openSession()) {
+			session.beginTransaction();
+			String hql = "select productId, name from Product "
+					+ "where location.locationId = :locationId";
+			@SuppressWarnings("rawtypes")
+			Query query = session.createQuery(hql);
+			query.setParameter("locationId", locationId); 
+			@SuppressWarnings("unchecked")
+			List<Object[]> listObj = query.list();
+			for (Object[] object : listObj) {
+				listProducts.add(new ProductDTO2((int)object[0], (String)object[1]));
+			}
+			return listProducts;
+		}
+	}
+
+	public List<ProductDTO2> findAllByProductComboId(Integer productComboId) {
+		List<ProductDTO2> listProducts = new ArrayList<ProductDTO2>();
+		try (Session session = this.sessionFactory.openSession()) {
+			session.beginTransaction();
+			String hql = "select c.product.productId, c.product.name "
+					+ "from ComboDetail c "
+					+ "inner join c.product "
+					+ "inner join c.productCombo "
+					+ "where c.productCombo.productComboId = :productComboId";
+			@SuppressWarnings("rawtypes")
+			Query query = session.createQuery(hql);
+			query.setParameter("productComboId", productComboId); 
+			@SuppressWarnings("unchecked")
+			List<Object[]> listObj = query.list();
+			for (Object[] object : listObj) {
+				listProducts.add(new ProductDTO2((int)object[0], (String)object[1]));
+			}
 			return listProducts;
 		}
 	}

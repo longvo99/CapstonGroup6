@@ -230,4 +230,10 @@ public class LocationDAO {
 		session.close();
 		return locationList;
 	}
+
+	public List<Location> unapprovedLocationList() {
+		try (Session session = this.sessionFactory.openSession()) {
+			return session.createQuery("FROM Location WHERE status = false", Location.class).list();
+		}
+	}
 }

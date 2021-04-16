@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import edu.group6.capston.daos.ComboDetailDAO;
 import edu.group6.capston.dtos.ComboDetailDTO;
+import edu.group6.capston.models.ComboDetail;
 import edu.group6.capston.services.ComboDetailService;
 
 @Service
@@ -23,6 +24,22 @@ public class ComboDetailServiceImpl implements ComboDetailService {
 	public List<ComboDetailDTO> findProductInComboLocation(int locationId) {
 		// TODO Auto-generated method stub
 		return comboDetailDAO.findProductInComboLocation(locationId);
+	}
+
+	@Override
+	public boolean delete(ComboDetailService comboDetailService) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void delete(Integer productComboId) {
+		comboDetailDAO.delete(productComboId);
+	}
+
+	@Override
+	public void save(ComboDetail comboDetail) {
+		comboDetailDAO.save(comboDetail);
 	}
 	
 }

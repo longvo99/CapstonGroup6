@@ -29,23 +29,27 @@
                 <div class="card-body">
                   <form role="form" method="post"  name="form" id="form" enctype="multipart/form-data">
                   	<div class="form-group">
-                      <label for="locationName">Location Name</label>
+                      <label for="locationName">Tên địa điểm</label>
                       <input class="form-control mb-3" type="text" value="" id="locationName" name="locationName">
                     </div>
                     <div class="form-group">
-                      <label for="address">Address</label>
+                      <label for="address">Địa chỉ</label>
                       <input class="form-control mb-3" type="text" value="" id="address" name="address">
                     </div>
                     <div class="form-group">
-                      <label for="openTime">Open Time</label>
+                      <label for="openTime">Giờ mở cửa</label>
                       <input class="form-control mb-3" type="time" value="" id="openTime" name="openTime">
                     </div>
                     <div class="form-group">
-                      <label for="closeTime">Close Time</label>
+                      <label for="closeTime">Giờ đóng cửa</label>
                       <input class="form-control mb-3" type="time" value="" id="closeTime" name="closeTime">
                     </div>
                     <div class="form-group">
-                      <label for="locationcategory">Location Category</label>
+                    	<label for="description">Mô tả</label>
+						<textarea class="form-control mb-10" id="description" rows="5" name="description" placeholder="Nội dung" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nội dung'"></textarea>
+					</div>
+                    <div class="form-group">
+                      <label for="locationcategory">Danh mục địa điểm</label>
                       <select class="form-control" id="locationcategory" name="locationCategory.categoryId">
 	                      <c:if test="${not empty locationCategoriesList1}">
 	                      	<c:forEach items="${locationCategoriesList1}" var="cat1">
@@ -61,7 +65,7 @@
                       </select>
                     </div>
                     <div class="form-group">
-                      <label for="locationtype">Location Type</label>
+                      <label for="locationtype">Kiểu địa điểm</label>
                       <select class="form-control" id="locationType" name="locationType.locationTypeId">
                       <c:if test="${not empty locationTypeList}">
                       	<c:forEach items="${locationTypeList}" var="type">
@@ -204,7 +208,7 @@
 	                  <input type="file" name="picture" />
                     </div> -->
                     <div class="input-field">
-				        <label class="active">Photos</label>
+				        <label class="active">Hình ảnh</label>
 				        <div class="input-images" style="padding-top: .5rem;"></div>
 				    </div>
 				    <script type="text/javascript">
@@ -243,6 +247,9 @@ $.validator.addMethod("valueNotEquals", function(value, element, arg){
 				closeTime: {                      
 					required:true,
 				},
+				description: {                      
+					required:true,
+				},
 				city: {                      
 					valueNotEquals: "000",
 				},
@@ -264,6 +271,9 @@ $.validator.addMethod("valueNotEquals", function(value, element, arg){
 					required: " (Mời nhập)",
 				},
 				closeTime: {
+					required: " (Mời nhập)",
+				},
+				description: {                      
 					required: " (Mời nhập)",
 				},
 				city: {
