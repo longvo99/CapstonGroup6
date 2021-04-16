@@ -136,7 +136,6 @@ public class PublicOrderController extends PublicAbstractController {
 		Users user = (Users) request.getSession().getAttribute("userSession");
 		String productId = request.getParameter("aProductId");
 		String nameCookie = productId + "-" + user.getUsername();
-		System.out.println("namecookie " + nameCookie);
 		// delete cookie
 		Cookie cookieDel = new Cookie(nameCookie, "");
 		cookieDel.setMaxAge(0);
@@ -302,7 +301,6 @@ public class PublicOrderController extends PublicAbstractController {
 		}
 		//set free ship 
 		totalCart += 20000;
-		System.out.println(totalCart + "-------------------");
 		Orders order = new Orders(0, GlobalsFunction.getCurrentTime(), new OrderStatus(1, ""), user, totalCart,
 				userAddress.getNote(), "", GlobalsConstant.priceShip, GlobalsFunction.AddressUser(userAddress),
 				new Location(listOrderDTO.get(0).getLocationId()));
