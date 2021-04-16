@@ -52,13 +52,21 @@ public class DiscountInfo {
 	@ManyToOne
 	@JoinColumn(name = "locationId")
 	private Location location;
+	
 	public DiscountInfo(int discountId, int limitedPerUser) {
 		super();
 		this.discountId = discountId;
 		this.limitedPerUser = limitedPerUser;
 	}
+	
 	public DiscountInfo(int discountId) {
 		super();
 		this.discountId = discountId;
+	}
+	
+	public DiscountInfo(String title, int locationId) {
+		super();
+		this.title = title;
+		this.location = new Location(locationId);
 	}
 }

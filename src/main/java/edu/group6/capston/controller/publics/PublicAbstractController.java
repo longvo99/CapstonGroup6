@@ -58,6 +58,7 @@ public abstract class PublicAbstractController  {
 							product.setPrice(GlobalsFunction.totalPriceCombo(product.getPrice(), product.getRateDiscount()));
 						}else {
 							product = productService.findByProductIdOrder(Integer.valueOf(productId));
+							product.setPrice(GlobalsFunction.totalPriceCombo(product.getPrice(), product.getRateDiscount()));
 						}
 						double total = product.getPrice() * Integer.valueOf(cookie.getValue());
 						OrderDTO order = new OrderDTO(user.getUserId(), productId , product.getName(), product.getPrice(),

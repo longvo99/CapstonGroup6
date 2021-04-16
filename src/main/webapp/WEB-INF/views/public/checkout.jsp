@@ -281,7 +281,7 @@
 	                                                <a href="javascript:void(0)" onclick="deleteCookieOrder('${orderDTO.productId}')" class="text-dark-white"> <i class="far fa-trash-alt"></i>
 	                                                </a>
 	                                            </div>
-	                                            <div class="price"> <a href="#" id="totalPriceProduct${orderDTO.productId}" class="text-dark-white fw-500">${orderDTO.quantity * orderDTO.price}</a>
+	                                            <div class="price"> <a href="#" id="totalPriceProduct${orderDTO.productId}" class="text-dark-white fw-500"><fmt:formatNumber value="${orderDTO.quantity * orderDTO.price}" type="number"/></a>
 	                                            </div>
 	                                        </div>
                                             </c:forEach>
@@ -306,7 +306,7 @@
                                 <c:if test="${not empty listOrderDTO}">
                                 <div class="card-footer p-0 modify-order">
                                     <div class="total-amount"> <span class="text-custom-white fw-700">TỔNG:</span>
-                                        <span id="totalCartCheckOut" class="text-custom-white fw-700" >${totalCart + 20000}</span>
+                                        <span id="totalCartCheckOut" class="text-custom-white fw-700" ><fmt:formatNumber value="${totalCart + 20000}" type="number"/></span>
                                     </div>
                                 </div>
                                 </c:if>
@@ -337,7 +337,6 @@ function plusQuantity(productId, price) {
    	var totalCartCurr = $("#totalCartCheckOut").text();
    	var totalCartResult = parseInt(price) + parseInt(totalCartCurr);
    	$("#totalPriceProduct" + productId).text(total);
-   	$("#totalCartCheckOut").text(totalCartResult);
    	$.ajax({
 		type : "GET",
 		contentType : "application/json",
@@ -358,7 +357,7 @@ function plusQuantity(productId, price) {
 	                 +"<div class='delete-btn'>"
 	                     +"<a href='javascript:void(0)' onclick='deleteCookieOrder("+ val.productId +")' class='text-dark-white'> <i class='far fa-trash-alt'></i></a>"
 	                 +"</div>"
-	                 +"<div class='price'> <a href='#' class='text-dark-white fw-500'>"+ val.price +"</a></div>"
+	                 +"<div class='price'> <a href='#' class='text-dark-white fw-500'>"+ val.price + "</a></div>"
 	             +"</div>"
 	             totalPriceDTO += parseInt(val.price);
 			 });
@@ -367,6 +366,7 @@ function plusQuantity(productId, price) {
 			 $("#totalPriceDTO").text(totalPriceDTO);
 			 $("#totalPriceDTOTopBar").text(totalPriceDTO);
 			 $("#sizeCart").text(sizeCart);
+			 $("#totalCartCheckOut").text(parseInt(totalPriceDTO) + 20000);
 		  }
   	});
 }
@@ -377,16 +377,17 @@ function minusQuantity(productId, price) {
 	var totalCartCurr = $("#totalCartCheckOut").text();
 	var totalCartResult = parseInt(totalCartCurr) - parseInt(price);
 	if(quantity != 1){
-	$("#totalPriceProduct" + productId).text(total);              			    		
+		quantity = parseInt(quantity) - 1
+		$("#totalPriceProduct" + productId).text(total);              			    		
 	}else{
-	$("#totalPriceProduct" + productId).text(price);
+		quantity = 1;
+		$("#totalPriceProduct" + productId).text(price);
 	}
-	$("#totalCartCheckOut").text(totalCartResult);
 	$.ajax({
 		type : "GET",
 		contentType : "application/json",
 		url : "${pageContext.request.contextPath}/public/addCartAjax",
-		data : {'aProductId': productId, 'aQuantity': parseInt(quantity) - 1 },
+		data : {'aProductId': productId, 'aQuantity': quantity },
 		success: function (data) {
 			var html_code = '';
 			var totalPriceDTO = 0;
@@ -402,7 +403,7 @@ function minusQuantity(productId, price) {
 	                 +"<div class='delete-btn'>"
 	                     +"<a href='javascript:void(0)' onclick='deleteCookieOrder("+ val.productId +")' class='text-dark-white'> <i class='far fa-trash-alt'></i></a>"
 	                 +"</div>"
-	                 +"<div class='price'> <a href='#' class='text-dark-white fw-500'>"+ val.price +"</a></div>"
+	                 +"<div class='price'> <a href='#' class='text-dark-white fw-500'>" + val.price + "</a></div>"
 	             +"</div>"
 	             totalPriceDTO += parseInt(val.price);
 			 });
@@ -411,6 +412,7 @@ function minusQuantity(productId, price) {
 			 $("#totalPriceDTO").text(totalPriceDTO);
 			 $("#totalPriceDTOTopBar").text(totalPriceDTO);
 			 $("#sizeCart").text(sizeCart);
+			 $("#totalCartCheckOut").text(parseInt(totalPriceDTO) + 20000);
 		  }
   	});
 }

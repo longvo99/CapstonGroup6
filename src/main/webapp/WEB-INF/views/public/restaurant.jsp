@@ -403,7 +403,7 @@
                                                                       </span>
                                                                 </div> 
                                                                 <div class="restaurent-product-price">
-                                                                    <h6 class="text-success fw-600 no-margin">${product.price} VNĐ</h6>
+                                                                    <h6 class="text-success fw-600 no-margin"><fmt:formatNumber value="${product.price}" type="number" /> VNĐ</h6>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -528,7 +528,7 @@
                                                         <a href="javascript:void(0)" onclick="deleteCookieOrder('${orderDTO.productId}')" class="text-dark-white"> <i class="far fa-trash-alt"></i>
                                                         </a>
                                                     </div>
-                                                    <div class="price"> <a href="#" class="text-dark-white fw-500">${orderDTO.quantity * orderDTO.price}</a>
+                                                    <div class="price"> <a href="#" class="text-dark-white fw-500"><fmt:formatNumber value="${orderDTO.quantity * orderDTO.price}" type="number" /></a>
                                                     </div>
                                                 </div>
                                                 </c:forEach>
@@ -543,7 +543,7 @@
                                     <c:if test="${not empty totalCart}">
                                     <div style="height:100%;" class="item-total">
                                         <div class="total-price border-0"> <span class="text-dark-white fw-700">Tổng tiền:</span>
-                                            <span id="totalPriceDTO" class="text-dark-white fw-700">${totalCart}</span>
+                                            <span id="totalPriceDTO" class="text-dark-white fw-700"><fmt:formatNumber value="${totalCart}" type="number" /></span>
                                         </div>
                                     </div>
                                     </c:if>
@@ -1196,7 +1196,7 @@
                 </div>
                 <div class="name padding-10">
                     <h3 class="text-light-black fw-700 mb-2">${product.name}</h3>
-                    <h5 class="text-light-black fw-600 no-margin">${product.price}VNĐ</h5>
+                    <h5 class="text-light-black fw-600 no-margin"><fmt:formatNumber value="${product.price}" type="number" />VNĐ</h5>
                 </div>
                 <div class="u-line">
                     <div class="product-quantity padding-10"> <span class="text-light-black fw-700 fs-16">Quantity</span>
@@ -1209,7 +1209,7 @@
                                 <button class="plus-btn product${product.productId}" type="button" name="button"><i class="fas fa-plus"></i></button>
                             </div>
                             <div class="input-group-prepend">
-                            	<button class="btn-second btn-submit"><span id="totalPriceProduct${product.productId}">${product.price}</span>VNĐ</button>
+                            	<button class="btn-second btn-submit"><span id="totalPriceProduct${product.productId}"><fmt:formatNumber value="${product.price}" type="number" /></span>VNĐ</button>
                             </div>
                         </div>
                         <script type="text/javascript">

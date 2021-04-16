@@ -94,6 +94,7 @@ public class PublicOrderController extends PublicAbstractController {
 			product.setPrice(GlobalsFunction.totalPriceCombo(product.getPrice(), product.getRateDiscount()));
 		} else {
 			product = productService.findByProductIdOrder(Integer.valueOf(productId));
+			product.setPrice(product.getPrice() * Integer.valueOf(quantity));
 		}
 		OrderDTO order1 = new OrderDTO(user.getUserId(), productId, product.getName(), product.getPrice(),
 				Integer.valueOf(quantity), product.getLocationId());
@@ -157,6 +158,8 @@ public class PublicOrderController extends PublicAbstractController {
 								GlobalsFunction.totalPriceCombo(product.getPrice(), product.getRateDiscount()));
 					} else {
 						product = productService.findByProductIdOrder(Integer.valueOf(productId));
+						product.setPrice(
+								GlobalsFunction.totalPriceCombo(product.getPrice(), product.getRateDiscount()));
 					}
 					order = new OrderDTO(user.getUserId(), productId, product.getName(), product.getPrice(),
 							Integer.valueOf(cookie.getValue()), product.getLocationId());
@@ -188,6 +191,8 @@ public class PublicOrderController extends PublicAbstractController {
 									GlobalsFunction.totalPriceCombo(product.getPrice(), product.getRateDiscount()));
 						} else {
 							product = productService.findByProductIdOrder(Integer.valueOf(productId));
+							product.setPrice(
+									GlobalsFunction.totalPriceCombo(product.getPrice(), product.getRateDiscount()));
 						}
 						double total = product.getPrice() * Integer.valueOf(cookie.getValue());
 						OrderDTO order = new OrderDTO(user.getUserId(), productId, product.getName(),
@@ -272,6 +277,8 @@ public class PublicOrderController extends PublicAbstractController {
 						}
 					} else {
 						product = productService.findByProductIdOrder(Integer.valueOf(productId));
+						product.setPrice(
+								GlobalsFunction.totalPriceCombo(product.getPrice(), product.getRateDiscount()));
 					}
 					double total = 0;
 					if(!cookie.getName().contains("Discount-" + user.getUsername())) {
@@ -293,7 +300,9 @@ public class PublicOrderController extends PublicAbstractController {
 		}else {
 			totalCart -= ((totalCart * rateDiscount) / 100);
 		}
-		
+		//set free ship 
+		totalCart += 20000;
+		System.out.println(totalCart + "-------------------");
 		Orders order = new Orders(0, GlobalsFunction.getCurrentTime(), new OrderStatus(1, ""), user, totalCart,
 				userAddress.getNote(), "", GlobalsConstant.priceShip, GlobalsFunction.AddressUser(userAddress),
 				new Location(listOrderDTO.get(0).getLocationId()));

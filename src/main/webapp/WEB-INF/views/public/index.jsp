@@ -144,13 +144,14 @@
 										<div class="price-time">
 											<span class="text-light-black time">
 												${locationDiscountTop.openTime}-${locationDiscountTop.closeTime}</span>
-											<c:set var="minMaxPrice" value="--.--"/>
+												<c:set var="minMaxPrice" value="--.--" />
 												<c:forEach items="${minMaxLocation}" var="minMax">
 													<c:if test="${minMax.locationId == locationDiscountTop.locationId}">
-														<c:set var="minMaxPrice" value="${minMax.minPrice}VNĐ - ${minMax.maxPrice}VNĐ"/>
+														<span class="text-light-white price"><fmt:formatNumber value="${minMax.minPrice}" type="number" />VNĐ - <fmt:formatNumber value="${minMax.maxPrice}" type="number"/>VNĐ</span>
+														<c:set var="minMaxPrice" value="" />
 													</c:if>
-											</c:forEach>
-											<span class="text-light-white price">${minMaxPrice}</span>
+												</c:forEach>
+												<span class="text-light-white price">${minMaxPrice}</span>
 										</div>
 										<div class="rating">
 											<!-- <span> <i class="fas fa-star text-yellow"></i> <i
@@ -280,12 +281,13 @@
 										<div class="price-time">
 											<span class="text-light-black time">
 												${location.openTime}-${location.closeTime}</span> 
-												<c:set var="minMaxPrice" value="--.--"/>
+												<c:set var="minMaxPrice" value="--.--" />
 												<c:forEach items="${minMaxLocation}" var="minMax">
 													<c:if test="${minMax.locationId == location.locationId}">
-														<c:set var="minMaxPrice" value="${minMax.minPrice}VNĐ - ${minMax.maxPrice}VNĐ"/>
+														<span class="text-light-white price"><fmt:formatNumber value="${minMax.minPrice}" type="number" />VNĐ - <fmt:formatNumber value="${minMax.maxPrice}" type="number"/>VNĐ</span>
+														<c:set var="minMaxPrice" value="" />
 													</c:if>
-											</c:forEach>
+												</c:forEach>
 											<span class="text-light-white price">${minMaxPrice}</span>
 										</div>
 										<div class="rating">
@@ -396,13 +398,15 @@
 
 													<div class="price-time">
 														<span class="text-light-black time">${locationFavorite.location.openTime}-${locationFavorite.location.closeTime}</span>
-														<c:set var="minMaxPrice" value="--.--"/>
+														<c:set var="minMaxPrice" value="--.--" />
 														<c:forEach items="${minMaxLocation}" var="minMax">
 															<c:if test="${minMax.locationId == locationFavorite.location.locationId}">
-																<c:set var="minMaxPrice" value="${minMax.minPrice}VNĐ - ${minMax.maxPrice}VNĐ"/>
+																<span class="text-light-white price"><fmt:formatNumber value="${minMax.minPrice}" type="number" />VNĐ - <fmt:formatNumber value="${minMax.maxPrice}" type="number"/>VNĐ</span>
+																<c:set var="minMaxPrice" value="" />
 															</c:if>
 														</c:forEach>
 														<span class="text-light-white price">${minMaxPrice}</span>
+													<span class="text-light-white price">${minMaxPrice}</span>
 													</div>
 													<div class="rating">
 														<!-- <span> <i class="fas fa-star text-yellow"></i> <i

@@ -277,9 +277,9 @@
 		                 +"<div class='delete-btn'>"
 		                     +"<a href='javascript:void(0)' onclick=deleteCookieOrder('" + val.productId + "') class='text-dark-white'> <i class='far fa-trash-alt'></i></a>"
 		                 +"</div>"
-		                 +"<div class='price'> <a href='#' class='text-dark-white fw-500'>"+ (parseInt(val.price) * parseInt(val.quantity)) +"</a></div>"
+		                 +"<div class='price'> <a href='#' class='text-dark-white fw-500'>"+ parseInt(val.price) +"</a></div>"
 		             +"</div>"
-		             totalPriceDTO += (parseInt(val.price) * parseInt(val.quantity));
+		             totalPriceDTO += parseInt(val.price);
 				 });
 				 $("#cat-product-box").html(html_code);
 				 $("#cat-product-box-topbar").html(html_code);

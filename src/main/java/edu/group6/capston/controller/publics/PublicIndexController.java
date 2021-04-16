@@ -84,7 +84,7 @@ public class PublicIndexController extends PublicAbstractController {
 	@GetMapping("/index")
 	public String index(Model model, HttpServletRequest request) {
 		model.addAttribute("locationTypeList", locationTypeService.findAll());
-		model.addAttribute("DiscountList", discountService.findAll());
+		model.addAttribute("DiscountList", discountService.findLocationIdOnDiscount());
 		model.addAttribute("ratingList", ratingService.findAllRatingLocation());
 		model.addAttribute("minMaxLocation", productService.findMinMaxPriceLocation());
 		model.addAttribute("DiscountTopList", discountService.findTopNewDiscountInfo());

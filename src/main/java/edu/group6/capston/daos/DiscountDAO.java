@@ -15,7 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import edu.group6.capston.models.DiscountInfo;
-import edu.group6.capston.models.DiscountLimitedUse;;
+import edu.group6.capston.models.DiscountLimitedUse;
+import edu.group6.capston.models.Location;;
 
 @Repository
 public class DiscountDAO {
@@ -28,6 +29,22 @@ public class DiscountDAO {
 			List<DiscountInfo> list = session.createQuery("from DiscountInfo", DiscountInfo.class).list();
 			return list;
 		}
+	}
+	
+	public List<DiscountInfo> findLocationIdOnDiscount() {
+		List<DiscountInfo> locationList = null;
+		Session session = this.sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<DiscountInfo> query = builder.createQuery(DiscountInfo.class);
+		Root<DiscountInfo> root = query.from(DiscountInfo.class);
+		query.multiselect(root.get("title"),
+				root.get("location").get("locationId"));
+		query.distinct(true);
+		locationList = session.createQuery(query).getResultList();
+		transaction.commit();
+		session.close();
+		return locationList;
 	}
 	
 	public boolean save(DiscountInfo discountInfo) {
@@ -103,7 +120,7 @@ public class DiscountDAO {
 
 	public List<DiscountInfo> findBylocationId(int locationId) {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("FROM DiscountInfo WHERE locationId = " + locationId + " AND limitedPerUser > 0 AND GETDATE() < Convert(datetime, endDate)", DiscountInfo.class).list();
+			return session.createQuery("FROM DiscountInfo WHERE locationId = " + locationId + " AND limitedPerUser > 0 AND Convert(date, getdate()) <= Convert(date, endDate)", DiscountInfo.class).list();
 		}
 	}
 

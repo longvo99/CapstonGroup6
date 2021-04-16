@@ -124,13 +124,12 @@ public class LocationDAO {
 		Root<DiscountInfo> root = query.from(DiscountInfo.class);
 		root.join("location", JoinType.INNER);
 		query.distinct(true);
-		query.multiselect(root.get("discountId"), root.get("location").get("locationId"),
+		query.multiselect(root.get("location").get("locationId"),
 				root.get("location").get("locationName"), root.get("location").get("openTime"),
 				root.get("location").get("closeTime"), root.get("location").get("reviewCount"),
 				root.get("location").get("locationCategory").get("locationCategoryName"),
 				root.get("location").get("locationType").get("locationTypeName"),
 				root.get("location").get("mediaPath"));
-		query.orderBy(builder.desc(root.get("discountId")));
 		locationList = session.createQuery(query).setMaxResults(6).getResultList();
 		transaction.commit();
 		session.close();

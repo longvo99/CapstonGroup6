@@ -94,4 +94,9 @@ public class DiscountServiceImpl implements DiscountService {
 	public List<DiscountLimitedUse> findDiscountLimitedUseByLocationId(int locationId, int userId) {
 		return discountDAO.findDiscountLimitedUseByLocationId(locationId, userId);
 	}
+
+	@Override
+	public List<DiscountInfo> findLocationIdOnDiscount() {
+		return discountDAO.findLocationIdOnDiscount();
+	}
 }

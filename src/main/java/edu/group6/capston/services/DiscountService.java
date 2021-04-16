@@ -7,6 +7,7 @@ import edu.group6.capston.models.DiscountLimitedUse;
 
 public interface DiscountService {
 	List<DiscountInfo> findAll();
+	List<DiscountInfo> findLocationIdOnDiscount();
 	boolean save(DiscountInfo discountInfo);
 	boolean update(DiscountInfo discount);
 	boolean delete(Integer id);
