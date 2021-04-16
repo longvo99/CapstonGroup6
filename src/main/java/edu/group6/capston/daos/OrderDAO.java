@@ -130,7 +130,11 @@ public class OrderDAO {
 					   + "WHERE locationId = " + locationId
 					   + " AND userId = " + userId
 					   + " AND OrderStatusId = 4";
-			return (double) session.createQuery(hql).setMaxResults(1).uniqueResult();
+			double result = 0;
+			if(session.createQuery(hql).setMaxResults(1).uniqueResult() != null) {
+				result = (double) session.createQuery(hql).setMaxResults(1).uniqueResult();
+			}
+			return result;
 		}
 	}
 
