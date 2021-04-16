@@ -138,38 +138,28 @@
             <div class="col-xl-4 col-lg-5 ">
               <div class="card">
                 <div class="card-header py-4 bg-primary d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-light">Địa điểm mới chưa duyệt</h6>
+				  <c:set value="0" var="count" ></c:set>	                 
+                  <c:if test="${not empty unapprovedLocationList}">
+                  	<c:set value="${unapprovedLocationList.size()}" var="count" ></c:set>
+                  </c:if>
+                  <h6 class="m-0 font-weight-bold text-light">Địa điểm mới chưa duyệt (${count})</h6>
                 </div>
-                <div>
-                  <div class="customer-message align-items-center">
-                    <a class="font-weight-bold" href="#">
-                      <div class="text-truncate message-title">Nhà Hàng A</div>
-                      <div class="small text-gray-500 message-time font-weight-bold">03 - Lê Đại Hành</div>
-                    </a>
-                  </div>
-                  <div class="customer-message align-items-center">
-                    <a href="#">
-                      <div class="text-truncate message-title">Nhà Hàng B</div>
-                      <div class="small text-gray-500 message-time">05 - Lê Đại Hành</div>
-                    </a>
-                  </div>
-                  <div class="customer-message align-items-center">
-                    <a class="font-weight-bold" href="#">
-                      <div class="text-truncate message-title">Nhà Hàng C</div>
-                      <div class="small text-gray-500 message-time font-weight-bold">05 - Lê Lợi</div>
-                    </a>
-                  </div>
-                  <div class="customer-message align-items-center">
-                    <a class="font-weight-bold" href="#">
-                      <div class="text-truncate message-title">Nhà Hàng D
-                      </div>
-                      <div class="small text-gray-500 message-time font-weight-bold">20 - Nguyễn Hoàng</div>
-                    </a>
-                  </div>
-                  <div class="card-footer text-center">
-                    <a class="m-0 small text-primary card-link" href="#">Xem thêm<i
-                        class="fas fa-chevron-right"></i></a>
-                  </div>
+                <div style="height:350px; overflow-y: scroll;">
+                <c:if test="${not empty unapprovedLocationList}">
+                	<c:forEach var="location" items="${unapprovedLocationList}">
+                		 <div class="customer-message align-items-center">
+		                    <a class="font-weight-bold" href="${pageContext.request.contextPath}/admin/location/edit/${location.locationId}">
+		                      <div class="text-truncate message-title">${location.locationName}</div>
+		                      <div class="small text-gray-500 message-time font-weight-bold">${location.address}</div>
+		                    </a>
+		                  </div>
+                	</c:forEach>
+                </c:if>
+                <c:if test="${empty unapprovedLocationList}">
+                		 <div class="text-center">
+		                    Chưa có địa điểm nào!
+		                  </div>
+                </c:if>
                 </div>
               </div>
             </div>

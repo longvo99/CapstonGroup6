@@ -9,6 +9,7 @@ import edu.group6.capston.daos.ProductDAO;
 import edu.group6.capston.dtos.LocationDTO;
 import edu.group6.capston.dtos.OrderDTO;
 import edu.group6.capston.dtos.ProductDTO;
+import edu.group6.capston.dtos.ProductDTO2;
 import edu.group6.capston.models.Product;
 import edu.group6.capston.services.ProductService;
 
@@ -82,5 +83,15 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<String> searchProductNameByLocationId(List<Integer> locationIdList) {
 		return ProductDAO.searchProductNameByLocationId(locationIdList);
+	}
+
+	@Override
+	public List<ProductDTO2> findAllByLocationId(Integer locationId) {
+		return ProductDAO.findAllByLocationId(locationId);
+	}
+
+	@Override
+	public List<ProductDTO2> findAllByProductComboId(Integer productComboId) {
+		return ProductDAO.findAllByProductComboId(productComboId);
 	}
 }

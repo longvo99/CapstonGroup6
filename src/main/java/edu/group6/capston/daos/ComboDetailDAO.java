@@ -10,6 +10,7 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -67,5 +68,28 @@ public class ComboDetailDAO{
 		transaction.commit();
 		session.close();
 		return locationList;
+	}
+
+	public void delete(Integer productComboId) {
+		try (Session session = this.sessionFactory.openSession()) {
+			Transaction tx  = session.beginTransaction();
+			@SuppressWarnings("rawtypes")
+			Query query = session.createQuery("DELETE FROM ComboDetail WHERE productCombo.productComboId = :productComboId");
+			query.setParameter("productComboId", productComboId); 
+			query.executeUpdate();
+			tx.commit();
+		}
+	}
+
+	public void save(ComboDetail comboDetail) {
+		Session session = this.sessionFactory.openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			session.persist(comboDetail);
+			tx.commit();
+			session.close();
+		} catch (Exception e) {
+		}
 	}
 }

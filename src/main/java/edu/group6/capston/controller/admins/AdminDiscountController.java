@@ -133,10 +133,8 @@ public class AdminDiscountController {
 		 * "product": String productName = request.getParameter("productName").trim();
 		 * discountInfo.setValue("product:".concat(productName)); break; } ; }
 		 */
-		if (condition != null) {
 			discountInfo.setDiscountRule(new DiscountRule(Integer.parseInt(request.getParameter("discountRule1"))));
 			discountInfo.setValueRule(Integer.parseInt(request.getParameter("valueRule1")));
-		}
 		if (!GlobalsFunction.getUsers().getRole().getRoleId().equals("ADMIN")) {
 			List<DiscountInfo> list1 = new ArrayList<>();
 			DiscountInfo obj = null;
@@ -212,26 +210,17 @@ public class AdminDiscountController {
 			}
 			;
 		}
-		if (!GlobalsFunction.getUsers().getRole().getRoleId().equals("ADMIN")) {
-			switch (request.getParameter("optradio")) {
-			case "allproduct":
-				discountInfo.setValue("allproduct");
-				break;
-			case "category":
-				String categoryName = request.getParameter("categoryName").trim();
-				discountInfo.setValue("category:".concat(categoryName));
-				break;
-			case "product":
-				String productName = request.getParameter("productName").trim();
-				discountInfo.setValue("product:".concat(productName));
-				break;
-			}
-			;
-		}
-		if (condition != null) {
+		/*
+		 * if (!GlobalsFunction.getUsers().getRole().getRoleId().equals("ADMIN")) {
+		 * switch (request.getParameter("optradio")) { case "allproduct":
+		 * discountInfo.setValue("allproduct"); break; case "category": String
+		 * categoryName = request.getParameter("categoryName").trim();
+		 * discountInfo.setValue("category:".concat(categoryName)); break; case
+		 * "product": String productName = request.getParameter("productName").trim();
+		 * discountInfo.setValue("product:".concat(productName)); break; } ; }
+		 */
 			discountInfo.setDiscountRule(new DiscountRule(Integer.parseInt(request.getParameter("discountRule1"))));
 			discountInfo.setValueRule(Integer.parseInt(request.getParameter("valueRule1")));
-		}
 		if (!GlobalsFunction.getUsers().getRole().getRoleId().equals("ADMIN")) {
 			int locationId = Integer.valueOf(request.getParameter("locati"));
 			discountInfo.setLocation(new Location(locationId));

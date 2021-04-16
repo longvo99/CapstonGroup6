@@ -45,27 +45,31 @@
                   </c:if>
                   </c:if>
                   	<div class="form-group">
-                      <label for="name">Location ID</label>
+                      <label for="name">ID</label>
                       <input class="form-control mb-3" type="text" value="${location.locationId}" id="locationId" name="locationId" readonly="readonly">
                     </div>
                   	<div class="form-group">
-                      <label for="name">Location Name</label>
+                      <label for="name">Tên địa điểm</label>
                       <input class="form-control mb-3" type="text" value="${location.locationName}" id="locationName" name="locationName" ${readonly}>
                     </div>
                     <div class="form-group">
-                      <label for="address">Address</label>
+                      <label for="address">Địa chỉ</label>
                       <input class="form-control mb-3" type="text" value="${location.address}" id="address" name="address" ${readonly}>
                     </div>
                     <div class="form-group">
-                      <label for="opentime">Open Time</label>
+                      <label for="opentime">Giờ mở cửa</label>
                       <input class="form-control mb-3" type="time" value="${location.openTime}" id="openTime" name="openTime" ${readonly}>
                     </div>
                     <div class="form-group">
-                      <label for="closetime">Close Time</label>
+                      <label for="closetime">Giờ đóng cửa</label>
                       <input class="form-control mb-3" type="time" value="${location.closeTime}" id="closeTime" name="closeTime" ${readonly}>
                     </div>
+                   <div class="form-group">
+                   		<label for="closetime">Mô tả</label>
+						<textarea ${readonly} class="form-control mb-10" id="description" rows="5" name="description" placeholder="Nội dung" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nội dung'">${location.description}</textarea>
+					</div>
                     <div class="form-group">
-                      <label for="locationcategory">Location Category</label>
+                      <label for="locationcategory">Danh mục địa điểm</label>
                       <select class="form-control" id="locationcategory" name="locationCategory.categoryId" ${readonly}>
 	                      <c:if test="${not empty locationCategoriesList1}">
 	                      	<c:forEach items="${locationCategoriesList1}" var="cat1">
@@ -89,7 +93,7 @@
                       </select>
                     </div>
                     <div class="form-group">
-                      <label for="locationtype">Location Type</label>
+                      <label for="locationtype">Kiểu địa điểm</label>
                       <select class="form-control" id="locationType" name="locationType.locationTypeId" ${readonly}>
                       <c:if test="${not empty locationTypeList}">
                       	<c:forEach items="${locationTypeList}" var="type">
@@ -219,9 +223,15 @@
                   	</c:if>
 				    <div class="form-group">
 						<label for="country">Trạng Thái</label>
-					   	<select class="form-control input-lg" ${readonly1}>
-					    	<option>Cho phép hiển thị</option>
-					    	<option>Không cho phép hiển thị</option>
+					   	<select name="status" class="form-control input-lg" ${readonly1}>
+					   	<c:if test="${location.status eq false}">
+					   		<option value="true">Đang hiển thị</option>
+					    	<option selected="selected" value="false">Đang tắt</option>
+					   	</c:if>
+					   	<c:if test="${location.status eq true}">
+					   		<option selected="selected" value="true">Đang hiển thị</option>
+					    	<option value="false">Đang tắt</option>
+					   	</c:if>
 					   	</select>
 					</div>
 					<script>

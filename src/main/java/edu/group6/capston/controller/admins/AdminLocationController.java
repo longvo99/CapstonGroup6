@@ -171,6 +171,7 @@ public class AdminLocationController {
 			}
 			location.setMediaPath(mediaPath);
 			location.setUsers(new Users(GlobalsFunction.getUsers().getUserId()));
+			location.setStatus(false);
 			if (locationService.save(location)) {
 				rd.addFlashAttribute(GlobalsConstant.MESSAGE,
 						messageSource.getMessage("success", null, Locale.getDefault()));

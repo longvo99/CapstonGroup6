@@ -9,6 +9,7 @@
 			<c:set var="imageUrl" value="${pageContext.request.contextPath}/public/location/image" />
 			<c:set var="deleteUrl" value="${pageContext.request.contextPath}/public/location/delete" />
 			<c:set var="productUrl" value="${pageContext.request.contextPath}/public/product/index" />
+			<c:set var="comboUrl" value="${pageContext.request.contextPath}/public/combo/index" />
 		</c:when>
 		<c:otherwise>
 			<c:set var="addUrl" value="${pageContext.request.contextPath}/admin/location/add" />
@@ -16,6 +17,7 @@
 			<c:set var="imageUrl" value="${pageContext.request.contextPath}/admin/location/image" />
 			<c:set var="deleteUrl" value="${pageContext.request.contextPath}/admin/location/delete" />
 			<c:set var="productUrl" value="${pageContext.request.contextPath}/admin/product/index" />
+			<c:set var="comboUrl" value="${pageContext.request.contextPath}/admin/combo/index" />
 		</c:otherwise>
 	</c:choose>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -65,9 +67,9 @@
                     <thead class="thead-light">
                       <tr>
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>Category</th>
-                        <th>Type</th>
+                        <th>Tên</th>
+                        <th>Danh mục</th>
+                        <th>Kiểu</th>
                         <th class="center text-center">Chức năng</th>
                       </tr>
                     </thead>
@@ -79,17 +81,18 @@
 							<td>${location.locationCategory.locationCategoryName}</td>
 							<td>${location.locationType.locationTypeName}</td>
 							<td class="center text-center">
-								<a href="${editUrl}/${location.locationId}" class="btn btn-sm btn-success"><i class="fa fa-edit">Chi tiết</i></a>
+								<a href="${editUrl}/${location.locationId}" class="btn btn-sm btn-success" title="CHI TIẾT"><i class="fas fa-info-circle"></i></a>
 								<c:if test="${empty sessionScope.userSession}">
 								<c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
-			                  		<a href="${pageContext.request.contextPath}/admin/location/image/${location.locationId}" class="btn btn-sm btn-primary"><i class="fa fa-edit">Hình ảnh</i></a>
+			                  		<a href="${pageContext.request.contextPath}/admin/location/image/${location.locationId}" title="HÌNH ẢNH" class="btn btn-sm btn-primary"><i class="fas fa-image" aria-hidden="true"></i></a>
 			                  	</c:if>
 			                  	</c:if>
-                                <a href="${productUrl}/${location.locationId}" class="btn btn-sm btn-warning"><i class="fa fa-edit">Sản phẩm</i></a>
-                                <a href="${deleteUrl}"  class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa không');"><i class="fas fa-trash"> Xóa </i></a>
+                                <a href="${productUrl}/${location.locationId}" class="btn btn-sm btn-warning" title="SẢN PHẨM"><i class="fab fa-product-hunt"></i></a>
+                                <a href="${comboUrl}/${location.locationId}" class="btn btn-sm btn-info" title="COMBO"><i class="fas fa-certificate"></i></a>
+                                <a href="${deleteUrl}"  class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa không');" title="XÓA"><i class="fas fa-trash"></i></a>
                                 <c:if test="${empty sessionScope.userSession}">
                                 <c:if test="${userDetail.user.role.roleId eq 'ADMIN'}">
-			                  		<a href="" data-toggle="modal" data-target="#exampleModalCenter${location.locationId}" class="btn btn-sm btn-info"><i class="fa fa-edit"> Liên hệ </i></a>
+			                  		<a href="" data-toggle="modal" data-target="#exampleModalCenter${location.locationId}" title="LIÊN HỆ" class="btn btn-sm btn-info"><i class="fas fa-comment-dots"></i></a>
 			                  		<!-- Modal Center -->
 							          <div class="modal fade" id="exampleModalCenter${location.locationId}" tabindex="-1" role="dialog"
 							            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

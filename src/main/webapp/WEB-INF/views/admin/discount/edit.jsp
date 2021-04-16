@@ -31,7 +31,7 @@
               <!-- Form Basic -->
               <div class="card mb-4">
                 <div class="card-body">
-                  <c:set var="actionUrl" value="${pageContext.request.contextPath}/admin/user/edit" />
+                  <c:set var="actionUrl" value="${pageContext.request.contextPath}/admin/discount/edit" />
                   <form action="${actionUrl}" role="form" method="POST" name="form" id="form" enctype="multipart/form-data">
                  	<div class="form-group">
                       <label for="title">Id</label>
@@ -41,10 +41,10 @@
                       <label for="title">Tiêu đề</label>
                       <input class="form-control mb-3" type="text" value="${discount.title}" id="title" name="title">
                     </div>
-                    <div class="form-group">
+                    <%-- <div class="form-group">
                       <label style="display: block;" for="code">Mã giảm giá</label>
                       <input readonly="readonly" style="display: inline-block;" class="form-control mb-3 col-lg-3" type="text" value="${discount.code}" id="code" name="code">
-                      <!-- <button type="button" onclick="createCode(7)" class="btn btn-success mb-1">Tạo mã</button>
+                      <button type="button" onclick="createCode(7)" class="btn btn-success mb-1">Tạo mã</button>
                       <script type="text/javascript">
                       function createCode(length) {
                     	   var result           = '';
@@ -55,8 +55,8 @@
                     	   }
                     	   document.getElementById("code").value = result;
                     	}
-                      </script> -->
-                    </div>
+                      </script>
+                    </div> --%>
                     <div class="form-group">
                       <label for="description">Mô tả</label>
                       <input class="form-control mb-3" type="text" value="${discount.description}" id="description" name="description">
@@ -247,6 +247,10 @@
 					<c:if test="${empty sessionScope.userSession}">
 					<c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
 					<input type="hidden" name="locati" value="${discount.location.locationId}">
+					</c:if></c:if>
+					<%-- <c:if test="${empty sessionScope.userSession}">
+					<c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
+					<input type="hidden" name="locati" value="${discount.location.locationId}">
 					<c:choose>
                     	<c:when test="${fn:contains(discount.value, 'allproduct')}">
                     		<c:set value="checked='checked'" var="checked1" ></c:set>
@@ -287,18 +291,22 @@
 			       		</div>
                     </div>
 					</c:if>	
-					</c:if>
+					</c:if> --%>
 					<c:if test="${discount.discountRule.ruleId ne null}">
 						<c:set var="onoff" value="checked='checked'"></c:set>
 						<c:set value="show" var="show4" ></c:set>
 					</c:if>
                     <div class="form-group">
+						<c:if test="${empty sessionScope.userSession}">
+                  	  	<c:if test="${userDetail.user.role.roleId eq 'ADMIN'}">
 						<div class="custom-control custom-switch">
 	                        <input type="checkbox" ${onoff} name="condition" id="checkbox" class="custom-control-input">
 	                        <label class="custom-control-label" for="checkbox"><strong>Điều kiện áp dụng</strong></label>
                         </div>
+                        </c:if>
+                        </c:if>
                         <c:if test="${not empty discountRuleList}">
-						 <div id="collapseThree" class="row collapse ${show4}" >
+						 <div id="collapseThree" class="row collapse show" >
 		                    <div class="col-lg-6">
 		                    	<label for="ruleId">Điều kiện</label>
 		                    	<select id="ruleId" name="discountRule1" class="form-control">

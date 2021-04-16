@@ -100,4 +100,9 @@ public class LocationServiceImpl implements LocationService {
 		return LocationDAO.findImageLocation();
 	}
 
+	@Override
+	public List<Location> unapprovedLocationList() {
+		return LocationDAO.unapprovedLocationList();
+	}
+
 }

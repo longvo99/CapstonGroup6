@@ -46,7 +46,11 @@ public class Location{
 	@Column
 	private String closeTime;
 	@Column
+	private String description;
+	@Column
 	private int reviewCount;
+	@Column
+	private boolean status;
 	@ManyToOne
 	@JoinColumn(name = "CategoryId")
 	private LocationCategory locationCategory;
