@@ -3,10 +3,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>FPT</groupId>
-	<artifactId>CapstonGroup6</artifactId>
+	<artifactId>CapstoneGroup6</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>CapstonGroup6 Maven Webapp</name>
+	<name>CapstoneGroup6 Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
 	<!-- <properties> <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> 
@@ -88,6 +88,11 @@
 			<artifactId>mssql-jdbc</artifactId>
 			<version>6.2.2.jre8</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<!-- <dependency> <groupId>mysql</groupId> <artifactId>mysql-connector-java</artifactId> 
+			<version>8.0.22</version> </dependency> -->
+		<!-- <dependency> <groupId>mysql</groupId> <artifactId>mysql-connector-java</artifactId> 
+			<version>5.1.47</version> </dependency> -->
 
 		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
 		<dependency>

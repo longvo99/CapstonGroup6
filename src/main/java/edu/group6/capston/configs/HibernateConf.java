@@ -58,4 +58,11 @@ public class HibernateConf {
 		return transactionManager;
 	}
 
+//	@Bean
+//	public HibernateTransactionManager getTransactionManager() {
+//		HibernateTransactionManager transactionManager = new HibernateTransactionManager();
+//		transactionManager.setSessionFactory(sessionFactory().getObject());
+//		return transactionManager;
+//	}
+
 }

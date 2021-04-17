@@ -22,7 +22,7 @@ public class LocationCategory{
 	 * 
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "CategoryId")
 	private int categoryId;
 	@Column(name = "lCategoryName")

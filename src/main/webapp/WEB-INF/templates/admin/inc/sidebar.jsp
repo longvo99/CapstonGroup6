@@ -63,9 +63,12 @@
 <body id="page-top">
   <div id="wrapper">
     <!-- Sidebar -->
-   	
+    <c:set var="urlHomePage" value="${pageContext.request.contextPath}/admin/index" />
+   	<c:if test="${not empty sessionScope.userSession}">
+   		 <c:set var="urlHomePage" value="${pageContext.request.contextPath}/public/index" />
+   	</c:if>
     <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${pageContext.request.contextPath}/admin/index">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${urlHomePage}">
         <div class="sidebar-brand-icon">
           <img src="${pageContext.request.contextPath}/resources/admin/assets/img/logo/logo3.png" width="50px">
         </div>
@@ -73,9 +76,10 @@
       </a>
       <hr class="sidebar-divider my-0">
       <li class="nav-item active">
-        <a class="nav-link" href="${pageContext.request.contextPath}/admin/index">
+        <a class="nav-link" href="${urlHomePage}">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Trang chủ</span></a>
+          <span>Trang chủ</span>
+        </a>
       </li>
       <hr class="sidebar-divider">
       <div class="sidebar-heading">
