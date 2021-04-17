@@ -39,11 +39,21 @@
                   <div class="col-sm-10">
                   	<c:if test="${empty sessionScope.userSession}">
                   	<c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
-	               		<a href="${addUrl}/${locationId}" class="btn btn-success btn-md"><i class="fa fa-plus-square"> Thêm </i></a>
+                  	<c:set var="url" value="${addUrl}/${locationId}" ></c:set>
+                  	<c:if test="${countAllByLocationId eq 0}">
+                  		<c:set var="url" value="javascript:void(0)" ></c:set>
+                  		<c:set var="click" value="return alert('Chưa có sản phẩm để thêm!');" ></c:set>
+                  	</c:if>
+	               		<a href="${url}" onclick="${click}" class="btn btn-success btn-md"><i class="fa fa-plus-square"> Thêm </i></a>
 	               	</c:if>
 	               	</c:if>
 	               	<c:if test="${not empty sessionScope.userSession}">
-	                	<a href="${addUrl}/${locationId}" class="btn btn-success btn-md"><i class="fa fa-plus-square"> Thêm </i></a>
+	               	<c:set var="url" value="${addUrl}/${locationId}" ></c:set>
+                  	<c:if test="${countAllByLocationId eq 0}">
+                  		<c:set var="url" value="javascript:void(0)" ></c:set>
+                  		<c:set var="click" value="return alert('Chưa có sản phẩm để thêm!');" ></c:set>
+                  	</c:if>
+	                	<a href="${url}" onclick="${click}" class="btn btn-success btn-md"><i class="fa fa-plus-square"> Thêm </i></a>
 	                </c:if>
                   </div>
                 </div>

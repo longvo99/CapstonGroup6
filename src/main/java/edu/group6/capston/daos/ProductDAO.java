@@ -261,4 +261,11 @@ public class ProductDAO {
 			return listProducts;
 		}
 	}
+
+	public long countAllByLocationId(Integer locationId) {
+		try (Session session = this.sessionFactory.openSession()) {
+			long count = (long) session.createQuery("select count(*) from Product where location.locationId = " + locationId).uniqueResult();
+			return count;
+		}
+	}
 }

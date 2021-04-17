@@ -94,4 +94,9 @@ public class ProductServiceImpl implements ProductService {
 	public List<ProductDTO2> findAllByProductComboId(Integer productComboId) {
 		return ProductDAO.findAllByProductComboId(productComboId);
 	}
+
+	@Override
+	public long countAllByLocationId(Integer locationId) {
+		return ProductDAO.countAllByLocationId(locationId);
+	}
 }

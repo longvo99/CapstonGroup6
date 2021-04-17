@@ -23,4 +23,5 @@ public interface ProductService {
 	List<String> searchProductNameByLocationId(List<Integer> locationIdList);
 	List<ProductDTO2> findAllByLocationId(Integer locationId);
 	List<ProductDTO2> findAllByProductComboId(Integer productComboId);
+	long countAllByLocationId(Integer locationId);
 }
