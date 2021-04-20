@@ -23,7 +23,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.paypal.base.rest.PayPalRESTException;
+
 import edu.group6.capston.dtos.OrderDTO;
+import edu.group6.capston.dtos.OrderDetailDTO;
 import edu.group6.capston.dtos.UserAddress;
 import edu.group6.capston.models.DiscountInfo;
 import edu.group6.capston.models.DiscountLimitedUse;
@@ -42,6 +45,7 @@ import edu.group6.capston.services.ProductService;
 import edu.group6.capston.services.UserService;
 import edu.group6.capston.utils.GlobalsConstant;
 import edu.group6.capston.utils.GlobalsFunction;
+import edu.group6.capston.utils.PaymentServices;
 
 @Controller
 @RequestMapping("public")
@@ -224,9 +228,9 @@ public class PublicOrderController extends PublicAbstractController {
 		return "public.checkout";
 	}
 
-	@PostMapping("/checkout")
-	public String checkout(@Valid @ModelAttribute("userAddress") UserAddress userAddress, Model model,
-			HttpServletRequest request, BindingResult br, RedirectAttributes rd, HttpServletResponse response) {
+	@PostMapping("/checkout/{typePay}")
+	public String checkout(@Valid @ModelAttribute("userAddress") UserAddress userAddress, @PathVariable String typePay, Model model,
+			HttpServletRequest request, BindingResult br, RedirectAttributes rd, HttpServletResponse response) throws PayPalRESTException {
 		if (br.hasErrors()) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
 			return "redirect:/public/checkout";
@@ -320,6 +324,17 @@ public class PublicOrderController extends PublicAbstractController {
 						new Product(Integer.valueOf(orderDTO.getProductId())), null, order);
 			}
 			orderDetailService.save(orderDetail);
+		}
+		if(typePay.equals("paypal")) {
+			PaymentServices paymentServices = new PaymentServices();
+			float price = (totalCart)/23000 - 1;
+			float tax = ((totalCart)*10/100)/23000;
+			float subPrice = price + tax + 1;
+			OrderDetailDTO orerDetail = new OrderDetailDTO("Chi tiết đơn hàng", String.valueOf(price) , "1", String.valueOf(tax) , String.valueOf(subPrice));
+			String approvalLink = paymentServices.authorizePayment(orerDetail);
+			order.setOrderStatus(new OrderStatus(6, ""));
+			orderService.update(order);
+			return "redirect:" + approvalLink;
 		}
 		return "redirect:/public/orderdetails";
 	}

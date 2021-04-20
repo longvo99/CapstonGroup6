@@ -26,7 +26,6 @@ public class GlobalsFunction {
 	private static UserDAO userDAO;
 
 	public static String checkUsername(String username) {
-		System.out.println("abc: " + username);
 		username = "admin";
 		Users user = userDAO.findByUsername(username);
 		if (user != null) {

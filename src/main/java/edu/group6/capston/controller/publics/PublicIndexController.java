@@ -41,7 +41,6 @@ import edu.group6.capston.services.RatingService;
 import edu.group6.capston.utils.GlobalsConstant;
 import edu.group6.capston.utils.GlobalsFunction;
 import edu.group6.capston.utils.UploadFile;
-
 @Controller
 @RequestMapping("public")
 public class PublicIndexController extends PublicAbstractController {
@@ -231,5 +230,4 @@ public class PublicIndexController extends PublicAbstractController {
 		rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
 		return "redirect:/public/restaurant/" + locationId;
 	}
-
 }

@@ -14,42 +14,57 @@
                             <h2 class="text-light-black fw-700 no-margin">9:00pm-9:10pm</h2> -->
                             <div id="add-listing-tab" class="step-app">
                                 <ul class="step-steps">
-                                <c:if test="${order.orderStatus.orderStatusId eq 5}">
+                                <c:if test="${order.orderStatus.orderStatusId eq 6}">
                                 	<c:forEach items="${orderStatusList}" var="orderStatus">
-	                                	<c:if test="${order.orderStatus.orderStatusId eq 1}">
-	                                	<li class="done">
-	                                        <a href="javascript:void(0)"> <span class="number"></span>
-	                                            <span class="step-name">${orderStatus.statusName}<!-- <br>8:38pm --></span>
-	                                        </a>
-	                                    </li>
-	                                    </c:if>
-	                                    <c:if test="${order.orderStatus.orderStatusId eq 5}">
-	                                	<li class="active">
-	                                        <a href="javascript:void(0)"> <span class="number"></span>
-	                                            <span class="step-name">${orderStatus.statusName}<!-- <br>8:38pm --></span>
-	                                        </a>
-	                                    </li>
-	                                    </c:if>
-                                    </c:forEach>
-                                </c:if>
-                                <c:if test="${order.orderStatus.orderStatusId != 5}">
-	                                <c:forEach items="${orderStatusList}" var="orderStatus">
-	                                	<c:set var="classDone" value="" />
-	                                	<c:choose>
-	                                		<c:when test="${orderStatus.orderStatusId < order.orderStatus.orderStatusId}">
-	                                			<c:set var="classDone" value="class='done'" />
-	                                		</c:when>
-	                                		<c:when test="${orderStatus.orderStatusId eq order.orderStatus.orderStatusId}">
-	                                			<c:set var="classDone" value="class='active'" />
-	                                		</c:when>
-	                                	</c:choose>
-	                                	<c:if test="${orderStatus.orderStatusId != 5}">
-		                                	<li ${classDone}>
+	                                    <c:if test="${orderStatus.orderStatusId eq 6}">
+		                                	<li class="done active">
 		                                        <a href="javascript:void(0)"> <span class="number"></span>
-		                                            <span class="step-name">${orderStatus.statusName}<!-- <br>8:38pm --></span>
+		                                            <span class="step-name">${orderStatus.statusName}</span>
 		                                        </a>
 		                                    </li>
 	                                    </c:if>
+                                    </c:forEach>
+                                </c:if>
+                                <c:if test="${order.orderStatus.orderStatusId ne 6}">
+	                                <c:forEach items="${orderStatusList}" var="orderStatus">
+	                                	<c:choose>
+	                                		<c:when test="${order.orderStatus.orderStatusId eq 2}">
+	                                			<c:choose>
+	                                				<c:when test="${orderStatus.orderStatusId eq 2}">
+	                                					<li class='active'>
+					                                        <a href="javascript:void(0)"> <span class="number"></span>
+					                                            <span class="step-name">${orderStatus.statusName}<!-- <br>8:38pm --></span>
+					                                        </a>
+					                                    </li>
+	                                				</c:when>
+	                                				<c:when test="${orderStatus.orderStatusId > 2 and orderStatus.orderStatusId ne 6}">
+	                                					<li>
+					                                        <a href="javascript:void(0)"> <span class="number"></span>
+					                                            <span class="step-name">${orderStatus.statusName}<!-- <br>8:38pm --></span>
+					                                        </a>
+					                                    </li>
+	                                				</c:when>
+	                                			</c:choose>
+	                                		</c:when>
+	                                		<c:otherwise>
+	                                			<c:if test="${orderStatus.orderStatusId ne 2 and orderStatus.orderStatusId < 6}">
+			                                	<c:set var="classDone" value="" />
+			                                	<c:choose>
+			                                		<c:when test="${orderStatus.orderStatusId < order.orderStatus.orderStatusId}">
+			                                			<c:set var="classDone" value="class='done'" />
+			                                		</c:when>
+			                                		<c:when test="${orderStatus.orderStatusId eq order.orderStatus.orderStatusId}">
+			                                			<c:set var="classDone" value="class='active'" />
+			                                		</c:when>
+			                                	</c:choose>
+			                                	<li ${classDone}>
+			                                        <a href="javascript:void(0)"> <span class="number"></span>
+			                                            <span class="step-name">${orderStatus.statusName}<!-- <br>8:38pm --></span>
+			                                        </a>
+			                                    </li>
+			                                    </c:if>
+		                                    </c:otherwise>
+	                                	</c:choose>
 	                                </c:forEach>
 	                              </c:if>
                                 </ul>
@@ -212,7 +227,11 @@
 														<td class="cell100 column1">${order.orderId}</td>
 														<td class="cell100 column2">${order.orderTime}</td>
 														<td class="cell100 column2">${order.totalPrice}</td>
-														<td class="cell100 column3">${order.orderStatus.statusName}</td>
+														<c:set var="colorOrderStatus" value=""/>
+														<c:if test="${order.orderStatus.orderStatusId eq 6}">
+															<c:set var="colorOrderStatus" value="style='color:red;'"/>
+														</c:if>
+														<td class="cell100 column3"><span ${colorOrderStatus}>${order.orderStatus.statusName}</span></td>
 														<td class="cell100 column4"><a href="${pageContext.request.contextPath}/public/orderdetails/${order.orderId}"><i class="fa fa-eye" style="font-size:24px"></i></a></td>
 													</tr>
 												</c:forEach>

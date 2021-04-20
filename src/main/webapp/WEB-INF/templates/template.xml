@@ -169,6 +169,4 @@
 	<definition name="admin.role.list" extends="templates.admin">
 		<put-attribute name="admin-content" value="/WEB-INF/views/admin/role/list.jsp" />
 	</definition>
-	
-	
 </tiles-definitions>

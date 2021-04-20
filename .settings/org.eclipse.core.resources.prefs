@@ -13,6 +13,7 @@ encoding//src/main/java/edu/group6/capston/controller/publics/PublicAbstractCont
 encoding//src/main/java/edu/group6/capston/controller/publics/PublicDiscountController.java=UTF-8
 encoding//src/main/java/edu/group6/capston/controller/publics/PublicIndexController.java=UTF-8
 encoding//src/main/java/edu/group6/capston/controller/publics/PublicLocationController.java=UTF-8
+encoding//src/main/java/edu/group6/capston/controller/publics/PublicOrderController.java=UTF-8
 encoding//src/main/java/edu/group6/capston/controller/publics/PublicSearchController.java=UTF-8
 encoding//src/main/java/edu/group6/capston/controller/publics/PublicUserController.java=UTF-8
 encoding//src/main/java/edu/group6/capston/daos/DiscountDAO.java=UTF-8
@@ -26,6 +27,7 @@ encoding//src/main/java/edu/group6/capston/services/impls/RatingServiceImpl.java
 encoding//src/main/java/edu/group6/capston/services/impls/UserServiceImpl.java=UTF-8
 encoding//src/main/java/edu/group6/capston/utils/GlobalsConstant.java=UTF-8
 encoding//src/main/java/edu/group6/capston/utils/GlobalsFunction.java=UTF-8
+encoding//src/main/java/edu/group6/capston/utils/PaymentServices.java=UTF-8
 encoding//src/main/java/edu/group6/capston/utils/UploadFile.java=UTF-8
 encoding//src/main/resources/messages.properties=UTF-8
 encoding//src/main/webapp/WEB-INF/resources/admin/assets/js/city_district_ward.json=UTF-8

@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-7">
-                <form action="${pageContext.request.contextPath}/public/checkout" method="POST">
+                <form action="${pageContext.request.contextPath}/public/checkout/cash" id="formId" method="POST">
                     <div class="main-box padding-20">
                         <div class="row mb-xl-20">
                             <div class="col-md-10">
@@ -219,9 +219,9 @@
                                                     <ul class="nav nav-tabs">
                                                         <!-- <li class="nav-item"> <a class="nav-link fw-600 active" data-toggle="tab" href="#newcreditcard">Thẻ tín dụng</a>
                                                         </li> --> 
-                                                        <li class="nav-item"> <a class="nav-link fw-600 active" data-toggle="tab" href="#cash">Tiền mặt</a>
+                                                        <li class="nav-item"> <a class="nav-link fw-600 active" data-toggle="tab" id="payCash" href="#cash">Tiền mặt</a>
                                                         </li>
-                                                        <li class="nav-item"> <a class="nav-link fw-600" data-toggle="tab" href="#paypal">PayPal<sup>TM</sup></a>
+                                                        <li class="nav-item"> <a class="nav-link fw-600" data-toggle="tab" id="payPaypal" href="#paypal">PayPal<sup>TM</sup></a>
                                                         </li>
                                                         <!-- <li class="nav-item"> <a class="nav-link fw-600" data-toggle="tab" href="#amexcheckout">Amex Express Checkout</a>
                                                         </li> -->
@@ -232,12 +232,13 @@
                                                             <div class="form-group">
                                                                 <button type="submit" class="btn-first green-btn text-custom-white full-width fw-500">Đặt hàng</button>
                                                             </div>
-                                                            <p class="text-center text-light-black no-margin">Bằng cách đặt hàng bạn đồng ý với các  
-                                                            	<a href="#">điều khoản sử dụng</a> và <a href="#">quyền riêng tư</a> của FoodMart
-                                                            </p>
+                                                        </div>
+                                                        <div class="tab-pane" id="paypal">
+                                                            <div class="form-group">
+                                                                <button type="submit" class="btn-first green-btn text-custom-white full-width fw-500">Thanh toán</button>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -246,6 +247,14 @@
                             </div>
                         </div>
                     </form>
+                    <script type="text/javascript">
+                    $("#payCash").click(function(){
+                    	$('#formId').attr('action', '${pageContext.request.contextPath}/public/checkout/cash');
+                    	});
+                    $("#payPaypal").click(function(){
+                    	$('#formId').attr('action', '${pageContext.request.contextPath}/public/checkout/paypal');
+                    	});
+                    </script>
                     </div>
                 <div class="col-lg-5">
                     <div class="sidebar">
