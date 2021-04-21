@@ -32,24 +32,23 @@
                   		<c:set var="actionUrl" value="${pageContext.request.contextPath}/public/product/edit" />
                   </c:if>
                   <form role="form" action="${actionUrl}" method="post" id="form" enctype="multipart/form-data">
-                  	<div class="form-group">
-                      <label for="name">ID sản phẩm</label>
-                      <input class="form-control mb-3" type="text" value="${product.productId}" id="productId" name="productId" readonly>
-                    </div>
+                      <input type="hidden" value="${product.productId}" id="productId" name="productId">
+                      <input type="hidden" value="${product.orderCount}" id="orderCount" name="orderCount">
+                      <input type="hidden" value="${product.location.locationId}" id="locationId" name="location.locationId">
                   	<div class="form-group">
                       <label for="name">Tên sản phẩm</label>
                       <input class="form-control mb-3" type="text" value="${product.name}" id="name" name="name">
                     </div>
                     <div class="form-group">
-                      <label for="name">Tên giá</label>
+                      <label for="price">Giá sản phẩm</label>
                       <input class="form-control mb-3" type="text" value="${product.price}" id="price" name="price">
                     </div>
                     <div class="form-group">
-                      <label for="name">Mô tả</label>
-                      <input class="form-control mb-3" type="text" value="${product.describe}" id="describe" name="describe">
+                      <label for="description">Mô tả</label>
+                      <input class="form-control mb-3" type="text" value="${product.description}" id="description" name="description">
                     </div>
                     <div class="form-group">
-                      <label for="name">Loại sản phẩm</label>
+                      <label for="">Loại sản phẩm</label>
                       <select class="form-control" id="productCategory.productCategoryId" name="productCategory.productCategoryId">
                       <c:if test="${not empty productCategoryList}">
                       	<c:forEach items="${productCategoryList}" var="productCategory">
@@ -67,14 +66,10 @@
                       </select>
                     </div>
                     <div class="form-group">
-                      <label for="name">Id địa điểm</label>
-                      <input class="form-control mb-3" type="text" value="${product.location.locationId}" id="locationId" name="location.locationId" readonly>
-                    </div>
-                    <div class="form-group">
-                    	<label for="name">Upload hình ảnh</label>
+                    	<label for="file">Upload hình ảnh</label>
                     	<input type="file" name="image" class="file" accept="image/*">
 					    <div class="input-group my-3">
-					      <input type="text" class="form-control" value="${product.imagePath}" name="image" disabled placeholder="Upload File" id="file">
+					      <input type="text" class="form-control" value="${product.imagePath}" readonly="readonly"  placeholder="Upload File" id="file">
 					      <div class="input-group-append">
 					        <button type="button" class="browse btn btn-primary">Chọn ảnh</button>
 					      </div>
@@ -119,3 +114,48 @@
         </div>
         <!---Container Fluid-->
       </div>
+      <script src="${pageContext.request.contextPath}/resources/admin/assets/js/jquery.validate.min.js"></script>
+<script type="text/javascript">
+$.validator.addMethod("valueNotEquals", function(value, element, arg){
+	  return arg !== value;
+	 }, "Value must not equal arg.");
+	$().ready(function() {
+		var validator = $("#form").validate({
+			errorPlacement: function(error, element){
+				$(element).closest("form").find("label[for='" + element.attr("id") + "']").append(error);
+			},
+			errorElement: "span",
+			ignore: [],
+			rules:{
+				name: {                      //lay name
+					required:true,
+				},
+				price: {                      
+					required:true,
+					digits:true,
+				},
+				description: {                      
+					required:true,
+				},
+				image1: {                      
+					required:true,
+				},
+			},
+			messages: {
+				name: {
+					required: " (Mời nhập)",
+				},
+				price: {
+					required: " (Mời nhập)",
+					digits: " (Nhập số dương)",
+				},
+				description: {
+					required: " (Mời nhập)",
+				},
+				image1: {
+					required: " (Mời nhập)",
+				},
+			},
+		});
+	});
+</script>

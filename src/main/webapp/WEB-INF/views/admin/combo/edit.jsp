@@ -8,7 +8,7 @@
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="m-0 font-weight-bold text-primarys">Chỉnh sửa sản phẩm</h1>
+            <h1 class="m-0 font-weight-bold text-primarys">Chỉnh sửa combo</h1>
             <ol class="breadcrumb">
               <c:set var="actionIndex" value="${pageContext.request.contextPath}/admin/index" />
               <c:if test="${not empty sessionScope.userSession}">

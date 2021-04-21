@@ -32,13 +32,13 @@
                   <form action="${pageContext.request.contextPath}/reset_password" name='forgotPasswordForm' class="" method="POST">
                     <input type="hidden" name="token" value="${token}" />
                     <div class="form-group">
-                      <input type="password" name="password" id="password" class="form-control" placeholder="Enter your new password" required autofocus />
+                      <input type="password" name="password" id="password" class="form-control" placeholder="Nhập mật khẩu mới" required autofocus />
                     </div>
                     <div class="form-group">
-                    	<input type="password" class="form-control" placeholder="Confirm your new password" required/>
+                    	<input type="password" class="form-control" placeholder="Xác nhận lại mật khẩu mới" required/>
                     </div>
                     <div class="form-group">
-                      <button type="submit" class="btn btn-primary btn-block">Change Password</button>
+                      <button type="submit" class="btn btn-primary btn-block">Thay đổi</button>
                     </div>
                     <!-- <hr>
                     <a href="https://indrijunanda.github.io/RuangAdmin/index.html" class="btn btn-google btn-block">

@@ -17,31 +17,36 @@
             <div class="col-lg-12">
               <div class="card shadow mb-4">
                 <div class="card-header py-3 text-center">
-                  <h3 class="m-0 font-weight-bold text-primary">DOANH THU TỪNG THÁNG (NĂM 2021)</h3>
+                  <h3 class="m-0 font-weight-bold text-primary">DOANH THU TỪNG THÁNG (NĂM ${year})</h3>
+                  <div class="dropdown mb-3">
+                    <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Năm ${year}
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <c:if test="${not empty listYear}">
+	                    <c:forEach var="obj" items="${listYear}" >
+	                    	 <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/statistical/index/${obj}">Năm ${obj}</a>
+	                    </c:forEach>
+                     </c:if>
+                    </div>
+                  </div>
                 </div>
                 <div class="card-body">
                   <div class="chart-bar">
                     <canvas id="myBarChart"></canvas>
                   </div>
                   <hr>
-                   <div class="dropdown mb-3">
-                    <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton"
-                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Chọn năm
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="${pageContext.request.contextPath}/index/2019">Năm 2019</a>
-                      <a class="dropdown-item" href="${pageContext.request.contextPath}/index/2020">Năm 2020</a>
-                      <a class="dropdown-item" href="${pageContext.request.contextPath}/index/2021">Năm 2021</a>
-                    </div>
-                  </div>
-                   <h3><a href="${pageContext.request.contextPath}/admin/statistical/downloadExcel">Download Excel Document</a></h3>
                 </div>
               </div>
             </div>
           </div>
           <!--Row-->
-
+			<div class="row" >
+				<div class="col-lg-12">
+					<h3><a href="${pageContext.request.contextPath}/admin/statistical/downloadExcel">Tổng doanh thu của từng địa điểm theo năm(Download Excel)</a></h3>
+				</div>
+			</div>
           <!-- Documentation Link -->
         </div>
         <!---Container Fluid-->

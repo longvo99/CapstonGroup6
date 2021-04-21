@@ -142,71 +142,6 @@
 						 });
 						});
 			</script>
-                    
-                    
-                    
-					
-					<!-- <script>
-					$(document).ready(function(){
-
-						 load_json_data('city');
-
-						 function load_json_data(id, parent_id)
-						 {
-						  var html_code = '';
-						  $.getJSON('${pageContext.request.contextPath}/resources/admin/assets/js/city_district_ward.json', function(data){
-
-						   html_code += '<option value="">Select</option>';
-						   $.each(data, function(key, value){
-						    if(id == 'city')
-						    {
-						     if(value.parent_id == '0')
-						     {
-						      html_code += '<option value="'+value.id+'">'+value.name+'</option>';
-						     }
-						    }
-						    else
-						    {
-						     if(value.parent_id == parent_id)
-						     {
-						      html_code += '<option value="'+value.id+'">'+value.name+'</option>';
-						     }
-						    }
-						   });
-						   $('#'+id).html(html_code);
-						  });
-
-						 }
-
-						 $(document).on('change', '#city', function(){
-						  var city_id = $(this).val();
-						  if(city_id != '')
-						  {
-						   load_json_data('district', city_id);
-						  }
-						  else
-						  {
-						   $('#district').html('<option value="">Select</option>');
-						   $('#ward').html('<option value="">Select</option>');
-						  }
-						 });
-						 $(document).on('change', '#district', function(){
-						  var district_id = $(this).val();
-						  if(district_id != '')
-						  {
-						   load_json_data('ward', district_id);
-						  }
-						  else
-						  {
-						   $('#ward').html('<option value="">Select</option>');
-						  }
-						 });
-						});
-					</script> -->
-                    <!-- <div class="form-group">
-	                  <label for="picture">Hình ảnh</label>
-	                  <input type="file" name="picture" />
-                    </div> -->
                     <div class="input-field">
 				        <label class="active">Hình ảnh</label>
 				        <div class="input-images" style="padding-top: .5rem;"></div>
@@ -259,6 +194,16 @@ $.validator.addMethod("valueNotEquals", function(value, element, arg){
 				ward: {                      
 					valueNotEquals: "000",
 				},
+				locationPhone: {                      
+					required:true,
+					digits:true,
+					minlength:10, 
+					maxlength:10,
+				},
+				locationEmail: {                      
+					required:true,
+					email: true,
+				},
 			},
 			messages: {
 				locationName: {
@@ -284,6 +229,16 @@ $.validator.addMethod("valueNotEquals", function(value, element, arg){
 				},
 				ward: {
 					valueNotEquals: " (Mời nhập)",
+				},
+				locationPhone: {
+					required: " (Mời nhập)",
+					digits: " (Nhập số)",
+					minlength:" (Nhập 10 số)", 
+					maxlength:" (Nhập 10 số)",
+				},
+				locationEmail: {
+					required: " (Mời nhập)",
+					email: " (Nhập đúng định dạng)",
 				},
 			},
 		});

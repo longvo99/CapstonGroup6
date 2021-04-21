@@ -69,9 +69,9 @@ public class AdminLocationController {
 	}
 
 	@PostMapping("/image/edit/{locationId}")
-	public String image(@PathVariable Integer locationId, @Valid @ModelAttribute("images") ImageUpload images,
+	public String image(@PathVariable Integer locationId,
 			@RequestParam(value = "images") MultipartFile[] filess,
-			@RequestParam(value = "image[]", required = false) String oldImages, BindingResult br,
+			@RequestParam(value = "image[]", required = false) String oldImages,
 			RedirectAttributes rd, HttpServletRequest request) throws IllegalStateException, IOException {
 		Location location = locationService.findLocationId(locationId);
 		String mediaPath = "";
@@ -154,7 +154,6 @@ public class AdminLocationController {
 			HttpServletRequest request, MultipartFile file, Model model) throws IllegalStateException, IOException {
 		if (br.hasErrors()) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
-			rd.addFlashAttribute("error", true);
 			model.addAttribute("location", location);
 			return "admin.location.add";
 		}
@@ -178,9 +177,7 @@ public class AdminLocationController {
 				return "redirect:/admin/location/index";
 			}
 		}
-
 		rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
-		rd.addFlashAttribute("error", true);
 		model.addAttribute("location", location);
 		return "admin.location.add";
 	}
@@ -216,25 +213,22 @@ public class AdminLocationController {
 	public String Edit(@Valid @ModelAttribute("location") Location location, BindingResult br, RedirectAttributes rd,
 			HttpServletRequest request, MultipartFile file, Model model) {
 		if (br.hasErrors()) {
-			return "admin.location.index";
+			return "redirect:/admin/location/edit/" + location.getLocationId();
 		}
 		String mediapath = locationService.findLocationId(location.getLocationId()).getMediaPath();
 		location.setMediaPath(mediapath);
 		location.setUsers(new Users(GlobalsFunction.getUsers().getUserId()));
 		if (locationService.update(location)) {
-			rd.addFlashAttribute(GlobalsConstant.MESSAGE,
-					messageSource.getMessage("success", null, Locale.getDefault()));
-			rd.addFlashAttribute("success", true);
+			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("success", null, Locale.getDefault()));
 			return "redirect:/admin/location/index";
 		}
 		rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
-		rd.addFlashAttribute("error", true);
-		return "admin.location.index";
+		return "redirect:/admin/location/edit/" + location.getLocationId();
 	}
 
-	@RequestMapping(value = "/detele")
-	public String Delete(Model model) {
-		model.addAttribute("locationList", locationService.findAll());
-		return "admin.location.detele";
+	@RequestMapping(value = "/delete")
+	public String Delete(Model model, RedirectAttributes rd) {
+		rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("success", null, Locale.getDefault()));
+		return "redirect:/admin/location/index";
 	}
 }

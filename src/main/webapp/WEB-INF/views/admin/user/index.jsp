@@ -105,7 +105,7 @@
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="usercategory">Địa chỉ</label>
-					                      <input class="form-control mb-3" type="text" value="${user.contactAddress}" id="contactAddress" name="contactAddress" readonly>
+					                      <input class="form-control mb-3" type="text" value="${fn:substring(user.contactAddress, 0, fn:indexOf(user.contactAddress, '-'))}" id="contactAddress" name="contactAddress" readonly>
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="usertype">Giới tính</label>
@@ -205,7 +205,7 @@
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="usercategory">Địa chỉ</label>
-					                      <input class="form-control mb-3" type="text" value="${user.contactAddress}" id="contactAddress" name="contactAddress" readonly>
+					                      <input class="form-control mb-3" type="text" value="${fn:substring(user.contactAddress, 0, fn:indexOf(user.contactAddress, '-'))}" id="contactAddress" name="contactAddress" readonly>
 					                    </div>
 					                    <div class="form-group">
 					                      <label for="usertype">Giới tính</label>

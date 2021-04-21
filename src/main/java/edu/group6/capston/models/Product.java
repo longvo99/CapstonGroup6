@@ -27,9 +27,9 @@ public class Product {
 	@Column
 	private float price;
 	@Column
-	private String describe;
+	private String description;
 	@Column
-	private String orderCount;
+	private int orderCount;
 	@Column
 	private String imagePath;
 	@ManyToOne

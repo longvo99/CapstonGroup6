@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import edu.group6.capston.models.Location;
 import edu.group6.capston.models.Product;
 import edu.group6.capston.services.ProductCategoryService;
 import edu.group6.capston.services.ProductService;
@@ -59,21 +58,16 @@ public class AdminProductController {
 			HttpServletRequest request, @RequestParam("image") MultipartFile file, Model model) throws IllegalStateException, IOException {
 		if (br.hasErrors()) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
-			rd.addFlashAttribute("error", true);
-			model.addAttribute("product", product);
 			return "redirect:/admin/product/add/"+product.getLocation().getLocationId();
 		}
 		String filename = UploadFile.upload(file, request);
 		product.setImagePath(filename);
 		if (productService.save(product)) {
-			rd.addFlashAttribute(GlobalsConstant.MESSAGE,
-					messageSource.getMessage("success", null, Locale.getDefault()));
-			rd.addFlashAttribute("success", true);
+			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("success", null, Locale.getDefault()));
 			return "redirect:/admin/product/index/"+product.getLocation().getLocationId();
 		}
+		UploadFile.del(filename, request);
 		rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
-		rd.addFlashAttribute("error", true);
-		model.addAttribute("product", product);
 		return "redirect:/admin/product/add/"+ product.getLocation().getLocationId();
 	}
 	
@@ -89,8 +83,6 @@ public class AdminProductController {
 			HttpServletRequest request, @RequestParam("image") MultipartFile file, Model model) throws IllegalStateException, IOException {
 		if (br.hasErrors()) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
-			rd.addFlashAttribute("error", true);
-			model.addAttribute("product", product);
 			return "redirect:/admin/product/edit/"+product.getProductId();
 		}
 		String filename = UploadFile.upload(file, request);
@@ -101,30 +93,25 @@ public class AdminProductController {
 			filename = productService.findByProductId(product.getProductId()).getImagePath();
 		}
 		product.setImagePath(filename);
-		product.setLocation(new Location(productService.findByProductId(product.getProductId()).getLocation().getLocationId()));
 		if (productService.update(product)) {
-			rd.addFlashAttribute(GlobalsConstant.MESSAGE,
-					messageSource.getMessage("success", null, Locale.getDefault()));
-			rd.addFlashAttribute("success", true);
+			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("success", null, Locale.getDefault()));
 			return "redirect:/admin/product/index/"+product.getLocation().getLocationId();
 		}
+		UploadFile.del(filename, request);
 		rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
-		rd.addFlashAttribute("error", true);
-		model.addAttribute("product", product);
 		return "redirect:/admin/product/edit/"+ product.getProductId();
 	}
 	
-	@RequestMapping(value ="/del/{id}")
+	@RequestMapping(value ="/delete/{id}")
 	public String delete(@PathVariable Integer id, RedirectAttributes rd, HttpServletRequest request, Model mode) {
+		String image = productService.findByProductId(id).getImagePath();
+		int locationId = productService.findByProductId(id).getLocation().getLocationId();
+		UploadFile.del(image, request);
 		if (productService.delete(id)) {
-			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
-			rd.addFlashAttribute("error", true);
-			System.out.println("aaaaa");
-			return "redirect:/admin/product/index";
+			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("success", null, Locale.getDefault()));
+			return "redirect:/admin/product/index/" + locationId;
 		}
-		System.out.println("bbbbb");
-		rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("success", null, Locale.getDefault()));
-		rd.addFlashAttribute("success", true);
-		return "redirect:/admin/product/index";
+		rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
+		return "redirect:/admin/product/index/" + locationId;
 	}
 }

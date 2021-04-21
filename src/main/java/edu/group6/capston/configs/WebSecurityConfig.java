@@ -58,9 +58,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		deleteCookies("JSESSIONID").
 		and().exceptionHandling().accessDeniedPage("/error403");
 		http.authorizeRequests().antMatchers("/").permitAll();
-		http.authorizeRequests().antMatchers("/admin/location/add").access("hasAnyRole('ROLE_ADMIN', 'ROLE_POSTER', 'ROLE_STAFF')");
+		http.authorizeRequests().antMatchers("/admin/location/add").access("hasAnyRole('ROLE_POSTER')");
+		http.authorizeRequests().antMatchers("/admin/location/image/*").access("hasAnyRole('ROLE_POSTER')");
+		http.authorizeRequests().antMatchers("/admin/product/add/*").access("hasAnyRole('ROLE_POSTER')");
+		http.authorizeRequests().antMatchers("/admin/product/add").access("hasAnyRole('ROLE_POSTER')");
+		http.authorizeRequests().antMatchers("/admin/product/edit/*").access("hasAnyRole('ROLE_POSTER')");
+		http.authorizeRequests().antMatchers("/admin/product/edit").access("hasAnyRole('ROLE_POSTER')");
+		http.authorizeRequests().antMatchers("/admin/product/delete/*").access("hasAnyRole('ROLE_POSTER')");
 		http.authorizeRequests().antMatchers("/admin/locationType/index").access("hasAnyRole('ROLE_ADMIN', 'ROLE_STAFF')");
 		http.authorizeRequests().antMatchers("/admin/locationType/add").access("hasAnyRole('ROLE_ADMIN', 'ROLE_POSTER')");
+		http.authorizeRequests().antMatchers("/admin/order/index").access("hasAnyRole('ROLE_ADMIN', 'ROLE_STAFF')");
+		http.authorizeRequests().antMatchers("/admin/order/neworder").access("hasAnyRole('ROLE_ADMIN', 'ROLE_STAFF')");
+		http.authorizeRequests().antMatchers("/admin/order/detail/*").access("hasAnyRole('ROLE_ADMIN', 'ROLE_STAFF')");
+		http.authorizeRequests().antMatchers("/admin/order/edit").access("hasAnyRole('ROLE_ADMIN', 'ROLE_STAFF')");
+		http.authorizeRequests().antMatchers("/admin/statistical/index/*").access("hasAnyRole('ROLE_ADMIN', 'ROLE_STAFF')");
+		http.authorizeRequests().antMatchers("/admin/statistical/index").access("hasAnyRole('ROLE_ADMIN', 'ROLE_STAFF')");
+		http.authorizeRequests().antMatchers("/admin/statistical/downloadExcel").access("hasAnyRole('ROLE_ADMIN', 'ROLE_STAFF')");
 		http.authorizeRequests().antMatchers("/admin/**").access("hasAnyRole('ROLE_ADMIN', 'ROLE_STAFF', 'ROLE_POSTER')");
 		
 		 

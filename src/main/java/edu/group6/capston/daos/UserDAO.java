@@ -189,4 +189,15 @@ public class UserDAO {
 			} return false;
 		}
 	}
+	public boolean update1(Users user) {
+		try (Session session = this.sessionFactory.openSession()) {
+			Transaction tx = session.beginTransaction();
+			session.update(user);
+			tx.commit();
+			session.close();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 }

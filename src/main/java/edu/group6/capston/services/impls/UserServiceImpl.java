@@ -208,7 +208,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		Users users = UserDAO.findByEmailAndUserName(email, username);
         if (users != null) {
         	users.setResetPasswordToken(token);
-            UserDAO.update(users);
+            UserDAO.update1(users);
         } else {
             throw new CustomerNotFoundException("Email và Tài khoản không hợp lệ!");
         }
@@ -230,8 +230,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	}
 
 	@Override
+	public boolean update1(Users user) {
+		return UserDAO.update1(user);
+	}
+
+	@Override
 	public boolean update(Users user) {
-		// TODO Auto-generated method stub
 		return UserDAO.update(user);
 	}
 

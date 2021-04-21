@@ -15,6 +15,7 @@ public interface UserService {
 	Users findByResetPasswordToken(String token);
 	Users findOneByUserId(Integer userId);
 	boolean update(Users user);
+	boolean update1(Users user);
 	boolean checkUserExist(String username);
 	void sendMailWarning(String mail);
 	void sendMailNewAccount(String mail, String username);

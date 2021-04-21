@@ -28,12 +28,9 @@
                   		<c:set var="actionUrl" value="${pageContext.request.contextPath}/user/edit" />
                   </c:if>
                   <form action="${actionUrl}" role="form" method="post"  name="form" id="form" enctype="multipart/form-data">
-                  	<div class="form-group">
-                      <label for="userId">ID</label>
-                      <input class="form-control mb-3" type="text" value="${user.userId}" id="userId" name="userId" readonly="readonly">
+                      <input class="form-control mb-3" type="hidden" value="${user.userId}" id="userId" name="userId" readonly="readonly">
                       <input type="hidden" value="${user.role.roleId}" name="role.roleId">
                       <input type="hidden" value="${user.password}" name="password">
-                    </div>
                   	<div class="form-group">
                       <label for="username">Tên tài khoản</label>
                       <input class="form-control mb-3" type="text" value="${user.username}" id="username" name="username" readonly="readonly">

@@ -28,20 +28,11 @@
             </ol>
           </div>
           <!-- Row -->
-	      <span id="result">
-	      	<c:if test="${not empty msg}">
-               	<c:if test="${success eq true}">
-					<div class="alert alert-success">
-						<strong>${msg}</strong>
-					</div>
-				</c:if>
-				<c:if test="${error eq true}">
-					<div class="alert alert-danger">
-						<strong>${msg}</strong>
-					</div>
-				</c:if>
-			</c:if>
-	      </span>
+	      <c:if test="${not empty msg}">
+			<div class="alert alert-success">
+				<strong>${msg}</strong>
+			</div>
+		  </c:if>
           <div class="row">
             <!-- DataTable with Hover -->
             <div class="col-lg-12">
@@ -64,7 +55,7 @@
                   <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                     <thead class="thead-light">
                       <tr>
-                        <th>ID</th>
+                      	<th>ID</th>
                         <th>Tên sản phẩm</th>
                         <th>Giá</th>
                         <th>Loại sản phẩm</th>
@@ -102,10 +93,7 @@
 			                <div class="modal-body">
 				                <form role="form" action="${editUrl}/${product.productId}" method="post" id="form">
 				                	<div class="comment-form">
-				                		<div class="form-group">
-					                      <label for="name">ID</label>
-					                      <input class="form-control mb-3" type="text" value="${product.productId}" id="productId" name="productId" readonly>
-					                    </div>
+					                      <input class="form-control mb-3" type="hidden" value="${product.productId}" id="productId" name="productId" readonly>
 										<div class="form-group">
 					                      <label for="name">Tên sản phẩm</label>
 					                      <input class="form-control mb-3" type="text" value="${product.name}" id="name" name="name" readonly>
@@ -115,13 +103,10 @@
 					                      <input class="form-control mb-3" type="text" value="${product.price}" id="price" name="price" readonly>
 					                    </div>
 					                    <div class="form-group">
-					                      <label for="name">Tên mô tả</label>
-					                      <input class="form-control mb-3" type="text" value="${product.describe}" id="describe" name="describe" readonly>
+					                      <label for="name">Mô tả</label>
+					                      <input class="form-control mb-3" type="text" value="${product.description}" id="description" name="description" readonly>
 					                    </div>
-					                    <div class="form-group">
-					                      <label for="name">Số lần đặt hàng</label>
-					                      <input class="form-control mb-3" type="text" value="${product.orderCount}" id="orderCount" name="orderCount" readonly>
-					                    </div>
+					                      <input class="form-control mb-3" type="hidden" value="${product.orderCount}" id="orderCount" name="orderCount" readonly>
 					                    <div class="form-group">
 					                      <label for="name">Loại sản phẩm</label>
 					                      <input class="form-control mb-3" type="text" value="${product.productCategory.productCategoryName}" id="productCategory.productCategoryId" name="productCategory.productCategoryId" readonly>
