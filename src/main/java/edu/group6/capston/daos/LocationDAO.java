@@ -236,4 +236,10 @@ public class LocationDAO {
 			return session.createQuery("FROM Location WHERE status = false", Location.class).list();
 		}
 	}
+
+	public List<Location> findLocationNearYou(String ward, String district, String city) {
+		try (Session session = this.sessionFactory.openSession()) {
+			return session.createQuery("FROM Location WHERE ward = " + ward + " or district = " + district + " or City = " + city, Location.class).setMaxResults(5).list();
+		}
+	}
 }

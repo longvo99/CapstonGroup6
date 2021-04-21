@@ -3,6 +3,7 @@ package edu.group6.capston.services;
 import java.util.List;
 
 import edu.group6.capston.dtos.LocationDTO;
+import edu.group6.capston.dtos.UserAddress;
 import edu.group6.capston.models.Location;;
 
 public interface LocationService {
@@ -23,4 +24,5 @@ public interface LocationService {
 	List<LocationDTO> searchLocation(String productName);
 	List<Location> findImageLocation();
 	List<Location> unapprovedLocationList();
+	List<Location> findLocationNearYou(UserAddress address);
 }

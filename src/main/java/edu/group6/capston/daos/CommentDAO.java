@@ -64,4 +64,13 @@ public class CommentDAO{
 			return count;
 		}
 	}
+
+	public List<Comment> findCommentReply(int userId) {
+		try (Session session = this.sessionFactory.openSession()) {
+			List<Comment> list = session.createQuery("from Comment WHERE parentCommentId in (SELECT commentId FROM Comment WHERE parentCommentId = 0 and users.userId = " + userId +") AND users.userId != " + userId + " order by status ASC , commentId DESC ", Comment.class).list();
+			return list;
+		}
+	}
+	
+	
 }

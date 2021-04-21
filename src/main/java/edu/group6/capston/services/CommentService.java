@@ -12,4 +12,5 @@ public interface CommentService {
 	List<Comment> findAllCommentByLocationId(Integer locationId);
 	List<Comment> findAllCommentByParentCommentId(Integer locationId);
 	Long findCountCommentByLocationId(Integer locationId);
+	List<Comment> findCommentReply(int userId);
 }

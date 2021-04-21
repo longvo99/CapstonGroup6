@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.group6.capston.daos.LocationDAO;
 import edu.group6.capston.dtos.LocationDTO;
+import edu.group6.capston.dtos.UserAddress;
 import edu.group6.capston.models.Location;
 import edu.group6.capston.services.LocationService;
 
@@ -103,6 +104,11 @@ public class LocationServiceImpl implements LocationService {
 	@Override
 	public List<Location> unapprovedLocationList() {
 		return LocationDAO.unapprovedLocationList();
+	}
+
+	@Override
+	public List<Location> findLocationNearYou(UserAddress address) {
+		return LocationDAO.findLocationNearYou(address.getWard(), address.getDistrict(), address.getCity());
 	}
 
 }

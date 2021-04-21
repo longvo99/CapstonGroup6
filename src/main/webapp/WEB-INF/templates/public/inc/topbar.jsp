@@ -482,30 +482,60 @@ input[type="file"] {
                             <!-- user notification -->
                             <div class="cart-btn notification-btn">
                                 <a href="#" class="text-light-green fw-700"> <i class="fas fa-bell"></i>
-                                    <span class="user-alert-notification"></span>
+                                    <c:if test="${sizeNotification ne 0}">
+                                    <span class="user-alert-notification">${sizeNotification}</span>
+                                    </c:if>
                                 </a>
                                 <div class="notification-dropdown">
-                                    <div class="product-detail">
-                                        <a href="#">
-                                            <div class="img-box">
-                                                <img src="https://via.placeholder.com/50x50" class="rounded" alt="image">
+                                <c:if test="${not empty listNotification}">
+                                <c:forEach items="${listNotification}" var="notification">
+                                	<c:set var="setStyle" value="" />
+                                	<c:if test="${notification.status eq false}">
+                                		<c:set var="setStyle" value="style='background-color: white;'" />
+                                	</c:if>
+                                    <div class="product-detail" ${setStyle}>
+                                        <a ${setStyle} href="${pageContext.request.contextPath}/public/restaurant/${notification.location.locationId}">
+                                            <div class="img-box" ${setStyle}>
+                                                <img style="width: 50px; height: 50px;" src="${pageContext.request.contextPath}/resources/admin/assets/img/uploads/${notification.users.avatarPath}" class="rounded" alt="image">
                                             </div>
-                                            <div class="product-about">
-                                                <p class="text-light-black">Lil Johnny’s</p>
-                                                <p class="text-light-white">Spicy Maxican Grill</p>
+                                            <div class="product-about" ${setStyle}>
+                                            	<c:set var="nameUserComment" value=""/>
+                                            	<c:choose>
+                                            		<c:when test="${not empty notification.users.contactName}">
+                                            			<c:set var="nameUserComment" value="${notification.users.contactName}"/>
+                                            		</c:when>
+                                            		<c:otherwise>
+                                            			<c:set var="nameUserComment" value="${notification.users.username}"/>
+                                            		</c:otherwise>
+                                            	</c:choose>
+                                                <p class="text-light-black">${nameUserComment}</p>
+                                                <p class="text-light-white">Đã trả lời phản hồi bình luận...</p>
                                             </div>
                                         </a>
                                     </div>
-                                    <div class="rating-box">
-                                        <p class="text-light-black">How was your last order ?.</p> <span class="text-dark-white"><i class="fas fa-star"></i></span>
-                                        <span class="text-dark-white"><i class="fas fa-star"></i></span>
-                                        <span class="text-dark-white"><i class="fas fa-star"></i></span>
-                                        <span class="text-dark-white"><i class="fas fa-star"></i></span>
-                                        <span class="text-dark-white"><i class="fas fa-star"></i></span>
-                                        <cite class="text-light-white">Ordered 2 days ago</cite>
-                                    </div>
+                                </c:forEach>
+                                </c:if>
                                 </div>
+                                <c:if test="${empty listNotification}">
+                                <div class="notification-dropdown">
+                                	<div class="product-detail">
+                                		<p class="text-light-white">Không có thông báo nào!</p>
+                                	</div>
+                                </div>
+                                </c:if>
                             </div>
+                             <style type="text/css">
+								.notification-dropdown {
+									width: 400px;
+									max-height: 250px;
+									overflow-y: auto;
+									overflow-x: hidden;
+								}
+								.product-detail{
+									width: 400px;
+								}
+							</style>
+                            
                             <!-- user notification -->
                             <!-- user cart -->
                             <div class="cart-btn cart-dropdown">

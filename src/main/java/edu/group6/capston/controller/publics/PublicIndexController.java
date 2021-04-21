@@ -127,11 +127,15 @@ public class PublicIndexController extends PublicAbstractController {
 			Users user = (Users) request.getSession().getAttribute("userSession");
 			LocationFavorites locationFavorite = locationFavoriteService.findLocationFavorite(user.getUserId() , locationId);
 			model.addAttribute("locationFavorite", locationFavorite);
+			if(user.getContactAddress() != null) {
+				model.addAttribute("minMaxLocation", productService.findMinMaxPriceLocation());
+				model.addAttribute("ratingList", ratingService.findAllRatingLocation());
+				model.addAttribute("locationNearYou", GlobalsFunction.changeImageLocation(locationService.findLocationNearYou(GlobalsFunction.AddressUser(user.getContactAddress()))));
+			}
 		}
 		
 		model.addAttribute("countRating", commentService.findCountCommentByLocationId(locationId));
 		model.addAttribute("pointRating", ratingService.findAVGRating(locationId));
-		
 		return "public.restaurant";
 	}
 
@@ -185,7 +189,7 @@ public class PublicIndexController extends PublicAbstractController {
 	@RequestMapping(value = "/restaurant/parentComment/{commentId}/{locationId}", method = RequestMethod.POST, produces = "application/json")
 	public @ResponseBody String addParentComment(@RequestBody String content, @PathVariable Integer commentId, @PathVariable Integer locationId, HttpServletRequest request) {
 		Users user = (Users) request.getSession().getAttribute("userSession");
-		Comment comment = new Comment(0, null, String.valueOf(GlobalsFunction.getCurrentTime()), content, null, commentId, new Location(locationId), new Users(user.getUserId()));
+		Comment comment = new Comment(0, null, String.valueOf(GlobalsFunction.getCurrentTime()), content, null, commentId, new Location(locationId), new Users(user.getUserId()), false);
 		commentService.save(comment);
 		return "success";
 	}
@@ -213,7 +217,7 @@ public class PublicIndexController extends PublicAbstractController {
 		}
 		mediaPath += ";" + video;
 		Users user = (Users) request.getSession().getAttribute("userSession");
-		Comment comment = new Comment(0, commentDTO.getTitle(), String.valueOf(GlobalsFunction.getCurrentTime()), commentDTO.getContent(), mediaPath, 0, new Location(locationId), new Users(user.getUserId()));
+		Comment comment = new Comment(0, commentDTO.getTitle(), String.valueOf(GlobalsFunction.getCurrentTime()), commentDTO.getContent(), mediaPath, 0, new Location(locationId), new Users(user.getUserId()), false);
 		if (commentService.save(comment)) {
 			Rating rate1 = new Rating(0, commentDTO.getLocation() , "location", comment);
 			Rating rate2 = new Rating(0, commentDTO.getPrice() , "price", comment);

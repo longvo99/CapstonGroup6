@@ -988,202 +988,82 @@
     </section>
     <!-- restaurent reviews -->
     <!-- offer near -->
-    <!-- <section class="fresh-deals section-padding">
+    <section class="fresh-deals section-padding">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="section-header-left">
-                        <h3 class="text-light-black header-title title">Offers near you</h3>
+                        <h3 class="text-light-black header-title title">Địa điểm gần bạn</h3>
                     </div>
                 </div>
+                <c:if test="${not empty locationNearYou}">
                 <div class="col-12">
                     <div class="fresh-deals-slider swiper-container">
                         <div class="swiper-wrapper">
+                        	<c:forEach items="${locationNearYou}" var="location">
                             <div class="swiper-slide">
                                 <div class="product-box">
                                     <div class="product-img">
-                                        <a href="restaurant.html">
-                                            <img src="https://via.placeholder.com/255x150" class="img-fluid full-width" alt="product-img">
+                                        <a href="${pageContext.request.contextPath}/public/restaurant/${location.locationId}">
+                                            <img style="width: 258px; height: 172px;" src="${pageContext.request.contextPath}/resources/admin/assets/img/uploads/${location.mediaPath}" class="img-fluid full-width" alt="product-img">
                                         </a>
                                     </div>
                                     <div class="product-caption">
                                         <div class="title-box">
-                                            <h6 class="product-title"><a href="restaurant.html" class="text-light-black">Great Burger</a></h6>
+                                            <h6 class="product-title"><a href="${pageContext.request.contextPath}/public/restaurant/${location.locationId}" class="text-light-black">${location.locationName}</a></h6>
                                         </div>
-                                        <p class="text-light-white">American, Fast Food</p>
+                                        <p class="text-light-white">${location.locationType.locationTypeName},
+										${location.locationCategory.locationCategoryName}</p>
                                         <div class="product-details">
-                                            <div class="price-time"> <span class="text-light-black time">30-40 min</span>
-                                                <span class="text-light-white price">$10 min</span>
+                                            <div class="price-time"> 
+                                            	<span class="text-light-black time">
+												${location.openTime}-${location.closeTime}</span>
+												<c:set var="minMaxPrice" value="--.--" />
+												<c:forEach items="${minMaxLocation}" var="minMax">
+													<c:if test="${minMax.locationId == location.locationId}">
+														<span class="text-light-white price"><fmt:formatNumber value="${minMax.minPrice}" type="number" />VNĐ - <fmt:formatNumber value="${minMax.maxPrice}" type="number"/>VNĐ</span>
+														<c:set var="minMaxPrice" value="" />
+													</c:if>
+												</c:forEach>
+												<span class="text-light-white price">${minMaxPrice}</span>
                                             </div>
-                                            <div class="rating"> <span>
-                          <i class="fas fa-star text-yellow"></i>
-                          <i class="fas fa-star text-yellow"></i>
-                          <i class="fas fa-star text-yellow"></i>
-                          <i class="fas fa-star text-yellow"></i>
-                          <i class="fas fa-star text-yellow"></i>
-                        </span>
-                                                <span class="text-light-white text-right">4225 ratings</span>
+                                            <div class="rating"> 
+                                            	<c:set var="ratingPoint" value="-.-" />
+												<c:forEach items="${ratingList}" var="rating">
+													<c:if test="${rating.locationId == locationDiscountTop.locationId}"><c:set var="ratingPoint" value="${rating.point}" /></c:if>
+												</c:forEach>
+												<div class="tags">
+													<span class="text-custom-white rectangle-tag bg-yellow">
+														${ratingPoint} </span>
+												</div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="product-footer-2">
+                                    <!-- <div class="product-footer-2">
                                         <div class="discount"> <span class="text-success fs-14">$3 off</span>
                                         </div>
                                         <div class="discount-coupon"> <span class="text-light-white fs-14">First order only</span>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
+                            
                             </div>
-                            <div class="swiper-slide">
-                                <div class="product-box">
-                                    <div class="product-img">
-                                        <a href="restaurant.html">
-                                            <img src="https://via.placeholder.com/255x150" class="img-fluid full-width" alt="product-img">
-                                        </a>
-                                    </div>
-                                    <div class="product-caption">
-                                        <div class="title-box">
-                                            <h6 class="product-title"><a href="restaurant.html" class="text-light-black">Flavor Town</a></h6>
-                                        </div>
-                                        <p class="text-light-white">Breakfast, Lunch & Dinner</p>
-                                        <div class="product-details">
-                                            <div class="price-time"> <span class="text-light-black time">30-40 min</span>
-                                                <span class="text-light-white price">$10 min</span>
-                                            </div>
-                                            <div class="rating"> <span>
-                          <i class="fas fa-star text-yellow"></i>
-                          <i class="fas fa-star text-yellow"></i>
-                          <i class="fas fa-star text-yellow"></i>
-                          <i class="fas fa-star text-yellow"></i>
-                          <i class="fas fa-star text-yellow"></i>
-                        </span>
-                                                <span class="text-light-white text-right">4225 ratings</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-footer-2">
-                                        <div class="discount"> <span class="text-success fs-14">$3 off</span>
-                                        </div>
-                                        <div class="discount-coupon"> <span class="text-light-white fs-14">First order only</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="product-box">
-                                    <div class="product-img">
-                                        <a href="restaurant.html">
-                                            <img src="https://via.placeholder.com/255x150" class="img-fluid full-width" alt="product-img">
-                                        </a>
-                                    </div>
-                                    <div class="product-caption">
-                                        <div class="title-box">
-                                            <h6 class="product-title"><a href="restaurant.html" class="text-light-black">Big Bites</a></h6>
-                                        </div>
-                                        <p class="text-light-white">Pizzas, Fast Food</p>
-                                        <div class="product-details">
-                                            <div class="price-time"> <span class="text-light-black time">30-40 min</span>
-                                                <span class="text-light-white price">$10 min</span>
-                                            </div>
-                                            <div class="rating"> <span>
-                          <i class="fas fa-star text-yellow"></i>
-                          <i class="fas fa-star text-yellow"></i>
-                          <i class="fas fa-star text-yellow"></i>
-                          <i class="fas fa-star text-yellow"></i>
-                          <i class="fas fa-star text-yellow"></i>
-                        </span>
-                                                <span class="text-light-white text-right">4225 ratings</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-footer-2">
-                                        <div class="discount"> <span class="text-success fs-14">$3 off</span>
-                                        </div>
-                                        <div class="discount-coupon"> <span class="text-light-white fs-14">First order only</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="product-box">
-                                    <div class="product-img">
-                                        <a href="restaurant.html">
-                                            <img src="https://via.placeholder.com/255x150" class="img-fluid full-width" alt="product-img">
-                                        </a>
-                                    </div>
-                                    <div class="product-caption">
-                                        <div class="title-box">
-                                            <h6 class="product-title"><a href="restaurant.html" class="text-light-black">Smile N’ Delight</a></h6>
-                                        </div>
-                                        <p class="text-light-white">Desserts, Beverages</p>
-                                        <div class="product-details">
-                                            <div class="price-time"> <span class="text-light-black time">30-40 min</span>
-                                                <span class="text-light-white price">$10 min</span>
-                                            </div>
-                                            <div class="rating"> <span>
-                          <i class="fas fa-star text-yellow"></i>
-                          <i class="fas fa-star text-yellow"></i>
-                          <i class="fas fa-star text-yellow"></i>
-                          <i class="fas fa-star text-yellow"></i>
-                          <i class="fas fa-star text-yellow"></i>
-                        </span>
-                                                <span class="text-light-white text-right">4225 ratings</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-footer-2">
-                                        <div class="discount"> <span class="text-success fs-14">$3 off</span>
-                                        </div>
-                                        <div class="discount-coupon"> <span class="text-light-white fs-14">First order only</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="product-box">
-                                    <div class="product-img">
-                                        <a href="restaurant.html">
-                                            <img src="https://via.placeholder.com/255x150" class="img-fluid full-width" alt="product-img">
-                                        </a>
-                                    </div>
-                                    <div class="product-caption">
-                                        <div class="title-box">
-                                            <h6 class="product-title"><a href="restaurant.html" class="text-light-black">Lil Johnny’s</a></h6>
-                                        </div>
-                                        <p class="text-light-white">Continental & Mexican</p>
-                                        <div class="product-details">
-                                            <div class="price-time"> <span class="text-light-black time">30-40 min</span>
-                                                <span class="text-light-white price">$10 min</span>
-                                            </div>
-                                            <div class="rating"> <span>
-                          <i class="fas fa-star text-yellow"></i>
-                          <i class="fas fa-star text-yellow"></i>
-                          <i class="fas fa-star text-yellow"></i>
-                          <i class="fas fa-star text-yellow"></i>
-                          <i class="fas fa-star text-yellow"></i>
-                        </span>
-                                                <span class="text-light-white text-right">4225 ratings</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-footer-2">
-                                        <div class="discount"> <span class="text-success fs-14">$3 off</span>
-                                        </div>
-                                        <div class="discount-coupon"> <span class="text-light-white fs-14">First order only</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            </c:forEach>
                         </div>
-                        Add Arrows
                         <div class="swiper-button-next"></div>
                         <div class="swiper-button-prev"></div>
                     </div>
                 </div>
+            	</c:if>
+            	<c:if test="${empty locationNearYou}">
+            		<div class="col-12">
+            			<span>Bạn hãy cập nhập địa chỉ của mình để xem các địa điểm gần nơi bạn sống, cảm ơn!</span>
+            		</div>
+            	</c:if>
             </div>
         </div>
     </section>
-     --><!-- offer near -->
+    <!-- offer near -->
    
     <!-- product popup -->
     <c:forEach items="${product}" var="product">

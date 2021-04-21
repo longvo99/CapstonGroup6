@@ -39,4 +39,6 @@ public class Comment {
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private Users users;
+	@Column
+	private boolean status;
 }
