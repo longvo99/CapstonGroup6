@@ -7,7 +7,7 @@ import edu.group6.capston.models.Comment;
 public interface CommentService {
 	//List<Comment> findAll();
 	boolean save(Comment comment);
-	//boolean update(Comment discount);
+	boolean update(int commentId);
 	boolean delete(Comment comment);
 	List<Comment> findAllCommentByLocationId(Integer locationId);
 	List<Comment> findAllCommentByParentCommentId(Integer locationId);

@@ -44,5 +44,12 @@ public class CommentServiceImpl implements CommentService {
 		return commentDAO.findCommentReply(userId);
 	}
 
+	@Override
+	public boolean update(int commentId) {
+		if(commentDAO.update(commentId))
+			return true;
+		return false;
+	}
+
 	
 }

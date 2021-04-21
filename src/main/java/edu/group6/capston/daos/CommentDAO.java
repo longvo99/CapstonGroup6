@@ -71,6 +71,19 @@ public class CommentDAO{
 			return list;
 		}
 	}
-	
+
+	public boolean update(int commentId) {
+		try (Session session = this.sessionFactory.openSession()) {
+			Transaction tx = session.beginTransaction();
+			Comment comment = session.find(Comment.class, commentId);
+			comment.setStatus(true);
+			session.update(comment);
+			tx.commit();
+			session.close();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 	
 }

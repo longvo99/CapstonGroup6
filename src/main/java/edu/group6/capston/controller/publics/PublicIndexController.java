@@ -98,8 +98,11 @@ public class PublicIndexController extends PublicAbstractController {
 		return "public.index";
 	}
 	
-	@GetMapping("/restaurant/{locationId}")
-	public String productdetail(@PathVariable Integer locationId, Model model, HttpServletRequest request) {
+	@GetMapping(value = {"/restaurant/{locationId}" , "/restaurant/{locationId}/{commentId}"})
+	public String productdetail(@PathVariable Integer locationId, @PathVariable Integer commentId, Model model, HttpServletRequest request) {
+		if(commentId != null) {
+			commentService.update(commentId);
+		}
 		Location location = locationService.findLocationId(locationId);
 		String[] imagePath = GlobalsFunction.splitPathMedia(location.getMediaPath());
 		model.addAttribute("location", GlobalsFunction.formatTime(location));

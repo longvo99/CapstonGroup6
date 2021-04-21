@@ -482,8 +482,10 @@ input[type="file"] {
                             <!-- user notification -->
                             <div class="cart-btn notification-btn">
                                 <a href="#" class="text-light-green fw-700"> <i class="fas fa-bell"></i>
+                                    <c:if test="${not empty sizeNotification}">
                                     <c:if test="${sizeNotification ne 0}">
                                     <span class="user-alert-notification">${sizeNotification}</span>
+                                    </c:if>
                                     </c:if>
                                 </a>
                                 <div class="notification-dropdown">
@@ -494,7 +496,7 @@ input[type="file"] {
                                 		<c:set var="setStyle" value="style='background-color: white;'" />
                                 	</c:if>
                                     <div class="product-detail" ${setStyle}>
-                                        <a ${setStyle} href="${pageContext.request.contextPath}/public/restaurant/${notification.location.locationId}">
+                                        <a ${setStyle} href="${pageContext.request.contextPath}/public/restaurant/${notification.location.locationId}/${notification.commentId}">
                                             <div class="img-box" ${setStyle}>
                                                 <img style="width: 50px; height: 50px;" src="${pageContext.request.contextPath}/resources/admin/assets/img/uploads/${notification.users.avatarPath}" class="rounded" alt="image">
                                             </div>
