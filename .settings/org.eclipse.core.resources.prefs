@@ -7,6 +7,7 @@ encoding//src/main/java/edu/group6/capston/controller/admins/AdminDiscountContro
 encoding//src/main/java/edu/group6/capston/controller/admins/AdminLocationController.java=UTF-8
 encoding//src/main/java/edu/group6/capston/controller/admins/AdminUserController.java=UTF-8
 encoding//src/main/java/edu/group6/capston/controller/admins/CustomLoginFailureHandler.java=UTF-8
+encoding//src/main/java/edu/group6/capston/controller/admins/ExcelBuilder.java=UTF-8
 encoding//src/main/java/edu/group6/capston/controller/admins/ForgotPasswordController.java=UTF-8
 encoding//src/main/java/edu/group6/capston/controller/auths/LoginController.java=UTF-8
 encoding//src/main/java/edu/group6/capston/controller/publics/PublicAbstractController.java=UTF-8
@@ -18,6 +19,7 @@ encoding//src/main/java/edu/group6/capston/controller/publics/PublicSearchContro
 encoding//src/main/java/edu/group6/capston/controller/publics/PublicUserController.java=UTF-8
 encoding//src/main/java/edu/group6/capston/daos/DiscountDAO.java=UTF-8
 encoding//src/main/java/edu/group6/capston/dtos/LocationDTO.java=UTF-8
+encoding//src/main/java/edu/group6/capston/dtos/LocationDTO2.java=UTF-8
 encoding//src/main/java/edu/group6/capston/mail/MainApp.java=UTF-8
 encoding//src/main/java/edu/group6/capston/models/CustomUserDetails.java=UTF-8
 encoding//src/main/java/edu/group6/capston/models/Location.java=UTF-8
