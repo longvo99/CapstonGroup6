@@ -316,7 +316,7 @@
                     </div>
 					</c:if>	 --%>
                     <div class="form-group">
-                    <c:if test="${empty sessionScope.userSession}">
+                    <%-- <c:if test="${empty sessionScope.userSession}">
                     <c:if test="${userDetail.user.role.roleId eq 'ADMIN'}">
 						<div class="custom-control custom-switch">
 	                        <input type="checkbox" name="condition" id="checkbox" class="custom-control-input">
@@ -324,8 +324,48 @@
                         </div>
                         <c:set var="collapse" value="collapse" ></c:set>
                      </c:if>
-                     </c:if>
+                     </c:if> --%>
+                     <c:if test="${empty sessionScope.userSession}">
+					<c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
                         <c:if test="${not empty discountRuleList}">
+						 <div id="collapseThree" class="row ${collapse}" >
+		                    <div class="col-lg-6">
+		                    	<label for="ruleId">Điều kiện</label>
+		                    	<select id="ruleId" name="discountRule1" class="form-control">
+		                    		<option data-rate="" value="default">--Chọn--</option>
+		                    		<c:forEach items="${discountRuleList}" var="discountRule">
+		                    		<c:choose>
+								         <c:when test="${discountRule.ruleId eq 1}">
+								            <option value="${discountRule.ruleId}" data-rate="VNĐ" >${discountRule.ruleContent}</option>
+								         </c:when>
+								         <c:when test="${discountRule.ruleId eq 2}">
+								            <option value="${discountRule.ruleId}" data-rate="VNĐ">${discountRule.ruleContent}</option>
+								         </c:when>
+								         <c:otherwise>
+								            <option value="${discountRule.ruleId}" data-rate="">${discountRule.ruleContent}</option>
+								         </c:otherwise>
+							      	</c:choose>
+		                    		</c:forEach>
+		                      	</select>
+		                    </div>
+		                    <div class="col-lg-6">
+		                    	<label>Giá trị tối thiểu</label>
+		                   		<div class="placeholderrd abc" data-placeholder="">
+						    		<input class="form-control mb-3" type="text" name="valueRule1">
+						  		</div>
+						  	</div>
+						  	<script type="text/javascript">
+							   $(function(){
+							      $("#ruleId").change(function(){
+							         $(".abc").attr("data-placeholder", $(this).find(":selected").data("rate"));
+							      });
+							   });
+							</script>
+                    	</div>
+                    	</c:if>
+                    	</c:if></c:if>
+                    	<c:if test="${not empty sessionScope.userSession}">
+                    	<c:if test="${not empty discountRuleList}">
 						 <div id="collapseThree" class="row ${collapse}" >
 		                    <div class="col-lg-6">
 		                    	<label for="ruleId">Điều kiện</label>
@@ -360,6 +400,7 @@
 							   });
 							</script>
                     	</div>
+                    	</c:if>
                     	</c:if>
                     </div>
 <c:set var="urlSearchProduct" value="${pageContext.request.contextPath}/public/discount/searchproduct" />

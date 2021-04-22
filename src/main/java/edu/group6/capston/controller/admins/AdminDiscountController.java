@@ -133,8 +133,10 @@ public class AdminDiscountController {
 		 * "product": String productName = request.getParameter("productName").trim();
 		 * discountInfo.setValue("product:".concat(productName)); break; } ; }
 		 */
+		if (!GlobalsFunction.getUsers().getRole().getRoleId().equals("ADMIN")) {
 			discountInfo.setDiscountRule(new DiscountRule(Integer.parseInt(request.getParameter("discountRule1"))));
 			discountInfo.setValueRule(Integer.parseInt(request.getParameter("valueRule1")));
+		}
 		if (!GlobalsFunction.getUsers().getRole().getRoleId().equals("ADMIN")) {
 			List<DiscountInfo> list1 = new ArrayList<>();
 			DiscountInfo obj = null;
@@ -219,8 +221,10 @@ public class AdminDiscountController {
 		 * "product": String productName = request.getParameter("productName").trim();
 		 * discountInfo.setValue("product:".concat(productName)); break; } ; }
 		 */
+		if (!GlobalsFunction.getUsers().getRole().getRoleId().equals("ADMIN")) {
 			discountInfo.setDiscountRule(new DiscountRule(Integer.parseInt(request.getParameter("discountRule1"))));
 			discountInfo.setValueRule(Integer.parseInt(request.getParameter("valueRule1")));
+		}
 		if (!GlobalsFunction.getUsers().getRole().getRoleId().equals("ADMIN")) {
 			int locationId = Integer.valueOf(request.getParameter("locati"));
 			discountInfo.setLocation(new Location(locationId));

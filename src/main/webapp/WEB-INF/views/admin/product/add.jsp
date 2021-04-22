@@ -7,7 +7,7 @@
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="m-0 font-weight-bold text-primarys">Thêm mới loại địa điểm</h1>
+            <h1 class="m-0 font-weight-bold text-primarys">Thêm sản phẩm</h1>
             <ol class="breadcrumb">
               <c:set var="actionIndex" value="${pageContext.request.contextPath}/admin/index" />
               <c:if test="${not empty sessionScope.userSession}">
@@ -21,7 +21,7 @@
             <div class="col-lg-12">
               <!-- Form Basic -->
             <c:if test="${not empty msg}">
-				<div class="alert alert-danger">
+				<div class="alert alert-success">
 					<strong>${msg}</strong>
 				</div>
 			</c:if>
@@ -32,20 +32,22 @@
                   		<c:set var="actionUrl" value="${pageContext.request.contextPath}/public/product/add" />
                   </c:if>
                   <form role="form" action="${actionUrl}" method="post" id="form" enctype="multipart/form-data">
+                  	<input type="hidden" name="orderCount" value="0">
+                  	<input type="hidden" value="${locationId}" name="location.locationId">
                   	<div class="form-group">
                       <label for="name">Tên sản phẩm</label>
                       <input class="form-control mb-3" type="text" value="${product.name}" id="name" name="name">
                     </div>
                     <div class="form-group">
-                      <label for="name">Tên giá</label>
+                      <label for="price">Giá sản phẩm</label>
                       <input class="form-control mb-3" type="text" value="${product.price}" id="price" name="price">
                     </div>
                     <div class="form-group">
-                      <label for="name">Mô tả</label>
-                      <input class="form-control mb-3" type="text" value="${product.describe}" id="describe" name="describe">
+                      <label for="description">Mô tả</label>
+                      <input class="form-control mb-3" type="text" value="${product.description}" id="description" name="description">
                     </div>
                     <div class="form-group">
-                      <label for="name">Loại sản phẩm</label>
+                      <label >Loại sản phẩm</label>
                       <select class="form-control" id="productCategory.productCategoryId" name="productCategory.productCategoryId">
                       <c:if test="${not empty productCategoryList}">
                       	<c:forEach items="${productCategoryList}" var="productCategory">
@@ -55,14 +57,10 @@
                       </select>
                     </div>
                     <div class="form-group">
-                      <label for="name">Id địa điểm</label>
-                      <input class="form-control mb-3" type="text" value="${locationId}" id="locationId" name="location.locationId" readonly>
-                    </div>
-                    <div class="form-group">
-                    	<label for="name">Upload hình ảnh</label>
+                    	<label for="file">Upload hình ảnh</label>
                     	<input type="file" name="image" class="file" accept="image/*">
 					    <div class="input-group my-3">
-					      <input type="text" class="form-control" name="image" disabled placeholder="Upload File" id="file">
+					      <input type="text" class="form-control" readonly="readonly" placeholder="Upload File" id="file">
 					      <div class="input-group-append">
 					        <button type="button" class="browse btn btn-primary">Chọn ảnh</button>
 					      </div>
@@ -107,3 +105,48 @@
         </div>
         <!---Container Fluid-->
       </div>
+<script src="${pageContext.request.contextPath}/resources/admin/assets/js/jquery.validate.min.js"></script>
+<script type="text/javascript">
+$.validator.addMethod("valueNotEquals", function(value, element, arg){
+	  return arg !== value;
+	 }, "Value must not equal arg.");
+	$().ready(function() {
+		var validator = $("#form").validate({
+			errorPlacement: function(error, element){
+				$(element).closest("form").find("label[for='" + element.attr("id") + "']").append(error);
+			},
+			errorElement: "span",
+			ignore: [],
+			rules:{
+				name: {                      //lay name
+					required:true,
+				},
+				price: {                      
+					required:true,
+					digits:true,
+				},
+				description: {                      
+					required:true,
+				},
+				image1: {                      
+					required:true,
+				},
+			},
+			messages: {
+				name: {
+					required: " (Mời nhập)",
+				},
+				price: {
+					required: " (Mời nhập)",
+					digits: " (Nhập số dương)",
+				},
+				description: {
+					required: " (Mời nhập)",
+				},
+				image1: {
+					required: " (Mời nhập)",
+				},
+			},
+		});
+	});
+</script>

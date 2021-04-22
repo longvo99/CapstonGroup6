@@ -15,20 +15,11 @@
               <li class="breadcrumb-item active" aria-current="page">Forms</li>
             </ol>
           </div>
-		  <span id="result">
-	      	<c:if test="${not empty msg}">
-               	<c:if test="${success eq true}">
-					<div class="alert alert-success">
-						<strong>${msg}</strong>
-					</div>
-				</c:if>
-				<c:if test="${error eq true}">
-					<div class="alert alert-danger">
-						<strong>${msg}</strong>
-					</div>
-				</c:if>
-			</c:if>
-	      </span>
+		  <c:if test="${not empty msg}">
+			<div class="alert alert-success">
+				<strong>${msg}</strong>
+			</div>
+		  </c:if>
           <div class="row">
             <div class="col-lg-12">
               <!-- Form Basic -->
@@ -44,10 +35,7 @@
                   	<c:set var="readonly" value="readonly='readonly'" ></c:set>
                   </c:if>
                   </c:if>
-                  	<div class="form-group">
-                      <label for="name">ID</label>
-                      <input class="form-control mb-3" type="text" value="${location.locationId}" id="locationId" name="locationId" readonly="readonly">
-                    </div>
+                    <input class="form-control mb-3" type="hidden" value="${location.locationId}" name="locationId">
                   	<div class="form-group">
                       <label for="name">Tên địa điểm</label>
                       <input class="form-control mb-3" type="text" value="${location.locationName}" id="locationName" name="locationName" ${readonly}>

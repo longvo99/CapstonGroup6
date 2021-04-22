@@ -31,20 +31,11 @@
             </ol>
           </div>
           <!-- Row -->
-	      <span id="result">
-	      	<c:if test="${not empty msg}">
-               	<c:if test="${success eq true}">
-					<div class="alert alert-success">
-						<strong>${msg}</strong>
-					</div>
-				</c:if>
-				<c:if test="${error eq true}">
-					<div class="alert alert-danger">
-						<strong>${msg}</strong>
-					</div>
-				</c:if>
-			</c:if>
-	      </span>
+	      <c:if test="${not empty msg}">
+			<div class="alert alert-success">
+				<strong>${msg}</strong>
+			</div>
+		  </c:if>
           <div class="row">
             <!-- DataTable with Hover -->
             <div class="col-lg-12">

@@ -26,7 +26,7 @@ public class DiscountDAO {
 
 	public List<DiscountInfo> findAll() {
 		try (Session session = this.sessionFactory.openSession()) {
-			List<DiscountInfo> list = session.createQuery("from DiscountInfo", DiscountInfo.class).list();
+			List<DiscountInfo> list = session.createQuery("from DiscountInfo ORDER BY discountId DESC", DiscountInfo.class).list();
 			return list;
 		}
 	}

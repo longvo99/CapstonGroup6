@@ -297,16 +297,18 @@
 						<c:set value="show" var="show4" ></c:set>
 					</c:if>
                     <div class="form-group">
-						<c:if test="${empty sessionScope.userSession}">
+						<%-- <c:if test="${empty sessionScope.userSession}">
                   	  	<c:if test="${userDetail.user.role.roleId eq 'ADMIN'}">
 						<div class="custom-control custom-switch">
 	                        <input type="checkbox" ${onoff} name="condition" id="checkbox" class="custom-control-input">
 	                        <label class="custom-control-label" for="checkbox"><strong>Điều kiện áp dụng</strong></label>
                         </div>
                         </c:if>
-                        </c:if>
+                        </c:if> --%>
+                        <c:if test="${empty sessionScope.userSession}">
+						<c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
                         <c:if test="${not empty discountRuleList}">
-						 <div id="collapseThree" class="row collapse show" >
+						 <div id="collapseThree" class="row ${collapse}" >
 		                    <div class="col-lg-6">
 		                    	<label for="ruleId">Điều kiện</label>
 		                    	<select id="ruleId" name="discountRule1" class="form-control">
@@ -352,7 +354,7 @@
 							   });
 							</script>
                     	</div>
-                    	</c:if>
+                    	</c:if></c:if></c:if>
                     </div>
 <c:set var="urlSearchProduct" value="${pageContext.request.contextPath}/public/discount/searchproduct" />
 <c:set var="urlSearchCategory" value="${pageContext.request.contextPath}/public/discount/searchcategory" />

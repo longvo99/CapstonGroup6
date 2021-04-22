@@ -20,6 +20,7 @@ import edu.group6.capston.dtos.OrderDTO;
 import edu.group6.capston.dtos.ProductDTO;
 import edu.group6.capston.dtos.ProductDTO2;
 import edu.group6.capston.models.ComboDetail;
+import edu.group6.capston.models.Comment;
 import edu.group6.capston.models.Location;
 import edu.group6.capston.models.Product;
 import edu.group6.capston.models.ProductCombo;
@@ -32,16 +33,15 @@ public class ProductDAO {
 
 	public List<Product> findByLocationId(int locationId) {
 		try (Session session = this.sessionFactory.openSession()) {
-			List<Product> list = session.createQuery("from Product Where locationId = " + locationId,Product.class).list();
+			List<Product> list = session.createQuery("from Product Where locationId = " + locationId, Product.class)
+					.list();
 			return list;
 		}
 	}
 
 	public boolean save(Product Product) {
-		Session session = this.sessionFactory.openSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
+		try (Session session = this.sessionFactory.openSession()) {
+			Transaction tx = session.beginTransaction();
 			session.persist(Product);
 			tx.commit();
 			session.close();
@@ -83,7 +83,7 @@ public class ProductDAO {
 		Product product = session.find(Product.class, productId);
 		return product;
 	}
-	
+
 	public List<LocationDTO> findMinMaxPriceLocation() {
 		List<LocationDTO> locationList = null;
 		Session session = this.sessionFactory.openSession();
@@ -91,9 +91,7 @@ public class ProductDAO {
 		CriteriaBuilder builder = session.getCriteriaBuilder();
 		CriteriaQuery<LocationDTO> query = builder.createQuery(LocationDTO.class);
 		Root<Product> root = query.from(Product.class);
-		query.multiselect(
-				root.get("location").get("locationId"),
-				builder.min(root.get("price")),
+		query.multiselect(root.get("location").get("locationId"), builder.min(root.get("price")),
 				builder.max(root.get("price")));
 		query.groupBy(root.get("location").get("locationId"));
 		locationList = session.createQuery(query).getResultList();
@@ -101,13 +99,11 @@ public class ProductDAO {
 		session.close();
 		return locationList;
 	}
-	
+
 	public List<String> searchProductNameByUserId(int userId) {
 		try (Session session = this.sessionFactory.openSession()) {
 			session.beginTransaction();
-			String hql = "select p.name from Product p "
-					+ "inner join p.location "
-					+ "inner join p.location.users "
+			String hql = "select p.name from Product p " + "inner join p.location " + "inner join p.location.users "
 					+ "where p.location.users.userId = " + userId;
 			@SuppressWarnings("rawtypes")
 			Query query = session.createQuery(hql);
@@ -116,7 +112,7 @@ public class ProductDAO {
 			return listProducts;
 		}
 	}
-	
+
 	public List<ProductDTO> searchAllProductName(String search) {
 		List<ProductDTO> product = null;
 		Session session = this.sessionFactory.openSession();
@@ -124,10 +120,7 @@ public class ProductDAO {
 		CriteriaBuilder builder = session.getCriteriaBuilder();
 		CriteriaQuery<ProductDTO> query = builder.createQuery(ProductDTO.class);
 		Root<Location> root = query.from(Location.class);
-		query.multiselect(
-				root.get("locationId"),
-				root.get("locationName"),
-				root.get("mediaPath"));
+		query.multiselect(root.get("locationId"), root.get("locationName"), root.get("mediaPath"));
 		query.where(builder.like(root.get("locationName"), "%" + search + "%"));
 		product = session.createQuery(query).setMaxResults(3).getResultList();
 		transaction.commit();
@@ -142,17 +135,14 @@ public class ProductDAO {
 		CriteriaBuilder builder = session.getCriteriaBuilder();
 		CriteriaQuery<OrderDTO> query = builder.createQuery(OrderDTO.class);
 		Root<Product> root = query.from(Product.class);
-		query.multiselect(
-				root.get("location").get("locationId"),
-				root.get("name"),
-				root.get("price"));
+		query.multiselect(root.get("location").get("locationId"), root.get("name"), root.get("price"));
 		query.where(builder.equal(root.get("productId"), productId));
 		product = session.createQuery(query).uniqueResult();
 		transaction.commit();
 		session.close();
 		return product;
 	}
-	
+
 	public OrderDTO findByComboIdOrder(Integer comboId) {
 		OrderDTO product = null;
 		Session session = this.sessionFactory.openSession();
@@ -162,19 +152,18 @@ public class ProductDAO {
 		Root<ComboDetail> root = query.from(ComboDetail.class);
 		root.join("product", JoinType.INNER);
 		root.join("productCombo", JoinType.INNER);
-		query.multiselect(
-				root.get("product").get("location").get("locationId"),
-				root.get("productCombo").get("comboName"),
-				root.get("productCombo").get("rateDiscount"),
+		query.multiselect(root.get("product").get("location").get("locationId"),
+				root.get("productCombo").get("comboName"), root.get("productCombo").get("rateDiscount"),
 				builder.sum(root.get("product").get("price")));
 		query.where(builder.equal(root.get("productCombo").get("productComboId"), comboId));
-		query.groupBy(root.get("product").get("location").get("locationId"), root.get("productCombo").get("comboName"), root.get("productCombo").get("rateDiscount"));
+		query.groupBy(root.get("product").get("location").get("locationId"), root.get("productCombo").get("comboName"),
+				root.get("productCombo").get("rateDiscount"));
 		product = session.createQuery(query).uniqueResult();
 		transaction.commit();
 		session.close();
 		return product;
 	}
-	
+
 	public OrderDTO findProductIdOrderDetail(Integer id) {
 		OrderDTO product = null;
 		Session session = this.sessionFactory.openSession();
@@ -182,16 +171,14 @@ public class ProductDAO {
 		CriteriaBuilder builder = session.getCriteriaBuilder();
 		CriteriaQuery<OrderDTO> query = builder.createQuery(OrderDTO.class);
 		Root<Product> root = query.from(Product.class);
-		query.multiselect(
-				root.get("name"),
-				root.get("imagePath"));
+		query.multiselect(root.get("name"), root.get("imagePath"));
 		query.where(builder.equal(root.get("productId"), id));
 		product = session.createQuery(query).uniqueResult();
 		transaction.commit();
 		session.close();
 		return product;
 	}
-	
+
 	public OrderDTO findComboIdOrderDetail(Integer id) {
 		OrderDTO product = null;
 		Session session = this.sessionFactory.openSession();
@@ -199,9 +186,7 @@ public class ProductDAO {
 		CriteriaBuilder builder = session.getCriteriaBuilder();
 		CriteriaQuery<OrderDTO> query = builder.createQuery(OrderDTO.class);
 		Root<ProductCombo> root = query.from(ProductCombo.class);
-		query.multiselect(
-				root.get("comboName"),
-				root.get("imagePath"));
+		query.multiselect(root.get("comboName"), root.get("imagePath"));
 		query.where(builder.equal(root.get("productComboId"), id));
 		product = session.createQuery(query).uniqueResult();
 		transaction.commit();
@@ -212,11 +197,10 @@ public class ProductDAO {
 	public List<String> searchProductNameByLocationId(List<Integer> locationIdList) {
 		try (Session session = this.sessionFactory.openSession()) {
 			session.beginTransaction();
-			String hql = "select p.name from Product p "
-					+ "where location.locationId IN (:list)";
+			String hql = "select p.name from Product p " + "where location.locationId IN (:list)";
 			@SuppressWarnings("rawtypes")
 			Query query = session.createQuery(hql);
-			query.setParameter("list", locationIdList); 
+			query.setParameter("list", locationIdList);
 			@SuppressWarnings("unchecked")
 			List<String> listProducts = query.getResultList();
 			return listProducts;
@@ -227,15 +211,14 @@ public class ProductDAO {
 		List<ProductDTO2> listProducts = new ArrayList<ProductDTO2>();
 		try (Session session = this.sessionFactory.openSession()) {
 			session.beginTransaction();
-			String hql = "select productId, name from Product "
-					+ "where location.locationId = :locationId";
+			String hql = "select productId, name from Product " + "where location.locationId = :locationId";
 			@SuppressWarnings("rawtypes")
 			Query query = session.createQuery(hql);
-			query.setParameter("locationId", locationId); 
+			query.setParameter("locationId", locationId);
 			@SuppressWarnings("unchecked")
 			List<Object[]> listObj = query.list();
 			for (Object[] object : listObj) {
-				listProducts.add(new ProductDTO2((int)object[0], (String)object[1]));
+				listProducts.add(new ProductDTO2((int) object[0], (String) object[1]));
 			}
 			return listProducts;
 		}
@@ -245,18 +228,15 @@ public class ProductDAO {
 		List<ProductDTO2> listProducts = new ArrayList<ProductDTO2>();
 		try (Session session = this.sessionFactory.openSession()) {
 			session.beginTransaction();
-			String hql = "select c.product.productId, c.product.name "
-					+ "from ComboDetail c "
-					+ "inner join c.product "
-					+ "inner join c.productCombo "
-					+ "where c.productCombo.productComboId = :productComboId";
+			String hql = "select c.product.productId, c.product.name " + "from ComboDetail c " + "inner join c.product "
+					+ "inner join c.productCombo " + "where c.productCombo.productComboId = :productComboId";
 			@SuppressWarnings("rawtypes")
 			Query query = session.createQuery(hql);
-			query.setParameter("productComboId", productComboId); 
+			query.setParameter("productComboId", productComboId);
 			@SuppressWarnings("unchecked")
 			List<Object[]> listObj = query.list();
 			for (Object[] object : listObj) {
-				listProducts.add(new ProductDTO2((int)object[0], (String)object[1]));
+				listProducts.add(new ProductDTO2((int) object[0], (String) object[1]));
 			}
 			return listProducts;
 		}
@@ -264,7 +244,9 @@ public class ProductDAO {
 
 	public long countAllByLocationId(Integer locationId) {
 		try (Session session = this.sessionFactory.openSession()) {
-			long count = (long) session.createQuery("select count(*) from Product where location.locationId = " + locationId).uniqueResult();
+			long count = (long) session
+					.createQuery("select count(*) from Product where location.locationId = " + locationId)
+					.uniqueResult();
 			return count;
 		}
 	}

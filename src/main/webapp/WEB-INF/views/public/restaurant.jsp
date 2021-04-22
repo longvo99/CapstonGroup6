@@ -382,7 +382,7 @@
                                                                     </div>
                                                                 </div> -->
                                                             </div>
-                                                            <div class="restaurent-product-caption-box"> <span class="text-light-white">${product.describe}</span>
+                                                            <div class="restaurent-product-caption-box"> <span class="text-light-white">${product.description}</span>
                                                             </div>
                                                             <div class="restaurent-tags-price">
                                                                 <div class="restaurent-tags"> 

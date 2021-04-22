@@ -48,7 +48,7 @@
                   <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                     <thead class="thead-light">
                       <tr>
-                        <th class="center text-center">ID</th>
+                      	<th class="center text-center">ID</th>
                         <th class="center text-center">Tiêu đề</th>
                         <th class="center text-center">Tên nhà hàng</th>
                         <th class="center text-center">Địa chỉ</th>
@@ -61,19 +61,19 @@
                     <tbody>
 					  <c:forEach items="${discountList}" var="discount">
 					  	<tr class="odd gradeX">
-							<td>${discount.discountId}</td>
+					  		<td>${discount.discountId}</td>
 							<td>${discount.title}</td>
 							<td>${discount.location.locationName}</td>
 							<td>${discount.location.address}</td>
 							<td class="center text-center">
-								<a href="" data-toggle="modal" data-target="#exampleModalCenter${discount.discountId}" class="btn btn-sm btn-primary"><i class="fa fa-edit"> Chi tiết </i></a>
+								<a href="" data-toggle="modal" data-target="#exampleModalCenter${discount.discountId}" class="btn btn-sm btn-success" title="CHI TIẾT"><i class="fas fa-info-circle"></i></a>
 								<c:if test="${empty sessionScope.userSession}">
 								<c:if test="${userDetail.user.role.roleId eq discount.users.role.roleId}">
-									<a href="${editUrl}/${discount.discountId}" class="btn btn-sm btn-warning"><i class="fa fa-edit"> Sửa </i></a>
+									<a href="${editUrl}/${discount.discountId}" class="btn btn-sm btn-primary" title="SỬA"><i class="fa fa-edit"></i></a>
 								</c:if>	
 								</c:if>
 								<c:if test="${not empty sessionScope.userSession}">
-									<a href="${editUrl}/${discount.discountId}" class="btn btn-sm btn-warning"><i class="fa fa-edit"> Sửa </i></a>
+									<a href="${editUrl}/${discount.discountId}" class="btn btn-sm btn-primary" title="SỬA"><i class="fa fa-edit"></i></a>
 								</c:if>
 							</td>
 							<td class="center text-center">
@@ -101,14 +101,20 @@
 			                <div class="modal-body">
 			                	<div class="comment-form">
 				                	<form action="${contextPath}/edit" method="POST">
-										<div class="form-group">
-					                      <label for="name">Id</label>
-					                      <input disabled="disabled" class="form-control mb-3" type="text" value="${discount.discountId}">
-					                    </div>
+					                      <input disabled="disabled" class="form-control mb-3" type="hidden" value="${discount.discountId}">
+					                      <c:if test="${empty sessionScope.userSession}">
+										<c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
 					                    <div class="form-group">
 					                      <label for="name">Tên nhà hàng</label>
 					                      <input disabled="disabled" class="form-control mb-3" type="text" value="${discount.location.locationName}">
 					                    </div>
+					                    </c:if></c:if>
+					                   <c:if test="${not empty sessionScope.userSession}">
+					                    <div class="form-group">
+					                      <label for="name">Tên nhà hàng</label>
+					                      <input disabled="disabled" class="form-control mb-3" type="text" value="${discount.location.locationName}">
+					                    </div>
+					                   </c:if>
 										<div class="form-group">
 					                      <label for="name">Tiêu đề</label>
 					                      <input disabled="disabled" class="form-control mb-3" type="text" value="${discount.title}">
@@ -135,15 +141,29 @@
 					                      </c:if>
 					                      <input disabled="disabled" class="form-control mb-3" type="text" value="${rd}">
 					                    </div>
-					                    <div class="form-group">
-					                      <label for="opentime">Điều kiện giảm</label>
-					                      <input disabled="disabled" class="form-control mb-3" type="text" 
-					                      value="${discount.discountRule.ruleContent}">
-					                    </div>
-					                    <div class="form-group">
-					                      <label for="opentime">Giá trị tối thiểu của điều kiện giảm</label>
-					                      <input disabled="disabled" class="form-control mb-3" type="text" value="${discount.valueRule}">
-					                    </div>
+					                    <c:if test="${empty sessionScope.userSession}">
+										<c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
+											<div class="form-group">
+						                      <label for="opentime">Điều kiện giảm</label>
+						                      <input disabled="disabled" class="form-control mb-3" type="text" 
+						                      value="${discount.discountRule.ruleContent}">
+						                    </div>
+						                    <div class="form-group">
+						                      <label for="opentime">Giá trị tối thiểu của điều kiện giảm</label>
+						                      <input disabled="disabled" class="form-control mb-3" type="text" value="${discount.valueRule}">
+						                    </div>
+										</c:if></c:if>
+										<c:if test="${not empty sessionScope.userSession}">
+											<div class="form-group">
+						                      <label for="opentime">Điều kiện giảm</label>
+						                      <input disabled="disabled" class="form-control mb-3" type="text" 
+						                      value="${discount.discountRule.ruleContent}">
+						                    </div>
+						                    <div class="form-group">
+						                      <label for="opentime">Giá trị tối thiểu của điều kiện giảm</label>
+						                      <input disabled="disabled" class="form-control mb-3" type="text" value="${discount.valueRule}">
+						                    </div>
+										</c:if>
 					                    <div class="form-group">
 					                      <label for="locationcategory">Ngày bắt đầu</label>
 					                      <input disabled="disabled" class="form-control mb-3" type="text" value="${discount.startDate}">

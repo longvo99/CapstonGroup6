@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/templates/tags/taglib.jsp" %>
+<sec:authentication var="userDetail" property="principal" />
 <!DOCTYPE html>
 <html lang="en">
 
@@ -63,6 +64,7 @@
 <body id="page-top">
   <div id="wrapper">
     <!-- Sidebar -->
+    
     <c:set var="urlHomePage" value="${pageContext.request.contextPath}/admin/index" />
    	<c:if test="${not empty sessionScope.userSession}">
    		 <c:set var="urlHomePage" value="${pageContext.request.contextPath}/public/index" />
@@ -99,21 +101,23 @@
 	      		<c:set var="urlL" value="${pageContext.request.contextPath}/admin/location/index" />
 	      	</c:if>
             <a class="collapse-item" href="${urlL}">Địa điểm</a>
-            <c:if test="${sessionScope.userSession.role.roleId ne 'CUSTOMER' }">
+            <c:if test="${empty sessionScope.userSession}">
+     		<c:if test="${userDetail.user.role.roleId eq 'ADMIN'}">
             <a class="collapse-item" href="${pageContext.request.contextPath}/admin/locationType/index">Kiểu địa điểm</a>
             <a class="collapse-item" href="${pageContext.request.contextPath}/admin/locationCategory/index">Phân loại địa điểm</a>
-          	</c:if>
+          	</c:if></c:if>
           </div>
         </div>
       </li>
-      <c:if test="${sessionScope.userSession.role.roleId ne 'CUSTOMER' }">
+      <c:if test="${empty sessionScope.userSession}">
+      <c:if test="${userDetail.user.role.roleId eq 'ADMIN'}">
       <li class="nav-item">
         <a class="nav-link" href="${pageContext.request.contextPath}/admin/order/index">
           <i class="fab fa-fw fa-wpforms"></i>
           <span>Quản lý đặt hàng</span>
         </a>
       </li>
-      </c:if>
+      </c:if></c:if>
       <li class="nav-item">
       	<c:set var="urlD" value="${pageContext.request.contextPath}/public/discount/index" />
       	<c:if test="${sessionScope.userSession.role.roleId ne 'CUSTOMER' }">
@@ -131,12 +135,15 @@
           <span>Quản lý liên hệ</span>
         </a>
       </li>
+      <c:if test="${empty sessionScope.userSession}">
+      <c:if test="${userDetail.user.role.roleId eq 'ADMIN'}">
       <li class="nav-item">
         <a class="nav-link" href="${pageContext.request.contextPath}/admin/statistical/index">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Thống kê</span>
         </a>
       </li>
+      </c:if></c:if>
       <hr class="sidebar-divider">
       <div class="sidebar-heading">
         Thông tin

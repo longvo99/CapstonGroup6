@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.group6.capston.daos.OrderDAO;
+import edu.group6.capston.dtos.LocationDTO2;
 import edu.group6.capston.models.OrderStatus;
 import edu.group6.capston.models.Orders;
 import edu.group6.capston.services.OrderService;
@@ -80,5 +81,15 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public double findTotalOrderedPricelocationId(int locationId, int userId) {
 		return orderDAO.findTotalOrderedPricelocationId(locationId, userId);
+	}
+
+	@Override
+	public List<Integer> listYear() {
+		return orderDAO.listYear();
+	}
+
+	@Override
+	public List<LocationDTO2> findAllByYear(Integer year) {
+		return orderDAO.findAllByYear(year);
 	}
 }
