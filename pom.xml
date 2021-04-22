@@ -83,11 +83,11 @@
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
 
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>mssql-jdbc</artifactId>
 			<version>6.2.2.jre8</version>
-		</dependency>
+		</dependency> -->
 
 		<dependency>
 			<groupId>mysql</groupId>

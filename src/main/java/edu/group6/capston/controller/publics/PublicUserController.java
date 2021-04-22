@@ -84,7 +84,7 @@ public class PublicUserController {
 			System.out.println(UploadFile.getDirPath(request));
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE,
 					messageSource.getMessage("success", null, Locale.getDefault()));
-			return "redirect:/profile/" + user.getUsername();
+			return "redirect:/user/profile/" + user.getUsername();
 		}
 		if (!"".equals(avatarPath)) {
 			UploadFile.del(avatarPath, request);

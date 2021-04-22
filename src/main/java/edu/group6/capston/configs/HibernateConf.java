@@ -51,18 +51,18 @@ public class HibernateConf {
 		return properties;
 	}
 
-	@Bean
-	public PlatformTransactionManager hibernateTransactionManager() {
-		HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-		transactionManager.setSessionFactory(sessionFactory().getObject());
-		return transactionManager;
-	}
-
 //	@Bean
-//	public HibernateTransactionManager getTransactionManager() {
+//	public PlatformTransactionManager hibernateTransactionManager() {
 //		HibernateTransactionManager transactionManager = new HibernateTransactionManager();
 //		transactionManager.setSessionFactory(sessionFactory().getObject());
 //		return transactionManager;
 //	}
+
+	@Bean
+	public HibernateTransactionManager getTransactionManager() {
+		HibernateTransactionManager transactionManager = new HibernateTransactionManager();
+		transactionManager.setSessionFactory(sessionFactory().getObject());
+		return transactionManager;
+	}
 
 }

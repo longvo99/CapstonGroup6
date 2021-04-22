@@ -98,7 +98,7 @@ public class PublicIndexController extends PublicAbstractController {
 		return "public.index";
 	}
 	
-	@GetMapping(value = {"/restaurant/{locationId}" , "/restaurant/{locationId}/{commentId}"})
+	@GetMapping({"/restaurant/{locationId}" , "/restaurant/{locationId}/{commentId}"})
 	public String productdetail(@PathVariable Integer locationId, @PathVariable Integer commentId, Model model, HttpServletRequest request) {
 		if(commentId != null) {
 			commentService.update(commentId);
