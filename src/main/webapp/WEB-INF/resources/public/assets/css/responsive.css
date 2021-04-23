@@ -4,7 +4,7 @@ Author: Slidesigma
 Author URL: https://www.templatemonster.com/vendors/slidesigmathemes/
 Version: 1.0.0
 */
-@media (max-width: 1500px) {
+@media ( max-width : 1500px) {
 	.location-picker {
 		width: 100%;
 	}
@@ -12,16 +12,14 @@ Version: 1.0.0
 		font-size: 14px;
 	}
 	.our-articles .side-bar .product-box .product-caption .title-box .tags,
-	.home-4 .product-box .product-caption .title-box .tags {
+		.home-4 .product-box .product-caption .title-box .tags {
 		display: none;
 	}
 }
-@media (max-width: 1200px) {
-	.header .right-side .catring,
-	.header .right-side .user-details,
-	.header .right-side .user-details,
-	.header .right-side .gem-points,
-	.header .right-side .cart-btn {
+
+@media ( max-width : 1200px) {
+	.header .right-side .catring, .header .right-side .user-details, .header .right-side .user-details,
+		.header .right-side .gem-points, .header .right-side .cart-btn {
 		margin: 0 10px;
 	}
 	.filters .delivery-slider .irs--flat .irs-grid-text {
@@ -33,23 +31,22 @@ Version: 1.0.0
 	.product-list-view .product-list-time {
 		width: 31%;
 	}
-	.promocode-text,
-	.product-list-view .product-list-time ul li {
+	.promocode-text, .product-list-view .product-list-time ul li {
 		padding: 0 5px;
 	}
 	.banner-1 .content-wrapper .content-box .input-group .input-group2 input,
-	.inner-wrapper .main-page .login-box input {
+		.inner-wrapper .main-page .login-box input {
 		border-radius: 4px 0 0 4px;
 	}
 	.banner-1 .content-wrapper .content-box .input-group .input-group2,
-	.inner-wrapper .main-page .login-box .input-group .input-group2 {
+		.inner-wrapper .main-page .login-box .input-group .input-group2 {
 		margin-bottom: 20px;
 	}
 	.banner-1 .content-wrapper .content-box .input-group-prepend,
-	.inner-wrapper .main-page .login-box .input-group-prepend {
+		.inner-wrapper .main-page .login-box .input-group-prepend {
 		display: flex;
 	}
-	.how-it-works .how-it-works-box.arrow-1:after{
+	.how-it-works .how-it-works-box.arrow-1:after {
 		top: -20px;
 	}
 	.home-4 .product-box .product-caption .title-box .tags {
@@ -63,16 +60,15 @@ Version: 1.0.0
 		flex: 0 0 41.666667%;
 		max-width: 41.666667%;
 	}
-
 	.thankmsg-sec .msg-wrapper .contact-details>li {
 		font-size: 12px;
 		margin: 0 8px;
 	}
-	.side-blog .content-wrap .entry-title{
+	.side-blog .content-wrap .entry-title {
 		font-size: 12px;
 	}
-	.copyright .payment-logo>span{
-		font-size:10px;
+	.copyright .payment-logo>span {
+		font-size: 10px;
 	}
 	.mb-lg-20 {
 		margin-bottom: 20px;
@@ -81,9 +77,10 @@ Version: 1.0.0
 		margin-bottom: 40px;
 	}
 }
-@media (max-width: 992px) {
-	.copyright .medewithlove{
-	  margin-bottom: 20px;
+
+@media ( max-width : 992px) {
+	.copyright .medewithlove {
+		margin-bottom: 20px;
 	}
 	.header .logo img {
 		transform: none;
@@ -91,7 +88,7 @@ Version: 1.0.0
 	.product-list-view .product-list-time {
 		width: 32%;
 	}
-	.side-blog .content-wrap .entry-title{
+	.side-blog .content-wrap .entry-title {
 		font-size: 18px;
 	}
 	.header .logo {
@@ -100,19 +97,17 @@ Version: 1.0.0
 	.header .search-form span {
 		font-size: 12px;
 	}
-	.copyright .payment-logo>span,
-	.filters .delivery-slider .irs--flat .irs-grid-text {
+	.copyright .payment-logo>span, .filters .delivery-slider .irs--flat .irs-grid-text
+		{
 		font-size: 14px;
 	}
-	.header .gem-points i,
-	.header .right-side .cart-btn a i {
+	.header .gem-points i, .header .right-side .cart-btn a i {
 		font-size: 25px;
 	}
 	.filter-sidebar {
 		padding: 0 15px;
 	}
-	.product-list-view,
-	.sort-tag-filter {
+	.product-list-view, .sort-tag-filter {
 		padding: 15px 0;
 	}
 	.header .gem-points span {
@@ -121,32 +116,31 @@ Version: 1.0.0
 	.main-padding {
 		padding: 64px;
 	}
-	.our-articles .blog-inner{
+	.our-articles .blog-inner {
 		margin-top: 0;
 	}
 	.promocode-text {
 		width: 100%;
 	}
-	.how-it-works .how-it-works-box.arrow-1:after{
+	.how-it-works .how-it-works-box.arrow-1:after {
 		top: -60px;
-    	left: 80px;
+		left: 80px;
 	}
-	.how-it-works .how-it-works-box.arrow-2:after{
+	.how-it-works .how-it-works-box.arrow-2:after {
 		display: none;
 	}
 	.main-banner .footer-img {
 		max-width: 170px;
 	}
-	.our-blog .blog-box .post .blog-img img,
-	.our-blog .blog-box .post .blog-img {
+	.our-blog .blog-box .post .blog-img img, .our-blog .blog-box .post .blog-img
+		{
 		height: auto;
 	}
 	.our-articles .side-bar .product-box .product-caption .title-box .tags,
-	.our-blog .blog-box {
+		.our-blog .blog-box {
 		display: block;
 	}
-	.our-blog .blog-box .post,
-	.our-blog .blog-box .side-blog {
+	.our-blog .blog-box .post, .our-blog .blog-box .side-blog {
 		flex: 0 0 100%;
 		max-width: 100%;
 	}
@@ -158,9 +152,9 @@ Version: 1.0.0
 		margin: 0 20px;
 	}
 	.inner-wrapper .main-page .top-nav h5 {
-	    margin-right: 15px;
+		margin-right: 15px;
 	}
-	.inner-wrapper .main-page .top-nav h5:last-child{
+	.inner-wrapper .main-page .top-nav h5:last-child {
 		margin-right: 0;
 	}
 	.mb-md-20 {
@@ -169,38 +163,31 @@ Version: 1.0.0
 	.mb-md-40 {
 		margin-bottom: 40px;
 	}
-	.copyright .payment-logo,
-	.copyright .copyright-text,
-	footer .ft-logo-box {
+	.copyright .payment-logo, .copyright .copyright-text, footer .ft-logo-box
+		{
 		justify-content: center;
 	}
 }
-@media (max-width: 767px) {
-	.header,
-	.section-2,
-	.main-banner {
+
+@media ( max-width : 767px) {
+	.header, .section-2, .main-banner {
 		height: auto;
 	}
 	.header .search-form span {
 		font-size: 14px;
 	}
 	.product-list-view .product-list-details .product-detail-right-box .product-list-tags,
-	.product-list-view .product-list-details .product-detail-right-box .product-list-label,
-	.header .right-side .cart-btn.notification-btn,
-	.header .right-side .user-details>a>span,
-	.heading .head-rating .product-review h6,
-	.parent-megamenu a span,
-	.main-search,
-	.title-2 small,
-	.banner-adv2,
-	.banner-adv {
+		.product-list-view .product-list-details .product-detail-right-box .product-list-label,
+		.header .right-side .cart-btn.notification-btn, .header .right-side .user-details>a>span,
+		.heading .head-rating .product-review h6, .parent-megamenu a span,
+		.main-search, .title-2 small, .banner-adv2, .banner-adv {
 		display: none;
 	}
 	.header .main-search {
 		flex: none;
 	}
-	.header .right-side .cart-btn.notification-btn,
-	.header .right-side .user-details {
+	.header .right-side .cart-btn.notification-btn, .header .right-side .user-details
+		{
 		position: static;
 		margin: 0px;
 	}
@@ -219,7 +206,7 @@ Version: 1.0.0
 	.header .user-details:hover>.user-dropdown {
 		left: 0;
 	}
-	.parent-megamenu .megamenu .ex-collection-box{
+	.parent-megamenu .megamenu .ex-collection-box {
 		padding-bottom: 40px;
 	}
 	.heading .head-rating .product-review {
@@ -243,16 +230,16 @@ Version: 1.0.0
 		left: 60px;
 		top: 18px;
 	}
-	.how-it-works .how-it-works-box.arrow-1:after{
+	.how-it-works .how-it-works-box.arrow-1:after {
 		top: -35px;
-    	left: 70px;
+		left: 70px;
 	}
-	.parent-megamenu .megamenu{
+	.parent-megamenu .megamenu {
 		height: 100vh;
 		overflow: auto;
 	}
 	.product-list-view .product-list-bottom .product-list-type,
-	.product-list-view .product-list-details .product-list-title {
+		.product-list-view .product-list-details .product-list-title {
 		padding-left: 0;
 	}
 	.product-list-view .product-list-info .product-list-img {
@@ -260,8 +247,7 @@ Version: 1.0.0
 		display: flex;
 		align-items: center;
 	}
-	.sort-tag-filter,
-	.product-list-view {
+	.sort-tag-filter, .product-list-view {
 		padding: 15px 0px;
 	}
 	.restaurent-tags {
@@ -274,10 +260,8 @@ Version: 1.0.0
 	.notification-btn:hover>.notification-dropdown {
 		left: 0;
 	}
-	.product-list-view,
-	.location-picker,
-	.user-page .login-sec,
-	.inner-wrapper .main-page .top-nav {
+	.product-list-view, .location-picker, .user-page .login-sec,
+		.inner-wrapper .main-page .top-nav {
 		position: relative;
 	}
 	.user-page .login-sec {
@@ -292,46 +276,39 @@ Version: 1.0.0
 	.product-list-view {
 		align-items: flex-start;
 	}
-	.map-gallery-sec .map-pl-0{
-    	padding-left: 15px;
+	.map-gallery-sec .map-pl-0 {
+		padding-left: 15px;
 	}
-	.megamenu,
-	.cart-dropdown .cart-detail-box,
-	.user-dropdown{
+	.megamenu, .cart-dropdown .cart-detail-box, .user-dropdown {
 		opacity: 1;
-	    visibility: visible;
-	    left: 0;
-	    display: none;
+		visibility: visible;
+		left: 0;
+		display: none;
 	}
-	.megamenu.show,
-	.cart-dropdown .cart-detail-box.show,
-	.user-dropdown.show,
-	.product-list-view .product-list-bottom,
-	.product-list-view .product-list-details,
-	.mobile-search,
-	.restaurent-details-mob,
-	.sort-tag-filter,
-	.parent-megamenu>a>i {
+	.megamenu.show, .cart-dropdown .cart-detail-box.show, .user-dropdown.show,
+		.product-list-view .product-list-bottom, .product-list-view .product-list-details,
+		.mobile-search, .restaurent-details-mob, .sort-tag-filter,
+		.parent-megamenu>a>i {
 		display: block;
 	}
-	.parent-megamenu i{
+	.parent-megamenu i {
 		font-size: 22px;
 	}
-	.product-list-view .product-right-col .product-list-bottom .mob-tags-label{
+	.product-list-view .product-right-col .product-list-bottom .mob-tags-label
+		{
 		display: flex;
 		flex-wrap: wrap;
 	}
 	.product-list-view .product-right-col .product-list-bottom .mob-tags-label,
-	.product-list-view .product-list-time ul,
-	.promocode-text .promocode-btn {
+		.product-list-view .product-list-time ul, .promocode-text .promocode-btn
+		{
 		margin-top: 10px;
 	}
 	.product-list-view .product-list-time ul li:first-child {
 		padding-left: 0;
 	}
 	.product-list-view .product-list-details .product-detail-right-box .product-list-rating .ratings,
-	.product-list-view .product-list-info,
-	.map-gallery-sec .map-pr-0 {
+		.product-list-view .product-list-info, .map-gallery-sec .map-pr-0 {
 		padding-right: 15px;
 	}
 	.product-list-view .product-right-col {
@@ -347,7 +324,8 @@ Version: 1.0.0
 		font-size: 12px;
 		margin: 4px;
 	}
-	.product-list-view .product-list-details .product-detail-right-box .product-price-icon {
+	.product-list-view .product-list-details .product-detail-right-box .product-price-icon
+		{
 		position: absolute;
 		left: 0;
 		top: 100px;
@@ -355,15 +333,16 @@ Version: 1.0.0
 	.promocodeimg {
 		height: 175px;
 	}
-	.product-list-view .product-list-details .product-detail-right-box .product-list-rating {
+	.product-list-view .product-list-details .product-detail-right-box .product-list-rating
+		{
 		display: flex;
 	}
 	.product-list-view .product-list-details .product-detail-right-box .product-list-label button,
-	.promocode-text .promocode-btn a {
+		.promocode-text .promocode-btn a {
 		display: inline-block;
 	}
-	.product-list-view .product-list-time,
-	.product-list-view .product-list-details .product-detail-right-box {
+	.product-list-view .product-list-time, .product-list-view .product-list-details .product-detail-right-box
+		{
 		width: 100%;
 	}
 	.product-list-view .product-list-time span {
@@ -372,9 +351,8 @@ Version: 1.0.0
 		top: 15px;
 		right: 0;
 	}
-	.checkout-product .img-name-value .product-name span,
-	.tracking-sec,
-	.promocode-text{
+	.checkout-product .img-name-value .product-name span, .tracking-sec,
+		.promocode-text {
 		display: block;
 		white-space: nowrap;
 		text-overflow: ellipsis;
@@ -395,8 +373,7 @@ Version: 1.0.0
 	.mobile-search i {
 		font-size: 25px;
 	}
-	.tracking-sec .tracking-map,
-	.tracking-sec .tracking-details {
+	.tracking-sec .tracking-map, .tracking-sec .tracking-details {
 		flex: 0 0 100%;
 		max-width: 100%;
 	}
@@ -406,17 +383,17 @@ Version: 1.0.0
 	.driver-tip-sec .tip-percentage {
 		height: 65px;
 	}
-	.restaurent-product-list .restaurent-product-detail{
+	.restaurent-product-list .restaurent-product-detail {
 		flex-direction: column-reverse;
 	}
 	.restaurent-product-list .restaurent-product-img {
-	    margin: 15px auto;
-	    height: 150px;
+		margin: 15px auto;
+		height: 150px;
 	}
 	.map-gallery-sec .main-box #locmap {
 		height: 250px;
 	}
-	.tracking-sec .tracking-details .fullpageview{
+	.tracking-sec .tracking-details .fullpageview {
 		position: relative;
 		bottom: 0;
 		margin-top: 30px;
@@ -428,23 +405,20 @@ Version: 1.0.0
 		margin-bottom: 40px;
 	}
 }
-@media (max-width: 576px) {
-	.cart-dropdown .cart-detail-box,
-	.notification-btn .notification-dropdown,
-	.user-dropdown,
-	.cart-dropdown:hover>.cart-detail-box,
-	.notification-btn:hover>.notification-dropdown {
+
+@media ( max-width : 576px) {
+	.cart-dropdown .cart-detail-box, .notification-btn .notification-dropdown,
+		.user-dropdown, .cart-dropdown:hover>.cart-detail-box,
+		.notification-btn:hover>.notification-dropdown {
 		width: 100%;
 	}
-	.user-dropdown,
-	.cart-dropdown .cart-detail-box{
+	.user-dropdown, .cart-dropdown .cart-detail-box {
 		height: 100vh;
 	}
 	.delivery-slider .irs--flat.irs-with-grid {
 		width: 97%;
 	}
-	.filter-sidebar,
-	.most-popular .browse-cat>div {
+	.filter-sidebar, .most-popular .browse-cat>div {
 		padding: 0;
 	}
 	.user-page .login-sec .login-box {
@@ -453,12 +427,11 @@ Version: 1.0.0
 	.header .user-details:hover>.user-dropdown {
 		left: 0;
 	}
-	.how-it-works .how-it-works-box.arrow-1:after,
-	.restaurent-logo {
+	.how-it-works .how-it-works-box.arrow-1:after, .restaurent-logo {
 		display: none;
 	}
-	.header .right-side .user-details>a,
-	.header .right-side .cart-btn.notification-btn>a {
+	.header .right-side .user-details>a, .header .right-side .cart-btn.notification-btn>a
+		{
 		margin: 0 5px;
 	}
 	.header .right-side .cart-btn.notification-btn>a {
@@ -484,10 +457,8 @@ Version: 1.0.0
 	.restaurent-product-list .restaurent-product-detail .restaurent-tags {
 		margin-bottom: 5px;
 	}
-	.recipt-sec .recipt-name.title,
-	.restaurent-product-list>div,
-	.recipt-sec p.title span,
-	.recipt-sec p.title {
+	.recipt-sec .recipt-name.title, .restaurent-product-list>div,
+		.recipt-sec p.title span, .recipt-sec p.title {
 		display: block;
 	}
 	.restaurent-ad .ad-img .content-box {
@@ -512,8 +483,8 @@ Version: 1.0.0
 		flex: 0 0 50%;
 		max-width: 50%;
 	}
-	.driver-tip-sec>.nav>.nav-item>.nav-link,
-	.payment-option-tab>.nav>.nav-item>.nav-link {
+	.driver-tip-sec>.nav>.nav-item>.nav-link, .payment-option-tab>.nav>.nav-item>.nav-link
+		{
 		border: 1px solid rgba(67, 41, 163, .2);
 	}
 	.copyright .payment-logo {
@@ -528,8 +499,8 @@ Version: 1.0.0
 	}
 }
 
-@media (max-width:386px){
-	.product-box-3 .product-caption ul.food-description li:last-child{
+@media ( max-width :386px) {
+	.product-box-3 .product-caption ul.food-description li:last-child {
 		margin-top: 7px;
 	}
 }

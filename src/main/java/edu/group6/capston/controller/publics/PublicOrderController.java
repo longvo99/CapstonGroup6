@@ -290,10 +290,12 @@ public class PublicOrderController extends PublicAbstractController {
 							Integer.valueOf(cookie.getValue()), product.getLocationId());
 					listOrderDTO.add(order);
 					}
+					
 					totalCart += total;
 					// remote cookie
 					Cookie cookieDel = new Cookie(cookie.getName(), "");
 					cookieDel.setMaxAge(0);
+					System.out.println(cookie.getName());
 					response.addCookie(cookieDel);
 				}
 			}
@@ -332,7 +334,7 @@ public class PublicOrderController extends PublicAbstractController {
 			float subPrice = price + tax + 1;
 			OrderDetailDTO orerDetail = new OrderDetailDTO("Chi tiết đơn hàng", String.valueOf(price) , "1", String.valueOf(tax) , String.valueOf(subPrice));
 			String approvalLink = paymentServices.authorizePayment(orerDetail);
-			order.setOrderStatus(new OrderStatus(6, ""));
+			order.setOrderStatus(new OrderStatus(2, ""));
 			orderService.update(order);
 			return "redirect:" + approvalLink;
 		}

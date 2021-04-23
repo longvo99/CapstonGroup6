@@ -44,7 +44,8 @@
 		<div class="row">
 			<div class="col-12">
 				<div class="section-header-left">
-					<h3 class="text-light-black header-title title">Danh mục: ${listLocationByCat.get(0).locationCategory.locationCategoryName}</h3>
+					<h3 class="text-light-black header-title title">Danh mục:
+						${listLocationByCat.get(0).locationCategory.locationCategoryName}</h3>
 				</div>
 			</div>
 		</div>
@@ -52,8 +53,7 @@
 		<div class="row">
 			<div class="col-lg-12 col-md-12">
 				<div class="row">
-					<c:forEach items="${listLocationByCat}"
-						var="locationByCat">
+					<c:forEach items="${listLocationByCat}" var="locationByCat">
 						<div class="col-lg-3 col-md-6 col-sm-6">
 							<div class="product-box mb-xl-20">
 								<div class="product-img">
@@ -65,16 +65,15 @@
 									</a>
 									<div class="overlay">
 										<div class="product-tags padding-10">
-											<span class="${circletag}"> 
-											<c:set var="heartLNew" value="013-heart-1.svg" /> 
-											<c:forEach
+											<span class="${circletag}"> <c:set var="heartLNew"
+													value="013-heart-1.svg" /> <c:forEach
 													items="${locationFavoriteList}" var="locationLF">
 													<c:if
 														test="${locationLF.location.locationId == locationByCat.locationId}">
 														<c:set var="heartLNew" value="010-heart.svg" />
 													</c:if>
-											</c:forEach> 
-											<img onclick="editLocationFavorite(${locationByCat.locationId})"
+												</c:forEach> <img
+												onclick="editLocationFavorite(${locationByCat.locationId})"
 												src="${pageContext.request.contextPath}/resources/public/assets/img/svg/${heartLNew}"
 												alt="tag">
 											</span>
@@ -94,23 +93,25 @@
 								<div class="product-caption">
 									<div class="title-box">
 										<h6 class="product-title">
-										<c:if test="${fn:length(locationByCat.locationName) le 25}">
-											<a
-												href="${pageContext.request.contextPath}/public/restaurant/${locationByCat.locationId}"
-												class="text-light-black ">${locationByCat.locationName}</a>
-										</c:if>
-										<c:if test="${fn:length(locationByCat.locationName) gt 25}">
-											<a
-												href="${pageContext.request.contextPath}/public/restaurant/${locationByCat.locationId}"
-												class="text-light-black ">${fn:substring(locationByCat.locationName, 0, 25)}...</a>
-										</c:if>
+											<c:if test="${fn:length(locationByCat.locationName) le 25}">
+												<a
+													href="${pageContext.request.contextPath}/public/restaurant/${locationByCat.locationId}"
+													class="text-light-black ">${locationByCat.locationName}</a>
+											</c:if>
+											<c:if test="${fn:length(locationByCat.locationName) gt 25}">
+												<a
+													href="${pageContext.request.contextPath}/public/restaurant/${locationByCat.locationId}"
+													class="text-light-black ">${fn:substring(locationByCat.locationName, 0, 25)}...</a>
+											</c:if>
 											<%-- <a
 												href="${pageContext.request.contextPath}/public/restaurant/${locationByCat.locationId}"
 												class="text-light-black ">${fn:substring(locationByCat.locationName, 0, 15)}${locationByCat.locationName}</a> --%>
 										</h6>
 										<c:set var="ratingPoint" value="-.-" />
 										<c:forEach items="${ratingList}" var="rating">
-											<c:if test="${rating.locationId == locationByCat.locationId}"><c:set var="ratingPoint" value="${rating.point}" /></c:if>
+											<c:if test="${rating.locationId == locationByCat.locationId}">
+												<c:set var="ratingPoint" value="${rating.point}" />
+											</c:if>
 										</c:forEach>
 										<div class="tags">
 											<span class="text-custom-white rectangle-tag bg-yellow">
@@ -123,11 +124,13 @@
 										<div class="price-time">
 											<span class="text-light-black time">
 												${locationByCat.openTime}-${locationByCat.closeTime}</span>
-											<c:set var="minMaxPrice" value="--.--"/>
-												<c:forEach items="${minMaxLocation}" var="minMax">
-													<c:if test="${minMax.locationId == locationByCat.locationId}">
-														<c:set var="minMaxPrice" value="${minMax.minPrice}VNĐ - ${minMax.maxPrice}VNĐ"/>
-													</c:if>
+											<c:set var="minMaxPrice" value="--.--" />
+											<c:forEach items="${minMaxLocation}" var="minMax">
+												<c:if
+													test="${minMax.locationId == locationByCat.locationId}">
+													<c:set var="minMaxPrice"
+														value="${minMax.minPrice}VNĐ - ${minMax.maxPrice}VNĐ" />
+												</c:if>
 											</c:forEach>
 											<span class="text-light-white price">${minMaxPrice}</span>
 										</div>

@@ -1,46 +1,56 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@include file="/WEB-INF/templates/tags/taglib.jsp" %>
+	pageEncoding="UTF-8"%>
+<%@include file="/WEB-INF/templates/tags/taglib.jsp"%>
 
 <sec:authentication var="userDetail" property="principal" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/admin/assets/css/autocomplete/jquery-ui.js"></script>
-<script src="${pageContext.request.contextPath}/resources/admin/assets/js/jquery.validate.min.js"></script>
-	<div id="content-wrapper" class="d-flex flex-column">
-      <div id="content">
-        <!-- Container Fluid-->
-        <div class="container-fluid" id="container-wrapper">
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="m-0 font-weight-bold text-primarys">Add discount</h1>
-            <ol class="breadcrumb">
-              <c:set var="actionIndex" value="${pageContext.request.contextPath}/admin/index" />
-              <c:if test="${not empty sessionScope.userSession}">
-              		<c:set var="actionIndex" value="${pageContext.request.contextPath}/public/index" />
-              </c:if>
-              <li class="breadcrumb-item"><a href="${actionIndex}">Trang chủ</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Forms</li>
-            </ol>
-          </div>
-		  <c:if test="${not empty msg}">
-			<div class="alert alert-success">
-				<strong>${msg}</strong>
+<script
+	src="${pageContext.request.contextPath}/resources/admin/assets/css/autocomplete/jquery-ui.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/admin/assets/js/jquery.validate.min.js"></script>
+<div id="content-wrapper" class="d-flex flex-column">
+	<div id="content">
+		<!-- Container Fluid-->
+		<div class="container-fluid" id="container-wrapper">
+			<div
+				class="d-sm-flex align-items-center justify-content-between mb-4">
+				<h1 class="m-0 font-weight-bold text-primarys">Add discount</h1>
+				<ol class="breadcrumb">
+					<c:set var="actionIndex"
+						value="${pageContext.request.contextPath}/admin/index" />
+					<c:if test="${not empty sessionScope.userSession}">
+						<c:set var="actionIndex"
+							value="${pageContext.request.contextPath}/public/index" />
+					</c:if>
+					<li class="breadcrumb-item"><a href="${actionIndex}">Trang
+							chủ</a></li>
+					<li class="breadcrumb-item active" aria-current="page">Forms</li>
+				</ol>
 			</div>
-		  </c:if>
-          <div class="row">
-            <div class="col-lg-12">
-              <!-- Form Basic -->
-              <div class="card mb-4">
-                <div class="card-body">
-                  <c:set var="actionUrl" value="${pageContext.request.contextPath}/admin/discount/add" />
-                  <c:if test="${not empty sessionScope.userSession}">
-                  		<c:set var="actionUrl" value="${pageContext.request.contextPath}/public/discount/add" />
-                  </c:if>
-                  <form action="${actionUrl}" role="form" method="POST" name="form" id="form" enctype="multipart/form-data">
-                  	<div class="form-group">
-                      <label for="title">Tiêu đề</label>
-                      <input class="form-control mb-3" type="text" value="" id="title" name="title">
-                    </div>
-                    <!-- <div class="form-group">
+			<c:if test="${not empty msg}">
+				<div class="alert alert-success">
+					<strong>${msg}</strong>
+				</div>
+			</c:if>
+			<div class="row">
+				<div class="col-lg-12">
+					<!-- Form Basic -->
+					<div class="card mb-4">
+						<div class="card-body">
+							<c:set var="actionUrl"
+								value="${pageContext.request.contextPath}/admin/discount/add" />
+							<c:if test="${not empty sessionScope.userSession}">
+								<c:set var="actionUrl"
+									value="${pageContext.request.contextPath}/public/discount/add" />
+							</c:if>
+							<form action="${actionUrl}" role="form" method="POST" name="form"
+								id="form" enctype="multipart/form-data">
+								<div class="form-group">
+									<label for="title">Tiêu đề</label> <input
+										class="form-control mb-3" type="text" value="" id="title"
+										name="title">
+								</div>
+								<!-- <div class="form-group">
                       <label style="display: block;" for="code">Mã giảm giá</label>
                       <input readonly="readonly" style="display: inline-block;" class="form-control mb-3 col-lg-3" type="text" value="" id="code" name="code">
                       <button type="button" onclick="createCode(7)" class="btn btn-success mb-1">Tạo mã</button>
@@ -56,97 +66,105 @@
                     	}
                       </script>
                     </div> -->
-                    <div class="form-group">
-                      <label for="description">Mô tả</label>
-                      <input class="form-control mb-3" type="text" value="" id="description" name="description">
-                    </div>
-                    <div class="row form-group" >
-	                    <div class="col-lg-6">
-	                    	<label for="typeDiscount" >Loại khuyến mãi</label>
-	                    	<select id="typeDiscount" name="typeDiscount" class="form-control">
-	                    		<option data-rate="" value="default">--Chọn--</option>
-								<option data-rate="%" >Theo phần trăm</option>
-								<option data-rate="VNĐ">Theo mức giá cố định</option>
-	                      	</select>
-	                    </div>
-	                    <div class="col-lg-6">
-	                    	<label for="rateDiscount">Giá trị khuyến mãi</label>
-	                   		<div class="placeholderrd" data-placeholder="">
-					    		<input class="form-control mb-3" type="text" value="" id="rateDiscount" name="rateDiscount">
-					  		</div>
-					  	</div>
-					  	<script type="text/javascript">
+								<div class="form-group">
+									<label for="description">Mô tả</label> <input
+										class="form-control mb-3" type="text" value=""
+										id="description" name="description">
+								</div>
+								<div class="row form-group">
+									<div class="col-lg-6">
+										<label for="typeDiscount">Loại khuyến mãi</label> <select
+											id="typeDiscount" name="typeDiscount" class="form-control">
+											<option data-rate="" value="default">--Chọn--</option>
+											<option data-rate="%">Theo phần trăm</option>
+											<option data-rate="VNĐ">Theo mức giá cố định</option>
+										</select>
+									</div>
+									<div class="col-lg-6">
+										<label for="rateDiscount">Giá trị khuyến mãi</label>
+										<div class="placeholderrd" data-placeholder="">
+											<input class="form-control mb-3" type="text" value=""
+												id="rateDiscount" name="rateDiscount">
+										</div>
+									</div>
+									<script type="text/javascript">
 						   $(function(){
 						      $("#typeDiscount").change(function(){
 						         $(".placeholderrd").attr("data-placeholder", $(this).find(":selected").data("rate"));
 						      });
 						   });
 						</script>
-                    </div>
-                    <c:if test="${empty sessionScope.userSession}">
-                    <c:if test="${userDetail.user.role.roleId eq 'ADMIN'}">
-					<div class="form-group">
-                    	<label for="optradio" >Áp dụng cho</label>
-                      	<div class="form-check">
-					  		<label class="form-check-label">
-				      			<input type="radio" class="form-check-input" value="allproduct" id="optradio" name="optradio">Tất cả các quận/huyện
-							</label>
-						</div>
-						<div class="form-check">
-						  	<label class="form-check-label">
-						    	<input type="radio" class="form-check-input" value="category" id="optradio" name="optradio">Một số quận/huyện
-						  	</label>
-						</div>
-						<div id="collapseOne" class="collapse">
-							<input class="form-control mb-3" type="text" name="categoryName" id="categoryName" placeholder="Chọn bên dưới" >
-							<div style="margin-left: 50px;">
-						      	<label>Tỉnh/Thành:</label>
-								<select class="form-control col-lg-4" id="country" name="country">
-									<option value="000">-Chọn Tỉnh/Thành:-</option>
-								</select><br />
-								<label>Quận/huyện:</label>
-								<select class="form-control col-lg-4" id="state" name="state" onchange="myFunction(event)">
-									<option value="000">-Chọn Quận/Huyện-</option>
-								</select><br />
-								<!-- <label>Phường/Xã:</label>
+								</div>
+								<c:if test="${empty sessionScope.userSession}">
+									<c:if test="${userDetail.user.role.roleId eq 'ADMIN'}">
+										<div class="form-group">
+											<label for="optradio">Áp dụng cho</label>
+											<div class="form-check">
+												<label class="form-check-label"> <input type="radio"
+													class="form-check-input" value="allproduct" id="optradio"
+													name="optradio">Tất cả các quận/huyện
+												</label>
+											</div>
+											<div class="form-check">
+												<label class="form-check-label"> <input type="radio"
+													class="form-check-input" value="category" id="optradio"
+													name="optradio">Một số quận/huyện
+												</label>
+											</div>
+											<div id="collapseOne" class="collapse">
+												<input class="form-control mb-3" type="text"
+													name="categoryName" id="categoryName"
+													placeholder="Chọn bên dưới">
+												<div style="margin-left: 50px;">
+													<label>Tỉnh/Thành:</label> <select
+														class="form-control col-lg-4" id="country" name="country">
+														<option value="000">-Chọn Tỉnh/Thành:-</option>
+													</select><br /> <label>Quận/huyện:</label> <select
+														class="form-control col-lg-4" id="state" name="state"
+														onchange="myFunction(event)">
+														<option value="000">-Chọn Quận/Huyện-</option>
+													</select><br />
+													<!-- <label>Phường/Xã:</label>
 								<select class="form-control col-lg-6" id="city" name="city">
 									<option value="000">-Chọn Phường/Xã-</option>
 								</select><br /> -->
-								<script type='text/javascript'>
+													<script type='text/javascript'>
 								    function myFunction(e) {
 								    concat_string = $("#categoryName").val() + $("#state option:selected").html() + "(" + e.target.value + "),";
 								    document.getElementById("categoryName").value = concat_string;
 								}
 								</script>
-					      	</div>
-			       		</div>
-						<div class="form-check">
-						  	<label class="form-check-label">
-						    	<input type="radio" class="form-check-input" value="product" id="optradio" name="optradio">Một số phường/xã
-						  	</label>
-						</div>
-						<div id="collapseTwo" class="collapse">
-								<input class="form-control mb-3" type="text" name="productName" id="productName" placeholder="Chọn bên dưới" >
-								<div style="margin-left: 50px;">
-							      	<label>Tỉnh/Thành:</label>
-									<select id="country1" name="country1" class="form-control col-lg-4">
-										<option value="000">-Chọn Tỉnh/Thành:-</option>
-									</select><br />
-									<label>Quận/huyện:</label>
-									<select id="state1" name="state1" class="form-control col-lg-4">
-										<option value="000">-Chọn Quận/Huyện-</option>
-									</select><br />
-									<label>Phường/Xã:</label>
-									<select id="city1" name="city1" onchange="myFunction1(event)" class="form-control col-lg-4">
-										<option value="000">-Chọn Phường/Xã-</option>
-									</select><br />
-									<script type='text/javascript'>
+												</div>
+											</div>
+											<div class="form-check">
+												<label class="form-check-label"> <input type="radio"
+													class="form-check-input" value="product" id="optradio"
+													name="optradio">Một số phường/xã
+												</label>
+											</div>
+											<div id="collapseTwo" class="collapse">
+												<input class="form-control mb-3" type="text"
+													name="productName" id="productName"
+													placeholder="Chọn bên dưới">
+												<div style="margin-left: 50px;">
+													<label>Tỉnh/Thành:</label> <select id="country1"
+														name="country1" class="form-control col-lg-4">
+														<option value="000">-Chọn Tỉnh/Thành:-</option>
+													</select><br /> <label>Quận/huyện:</label> <select id="state1"
+														name="state1" class="form-control col-lg-4">
+														<option value="000">-Chọn Quận/Huyện-</option>
+													</select><br /> <label>Phường/Xã:</label> <select id="city1"
+														name="city1" onchange="myFunction1(event)"
+														class="form-control col-lg-4">
+														<option value="000">-Chọn Phường/Xã-</option>
+													</select><br />
+													<script type='text/javascript'>
 									    function myFunction1(e) {
 									    concat_string = $("#productName").val() + $("#city1 option:selected").html() + "(" + e.target.value + "),";
 									    document.getElementById("productName").value = concat_string;
 									}
 									</script>
-									<script>
+													<script>
 					$(document).ready(function(){
 						  $.getJSON('${pageContext.request.contextPath}/resources/admin/assets/js/data.json', function(data){
 							  $.each(data, function (index, value) {
@@ -179,24 +197,28 @@
 						 });
 						});
 			</script>
-						      	</div>
-			       		</div>
-                    </div>
-					</c:if>	
-					</c:if>
-					<c:if test="${not empty sessionScope.userSession}">
-					<div class="form-group">
-                    	<label for="" >Chọn cơ sở: (<input type="checkbox" id="select_all"/> Chọn hết:) </label>
-                    	<c:if test="${not empty locationByUserIdList}">
-                    		<c:forEach var="location" items="${locationByUserIdList}" >
-                    			<div class="form-check">
-					  				<label class="form-check-label">
-				      					<input type="checkbox" class="checkbox" name="check[]" value="${location.locationId}" style="zoom: 1.5;"> ${location.address}
-									</label>
-								</div>
-                    		</c:forEach>
-                    	</c:if>
-                    	<script type="text/javascript">
+												</div>
+											</div>
+										</div>
+									</c:if>
+								</c:if>
+								<c:if test="${not empty sessionScope.userSession}">
+									<div class="form-group">
+										<label for="">Chọn cơ sở: (<input type="checkbox"
+											id="select_all" /> Chọn hết:)
+										</label>
+										<c:if test="${not empty locationByUserIdList}">
+											<c:forEach var="location" items="${locationByUserIdList}">
+												<div class="form-check">
+													<label class="form-check-label"> <input
+														type="checkbox" class="checkbox" name="check[]"
+														value="${location.locationId}" style="zoom: 1.5;">
+														${location.address}
+													</label>
+												</div>
+											</c:forEach>
+										</c:if>
+										<script type="text/javascript">
 						  $("#select_all").change(function(){  //"select all" change 
 							    var status = this.checked; // "select all" checked status
 							    $('.checkbox').each(function(){ //iterate all listed checkbox items
@@ -214,23 +236,28 @@
 							    }
 							});
 						  </script>
-                    </div>
-					</c:if>
-					<c:if test="${empty sessionScope.userSession}">
-					<c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
-					<div class="form-group">
-                    	<label for="" >Chọn cơ sở: (<input type="checkbox" id="select_all"/> Chọn hết:) </label>
-                    	<input class="form-control" id="myInput" type="text" placeholder="Nhập tên cần tìm..">
-                    	<div style="height:200px; overflow-y: scroll; width: 500px; margin-top: 10px;">
-                    	<ul id="myList">
-                    	<c:if test="${not empty locationByUserIdList}">
-                    		<c:forEach var="location" items="${locationByUserIdList}" >
-				      			<li><input type="checkbox" class="checkbox" name="check[]" value="${location.locationId}" style="zoom: 1.5;"> ${location.address}</li>
-                    		</c:forEach>
-                    	</c:if>
-                    	</ul>
-                    	</div>
-                    	<script>
+									</div>
+								</c:if>
+								<c:if test="${empty sessionScope.userSession}">
+									<c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
+										<div class="form-group">
+											<label for="">Chọn cơ sở: (<input type="checkbox"
+												id="select_all" /> Chọn hết:)
+											</label> <input class="form-control" id="myInput" type="text"
+												placeholder="Nhập tên cần tìm..">
+											<div
+												style="height: 200px; overflow-y: scroll; width: 500px; margin-top: 10px;">
+												<ul id="myList">
+													<c:if test="${not empty locationByUserIdList}">
+														<c:forEach var="location" items="${locationByUserIdList}">
+															<li><input type="checkbox" class="checkbox"
+																name="check[]" value="${location.locationId}"
+																style="zoom: 1.5;"> ${location.address}</li>
+														</c:forEach>
+													</c:if>
+												</ul>
+											</div>
+											<script>
 							$(document).ready(function(){
 							  $("#myInput").on("keyup", function() {
 							    var value = $(this).val().toLowerCase();
@@ -240,7 +267,7 @@
 							  });
 							});
 						</script>
-                    	<script type="text/javascript">
+											<script type="text/javascript">
 						  $("#select_all").change(function(){  //"select all" change 
 							    var status = this.checked; // "select all" checked status
 							    $('.checkbox').each(function(){ //iterate all listed checkbox items
@@ -258,8 +285,8 @@
 							    }
 							});
 						  </script>
-                    </div>
-					<!-- <div class="form-group">
+										</div>
+										<!-- <div class="form-group">
                     	<label for="optradio1" >Áp dụng cho</label>
                       	<div class="form-check">
 					  		<label class="form-check-label">
@@ -285,9 +312,9 @@
 												id="productName" placeholder="Nhập sản phẩm cần tìm">
 										</div>
                     </div> -->
-					</c:if>	
-                    </c:if>
-                    <%-- <c:if test="${not empty sessionScope.userSession}">
+									</c:if>
+								</c:if>
+								<%-- <c:if test="${not empty sessionScope.userSession}">
 					<div class="form-group">
                     	<label for="optradio1" >Áp dụng cho</label>
                       	<div class="form-check">
@@ -315,8 +342,8 @@
 										</div>
                     </div>
 					</c:if>	 --%>
-                    <div class="form-group">
-                    <%-- <c:if test="${empty sessionScope.userSession}">
+								<div class="form-group">
+									<%-- <c:if test="${empty sessionScope.userSession}">
                     <c:if test="${userDetail.user.role.roleId eq 'ADMIN'}">
 						<div class="custom-control custom-switch">
 	                        <input type="checkbox" name="condition" id="checkbox" class="custom-control-input">
@@ -325,91 +352,99 @@
                         <c:set var="collapse" value="collapse" ></c:set>
                      </c:if>
                      </c:if> --%>
-                     <c:if test="${empty sessionScope.userSession}">
-					<c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
-                        <c:if test="${not empty discountRuleList}">
-						 <div id="collapseThree" class="row ${collapse}" >
-		                    <div class="col-lg-6">
-		                    	<label for="ruleId">Điều kiện</label>
-		                    	<select id="ruleId" name="discountRule1" class="form-control">
-		                    		<option data-rate="" value="default">--Chọn--</option>
-		                    		<c:forEach items="${discountRuleList}" var="discountRule">
-		                    		<c:choose>
-								         <c:when test="${discountRule.ruleId eq 1}">
-								            <option value="${discountRule.ruleId}" data-rate="VNĐ" >${discountRule.ruleContent}</option>
-								         </c:when>
-								         <c:when test="${discountRule.ruleId eq 2}">
-								            <option value="${discountRule.ruleId}" data-rate="VNĐ">${discountRule.ruleContent}</option>
-								         </c:when>
-								         <c:otherwise>
-								            <option value="${discountRule.ruleId}" data-rate="">${discountRule.ruleContent}</option>
-								         </c:otherwise>
-							      	</c:choose>
-		                    		</c:forEach>
-		                      	</select>
-		                    </div>
-		                    <div class="col-lg-6">
-		                    	<label>Giá trị tối thiểu</label>
-		                   		<div class="placeholderrd abc" data-placeholder="">
-						    		<input class="form-control mb-3" type="text" name="valueRule1">
-						  		</div>
-						  	</div>
-						  	<script type="text/javascript">
+									<c:if test="${empty sessionScope.userSession}">
+										<c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
+											<c:if test="${not empty discountRuleList}">
+												<div id="collapseThree" class="row ${collapse}">
+													<div class="col-lg-6">
+														<label for="ruleId">Điều kiện</label> <select id="ruleId"
+															name="discountRule1" class="form-control">
+															<option data-rate="" value="default">--Chọn--</option>
+															<c:forEach items="${discountRuleList}" var="discountRule">
+																<c:choose>
+																	<c:when test="${discountRule.ruleId eq 1}">
+																		<option value="${discountRule.ruleId}" data-rate="VNĐ">${discountRule.ruleContent}</option>
+																	</c:when>
+																	<c:when test="${discountRule.ruleId eq 2}">
+																		<option value="${discountRule.ruleId}" data-rate="VNĐ">${discountRule.ruleContent}</option>
+																	</c:when>
+																	<c:otherwise>
+																		<option value="${discountRule.ruleId}" data-rate="">${discountRule.ruleContent}</option>
+																	</c:otherwise>
+																</c:choose>
+															</c:forEach>
+														</select>
+													</div>
+													<div class="col-lg-6">
+														<label>Giá trị tối thiểu</label>
+														<div class="placeholderrd abc" data-placeholder="">
+															<input class="form-control mb-3" type="text"
+																name="valueRule1">
+														</div>
+													</div>
+													<script type="text/javascript">
 							   $(function(){
 							      $("#ruleId").change(function(){
 							         $(".abc").attr("data-placeholder", $(this).find(":selected").data("rate"));
 							      });
 							   });
 							</script>
-                    	</div>
-                    	</c:if>
-                    	</c:if></c:if>
-                    	<c:if test="${not empty sessionScope.userSession}">
-                    	<c:if test="${not empty discountRuleList}">
-						 <div id="collapseThree" class="row ${collapse}" >
-		                    <div class="col-lg-6">
-		                    	<label for="ruleId">Điều kiện</label>
-		                    	<select id="ruleId" name="discountRule1" class="form-control">
-		                    		<option data-rate="" value="default">--Chọn--</option>
-		                    		<c:forEach items="${discountRuleList}" var="discountRule">
-		                    		<c:choose>
-								         <c:when test="${discountRule.ruleId eq 1}">
-								            <option value="${discountRule.ruleId}" data-rate="VNĐ" >${discountRule.ruleContent}</option>
-								         </c:when>
-								         <c:when test="${discountRule.ruleId eq 2}">
-								            <option value="${discountRule.ruleId}" data-rate="Sản phẩm">${discountRule.ruleContent}</option>
-								         </c:when>
-								         <c:otherwise>
-								            <option value="${discountRule.ruleId}" data-rate="">${discountRule.ruleContent}</option>
-								         </c:otherwise>
-							      	</c:choose>
-		                    		</c:forEach>
-		                      	</select>
-		                    </div>
-		                    <div class="col-lg-6">
-		                    	<label>Giá trị tối thiểu</label>
-		                   		<div class="placeholderrd abc" data-placeholder="">
-						    		<input class="form-control mb-3" type="text" name="valueRule1">
-						  		</div>
-						  	</div>
-						  	<script type="text/javascript">
+												</div>
+											</c:if>
+										</c:if>
+									</c:if>
+									<c:if test="${not empty sessionScope.userSession}">
+										<c:if test="${not empty discountRuleList}">
+											<div id="collapseThree" class="row ${collapse}">
+												<div class="col-lg-6">
+													<label for="ruleId">Điều kiện</label> <select id="ruleId"
+														name="discountRule1" class="form-control">
+														<option data-rate="" value="default">--Chọn--</option>
+														<c:forEach items="${discountRuleList}" var="discountRule">
+															<c:choose>
+																<c:when test="${discountRule.ruleId eq 1}">
+																	<option value="${discountRule.ruleId}" data-rate="VNĐ">${discountRule.ruleContent}</option>
+																</c:when>
+																<c:when test="${discountRule.ruleId eq 2}">
+																	<option value="${discountRule.ruleId}"
+																		data-rate="Sản phẩm">${discountRule.ruleContent}</option>
+																</c:when>
+																<c:otherwise>
+																	<option value="${discountRule.ruleId}" data-rate="">${discountRule.ruleContent}</option>
+																</c:otherwise>
+															</c:choose>
+														</c:forEach>
+													</select>
+												</div>
+												<div class="col-lg-6">
+													<label>Giá trị tối thiểu</label>
+													<div class="placeholderrd abc" data-placeholder="">
+														<input class="form-control mb-3" type="text"
+															name="valueRule1">
+													</div>
+												</div>
+												<script type="text/javascript">
 							   $(function(){
 							      $("#ruleId").change(function(){
 							         $(".abc").attr("data-placeholder", $(this).find(":selected").data("rate"));
 							      });
 							   });
 							</script>
-                    	</div>
-                    	</c:if>
-                    	</c:if>
-                    </div>
-<c:set var="urlSearchProduct" value="${pageContext.request.contextPath}/public/discount/searchproduct" />
-<c:set var="urlSearchCategory" value="${pageContext.request.contextPath}/public/discount/searchcategory" />
-<c:if test="${empty sessionScope.userSession}">
-	<c:set var="urlSearchProduct" value="${pageContext.request.contextPath}/admin/discount/searchproduct" />
-	<c:set var="urlSearchCategory" value="${pageContext.request.contextPath}/admin/discount/searchcategory" />
-</c:if>
-<script>
+											</div>
+										</c:if>
+									</c:if>
+								</div>
+								<c:set var="urlSearchProduct"
+									value="${pageContext.request.contextPath}/public/discount/searchproduct" />
+								<c:set var="urlSearchCategory"
+									value="${pageContext.request.contextPath}/public/discount/searchcategory" />
+								<c:if test="${empty sessionScope.userSession}">
+									<c:set var="urlSearchProduct"
+										value="${pageContext.request.contextPath}/admin/discount/searchproduct" />
+									<c:set var="urlSearchCategory"
+										value="${pageContext.request.contextPath}/admin/discount/searchcategory" />
+								</c:if>
+								<script>
     function getCategory(){
     var userName = document.getElementById("categoryName");
     var string = userName.value;
@@ -466,7 +501,7 @@
     });
     } 
 </script>
-<script>
+								<script>
 $('[name="optradio1"]').on('change', function(){
 	var checkbox = document.getElementsByName('check[]'); //Trả về 1 mảng do các checkbox cùng tên vs nhau
     var kt = true; 
@@ -555,7 +590,7 @@ function getProduct(){
     });
     } 
 </script>
-<script type="text/javascript">
+								<script type="text/javascript">
 $('[name="optradio"]').on('change', function(){  
 	if($(this).val()  === "category"){
     	$('#collapseOne').collapse('show')
@@ -569,7 +604,7 @@ $('[name="optradio"]').on('change', function(){
   	}
 });
 </script>
-<script type="text/javascript">
+								<script type="text/javascript">
 $('#checkbox').change(function(){ 
     if(this.checked == true){
     	$('#collapseThree').collapse('show');
@@ -578,42 +613,51 @@ $('#checkbox').change(function(){
   	}
 });
 </script>
-                    <div class="form-group">
-                      <label for="startDate">Ngày bắt đầu</label>
-                      <input class="form-control mb-3" type="date" id="startDate" name="startDate">
-                    </div>
-                    <div class="form-group">
-                      <label for="endDate">Ngày kết thúc</label>
-                      <input class="form-control mb-3" type="date" id="endDate" name="endDate">
-                    </div>
-                    <div class="form-group">
-                      <label for="limitedUse">Tổng số lần dùng</label>
-                      <input class="form-control mb-3" type="text" value="" id="limitedUse" name="limitedUse">
-                    </div>
-                    <div class="form-group">
-                      <label for="limitedPerUser">Số lần dùng/1 người</label>
-                      <input class="form-control mb-3" type="text" value="" id="limitedPerUser" name="limitedPerUser">
-                    </div>
-                   <!--  <div class="form-group">
+								<div class="form-group">
+									<label for="startDate">Ngày bắt đầu</label> <input
+										class="form-control mb-3" type="date" id="startDate"
+										name="startDate">
+								</div>
+								<div class="form-group">
+									<label for="endDate">Ngày kết thúc</label> <input
+										class="form-control mb-3" type="date" id="endDate"
+										name="endDate">
+								</div>
+								<div class="form-group">
+									<label for="limitedUse">Tổng số lần dùng</label> <input
+										class="form-control mb-3" type="text" value="" id="limitedUse"
+										name="limitedUse">
+								</div>
+								<div class="form-group">
+									<label for="limitedPerUser">Số lần dùng/1 người</label> <input
+										class="form-control mb-3" type="text" value=""
+										id="limitedPerUser" name="limitedPerUser">
+								</div>
+								<!--  <div class="form-group">
                       	<label class="text-light-white fs-14">Ảnh</label><br>
                         <img id="blah" alt="your image" style="max-height: 100px; " />
 					    <input type="file" onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
                     </div> -->
-                    <div class="form-group">
-                      <div class="custom-file">
-                        <input type="file" name="file" class="custom-file-input" id="file" onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
-                        <label class="custom-file-label" for="file">Choose file</label>
-                      </div>
-                      <img id="blah" alt="your image" style="max-height: 300px; display:block; margin-top: 15px; " />
-                    </div>
-                    <button type="submit" class="btn btn-primary" name="submit">Thêm mới</button>
-                  </form>
-                </div>
-              </div>
-          <!--Row-->
-        </div>
-        <!---Container Fluid-->
-      </div>
+								<div class="form-group">
+									<div class="custom-file">
+										<input type="file" name="file" class="custom-file-input"
+											id="file"
+											onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
+										<label class="custom-file-label" for="file">Choose
+											file</label>
+									</div>
+									<img id="blah" alt="your image"
+										style="max-height: 300px; display: block; margin-top: 15px;" />
+								</div>
+								<button type="submit" class="btn btn-primary" name="submit">Thêm
+									mới</button>
+							</form>
+						</div>
+					</div>
+					<!--Row-->
+				</div>
+				<!---Container Fluid-->
+			</div>
 			<script>
 					$(document).ready(function(){
 						  $.getJSON('${pageContext.request.contextPath}/resources/admin/assets/js/data.json', function(data){
@@ -647,7 +691,7 @@ $('#checkbox').change(function(){
 						 });
 						});
 			</script>
-<script type="text/javascript">
+			<script type="text/javascript">
 jQuery.validator.addMethod("greaterThan", 
 		function(value, element, params) {
 

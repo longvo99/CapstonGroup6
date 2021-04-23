@@ -73,7 +73,8 @@
 		<div class="row">
 			<div class="col-12">
 				<div class="section-header-left">
-					<h3 class="text-light-black header-title title"> ${nameCategory} </h3>
+					<h3 class="text-light-black header-title title">
+						${nameCategory}</h3>
 				</div>
 			</div>
 		</div>
@@ -82,105 +83,109 @@
 			<div class="col-lg-12 col-md-12">
 				<div class="row">
 					<c:if test="${not empty listLocation}">
-					<c:forEach items="${listLocation}" var="location">
-						<div class="col-lg-3 col-md-6 col-sm-6">
-							<div class="product-box mb-xl-20">
-								<div class="product-img">
-									<a
-										href="${pageContext.request.contextPath}/public/restaurant/${location.locationId}">
-										<img style="width: 255px; height: 150px;"
-										src="${pageContext.request.contextPath}/resources/admin/assets/img/uploads/${location.mediaPath}"
-										class="img-fluid full-width" alt="product-img">
-									</a>
-									<div class="overlay">
-										<div class="product-tags padding-10">
-											<span class="${circletag}"> <c:set var="heartLNew"
-													value="013-heart-1.svg" /> <c:forEach
-													items="${locationFavoriteList}" var="locationLF">
+						<c:forEach items="${listLocation}" var="location">
+							<div class="col-lg-3 col-md-6 col-sm-6">
+								<div class="product-box mb-xl-20">
+									<div class="product-img">
+										<a
+											href="${pageContext.request.contextPath}/public/restaurant/${location.locationId}">
+											<img style="width: 255px; height: 150px;"
+											src="${pageContext.request.contextPath}/resources/admin/assets/img/uploads/${location.mediaPath}"
+											class="img-fluid full-width" alt="product-img">
+										</a>
+										<div class="overlay">
+											<div class="product-tags padding-10">
+												<span class="${circletag}"> <c:set var="heartLNew"
+														value="013-heart-1.svg" /> <c:forEach
+														items="${locationFavoriteList}" var="locationLF">
+														<c:if
+															test="${locationLF.location.locationId == location.locationId}">
+															<c:set var="heartLNew" value="010-heart.svg" />
+														</c:if>
+													</c:forEach> <img
+													onclick="editLocationFavorite(${location.locationId})"
+													src="${pageContext.request.contextPath}/resources/public/assets/img/svg/${heartLNew}"
+													alt="tag">
+												</span> <span class="text-custom-white type-tag bg-gradient-orange">
+													NEW </span>
+												<c:forEach items="${DiscountList}" var="discount">
 													<c:if
-														test="${locationLF.location.locationId == location.locationId}">
-														<c:set var="heartLNew" value="010-heart.svg" />
+														test="${discount.location.locationId == location.locationId}">
+														<div class="custom-tag">
+															<span
+																class="text-custom-white rectangle-tag bg-gradient-red">sale</span>
+														</div>
 													</c:if>
-												</c:forEach> <img onclick="editLocationFavorite(${location.locationId})"
-												src="${pageContext.request.contextPath}/resources/public/assets/img/svg/${heartLNew}"
-												alt="tag">
-											</span> <span class="text-custom-white type-tag bg-gradient-orange">
-												NEW </span>
-											<c:forEach items="${DiscountList}" var="discount">
-												<c:if
-													test="${discount.location.locationId == location.locationId}">
-													<div class="custom-tag">
-														<span
-															class="text-custom-white rectangle-tag bg-gradient-red">sale</span>
-													</div>
+												</c:forEach>
+											</div>
+										</div>
+									</div>
+									<div class="product-caption">
+										<div class="title-box">
+											<h6 class="product-title">
+												<a
+													href="${pageContext.request.contextPath}/public/restaurant/${location.locationId}"
+													class="text-light-black limitLength">${location.locationName}</a>
+											</h6>
+											<c:set var="ratingPoint" value="-.-" />
+											<c:forEach items="${ratingList}" var="rating">
+												<c:if test="${rating.locationId == location.locationId}">
+													<c:set var="ratingPoint" value="${rating.point}" />
 												</c:if>
 											</c:forEach>
+											<div class="tags">
+												<span class="text-custom-white rectangle-tag bg-yellow">
+													${ratingPoint} </span>
+											</div>
 										</div>
-									</div>
-								</div>
-								<div class="product-caption">
-									<div class="title-box">
-										<h6 class="product-title">
-											<a
-												href="${pageContext.request.contextPath}/public/restaurant/${location.locationId}"
-												class="text-light-black ">${location.locationName}</a>
-										</h6>
-										<c:set var="ratingPoint" value="-.-" />
-										<c:forEach items="${ratingList}" var="rating">
-											<c:if test="${rating.locationId == location.locationId}"><c:set var="ratingPoint" value="${rating.point}" /></c:if>
-										</c:forEach>
-										<div class="tags">
-											<span class="text-custom-white rectangle-tag bg-yellow">
-												${ratingPoint} </span>
-										</div>
-									</div>
-									<p class="text-light-white">${location.locationTypeName},
-										${location.locationCategoryName}</p>
-									<div class="product-details">
-										<div class="price-time">
-											<span class="text-light-black time">
-												${location.openTime}-${location.closeTime}</span> 
-												<c:set var="minMaxPrice" value="--.--"/>
+										<p class="text-light-white">${location.locationTypeName},
+											${location.locationCategoryName}</p>
+										<div class="product-details">
+											<div class="price-time">
+												<span class="text-light-black time">
+													${location.openTime}-${location.closeTime}</span>
+												<c:set var="minMaxPrice" value="--.--" />
 												<c:forEach items="${minMaxLocation}" var="minMax">
 													<c:if test="${minMax.locationId == location.locationId}">
-														<c:set var="minMaxPrice" value="${minMax.minPrice}VNĐ - ${minMax.maxPrice}VNĐ"/>
+														<c:set var="minMaxPrice"
+															value="${minMax.minPrice}VNĐ - ${minMax.maxPrice}VNĐ" />
 													</c:if>
-											</c:forEach>
-											<span class="text-light-white price">${minMaxPrice}</span>
-										</div>
-										<div class="rating">
-											<!-- <span> <i class="fas fa-star text-yellow"></i> <i
+												</c:forEach>
+												<span class="text-light-white price">${minMaxPrice}</span>
+											</div>
+											<div class="rating">
+												<!-- <span> <i class="fas fa-star text-yellow"></i> <i
 												class="fas fa-star text-yellow"></i> <i
 												class="fas fa-star text-yellow"></i> <i
 												class="fas fa-star text-yellow"></i> <i
 												class="fas fa-star text-yellow"></i>
 											</span>  -->
-											<!-- <span class="text-light-white text-right">4225
+												<!-- <span class="text-light-white text-right">4225
 												ratings</span> -->
+											</div>
 										</div>
-									</div>
-									<div class="product-footer">
-										<span class="text-custom-white square-tag"> <img
-											src="${pageContext.request.contextPath}/resources/public/assets/img/svg/004-leaf.svg"
-											alt="tag">
-										</span> <span class="text-custom-white square-tag"> <img
-											src="${pageContext.request.contextPath}/resources/public/assets/img/svg/006-chili.svg"
-											alt="tag">
-										</span> <span class="text-custom-white square-tag"> <img
-											src="${pageContext.request.contextPath}/resources/public/assets/img/svg/005-chef.svg"
-											alt="tag">
-										</span> <span class="text-custom-white square-tag"> <img
-											src="${pageContext.request.contextPath}/resources/public/assets/img/svg/008-protein.svg"
-											alt="tag">
-										</span> <span class="text-custom-white square-tag"> <img
-											src="${pageContext.request.contextPath}/resources/public/assets/img/svg/009-lemon.svg"
-											alt="tag">
-										</span>
+										<div class="product-footer">
+											<span class="text-custom-white square-tag"> <img
+												src="${pageContext.request.contextPath}/resources/public/assets/img/svg/004-leaf.svg"
+												alt="tag">
+											</span> <span class="text-custom-white square-tag"> <img
+												src="${pageContext.request.contextPath}/resources/public/assets/img/svg/006-chili.svg"
+												alt="tag">
+											</span> <span class="text-custom-white square-tag"> <img
+												src="${pageContext.request.contextPath}/resources/public/assets/img/svg/005-chef.svg"
+												alt="tag">
+											</span> <span class="text-custom-white square-tag"> <img
+												src="${pageContext.request.contextPath}/resources/public/assets/img/svg/008-protein.svg"
+												alt="tag">
+											</span> <span class="text-custom-white square-tag"> <img
+												src="${pageContext.request.contextPath}/resources/public/assets/img/svg/009-lemon.svg"
+												alt="tag">
+											</span>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</c:forEach>
+						</c:forEach>
 					</c:if>
 					<c:if test="${not empty listLocation2}">
 						<c:forEach items="${listLocation2}" var="locationFavorite">
@@ -195,7 +200,8 @@
 										</a>
 										<div class="overlay">
 											<div class="product-tags padding-10">
-												<span class="${circletag}"><img onclick="editLocationFavorite(${locationFavorite.location.locationId})"
+												<span class="${circletag}"><img
+													onclick="editLocationFavorite(${locationFavorite.location.locationId})"
 													src="${pageContext.request.contextPath}/resources/public/assets/img/svg/010-heart.svg"
 													alt="tag"></span>
 												<c:forEach items="${listLocationTopNew}" var="location">
@@ -222,26 +228,32 @@
 											<h6 class="product-title">
 												<a
 													href="${pageContext.request.contextPath}/public/restaurant/${locationFavorite.location.locationId}"
-													class="text-light-black ">${locationFavorite.location.locationName}</a>
+													class="text-light-black limitLength">${locationFavorite.location.locationName}</a>
 											</h6>
 											<c:set var="ratingPoint" value="-.-" />
 											<c:forEach items="${ratingList}" var="rating">
-												<c:if test="${rating.locationId == locationFavorite.location.locationId}"><c:set var="ratingPoint" value="${rating.point}" /></c:if>
+												<c:if
+													test="${rating.locationId == locationFavorite.location.locationId}">
+													<c:set var="ratingPoint" value="${rating.point}" />
+												</c:if>
 											</c:forEach>
 											<div class="tags">
 												<span class="text-custom-white rectangle-tag bg-yellow">
 													${ratingPoint} </span>
 											</div>
 										</div>
-										<p class="text-light-white">${locationFavorite.location.locationType.locationTypeName}, ${locationFavorite.location.locationCategory.locationCategoryName}</p>
+										<p class="text-light-white">${locationFavorite.location.locationType.locationTypeName},
+											${locationFavorite.location.locationCategory.locationCategoryName}</p>
 										<div class="product-details">
 
 											<div class="price-time">
 												<span class="text-light-black time">${locationFavorite.location.openTime}-${locationFavorite.location.closeTime}</span>
-												<c:set var="minMaxPrice" value="--.--"/>
+												<c:set var="minMaxPrice" value="--.--" />
 												<c:forEach items="${minMaxLocation}" var="minMax">
-													<c:if test="${minMax.locationId == locationFavorite.location.locationId}">
-														<c:set var="minMaxPrice" value="${minMax.minPrice}VNĐ - ${minMax.maxPrice}VNĐ"/>
+													<c:if
+														test="${minMax.locationId == locationFavorite.location.locationId}">
+														<c:set var="minMaxPrice"
+															value="${minMax.minPrice}VNĐ - ${minMax.maxPrice}VNĐ" />
 													</c:if>
 												</c:forEach>
 												<span class="text-light-white price">${minMaxPrice}</span>

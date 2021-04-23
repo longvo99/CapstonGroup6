@@ -50,85 +50,96 @@
 		<div class="col-lg-12">
 			<div class="tab-content">
 				<div class="tab-pane active" id="home">
-				  <c:set var="actionUrl" value="${pageContext.request.contextPath}/admin/user/edit" />
-                  <c:if test="${not empty sessionScope.userSession}">
-                  		<c:set var="actionUrl" value="${pageContext.request.contextPath}/user/edit" />
-                  </c:if>
-					<form class="form" action="${actionUrl}" method="post" id="registrationForm">
+					<c:set var="actionUrl"
+						value="${pageContext.request.contextPath}/admin/user/edit" />
+					<c:if test="${not empty sessionScope.userSession}">
+						<c:set var="actionUrl"
+							value="${pageContext.request.contextPath}/user/edit" />
+					</c:if>
+					<form class="form" action="${actionUrl}" method="post"
+						id="registrationForm">
 						<div class="form-group">
 							<div class="col-xs-6">
-								<label for="first_name"> Họ và Tên </label> 
-								<input type="text" class="form-control" value="${user.contactName}" name="contactName" id="contactName" >
+								<label for="first_name"> Họ và Tên </label> <input type="text"
+									class="form-control" value="${user.contactName}"
+									name="contactName" id="contactName">
 							</div>
 						</div>
 						<div class="form-group">
 
 							<div class="col-xs-6">
-								<label for="phone"> Số điện thoại </label> 
-								<input type="text" value="${user.contactPhone}" class="form-control" name="phone" id="phone">
+								<label for="phone"> Số điện thoại </label> <input type="text"
+									value="${user.contactPhone}" class="form-control" name="phone"
+									id="phone">
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-xs-6">
-								<label for="email"> Email </label> 
-								<input type="email" class="form-control" value="${user.contactEmail}" name="contactAddress" id="contactAddress" >
-						</div>
-						<div class="form-group">
-							<div class="col-xs-6">
-								<label for="email"> Địa chỉ </label> 
-								<input type="email" class="form-control" value="${user.contactAddress}" name="contactAddress" id="contactAddress" >
+								<label for="email"> Email </label> <input type="email"
+									class="form-control" value="${user.contactEmail}"
+									name="contactAddress" id="contactAddress">
 							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-xs-6">
-								<label for="mobile"> Giới tính </label> 
-								<input type="text" class="form-control" value="${user.gender}" name="gender" id="gender">
+							<div class="form-group">
+								<div class="col-xs-6">
+									<label for="email"> Địa chỉ </label> <input type="email"
+										class="form-control" value="${user.contactAddress}"
+										name="contactAddress" id="contactAddress">
+								</div>
 							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-xs-6">
-								<label for="mobile"> Ngày sinh </label> 
-								<input type="text" class="form-control" value="${user.dateOfBirth}" name="dateOfBirth" id="dateOfBirth">
+							<div class="form-group">
+								<div class="col-xs-6">
+									<label for="mobile"> Giới tính </label> <input type="text"
+										class="form-control" value="${user.gender}" name="gender"
+										id="gender">
+								</div>
 							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-xs-6">
-								<label for="mobile"> Mô tả </label> 
-								<input type="text" class="form-control" value="${user.description}" name="description" id="description">
+							<div class="form-group">
+								<div class="col-xs-6">
+									<label for="mobile"> Ngày sinh </label> <input type="text"
+										class="form-control" value="${user.dateOfBirth}"
+										name="dateOfBirth" id="dateOfBirth">
+								</div>
 							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-xs-6">
-								<label for="password"> Password </label> 
-								<input type="password" class="form-control" value="********" name="password" >
+							<div class="form-group">
+								<div class="col-xs-6">
+									<label for="mobile"> Mô tả </label> <input type="text"
+										class="form-control" value="${user.description}"
+										name="description" id="description">
+								</div>
 							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-xs-6">
-								<label for="password2"> Nhập lại mật khẩu </label> 
-								<input type="password" class="form-control" name="password2" id="password2"> 
+							<div class="form-group">
+								<div class="col-xs-6">
+									<label for="password"> Password </label> <input type="password"
+										class="form-control" value="********" name="password">
+								</div>
 							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-xs-12">
-								<br>
-								<button class="btn btn-lg btn-success" type="submit">
-									<i class="glyphicon glyphicon-ok-sign"></i> Save
-								</button>
-								<button class="btn btn-lg" type="reset">
-									<i class="glyphicon glyphicon-repeat"></i> Reset
-								</button>
+							<div class="form-group">
+								<div class="col-xs-6">
+									<label for="password2"> Nhập lại mật khẩu </label> <input
+										type="password" class="form-control" name="password2"
+										id="password2">
+								</div>
 							</div>
-						</div>
+							<div class="form-group">
+								<div class="col-xs-12">
+									<br>
+									<button class="btn btn-lg btn-success" type="submit">
+										<i class="glyphicon glyphicon-ok-sign"></i> Save
+									</button>
+									<button class="btn btn-lg" type="reset">
+										<i class="glyphicon glyphicon-repeat"></i> Reset
+									</button>
+								</div>
+							</div>
 					</form>
 
 					<hr>
 
 				</div>
-		</div>
-		<!--/tab-content-->
+			</div>
+			<!--/tab-content-->
 
-		<script type="text/javascript">
+			<script type="text/javascript">
 			$(document).ready(function() {
 		
 				var readURL = function(input) {

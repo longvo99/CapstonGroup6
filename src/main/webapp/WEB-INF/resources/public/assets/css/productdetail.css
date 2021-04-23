@@ -64,18 +64,94 @@
 	padding: 5px 10px;
 }
 
-.tag:not (.label ) {
-	background-color: #fff;
-	padding: 6px 12px;
-	border-radius: 2px;
-	border: 1px solid #cdd6e1;
-	font-size: 12px;
-	line-height: 1.42857;
-	vertical-align: middle;
-	-webkit-transition: all .15s;
-	transition: all .15s;
-}
+.tag
+:not
+ 
+(
+.label
+ 
+)
+{
+background-color
+:
+ 
+#fff
+;
 
+	
+padding
+:
+ 
+6
+px
+ 
+12
+px
+;
+
+	
+border-radius
+:
+ 
+2
+px
+;
+
+	
+border
+:
+ 
+1
+px
+ 
+solid
+ 
+#cdd6e1
+;
+
+	
+font-size
+:
+ 
+12
+px
+;
+
+	
+line-height
+:
+ 
+1
+.42857
+;
+
+	
+vertical-align
+:
+ 
+middle
+;
+
+	
+-webkit-transition
+:
+ 
+all
+ 
+.15s
+;
+
+	
+transition
+:
+ 
+all
+ 
+.15s
+;
+
+
+}
 .text-muted, a.text-muted:hover, a.text-muted:focus {
 	color: #acacac;
 }

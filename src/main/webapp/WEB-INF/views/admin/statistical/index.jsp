@@ -1,57 +1,63 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@include file="/WEB-INF/templates/tags/taglib.jsp" %>
+	pageEncoding="UTF-8"%>
+<%@include file="/WEB-INF/templates/tags/taglib.jsp"%>
 
-        
-        <!-- Container Fluid-->
-        <div class="container-fluid" id="container-wrapper">
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Charts</li>
-            </ol>
-          </div>
-          <!-- Row -->
-          <div class="row">
-            <!-- Bar Chart -->
-            <div class="col-lg-12">
-              <div class="card shadow mb-4">
-                <div class="card-header py-3 text-center">
-                  <h3 class="m-0 font-weight-bold text-primary">DOANH THU TỪNG THÁNG (NĂM ${year})</h3>
-                  <div class="dropdown mb-3">
-                    <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton"
-                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Năm ${year}
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <c:if test="${not empty listYear}">
-	                    <c:forEach var="obj" items="${listYear}" >
-	                    	 <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/statistical/index/${obj}">Năm ${obj}</a>
-	                    </c:forEach>
-                     </c:if>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <div class="chart-bar">
-                    <canvas id="myBarChart"></canvas>
-                  </div>
-                  <hr>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--Row-->
-			<div class="row" >
-				<div class="col-lg-12">
-					<h3><a href="${pageContext.request.contextPath}/admin/statistical/downloadExcel">Tổng doanh thu của từng địa điểm theo năm(Download Excel)</a></h3>
+
+<!-- Container Fluid-->
+<div class="container-fluid" id="container-wrapper">
+	<div class="d-sm-flex align-items-center justify-content-between mb-4">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="#">Home</a></li>
+			<li class="breadcrumb-item active" aria-current="page">Charts</li>
+		</ol>
+	</div>
+	<!-- Row -->
+	<div class="row">
+		<!-- Bar Chart -->
+		<div class="col-lg-12">
+			<div class="card shadow mb-4">
+				<div class="card-header py-3 text-center">
+					<h3 class="m-0 font-weight-bold text-primary">DOANH THU TỪNG
+						THÁNG (NĂM ${year})</h3>
+					<div class="dropdown mb-3">
+						<button class="btn btn-success dropdown-toggle" type="button"
+							id="dropdownMenuButton" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false">Năm ${year}</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<c:if test="${not empty listYear}">
+								<c:forEach var="obj" items="${listYear}">
+									<a class="dropdown-item"
+										href="${pageContext.request.contextPath}/admin/statistical/index/${obj}">Năm
+										${obj}</a>
+								</c:forEach>
+							</c:if>
+						</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<div class="chart-bar">
+						<canvas id="myBarChart"></canvas>
+					</div>
+					<hr>
 				</div>
 			</div>
-          <!-- Documentation Link -->
-        </div>
-        <!---Container Fluid-->
-      </div>
-      <script type="text/javascript">
+		</div>
+	</div>
+	<!--Row-->
+	<div class="row">
+		<div class="col-lg-12">
+			<h3>
+				<a
+					href="${pageContext.request.contextPath}/admin/statistical/downloadExcel">Tổng
+					doanh thu của từng địa điểm theo năm(Download Excel)</a>
+			</h3>
+		</div>
+	</div>
+	<!-- Documentation Link -->
+</div>
+<!---Container Fluid-->
+</div>
+<script type="text/javascript">
 window.onload = function() {
 	var totalPriceList = ${totalPriceList};
 	var largesttotalPrice = ${largesttotalPrice};

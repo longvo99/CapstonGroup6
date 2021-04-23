@@ -20,329 +20,328 @@
 		"parent_id": "02"
 	},
 	{
-        "id": "2101",
-        "name": "Phường Hòa Hiệp Bắc",
-        "parent_id": "201"
-    },
-    {
-        "id": "0002",
-        "name": "Phường Hòa Hiệp Nam",
-        "parent_id": "201"
-    },
-    {
-        "id": "0002",
-        "name": "Phường Hòa Khánh Bắc",
-        "parent_id": "201"
-    },
-    {
-        "id": "0002",
-        "name": "Phường Hòa Khánh Nam",
-        "parent_id": "201"
-    },
-    {
-        "id": "0002",
-        "name": "Phường Hòa Minh",
-        "parent_id": "201"
-    },
+		"id": "2101",
+		"name": "Phường Hòa Hiệp Bắc",
+		"parent_id": "201"
+	},
+	{
+		"id": "0002",
+		"name": "Phường Hòa Hiệp Nam",
+		"parent_id": "201"
+	},
+	{
+		"id": "0002",
+		"name": "Phường Hòa Khánh Bắc",
+		"parent_id": "201"
+	},
+	{
+		"id": "0002",
+		"name": "Phường Hòa Khánh Nam",
+		"parent_id": "201"
+	},
+	{
+		"id": "0002",
+		"name": "Phường Hòa Minh",
+		"parent_id": "201"
+	},
 	{
 		"id": "202",
 		"name": "Quận Thanh Khê",
 		"parent_id": "02"
 	},
 	{
-        "id": "2202",
-        "name": "Phường Tam Thuận",
-        "parent_id": "202"
-    },
-    {
-        "id": "20206",
-        "name": "Phường Thanh Khê Tây",
-        "parent_id": "202"
-    },
-    {
-        "id": "20207",
-        "name": "Phường Thanh Khê Đông",
-        "parent_id": "202"
-    },
-    {
-        "id": "20209",
-        "name": "Phường Xuân Hà",
-        "parent_id": "202"
-    },
-    {
-        "id": "20212",
-        "name": "Phường Tân Chính",
-        "parent_id": "202"
-    },
-    {
-        "id": "20215",
-        "name": "Phường Chính Gián",
-        "parent_id": "202"
-    },
-    {
-        "id": "20218",
-        "name": "Phường Vĩnh Trung",
-        "parent_id": "202"
-    },
-    {
-        "id": "20221",
-        "name": "Phường Thạc Gián",
-        "parent_id": "202"
-    },
-    {
-        "id": "20224",
-        "name": "Phường An Khê",
-        "parent_id": "202"
-    },
-    {
-        "id": "20225",
-        "name": "Phường Hòa Khê",
-        "parent_id": "202"
-    },
-    {
-        "id": "203",
-        "name": "Quận Hải Châu",
-        "parent_id": "02"
-    },
-    {
-        "id": "20227",
-        "name": "Phường Thanh Bình",
-        "parent_id": "203"
-    },
-    {
-        "id": "20230",
-        "name": "Phường Thuận Phước",
-        "parent_id": "203"
-    },
-    {
-        "id": "20233",
-        "name": "Phường Thạch Thang",
-        "parent_id": "203"
-    },
-    {
-        "id": "20236",
-        "name": "Phường Hải Châu  I",
-        "parent_id": "203"
-    },
-    {
-        "id": "20239",
-        "name": "Phường Hải Châu II",
-        "parent_id": "203"
-    },
-    {
-        "id": "20242",
-        "name": "Phường Phước Ninh",
-        "parent_id": "203"
-    },
-    {
-        "id": "20245",
-        "name": "Phường Hòa Thuận Tây",
-        "parent_id": "203"
-    },
-    {
-        "id": "20246",
-        "name": "Phường Hòa Thuận Đông",
-        "parent_id": "203"
-    },
-    {
-        "id": "20248",
-        "name": "Phường Nam Dương",
-        "parent_id": "203"
-    },
-    {
-        "id": "20251",
-        "name": "Phường Bình Hiên",
-        "parent_id": "203"
-    },
-    {
-        "id": "20254",
-        "name": "Phường Bình Thuận",
-        "parent_id": "203"
-    },
-    {
-        "id": "20257",
-        "name": "Phường Hòa Cường Bắc",
-        "parent_id": "203"
-    },
-    {
-        "id": "20258",
-        "name": "Phường Hòa Cường Nam",
-        "parent_id": "203"
-    },
-    {
-        "id": "204",
-        "name": "Quận Sơn Trà",
-        "parent_id": "02"
-    },
-    {
-        "id": "20263",
-        "name": "Phường Thọ Quang",
-        "parent_id": "204"
-    },
-    {
-        "id": "20266",
-        "name": "Phường Nại Hiên Đông",
-        "parent_id": "204"
-    },
-    {
-        "id": "20269",
-        "name": "Phường Mân Thái",
-        "parent_id": "204"
-    },
-    {
-        "id": "20272",
-        "name": "Phường An Hải Bắc",
-        "parent_id": "204"
-    },
-    {
-        "id": "20275",
-        "name": "Phường Phước Mỹ",
-        "parent_id": "204"
-    },
-    {
-        "id": "20278",
-        "name": "Phường An Hải Tây",
-        "parent_id": "204"
-    },
-    {
-        "id": "20281",
-        "name": "Phường An Hải Đông",
-        "parent_id": "204"
-    },
-    {
-        "id": "20281",
-        "name": "Phường An Hải Đông",
-        "parent_id": "204"
-    },
-    {
-        "id": "205",
-        "name": "Quận Ngũ Hành Sơn",
-        "parent_id": "02"
-    },
-    {
-        "id": "20284",
-        "name": "Phường Mỹ An",
-        "parent_id": "205"
-    },
-    {
-        "id": "20285",
-        "name": "Phường Khuê Mỹ",
-        "parent_id": "205"
-    },
-    {
-        "id": "20287",
-        "name": "Phường Hoà Quý",
-        "parent_id": "205"
-    },
-    {
-        "id": "20290",
-        "name": "Phường Hoà Hải",
-        "parent_id": "205"
-    },
-    {
-        "id": "206",
-        "name": "Quận Cẩm Lệ",
-        "parent_id": "02"
-    },
-    {
-        "id": "20260",
-        "name": "Phường Khuê Trung",
-        "parent_id": "206"
-    },
-    {
-        "id": "20305",
-        "name": "Phường Hòa Phát",
-        "parent_id": "206"
-    },
-    {
-        "id": "20306",
-        "name": "Phường Hòa An",
-        "parent_id": "206"
-    },
-    {
-        "id": "20311",
-        "name": "Phường Hòa Thọ Tây",
-        "parent_id": "206"
-    },
-    {
-        "id": "20312",
-        "name": "Phường Hòa Thọ Đông",
-        "parent_id": "206"
-    },
-    {
-        "id": "20314",
-        "name": "Phường Hòa Xuân",
-        "parent_id": "206"
-    },
-    {
-        "id": "207",
-        "name": "Huyện Hòa Vang",
-        "parent_id": "02"
-    },
-    {
-        "id": "20293",
-        "name": "Xã Hòa Bắc",
-        "parent_id": "207"
-    },
-    {
-        "id": "20296",
-        "name": "Xã Hòa Liên",
-        "parent_id": "207"
-    },
-    {
-        "id": "20299",
-        "name": "Xã Hòa Ninh",
-        "parent_id": "207"
-    },
-    {
-        "id": "20302",
-        "name": "Xã Hòa Sơn",
-        "parent_id": "207"
-    },
-    {
-        "id": "20308",
-        "name": "Xã Hòa Nhơn",
-        "parent_id": "207"
-    },
-    {
-        "id": "20317",
-        "name": "Xã Hòa Phú",
-        "parent_id": "207"
-    },
-    {
-        "id": "20320",
-        "name": "Xã Hòa Phong",
-        "parent_id": "207"
-    },
-    {
-        "id": "20323",
-        "name": "Xã Hòa Châu",
-        "parent_id": "207"
-    },
-    {
-        "id": "20326",
-        "name": "Xã Hòa Tiến",
-        "parent_id": "207"
-    },
-    {
-        "id": "20329",
-        "name": "Xã Hòa Phước",
-        "parent_id": "207"
-    },
-    {
-        "id": "20332",
-        "name": "Xã Hòa Khương",
-        "parent_id": "207"
-    },
-    {
-        "id": "208",
-        "name": "Huyện Hoàng Sa",
-        "parent_id": "02"
-    },
-    {
-        "id": "203321",
-        "name": "Hoàng Sa",
-        "parent_id": "208"
-    }
-    
+		"id": "2202",
+		"name": "Phường Tam Thuận",
+		"parent_id": "202"
+	},
+	{
+		"id": "20206",
+		"name": "Phường Thanh Khê Tây",
+		"parent_id": "202"
+	},
+	{
+		"id": "20207",
+		"name": "Phường Thanh Khê Đông",
+		"parent_id": "202"
+	},
+	{
+		"id": "20209",
+		"name": "Phường Xuân Hà",
+		"parent_id": "202"
+	},
+	{
+		"id": "20212",
+		"name": "Phường Tân Chính",
+		"parent_id": "202"
+	},
+	{
+		"id": "20215",
+		"name": "Phường Chính Gián",
+		"parent_id": "202"
+	},
+	{
+		"id": "20218",
+		"name": "Phường Vĩnh Trung",
+		"parent_id": "202"
+	},
+	{
+		"id": "20221",
+		"name": "Phường Thạc Gián",
+		"parent_id": "202"
+	},
+	{
+		"id": "20224",
+		"name": "Phường An Khê",
+		"parent_id": "202"
+	},
+	{
+		"id": "20225",
+		"name": "Phường Hòa Khê",
+		"parent_id": "202"
+	},
+	{
+		"id": "203",
+		"name": "Quận Hải Châu",
+		"parent_id": "02"
+	},
+	{
+		"id": "20227",
+		"name": "Phường Thanh Bình",
+		"parent_id": "203"
+	},
+	{
+		"id": "20230",
+		"name": "Phường Thuận Phước",
+		"parent_id": "203"
+	},
+	{
+		"id": "20233",
+		"name": "Phường Thạch Thang",
+		"parent_id": "203"
+	},
+	{
+		"id": "20236",
+		"name": "Phường Hải Châu  I",
+		"parent_id": "203"
+	},
+	{
+		"id": "20239",
+		"name": "Phường Hải Châu II",
+		"parent_id": "203"
+	},
+	{
+		"id": "20242",
+		"name": "Phường Phước Ninh",
+		"parent_id": "203"
+	},
+	{
+		"id": "20245",
+		"name": "Phường Hòa Thuận Tây",
+		"parent_id": "203"
+	},
+	{
+		"id": "20246",
+		"name": "Phường Hòa Thuận Đông",
+		"parent_id": "203"
+	},
+	{
+		"id": "20248",
+		"name": "Phường Nam Dương",
+		"parent_id": "203"
+	},
+	{
+		"id": "20251",
+		"name": "Phường Bình Hiên",
+		"parent_id": "203"
+	},
+	{
+		"id": "20254",
+		"name": "Phường Bình Thuận",
+		"parent_id": "203"
+	},
+	{
+		"id": "20257",
+		"name": "Phường Hòa Cường Bắc",
+		"parent_id": "203"
+	},
+	{
+		"id": "20258",
+		"name": "Phường Hòa Cường Nam",
+		"parent_id": "203"
+	},
+	{
+		"id": "204",
+		"name": "Quận Sơn Trà",
+		"parent_id": "02"
+	},
+	{
+		"id": "20263",
+		"name": "Phường Thọ Quang",
+		"parent_id": "204"
+	},
+	{
+		"id": "20266",
+		"name": "Phường Nại Hiên Đông",
+		"parent_id": "204"
+	},
+	{
+		"id": "20269",
+		"name": "Phường Mân Thái",
+		"parent_id": "204"
+	},
+	{
+		"id": "20272",
+		"name": "Phường An Hải Bắc",
+		"parent_id": "204"
+	},
+	{
+		"id": "20275",
+		"name": "Phường Phước Mỹ",
+		"parent_id": "204"
+	},
+	{
+		"id": "20278",
+		"name": "Phường An Hải Tây",
+		"parent_id": "204"
+	},
+	{
+		"id": "20281",
+		"name": "Phường An Hải Đông",
+		"parent_id": "204"
+	},
+	{
+		"id": "20281",
+		"name": "Phường An Hải Đông",
+		"parent_id": "204"
+	},
+	{
+		"id": "205",
+		"name": "Quận Ngũ Hành Sơn",
+		"parent_id": "02"
+	},
+	{
+		"id": "20284",
+		"name": "Phường Mỹ An",
+		"parent_id": "205"
+	},
+	{
+		"id": "20285",
+		"name": "Phường Khuê Mỹ",
+		"parent_id": "205"
+	},
+	{
+		"id": "20287",
+		"name": "Phường Hoà Quý",
+		"parent_id": "205"
+	},
+	{
+		"id": "20290",
+		"name": "Phường Hoà Hải",
+		"parent_id": "205"
+	},
+	{
+		"id": "206",
+		"name": "Quận Cẩm Lệ",
+		"parent_id": "02"
+	},
+	{
+		"id": "20260",
+		"name": "Phường Khuê Trung",
+		"parent_id": "206"
+	},
+	{
+		"id": "20305",
+		"name": "Phường Hòa Phát",
+		"parent_id": "206"
+	},
+	{
+		"id": "20306",
+		"name": "Phường Hòa An",
+		"parent_id": "206"
+	},
+	{
+		"id": "20311",
+		"name": "Phường Hòa Thọ Tây",
+		"parent_id": "206"
+	},
+	{
+		"id": "20312",
+		"name": "Phường Hòa Thọ Đông",
+		"parent_id": "206"
+	},
+	{
+		"id": "20314",
+		"name": "Phường Hòa Xuân",
+		"parent_id": "206"
+	},
+	{
+		"id": "207",
+		"name": "Huyện Hòa Vang",
+		"parent_id": "02"
+	},
+	{
+		"id": "20293",
+		"name": "Xã Hòa Bắc",
+		"parent_id": "207"
+	},
+	{
+		"id": "20296",
+		"name": "Xã Hòa Liên",
+		"parent_id": "207"
+	},
+	{
+		"id": "20299",
+		"name": "Xã Hòa Ninh",
+		"parent_id": "207"
+	},
+	{
+		"id": "20302",
+		"name": "Xã Hòa Sơn",
+		"parent_id": "207"
+	},
+	{
+		"id": "20308",
+		"name": "Xã Hòa Nhơn",
+		"parent_id": "207"
+	},
+	{
+		"id": "20317",
+		"name": "Xã Hòa Phú",
+		"parent_id": "207"
+	},
+	{
+		"id": "20320",
+		"name": "Xã Hòa Phong",
+		"parent_id": "207"
+	},
+	{
+		"id": "20323",
+		"name": "Xã Hòa Châu",
+		"parent_id": "207"
+	},
+	{
+		"id": "20326",
+		"name": "Xã Hòa Tiến",
+		"parent_id": "207"
+	},
+	{
+		"id": "20329",
+		"name": "Xã Hòa Phước",
+		"parent_id": "207"
+	},
+	{
+		"id": "20332",
+		"name": "Xã Hòa Khương",
+		"parent_id": "207"
+	},
+	{
+		"id": "208",
+		"name": "Huyện Hoàng Sa",
+		"parent_id": "02"
+	},
+	{
+		"id": "203321",
+		"name": "Hoàng Sa",
+		"parent_id": "208"
+	}
 ]

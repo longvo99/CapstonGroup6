@@ -4,50 +4,74 @@
       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 	<!-- admin -->
-	<definition name="templates.admin" template="/WEB-INF/templates/admin/inc/master.jsp">
-		<put-attribute name="admin-footer" value="/WEB-INF/templates/admin/inc/footer.jsp" />
-		<put-attribute name="admin-topbar" value="/WEB-INF/templates/admin/inc/topbar.jsp" />
-		<put-attribute name="admin-sidebar" value="/WEB-INF/templates/admin/inc/sidebar.jsp" />
+	<definition name="templates.admin"
+		template="/WEB-INF/templates/admin/inc/master.jsp">
+		<put-attribute name="admin-footer"
+			value="/WEB-INF/templates/admin/inc/footer.jsp" />
+		<put-attribute name="admin-topbar"
+			value="/WEB-INF/templates/admin/inc/topbar.jsp" />
+		<put-attribute name="admin-sidebar"
+			value="/WEB-INF/templates/admin/inc/sidebar.jsp" />
 	</definition>
 	<!-- public -->
-	<definition name="templates.public" template="/WEB-INF/templates/public/inc/master.jsp">
-		<put-attribute name="public-topbar" value="/WEB-INF/templates/public/inc/topbar.jsp" />
+	<definition name="templates.public"
+		template="/WEB-INF/templates/public/inc/master.jsp">
+		<put-attribute name="public-topbar"
+			value="/WEB-INF/templates/public/inc/topbar.jsp" />
 		<put-attribute name="public-content" value="" />
-		<put-attribute name="public-footer" value="/WEB-INF/templates/public/inc/footer.jsp" />
+		<put-attribute name="public-footer"
+			value="/WEB-INF/templates/public/inc/footer.jsp" />
 	</definition>
 	<!-- AUTHS -->
-	<definition name="auths.admin.login" template="/WEB-INF/views/auths/admin-login.jsp">
+	<definition name="auths.admin.login"
+		template="/WEB-INF/views/auths/admin-login.jsp">
 	</definition>
-	<definition name="admin.forgotpassword" template="/WEB-INF/views/auths/forgot-password.jsp">
+	<definition name="admin.forgotpassword"
+		template="/WEB-INF/views/auths/forgot-password.jsp">
 	</definition>
-	<definition name="admin.resetpassword" template="/WEB-INF/views/auths/reset-password.jsp">
+	<definition name="admin.resetpassword"
+		template="/WEB-INF/views/auths/reset-password.jsp">
 	</definition>
 	<!-- PUBLIC -->
 	<definition name="public.index" extends="templates.public">
-		<put-attribute name="public-content" value="/WEB-INF/views/public/index.jsp" />
+		<put-attribute name="public-content"
+			value="/WEB-INF/views/public/index.jsp" />
 	</definition>
-	<definition name="public.indexbycat" extends="templates.public">
-		<put-attribute name="public-content" value="/WEB-INF/views/public/indexbycat.jsp" />
+	<definition name="public.indexbycat"
+		extends="templates.public">
+		<put-attribute name="public-content"
+			value="/WEB-INF/views/public/indexbycat.jsp" />
 	</definition>
-	<definition name="public.restaurant" extends="templates.public">
-		<put-attribute name="public-content" value="/WEB-INF/views/public/restaurant.jsp" />
+	<definition name="public.restaurant"
+		extends="templates.public">
+		<put-attribute name="public-content"
+			value="/WEB-INF/views/public/restaurant.jsp" />
 	</definition>
-	<definition name="public.register" extends="templates.public">
-		<put-attribute name="public-content" value="/WEB-INF/views/public/register.jsp" />
+	<definition name="public.register"
+		extends="templates.public">
+		<put-attribute name="public-content"
+			value="/WEB-INF/views/public/register.jsp" />
 		<put-attribute name="public-footer" value="" />
 	</definition>
 	<definition name="public.login" extends="templates.public">
-		<put-attribute name="public-content" value="/WEB-INF/views/public/login.jsp" />
+		<put-attribute name="public-content"
+			value="/WEB-INF/views/public/login.jsp" />
 		<put-attribute name="public-footer" value="" />
 	</definition>
-	<definition name="public.checkout" extends="templates.public">
-		<put-attribute name="public-content" value="/WEB-INF/views/public/checkout.jsp" />
+	<definition name="public.checkout"
+		extends="templates.public">
+		<put-attribute name="public-content"
+			value="/WEB-INF/views/public/checkout.jsp" />
 	</definition>
-	<definition name="public.orderdetails" extends="templates.public">
-		<put-attribute name="public-content" value="/WEB-INF/views/public/orderdetails.jsp" />
+	<definition name="public.orderdetails"
+		extends="templates.public">
+		<put-attribute name="public-content"
+			value="/WEB-INF/views/public/orderdetails.jsp" />
 	</definition>
-	<definition name="public.category" extends="templates.public">
-		<put-attribute name="public-content" value="/WEB-INF/views/public/category.jsp" />
+	<definition name="public.category"
+		extends="templates.public">
+		<put-attribute name="public-content"
+			value="/WEB-INF/views/public/category.jsp" />
 	</definition>
 	<definition name="public.contact" extends="templates.public">
 		<put-attribute name="public-content"
@@ -64,109 +88,161 @@
 			value="/WEB-INF/views/public/cart.jsp" />
 		<put-attribute name="public-sidebar" value="" />
 	</definition>
-	
-	<!-- PAGE ADMIN INDEX  -->
+
+	<!-- PAGE ADMIN INDEX -->
 	<definition name="admin.index" extends="templates.admin">
-		<put-attribute name="admin-content" value="/WEB-INF/views/admin/index/index.jsp" />
+		<put-attribute name="admin-content"
+			value="/WEB-INF/views/admin/index/index.jsp" />
 	</definition>
-	
-	<!-- ADMIN USER  -->
-	<definition name="admin.user.index" extends="templates.admin">
-		<put-attribute name="admin-content" value="/WEB-INF/views/admin/user/index.jsp" />
+
+	<!-- ADMIN USER -->
+	<definition name="admin.user.index"
+		extends="templates.admin">
+		<put-attribute name="admin-content"
+			value="/WEB-INF/views/admin/user/index.jsp" />
 	</definition>
 	<definition name="admin.user.edit" extends="templates.admin">
-		<put-attribute name="admin-content" value="/WEB-INF/views/admin/user/edit.jsp" />
+		<put-attribute name="admin-content"
+			value="/WEB-INF/views/admin/user/edit.jsp" />
 	</definition>
 	<definition name="admin.user.add" extends="templates.admin">
-		<put-attribute name="admin-content" value="/WEB-INF/views/admin/user/add.jsp" />
+		<put-attribute name="admin-content"
+			value="/WEB-INF/views/admin/user/add.jsp" />
 	</definition>
-	<definition name="admin.user.profile" extends="templates.admin">
-		<put-attribute name="admin-content" value="/WEB-INF/views/admin/user/profile.jsp" />
+	<definition name="admin.user.profile"
+		extends="templates.admin">
+		<put-attribute name="admin-content"
+			value="/WEB-INF/views/admin/user/profile.jsp" />
 	</definition>
-	<!-- ADMIN STATISTICAL  -->
-	<definition name="admin.statistical.index" extends="templates.admin">
-		<put-attribute name="admin-content" value="/WEB-INF/views/admin/statistical/index.jsp" />
+	<!-- ADMIN STATISTICAL -->
+	<definition name="admin.statistical.index"
+		extends="templates.admin">
+		<put-attribute name="admin-content"
+			value="/WEB-INF/views/admin/statistical/index.jsp" />
 	</definition>
-	<!-- ADMIN PRODUCT  -->
-	<definition name="admin.product.index" extends="templates.admin">
-		<put-attribute name="admin-content" value="/WEB-INF/views/admin/product/index.jsp" />
+	<!-- ADMIN PRODUCT -->
+	<definition name="admin.product.index"
+		extends="templates.admin">
+		<put-attribute name="admin-content"
+			value="/WEB-INF/views/admin/product/index.jsp" />
 	</definition>
-	<definition name="admin.product.add" extends="templates.admin">
-		<put-attribute name="admin-content" value="/WEB-INF/views/admin/product/add.jsp" />
+	<definition name="admin.product.add"
+		extends="templates.admin">
+		<put-attribute name="admin-content"
+			value="/WEB-INF/views/admin/product/add.jsp" />
 	</definition>
-	<definition name="admin.product.edit" extends="templates.admin">
-		<put-attribute name="admin-content" value="/WEB-INF/views/admin/product/edit.jsp" />
+	<definition name="admin.product.edit"
+		extends="templates.admin">
+		<put-attribute name="admin-content"
+			value="/WEB-INF/views/admin/product/edit.jsp" />
 	</definition>
-	
-	<!-- ADMIN LOCATIONS  -->
-	<definition name="admin.location.index" extends="templates.admin">
-		<put-attribute name="admin-content" value="/WEB-INF/views/admin/location/index.jsp" />
+
+	<!-- ADMIN LOCATIONS -->
+	<definition name="admin.location.index"
+		extends="templates.admin">
+		<put-attribute name="admin-content"
+			value="/WEB-INF/views/admin/location/index.jsp" />
 	</definition>
-	<definition name="admin.location.add" extends="templates.admin">
-		<put-attribute name="admin-content" value="/WEB-INF/views/admin/location/add.jsp" />
+	<definition name="admin.location.add"
+		extends="templates.admin">
+		<put-attribute name="admin-content"
+			value="/WEB-INF/views/admin/location/add.jsp" />
 	</definition>
-	<definition name="admin.location.edit" extends="templates.admin">
-		<put-attribute name="admin-content" value="/WEB-INF/views/admin/location/edit.jsp" />
+	<definition name="admin.location.edit"
+		extends="templates.admin">
+		<put-attribute name="admin-content"
+			value="/WEB-INF/views/admin/location/edit.jsp" />
 	</definition>
-	<definition name="admin.location.image" extends="templates.admin">
-		<put-attribute name="admin-content" value="/WEB-INF/views/admin/location/image.jsp" />
+	<definition name="admin.location.image"
+		extends="templates.admin">
+		<put-attribute name="admin-content"
+			value="/WEB-INF/views/admin/location/image.jsp" />
 	</definition>
-	<!-- ADMIN LOCATIONTYPES  -->
-	<definition name="admin.locationType.index" extends="templates.admin">
-		<put-attribute name="admin-content" value="/WEB-INF/views/admin/locationType/index.jsp" />
+	<!-- ADMIN LOCATIONTYPES -->
+	<definition name="admin.locationType.index"
+		extends="templates.admin">
+		<put-attribute name="admin-content"
+			value="/WEB-INF/views/admin/locationType/index.jsp" />
 	</definition>
-	<definition name="admin.locationType.add" extends="templates.admin">
-		<put-attribute name="admin-content" value="/WEB-INF/views/admin/locationType/add.jsp" />
+	<definition name="admin.locationType.add"
+		extends="templates.admin">
+		<put-attribute name="admin-content"
+			value="/WEB-INF/views/admin/locationType/add.jsp" />
 	</definition>
-	
-	<!-- ADMIN ORDER  -->
-	<definition name="admin.order.index" extends="templates.admin">
-		<put-attribute name="admin-content" value="/WEB-INF/views/admin/order/index.jsp" />
+
+	<!-- ADMIN ORDER -->
+	<definition name="admin.order.index"
+		extends="templates.admin">
+		<put-attribute name="admin-content"
+			value="/WEB-INF/views/admin/order/index.jsp" />
 	</definition>
-	<definition name="admin.order.orderDetail" extends="templates.admin">
-		<put-attribute name="admin-content" value="/WEB-INF/views/admin/order/detail.jsp" />
+	<definition name="admin.order.orderDetail"
+		extends="templates.admin">
+		<put-attribute name="admin-content"
+			value="/WEB-INF/views/admin/order/detail.jsp" />
 	</definition>
-	<definition name="admin.order.neworder" extends="templates.admin">
-		<put-attribute name="admin-content" value="/WEB-INF/views/admin/order/neworder.jsp" />
+	<definition name="admin.order.neworder"
+		extends="templates.admin">
+		<put-attribute name="admin-content"
+			value="/WEB-INF/views/admin/order/neworder.jsp" />
 	</definition>
-	
-	<!-- ADMIN ERROR  -->
-	<definition name="error.404" template="/WEB-INF/views/error/404.jsp">
+
+	<!-- ADMIN ERROR -->
+	<definition name="error.404"
+		template="/WEB-INF/views/error/404.jsp">
 	</definition>
-	<!-- ADMIN COMBO  -->
-	<definition name="admin.combo.index" extends="templates.admin">
-		<put-attribute name="admin-content" value="/WEB-INF/views/admin/combo/index.jsp" />
+	<!-- ADMIN COMBO -->
+	<definition name="admin.combo.index"
+		extends="templates.admin">
+		<put-attribute name="admin-content"
+			value="/WEB-INF/views/admin/combo/index.jsp" />
 	</definition>
 	<definition name="admin.combo.add" extends="templates.admin">
-		<put-attribute name="admin-content" value="/WEB-INF/views/admin/combo/add.jsp" />
+		<put-attribute name="admin-content"
+			value="/WEB-INF/views/admin/combo/add.jsp" />
 	</definition>
-	<definition name="admin.combo.edit" extends="templates.admin">
-		<put-attribute name="admin-content" value="/WEB-INF/views/admin/combo/edit.jsp" />
+	<definition name="admin.combo.edit"
+		extends="templates.admin">
+		<put-attribute name="admin-content"
+			value="/WEB-INF/views/admin/combo/edit.jsp" />
 	</definition>
-	<!-- ADMIN DISCOUNTS  -->
-	<definition name="admin.discount.index" extends="templates.admin">
-		<put-attribute name="admin-content" value="/WEB-INF/views/admin/discount/index.jsp" />
+	<!-- ADMIN DISCOUNTS -->
+	<definition name="admin.discount.index"
+		extends="templates.admin">
+		<put-attribute name="admin-content"
+			value="/WEB-INF/views/admin/discount/index.jsp" />
 	</definition>
-	<definition name="admin.discount.add" extends="templates.admin">
-		<put-attribute name="admin-content" value="/WEB-INF/views/admin/discount/add.jsp" />
+	<definition name="admin.discount.add"
+		extends="templates.admin">
+		<put-attribute name="admin-content"
+			value="/WEB-INF/views/admin/discount/add.jsp" />
 	</definition>
-	<definition name="admin.discount.edit" extends="templates.admin">
-		<put-attribute name="admin-content" value="/WEB-INF/views/admin/discount/edit.jsp" />
+	<definition name="admin.discount.edit"
+		extends="templates.admin">
+		<put-attribute name="admin-content"
+			value="/WEB-INF/views/admin/discount/edit.jsp" />
 	</definition>
-	<!-- ADMIN ROLE MANAGEMENT  -->
-	<definition name="admin.role.index" extends="templates.admin">
-		<put-attribute name="admin-content" value="/WEB-INF/views/admin/role/index.jsp" />
+	<!-- ADMIN ROLE MANAGEMENT -->
+	<definition name="admin.role.index"
+		extends="templates.admin">
+		<put-attribute name="admin-content"
+			value="/WEB-INF/views/admin/role/index.jsp" />
 	</definition>
 	<definition name="admin.role.add" extends="templates.admin">
-		<put-attribute name="admin-content" value="/WEB-INF/views/admin/role/add.jsp" />
+		<put-attribute name="admin-content"
+			value="/WEB-INF/views/admin/role/add.jsp" />
 	</definition>
 	<definition name="admin.role.edit" extends="templates.admin">
-		<put-attribute name="admin-content" value="/WEB-INF/views/admin/role/index.jsp" />
+		<put-attribute name="admin-content"
+			value="/WEB-INF/views/admin/role/index.jsp" />
 	</definition>
-	<definition name="admin.role.delete" extends="templates.admin">
-		<put-attribute name="admin-content" value="/WEB-INF/views/admin/role/delete.jsp" />
+	<definition name="admin.role.delete"
+		extends="templates.admin">
+		<put-attribute name="admin-content"
+			value="/WEB-INF/views/admin/role/delete.jsp" />
 	</definition>
 	<definition name="admin.role.list" extends="templates.admin">
-		<put-attribute name="admin-content" value="/WEB-INF/views/admin/role/list.jsp" />
+		<put-attribute name="admin-content"
+			value="/WEB-INF/views/admin/role/list.jsp" />
 	</definition>
 </tiles-definitions>

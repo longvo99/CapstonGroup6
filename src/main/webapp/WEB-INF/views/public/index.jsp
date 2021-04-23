@@ -57,7 +57,7 @@
 							class="img-fluid full-width" alt="image">
 						<div class="custom-tag">
 							<span class="text-custom-white rectangle-tag bg-gradient-red">
-								<a
+								<a class="limitLength"
 								href="${pageContext.request.contextPath}/public/restaurant/${topRateLocation.locationId}">${topRateLocation.locationName}</a>
 							</span>
 						</div>
@@ -96,16 +96,15 @@
 									</a>
 									<div class="overlay">
 										<div class="product-tags padding-10">
-											<span class="${circletag}"> 
-											<c:set var="heartLNew" value="013-heart-1.svg" /> 
-											<c:forEach
+											<span class="${circletag}"> <c:set var="heartLNew"
+													value="013-heart-1.svg" /> <c:forEach
 													items="${locationFavoriteList}" var="locationLF">
 													<c:if
 														test="${locationLF.location.locationId == locationDiscountTop.locationId}">
 														<c:set var="heartLNew" value="010-heart.svg" />
 													</c:if>
-											</c:forEach> 
-											<img onclick="editLocationFavorite(${locationDiscountTop.locationId})"
+												</c:forEach> <img
+												onclick="editLocationFavorite(${locationDiscountTop.locationId})"
 												src="${pageContext.request.contextPath}/resources/public/assets/img/svg/${heartLNew}"
 												alt="tag">
 											</span>
@@ -127,11 +126,14 @@
 										<h6 class="product-title">
 											<a
 												href="${pageContext.request.contextPath}/public/restaurant/${locationDiscountTop.locationId}"
-												class="text-light-black ">${locationDiscountTop.locationName}</a>
+												class="text-light-black limitLength">${locationDiscountTop.locationName}</a>
 										</h6>
 										<c:set var="ratingPoint" value="-.-" />
 										<c:forEach items="${ratingList}" var="rating">
-											<c:if test="${rating.locationId == locationDiscountTop.locationId}"><c:set var="ratingPoint" value="${rating.point}" /></c:if>
+											<c:if
+												test="${rating.locationId == locationDiscountTop.locationId}">
+												<c:set var="ratingPoint" value="${rating.point}" />
+											</c:if>
 										</c:forEach>
 										<div class="tags">
 											<span class="text-custom-white rectangle-tag bg-yellow">
@@ -144,14 +146,17 @@
 										<div class="price-time">
 											<span class="text-light-black time">
 												${locationDiscountTop.openTime}-${locationDiscountTop.closeTime}</span>
-												<c:set var="minMaxPrice" value="--.--" />
-												<c:forEach items="${minMaxLocation}" var="minMax">
-													<c:if test="${minMax.locationId == locationDiscountTop.locationId}">
-														<span class="text-light-white price"><fmt:formatNumber value="${minMax.minPrice}" type="number" />VNĐ - <fmt:formatNumber value="${minMax.maxPrice}" type="number"/>VNĐ</span>
-														<c:set var="minMaxPrice" value="" />
-													</c:if>
-												</c:forEach>
-												<span class="text-light-white price">${minMaxPrice}</span>
+											<c:set var="minMaxPrice" value="--.--" />
+											<c:forEach items="${minMaxLocation}" var="minMax">
+												<c:if
+													test="${minMax.locationId == locationDiscountTop.locationId}">
+													<span class="text-light-white price"><fmt:formatNumber
+															value="${minMax.minPrice}" type="number" />VNĐ - <fmt:formatNumber
+															value="${minMax.maxPrice}" type="number" />VNĐ</span>
+													<c:set var="minMaxPrice" value="" />
+												</c:if>
+											</c:forEach>
+											<span class="text-light-white price">${minMaxPrice}</span>
 										</div>
 										<div class="rating">
 											<!-- <span> <i class="fas fa-star text-yellow"></i> <i
@@ -190,12 +195,15 @@
 			</div>
 			<div class="col-lg-3 col-md-4">
 				<div class="large-product-box mb-xl-20 p-relative">
-					<img src="${pageContext.request.contextPath}/resources/public/assets/img/images.jpg"
+					<img
+						src="${pageContext.request.contextPath}/resources/public/assets/img/images.jpg"
 						class="img-fluid full-width" alt="image">
 					<div class="category-type overlay padding-15">
 						<button class="category-btn">Địa điểm đang giảm giá</button>
-						<a href="${pageContext.request.contextPath}/public/listview/discount"
-							class="btn-first white-btn text-light-black fw-600 full-width">Xem thêm</a>
+						<a
+							href="${pageContext.request.contextPath}/public/listview/discount"
+							class="btn-first white-btn text-light-black fw-600 full-width">Xem
+							thêm</a>
 					</div>
 				</div>
 			</div>
@@ -212,12 +220,14 @@
 		<div class="row">
 			<div class="col-lg-3 col-md-4">
 				<div class="large-product-box mb-xl-20 p-relative">
-					<img src="${pageContext.request.contextPath}/resources/public/assets/img/images (1).jpg"
+					<img
+						src="${pageContext.request.contextPath}/resources/public/assets/img/images (1).jpg"
 						class="img-fluid full-width" alt="image">
 					<div class="category-type overlay padding-15">
 						<button class="category-btn">Địa điểm mới</button>
 						<a href="${pageContext.request.contextPath}/public/listview/new"
-							class="btn-first white-btn text-light-black fw-600 full-width">Xem thêm</a>
+							class="btn-first white-btn text-light-black fw-600 full-width">Xem
+							thêm</a>
 					</div>
 				</div>
 			</div>
@@ -268,7 +278,9 @@
 										</h6>
 										<c:set var="ratingPoint" value="-.-" />
 										<c:forEach items="${ratingList}" var="rating">
-											<c:if test="${rating.locationId == location.locationId}"><c:set var="ratingPoint" value="${rating.point}" /></c:if>
+											<c:if test="${rating.locationId == location.locationId}">
+												<c:set var="ratingPoint" value="${rating.point}" />
+											</c:if>
 										</c:forEach>
 										<div class="tags">
 											<span class="text-custom-white rectangle-tag bg-yellow">
@@ -280,14 +292,16 @@
 									<div class="product-details">
 										<div class="price-time">
 											<span class="text-light-black time">
-												${location.openTime}-${location.closeTime}</span> 
-												<c:set var="minMaxPrice" value="--.--" />
-												<c:forEach items="${minMaxLocation}" var="minMax">
-													<c:if test="${minMax.locationId == location.locationId}">
-														<span class="text-light-white price"><fmt:formatNumber value="${minMax.minPrice}" type="number" />VNĐ - <fmt:formatNumber value="${minMax.maxPrice}" type="number"/>VNĐ</span>
-														<c:set var="minMaxPrice" value="" />
-													</c:if>
-												</c:forEach>
+												${location.openTime}-${location.closeTime}</span>
+											<c:set var="minMaxPrice" value="--.--" />
+											<c:forEach items="${minMaxLocation}" var="minMax">
+												<c:if test="${minMax.locationId == location.locationId}">
+													<span class="text-light-white price"><fmt:formatNumber
+															value="${minMax.minPrice}" type="number" />VNĐ - <fmt:formatNumber
+															value="${minMax.maxPrice}" type="number" />VNĐ</span>
+													<c:set var="minMaxPrice" value="" />
+												</c:if>
+											</c:forEach>
 											<span class="text-light-white price">${minMaxPrice}</span>
 										</div>
 										<div class="rating">
@@ -355,7 +369,8 @@
 												</a>
 												<div class="overlay">
 													<div class="product-tags padding-10">
-														<span class="${circletag}"><img onclick="editLocationFavorite(${locationFavorite.location.locationId})"
+														<span class="${circletag}"><img
+															onclick="editLocationFavorite(${locationFavorite.location.locationId})"
 															src="${pageContext.request.contextPath}/resources/public/assets/img/svg/010-heart.svg"
 															alt="tag"></span>
 														<c:forEach items="${listLocationTopNew}" var="location">
@@ -386,27 +401,34 @@
 													</h6>
 													<c:set var="ratingPoint" value="-.-" />
 													<c:forEach items="${ratingList}" var="rating">
-														<c:if test="${rating.locationId == locationFavorite.location.locationId}"><c:set var="ratingPoint" value="${rating.point}" /></c:if>
+														<c:if
+															test="${rating.locationId == locationFavorite.location.locationId}">
+															<c:set var="ratingPoint" value="${rating.point}" />
+														</c:if>
 													</c:forEach>
 													<div class="tags">
 														<span class="text-custom-white rectangle-tag bg-yellow">
 															${ratingPoint} </span>
 													</div>
 												</div>
-												<p class="text-light-white">${locationFavorite.location.locationType.locationTypeName}, ${locationFavorite.location.locationCategory.locationCategoryName}</p>
+												<p class="text-light-white">${locationFavorite.location.locationType.locationTypeName},
+													${locationFavorite.location.locationCategory.locationCategoryName}</p>
 												<div class="product-details">
 
 													<div class="price-time">
 														<span class="text-light-black time">${locationFavorite.location.openTime}-${locationFavorite.location.closeTime}</span>
 														<c:set var="minMaxPrice" value="--.--" />
 														<c:forEach items="${minMaxLocation}" var="minMax">
-															<c:if test="${minMax.locationId == locationFavorite.location.locationId}">
-																<span class="text-light-white price"><fmt:formatNumber value="${minMax.minPrice}" type="number" />VNĐ - <fmt:formatNumber value="${minMax.maxPrice}" type="number"/>VNĐ</span>
+															<c:if
+																test="${minMax.locationId == locationFavorite.location.locationId}">
+																<span class="text-light-white price"><fmt:formatNumber
+																		value="${minMax.minPrice}" type="number" />VNĐ - <fmt:formatNumber
+																		value="${minMax.maxPrice}" type="number" />VNĐ</span>
 																<c:set var="minMaxPrice" value="" />
 															</c:if>
 														</c:forEach>
 														<span class="text-light-white price">${minMaxPrice}</span>
-													<span class="text-light-white price">${minMaxPrice}</span>
+														<span class="text-light-white price">${minMaxPrice}</span>
 													</div>
 													<div class="rating">
 														<!-- <span> <i class="fas fa-star text-yellow"></i> <i
@@ -452,12 +474,15 @@
 				<c:if test="${not empty locationFavoriteList}">
 					<div class="col-lg-3 col-md-4">
 						<div class="large-product-box mb-xl-20 p-relative">
-							<img src="${pageContext.request.contextPath}/resources/public/assets/img/images (2).jpg"
+							<img
+								src="${pageContext.request.contextPath}/resources/public/assets/img/images (2).jpg"
 								class="img-fluid full-width" alt="image">
 							<div class="category-type overlay padding-15">
 								<button class="category-btn">Địa điểm bạn yêu thích</button>
-								<a href="${pageContext.request.contextPath}/public/listview/favorite"
-									class="btn-first white-btn text-light-black fw-600 full-width">Xem thêm</a>
+								<a
+									href="${pageContext.request.contextPath}/public/listview/favorite"
+									class="btn-first white-btn text-light-black fw-600 full-width">Xem
+									thêm</a>
 							</div>
 						</div>
 					</div>
