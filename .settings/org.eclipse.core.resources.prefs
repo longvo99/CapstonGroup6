@@ -1,6 +1,6 @@
 =\=\=\=\=\=\=
-<<<<<<<=HEAD
->>>>>>>=c6976bf55988db4b634060c5430a5db014b8b548
+<<<<<<<=Updated upstream
+>>>>>>>=Stashed changes
 eclipse.preferences.version=1
 encoding//src/main/java/edu/group6/capston/configs/SpringMVCApplication.java=UTF-8
 encoding//src/main/java/edu/group6/capston/controller/admins/AdminDiscountController.java=UTF-8
@@ -33,9 +33,7 @@ encoding//src/main/java/edu/group6/capston/utils/PaymentServices.java=UTF-8
 encoding//src/main/java/edu/group6/capston/utils/UploadFile.java=UTF-8
 encoding//src/main/resources/messages.properties=UTF-8
 encoding//src/main/webapp/WEB-INF/resources/admin/assets/js/city_district_ward.json=UTF-8
-<<<<<<< Updated upstream
 encoding//src/main/webapp/WEB-INF/resources/admin/assets/js/data.json=UTF-8
-=======
 encoding//src/main/webapp/WEB-INF/views/admin/location/form_advanceds.jsp=UTF-8
->>>>>>> Stashed changes
 encoding//src/main/webapp/WEB-INF/views/public/checkout.jsp=UTF-8
+encoding/<project>=UTF-8
