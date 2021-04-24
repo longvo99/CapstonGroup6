@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-<<<<<<< Updated upstream
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/templates/tags/taglib.jsp"%>
 <sec:authentication var="userDetail" property="principal" />
@@ -298,7 +297,6 @@
 					</div>
       				</div>
 			<script>
->>>>>>> Stashed changes
 					$(document).ready(function(){
 						  $.getJSON('${pageContext.request.contextPath}/resources/admin/assets/js/data.json', function(data){
 							  var country_id;
@@ -362,7 +360,6 @@
 						 });
 						});
 			</script>
-<<<<<<< Updated upstream
 								<div class="form-group">
 									<label for="country">Người tạo</label> <input
 										readonly="readonly" class="form-control mb-3" type="text"
@@ -415,7 +412,6 @@
 						  	  	 	</c:if>
 						  	  	</c:forEach>
 					    </c:if>
-=======
 					<div class="form-group">
 						<label for="country">Người tạo</label>
 						<input readonly="readonly" class="form-control mb-3" type="text" value="${location.users.username}" id="user.username" name="user.username">
@@ -445,14 +441,12 @@
 						  	  	</c:if>	
 					  	  	</c:forEach>
 				  		  </c:if>
->>>>>>> Stashed changes
 				    	];
 				      	$('.input-images').imageUploader({
 				      	    preloaded: preloaded,
 				      	    imagesInputName: 'images',
 				      	    preloadedInputName: 'image'
 				      	});
-<<<<<<< Updated upstream
 					
 					</script>
 								<button type="submit" class="btn btn-primary" name="submit">Cập
@@ -586,4 +580,3 @@ $.validator.addMethod("valueNotEquals", function(value, element, arg){
 	      });
 	});
 </script>
->>>>>>> Stashed changes

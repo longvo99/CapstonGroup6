@@ -55,7 +55,6 @@
 									<c:set var="url" value="javascript:void(0)"></c:set>
 									<c:set var="click"
 										value="return alert('Chưa có sản phẩm để thêm!');"></c:set>
-=======
 	<div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h2 class="m-0 font-weight-bold text-primary">Quản lý Combo</h2>
@@ -126,7 +125,6 @@
 								</c:if>
 								<c:if test="${not empty sessionScope.userSession}">
 									<a href="${deleteUrl}/${productCombo.productComboId}" title="XÓA" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
->>>>>>> Stashed changes
 								</c:if>
 								<a href="${url}" onclick="${click}"
 									class="btn btn-success btn-md"><i class="fa fa-plus-square">
@@ -228,7 +226,6 @@
 			            </div>
 			          </div>
 			          <!-- Modal Center --> --%>
-<<<<<<< Updated upstream
 								</c:forEach>
 							</tbody>
 						</table>
@@ -247,7 +244,6 @@
 </div>
 <!---Container Fluid-->
 </div>
-=======
 			          </c:forEach>
 			          </c:if>
 	                  <c:if test="${empty productComboList}">
@@ -266,4 +262,3 @@
         </div>
         <!---Container Fluid-->
       </div>
->>>>>>> Stashed changes
