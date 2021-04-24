@@ -4,6 +4,7 @@
 
 <sec:authentication var="userDetail" property="principal" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<<<<<<< Updated upstream
 <script
 	src="${pageContext.request.contextPath}/resources/admin/assets/css/autocomplete/jquery-ui.js"></script>
 <script
@@ -26,6 +27,20 @@
 							chủ</a></li>
 					<li class="breadcrumb-item active" aria-current="page">Forms</li>
 				</ol>
+=======
+<script src="${pageContext.request.contextPath}/resources/admin/assets/css/autocomplete/jquery-ui.js"></script>
+<script src="${pageContext.request.contextPath}/resources/admin/assets/js/jquery.validate.min.js"></script>
+	<div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+        <!-- Container Fluid-->
+        <div class="container-fluid" id="container-wrapper">
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="m-0 font-weight-bold text-primarys">Thêm giảm giá</h1>
+          </div>
+		  <c:if test="${not empty msg}">
+			<div class="alert alert-success">
+				<strong>${msg}</strong>
+>>>>>>> Stashed changes
 			</div>
 			<c:if test="${not empty msg}">
 				<div class="alert alert-success">
@@ -66,6 +81,7 @@
                     	}
                       </script>
                     </div> -->
+<<<<<<< Updated upstream
 								<div class="form-group">
 									<label for="description">Mô tả</label> <input
 										class="form-control mb-3" type="text" value=""
@@ -88,6 +104,28 @@
 										</div>
 									</div>
 									<script type="text/javascript">
+=======
+                    <div class="form-group">
+                    	<label for="description">Mô tả</label>
+						<textarea class="form-control mb-10" id="description" rows="3" name="description" placeholder="Nội dung" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nội dung'"></textarea>
+					</div>
+                    <div class="row form-group" >
+	                    <div class="col-lg-6">
+	                    	<label for="typeDiscount" >Loại khuyến mãi</label>
+	                    	<select id="typeDiscount" name="typeDiscount" class="form-control">
+	                    		<option data-rate="" value="default">--Chọn--</option>
+								<option data-rate="%" >Theo phần trăm</option>
+								<option data-rate="VNĐ">Theo mức giá cố định</option>
+	                      	</select>
+	                    </div>
+	                    <div class="col-lg-6">
+	                    	<label for="rateDiscount">Giá trị khuyến mãi</label>
+	                   		<div class="placeholderrd" data-placeholder="">
+					    		<input class="form-control mb-3" type="text" value="" id="rateDiscount" name="rateDiscount">
+					  		</div>
+					  	</div>
+					  	<script type="text/javascript">
+>>>>>>> Stashed changes
 						   $(function(){
 						      $("#typeDiscount").change(function(){
 						         $(".placeholderrd").attr("data-placeholder", $(this).find(":selected").data("rate"));
@@ -197,6 +235,7 @@
 						 });
 						});
 			</script>
+<<<<<<< Updated upstream
 												</div>
 											</div>
 										</div>
@@ -219,6 +258,26 @@
 											</c:forEach>
 										</c:if>
 										<script type="text/javascript">
+=======
+						      	</div>
+			       		</div>
+                    </div>
+					</c:if>	
+					</c:if>
+					<c:if test="${not empty sessionScope.userSession}">
+					<div class="form-group">
+                    	<label for="" >Chọn cơ sở (<input type="checkbox" id="select_all"/> Tất cả): </label>
+                    	<c:if test="${not empty locationByUserIdList}">
+                    		<c:forEach var="location" items="${locationByUserIdList}" >
+                    			<div class="form-check">
+					  				<label class="form-check-label">
+				      					<input type="checkbox" class="checkbox" name="check[]" value="${location.locationId}" style="zoom: 1.5;"> ${location.address}
+									</label>
+								</div>
+                    		</c:forEach>
+                    	</c:if>
+                    	<script type="text/javascript">
+>>>>>>> Stashed changes
 						  $("#select_all").change(function(){  //"select all" change 
 							    var status = this.checked; // "select all" checked status
 							    $('.checkbox').each(function(){ //iterate all listed checkbox items
@@ -236,6 +295,7 @@
 							    }
 							});
 						  </script>
+<<<<<<< Updated upstream
 									</div>
 								</c:if>
 								<c:if test="${empty sessionScope.userSession}">
@@ -258,6 +318,25 @@
 												</ul>
 											</div>
 											<script>
+=======
+                    </div>
+					</c:if>
+					<c:if test="${empty sessionScope.userSession}">
+					<c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
+					<div class="form-group">
+                    	<label for="" >Chọn cơ sở ( <input type="checkbox" id="select_all"/> Tất cả ): </label>
+                    	<input class="form-control" id="myInput" type="text" placeholder="Nhập tên cần tìm..">
+                    	<div style="height:150px; overflow-y: scroll; margin-top: 10px;">
+                    	<ul id="myList">
+                    	<c:if test="${not empty locationByUserIdList}">
+                    		<c:forEach var="location" items="${locationByUserIdList}" >
+				      			<li><input type="checkbox" class="checkbox" name="check[]" value="${location.locationId}" style="zoom: 1.5;"> ${location.address}</li>
+                    		</c:forEach>
+                    	</c:if>
+                    	</ul>
+                    	</div>
+                    	<script>
+>>>>>>> Stashed changes
 							$(document).ready(function(){
 							  $("#myInput").on("keyup", function() {
 							    var value = $(this).val().toLowerCase();
@@ -352,6 +431,7 @@
                         <c:set var="collapse" value="collapse" ></c:set>
                      </c:if>
                      </c:if> --%>
+<<<<<<< Updated upstream
 									<c:if test="${empty sessionScope.userSession}">
 										<c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
 											<c:if test="${not empty discountRuleList}">
@@ -383,12 +463,45 @@
 														</div>
 													</div>
 													<script type="text/javascript">
+=======
+                     <c:if test="${empty sessionScope.userSession}">
+					<c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
+                        <c:if test="${not empty discountRuleList}">
+						 <div id="collapseThree" class="row ${collapse}" >
+		                    <div class="col-lg-6">
+		                    	<label for="ruleId">Điều kiện</label>
+		                    	<select id="ruleId" name="discountRule1" class="form-control">
+		                    		<option data-rate="" value="default">--Chọn--</option>
+		                    		<c:forEach items="${discountRuleList}" var="discountRule">
+		                    		<c:choose>
+								         <c:when test="${discountRule.ruleId eq 1}">
+								            <option value="${discountRule.ruleId}" data-rate="VNĐ" >${discountRule.ruleContent}</option>
+								         </c:when>
+								         <c:when test="${discountRule.ruleId eq 2}">
+								            <option value="${discountRule.ruleId}" data-rate="VNĐ">${discountRule.ruleContent}</option>
+								         </c:when>
+								         <c:otherwise>
+								            <option value="${discountRule.ruleId}" data-rate="">${discountRule.ruleContent}</option>
+								         </c:otherwise>
+							      	</c:choose>
+		                    		</c:forEach>
+		                      	</select>
+		                    </div>
+		                    <div class="col-lg-6">
+		                    	<label for="valueRule1">Giá trị tối thiểu</label>
+		                   		<div class="placeholderrd abc" data-placeholder="">
+						    		<input class="form-control mb-3" type="text" name="valueRule1" id="valueRule1">
+						  		</div>
+						  	</div>
+						  	<script type="text/javascript">
+>>>>>>> Stashed changes
 							   $(function(){
 							      $("#ruleId").change(function(){
 							         $(".abc").attr("data-placeholder", $(this).find(":selected").data("rate"));
 							      });
 							   });
 							</script>
+<<<<<<< Updated upstream
 												</div>
 											</c:if>
 										</c:if>
@@ -424,6 +537,40 @@
 													</div>
 												</div>
 												<script type="text/javascript">
+=======
+                    	</div>
+                    	</c:if>
+                    	</c:if></c:if>
+                    	<c:if test="${not empty sessionScope.userSession}">
+                    	<c:if test="${not empty discountRuleList}">
+						 <div id="collapseThree" class="row ${collapse}" >
+		                    <div class="col-lg-6">
+		                    	<label for="ruleId">Điều kiện</label>
+		                    	<select id="ruleId" name="discountRule1" class="form-control">
+		                    		<option data-rate="" value="default">--Chọn--</option>
+		                    		<c:forEach items="${discountRuleList}" var="discountRule">
+		                    		<c:choose>
+								         <c:when test="${discountRule.ruleId eq 1}">
+								            <option value="${discountRule.ruleId}" data-rate="VNĐ" >${discountRule.ruleContent}</option>
+								         </c:when>
+								         <c:when test="${discountRule.ruleId eq 2}">
+								            <option value="${discountRule.ruleId}" data-rate="Sản phẩm">${discountRule.ruleContent}</option>
+								         </c:when>
+								         <c:otherwise>
+								            <option value="${discountRule.ruleId}" data-rate="">${discountRule.ruleContent}</option>
+								         </c:otherwise>
+							      	</c:choose>
+		                    		</c:forEach>
+		                      	</select>
+		                    </div>
+		                    <div class="col-lg-6">
+		                    	<label for="valueRule1">Giá trị tối thiểu</label>
+		                   		<div class="placeholderrd abc" data-placeholder="">
+						    		<input class="form-control mb-3" type="text" name="valueRule1" id="valueRule1">
+						  		</div>
+						  	</div>
+						  	<script type="text/javascript">
+>>>>>>> Stashed changes
 							   $(function(){
 							      $("#ruleId").change(function(){
 							         $(".abc").attr("data-placeholder", $(this).find(":selected").data("rate"));
@@ -613,6 +760,7 @@ $('#checkbox').change(function(){
   	}
 });
 </script>
+<<<<<<< Updated upstream
 								<div class="form-group">
 									<label for="startDate">Ngày bắt đầu</label> <input
 										class="form-control mb-3" type="date" id="startDate"
@@ -634,10 +782,34 @@ $('#checkbox').change(function(){
 										id="limitedPerUser" name="limitedPerUser">
 								</div>
 								<!--  <div class="form-group">
+=======
+                    <div class="form-group">
+                      <div class="row">
+                    	<div class="col-lg-6">
+                      		<label for="startDate">Ngày bắt đầu</label>
+                      		<input class="form-control mb-3" type="date" id="startDate" name="startDate">
+                        </div>
+                        <div class="col-lg-6">
+                      		<label for="endDate">Ngày kết thúc</label>
+                     		<input class="form-control mb-3" type="date" id="endDate" name="endDate">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="limitedUse">Tổng số lần dùng</label>
+                      <input class="form-control mb-3" type="text" value="" id="limitedUse" name="limitedUse">
+                    </div>
+                    <div class="form-group">
+                      <label for="limitedPerUser">Số lần dùng/1 người</label>
+                      <input class="form-control mb-3" type="text" value="" id="limitedPerUser" name="limitedPerUser">
+                    </div>
+                   <!--  <div class="form-group">
+>>>>>>> Stashed changes
                       	<label class="text-light-white fs-14">Ảnh</label><br>
                         <img id="blah" alt="your image" style="max-height: 100px; " />
 					    <input type="file" onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
                     </div> -->
+<<<<<<< Updated upstream
 								<div class="form-group">
 									<div class="custom-file">
 										<input type="file" name="file" class="custom-file-input"
@@ -658,6 +830,23 @@ $('#checkbox').change(function(){
 				</div>
 				<!---Container Fluid-->
 			</div>
+=======
+                    <div class="form-group">
+                      <div class="custom-file">
+                        <input type="file" name="file" class="custom-file-input" id="file" onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
+                        <label class="custom-file-label" for="file">Chọn ảnh</label>
+                      </div>
+                      <img id="blah" src="https://via.placeholder.com/150x150" alt="your image" style="max-height: 300px; display:block; margin-top: 15px; " />
+                    </div>
+                    <button type="submit" class="btn btn-primary" name="submit">Thêm mới</button>
+                  </form>
+                </div>
+              </div>
+          <!--Row-->
+        </div>
+        <!---Container Fluid-->
+      </div>
+>>>>>>> Stashed changes
 			<script>
 					$(document).ready(function(){
 						  $.getJSON('${pageContext.request.contextPath}/resources/admin/assets/js/data.json', function(data){
@@ -755,6 +944,13 @@ $.validator.addMethod("valueNotEquals", function(value, element, arg){
 					required:true,
 					digits:true,
 				},
+				discountRule1: {                      
+					valueNotEquals: "default",
+				},
+				valueRule1: {  
+					required:true,
+					digits:true,
+				},
 			},
 			messages: {
 				title: {
@@ -796,6 +992,13 @@ $.validator.addMethod("valueNotEquals", function(value, element, arg){
 					valueNotEquals: " (Mời chọn)",
 				},
 				rateDiscount: {  
+					required:" (Mời nhập)",
+					digits:" (Nhập số nguyên dương)",
+				},
+				discountRule1: {
+					valueNotEquals: " (Mời chọn)",
+				},
+				valueRule1: {  
 					required:" (Mời nhập)",
 					digits:" (Nhập số nguyên dương)",
 				},

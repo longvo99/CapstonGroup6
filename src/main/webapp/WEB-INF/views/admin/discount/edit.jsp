@@ -544,6 +544,7 @@ $('#checkbox').change(function(){
   	}
 });
 </script>
+<<<<<<< Updated upstream
 								<div class="form-group">
 									<label for="startDate">Ngày bắt đầu</label> <input
 										value="${discount.startDate}" class="form-control mb-3"
@@ -565,6 +566,29 @@ $('#checkbox').change(function(){
 										type="text" value="" id="limitedPerUser" name="limitedPerUser">
 								</div>
 								<!--  <div class="form-group">
+=======
+                    <div class="form-group">
+                      <div class="row">
+                    	<div class="col-lg-6">
+                      		<label for="startDate">Ngày bắt đầu</label>
+                      		<input class="form-control mb-3" type="date" id="startDate" name="startDate">
+                        </div>
+                        <div class="col-lg-6">
+                      		<label for="endDate">Ngày kết thúc</label>
+                     		<input class="form-control mb-3" type="date" id="endDate" name="endDate">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="limitedUse">Tổng số lần dùng</label>
+                      <input value="${discount.limitedUse}" class="form-control mb-3" type="text" value="" id="limitedUse" name="limitedUse">
+                    </div>
+                    <div class="form-group">
+                      <label for="limitedPerUser">Số lần dùng/1 người</label>
+                      <input value="${discount.limitedPerUser}" class="form-control mb-3" type="text" value="" id="limitedPerUser" name="limitedPerUser">
+                    </div>
+                   <!--  <div class="form-group">
+>>>>>>> Stashed changes
                       	<label class="text-light-white fs-14">Ảnh</label><br>
                         <img id="blah" alt="your image" style="max-height: 100px; " />
 					    <input type="file" onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">

@@ -1,7 +1,6 @@
 package edu.group6.capston.controller.admins;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import edu.group6.capston.dtos.ProductDTO2;
 import edu.group6.capston.models.ComboDetail;
 import edu.group6.capston.models.Product;
 import edu.group6.capston.models.ProductCombo;
@@ -79,8 +77,9 @@ public class AdminComboController {
 				ComboDetail comboDetail = new ComboDetail(0, new Product(Integer.valueOf(string)), productCombo);
 				comboDetailService.save(comboDetail);
 			}
-			rd.addFlashAttribute(GlobalsConstant.MESSAGE,messageSource.getMessage("success", null, Locale.getDefault()));
-			return "redirect:/admin/combo/index/" +productCombo.getLocation().getLocationId();
+			rd.addFlashAttribute(GlobalsConstant.MESSAGE,
+					messageSource.getMessage("success", null, Locale.getDefault()));
+			return "redirect:/admin/combo/index/" + productCombo.getLocation().getLocationId();
 		}
 		UploadFile.del(filename, request);
 		rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
@@ -90,32 +89,15 @@ public class AdminComboController {
 	@RequestMapping(value = "/edit/{productComboId}/{locationId}")
 	public String edit(@PathVariable Integer productComboId, @PathVariable Integer locationId, Model model) {
 		model.addAttribute("productCombo", productComboService.findOneById(productComboId));
-		List<ProductDTO2> productListByProductComboId = productService.findAllByProductComboId(productComboId);
-		List<ProductDTO2> productListByLocationId = productService.findAllByLocationId(locationId);
-		List<ProductDTO2> productListChecked = new ArrayList<>();
-		List<ProductDTO2> productListUnChecked = new ArrayList<>();
-		for (ProductDTO2 obj1 : productListByLocationId) {
-			boolean check = true;
-			for (ProductDTO2 obj2 : productListByProductComboId) {
-				if (obj1.equals(obj2)) {
-					productListChecked.add(obj1);
-					check = false;
-					break;
-				}
-			}
-			if (check == true) {
-				productListUnChecked.add(obj1);
-			}
-		}
-		model.addAttribute("productListChecked", productListChecked);
-		model.addAttribute("productListUnChecked", productListUnChecked);
+		model.addAttribute("productListByProductComboId", productService.findAllByProductComboId(productComboId));
+		model.addAttribute("productListByLocationId", productService.findAllByLocationId(locationId));
 		return "admin.combo.edit";
 	}
 
 	@PostMapping(value = "/edit")
 	public String Edit(@Valid @ModelAttribute ProductCombo productCombo, BindingResult br, RedirectAttributes rd,
-			HttpServletRequest request, @RequestParam(name = "check[]", required = false) String[] productIdList,
-			@RequestParam("image") MultipartFile file, Model model) throws IllegalStateException, IOException {
+			HttpServletRequest request, @RequestParam("image") MultipartFile file, Model model)
+			throws IllegalStateException, IOException {
 		if (br.hasErrors()) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
 			return "redirect:/admin/combo/edit/" + productCombo.getProductComboId() + "/"
@@ -129,14 +111,12 @@ public class AdminComboController {
 			filename = productComboService.findOneById(productCombo.getProductComboId()).getImagePath();
 		}
 		productCombo.setImagePath(filename);
-		if (productIdList != null) {
-			comboDetailService.delete(productCombo.getProductComboId());
-			List<String> productIdList1 = Arrays.asList(productIdList);
-			for (String string : productIdList1) {
-				ComboDetail comboDetail = new ComboDetail(0, new Product(Integer.valueOf(string)),
-						new ProductCombo(productCombo.getProductComboId()));
-				comboDetailService.save(comboDetail);
-			}
+		comboDetailService.delete(productCombo.getProductComboId());
+		List<String> productIdList1 = Arrays.asList(request.getParameterValues("check[]"));
+		for (String string : productIdList1) {
+			ComboDetail comboDetail = new ComboDetail(0, new Product(Integer.valueOf(string)),
+					new ProductCombo(productCombo.getProductComboId()));
+			comboDetailService.save(comboDetail);
 		}
 		if (productComboService.update(productCombo)) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE,

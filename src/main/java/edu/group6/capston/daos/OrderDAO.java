@@ -179,7 +179,8 @@ public class OrderDAO {
 			for (Object[] object : listObj) {
 				listLocations.add(new LocationDTO2((String)object[0], (String)object[1], 
 						object[2] == null ? 0:(long)object[2], object[3] == null ? 0:(double)object[3], 
-								object[4]==null? 0:Double.valueOf(((String)object[4]).substring(0,((String)object[4]).indexOf(".")))));
+								object[4]==null? 0:Double.valueOf(((String)object[4]))));
+				//.substring(0,((String)object[4]).indexOf("."))
 			}
 			return listLocations;
 		}
