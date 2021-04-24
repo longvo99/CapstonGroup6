@@ -36,4 +36,6 @@ encoding//src/main/webapp/WEB-INF/resources/admin/assets/js/city_district_ward.j
 encoding//src/main/webapp/WEB-INF/resources/admin/assets/js/data.json=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/location/form_advanceds.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/public/checkout.jsp=UTF-8
+encoding//src/main/webapp/abcde.jsp=UTF-8
 encoding/<project>=UTF-8
+separateDerivedEncodings=true
