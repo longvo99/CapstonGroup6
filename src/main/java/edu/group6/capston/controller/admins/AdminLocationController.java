@@ -210,14 +210,63 @@ public class AdminLocationController {
 	}
 
 	@PostMapping(value = "/edit")
-	public String Edit(@Valid @ModelAttribute("location") Location location, BindingResult br, RedirectAttributes rd,
-			HttpServletRequest request, MultipartFile file, Model model) {
+	public String Edit(@Valid @ModelAttribute("location") Location location, BindingResult br, 
+			@RequestParam(value = "images") MultipartFile[] filess,
+			@RequestParam(value = "image[]", required = false) String oldImages, RedirectAttributes rd,
+			HttpServletRequest request, Model model) throws IllegalStateException, IOException {
 		if (br.hasErrors()) {
 			return "redirect:/admin/location/edit/" + location.getLocationId();
 		}
-		String mediapath = locationService.findLocationId(location.getLocationId()).getMediaPath();
-		location.setMediaPath(mediapath);
+		String mediapathOld = locationService.findLocationId(location.getLocationId()).getMediaPath();
+//		location.setMediaPath(mediapath);
+		String[] mediaPathArr = GlobalsFunction.splitPathMedia(mediapathOld);
 		location.setUsers(new Users(GlobalsFunction.getUsers().getUserId()));
+		String mediaPath = "";
+		for (MultipartFile file : filess) {
+			String fileName = UploadFile.upload(file, request);
+			if (fileName != "") {
+				mediaPath += fileName + ";";
+			}
+		}
+		if (mediaPath != "" && oldImages == null) {
+			location.setMediaPath(mediaPath);
+		} else if (mediaPath == "" && oldImages != null) {
+			//String[] mediaPathArr = GlobalsFunction.splitPathMedia(location.getMediaPath());
+			for (int i = 0; i < mediaPathArr.length; i++) {
+				if (oldImages.contains(String.valueOf(i)) == true) {
+					mediaPath += mediaPathArr[i] + ";";
+				} else {
+					UploadFile.del(mediaPathArr[i], request);
+				}
+			}
+			location.setMediaPath(mediaPath);
+		} else if (mediaPath != "" && oldImages != null) {
+			if (oldImages.lastIndexOf("0") != 0) {
+				oldImages = oldImages.substring(0, oldImages.lastIndexOf("0") - 1);
+				//String[] mediaPathArr = GlobalsFunction.splitPathMedia(location.getMediaPath());
+				String str = "";
+				for (int i = 0; i < mediaPathArr.length; i++) {
+					if (oldImages.contains(String.valueOf(i)) == true) {
+						str += mediaPathArr[i] + ";";
+					} else {
+						UploadFile.del(mediaPathArr[i], request);
+					}
+				}
+				location.setMediaPath(str + mediaPath);
+			} else {
+				//String[] mediaPathArr = GlobalsFunction.splitPathMedia(location.getMediaPath());
+				for (int i = 0; i < mediaPathArr.length; i++) {
+					UploadFile.del(mediaPathArr[i], request);
+				}
+				location.setMediaPath(mediaPath);
+			}
+		} else if (mediaPath == "" && oldImages == null) {
+			//String[] mediaPathArr = GlobalsFunction.splitPathMedia(location.getMediaPath());
+			for (int i = 0; i < mediaPathArr.length; i++) {
+				UploadFile.del(mediaPathArr[i], request);
+			}
+			location.setMediaPath(mediaPath);
+		}
 		if (locationService.update(location)) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("success", null, Locale.getDefault()));
 			return "redirect:/admin/location/index";
