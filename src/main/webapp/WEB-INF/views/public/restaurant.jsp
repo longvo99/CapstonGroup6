@@ -1079,7 +1079,7 @@
 										</div>
 										<div class="product-caption">
 											<div class="title-box">
-												<h6 class="product-title">
+												<h6 class="product-title limitLength">
 													<a
 														href="${pageContext.request.contextPath}/public/restaurant/${location.locationId}"
 														class="text-light-black">${location.locationName}</a>

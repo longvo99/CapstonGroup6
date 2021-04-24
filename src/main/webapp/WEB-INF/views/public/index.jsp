@@ -123,10 +123,10 @@
 								</div>
 								<div class="product-caption">
 									<div class="title-box">
-										<h6 class="product-title">
+										<h6 class="product-title limitLength">
 											<a
 												href="${pageContext.request.contextPath}/public/restaurant/${locationDiscountTop.locationId}"
-												class="text-light-black limitLength">${locationDiscountTop.locationName}</a>
+												class="text-light-black">${locationDiscountTop.locationName}</a>
 										</h6>
 										<c:set var="ratingPoint" value="-.-" />
 										<c:forEach items="${ratingList}" var="rating">
@@ -271,7 +271,7 @@
 								</div>
 								<div class="product-caption">
 									<div class="title-box">
-										<h6 class="product-title">
+										<h6 class="product-title limitLength">
 											<a
 												href="${pageContext.request.contextPath}/public/restaurant/${location.locationId}"
 												class="text-light-black ">${location.locationName}</a>
@@ -394,7 +394,7 @@
 											</div>
 											<div class="product-caption">
 												<div class="title-box">
-													<h6 class="product-title">
+													<h6 class="product-title limitLength">
 														<a
 															href="${pageContext.request.contextPath}/public/restaurant/${locationFavorite.location.locationId}"
 															class="text-light-black ">${locationFavorite.location.locationName}</a>

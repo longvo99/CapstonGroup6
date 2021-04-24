@@ -392,7 +392,7 @@
    	<style>
    		.limitLength {
 		  white-space: nowrap; 
-		  width: 100px; 
+		  width: 150px; 
 		  overflow: hidden;
 		  text-overflow: ellipsis; 
 		}

@@ -122,7 +122,7 @@
 									</div>
 									<div class="product-caption">
 										<div class="title-box">
-											<h6 class="product-title">
+											<h6 class="product-title limitLength">
 												<a
 													href="${pageContext.request.contextPath}/public/restaurant/${location.locationId}"
 													class="text-light-black limitLength">${location.locationName}</a>
@@ -225,7 +225,7 @@
 									</div>
 									<div class="product-caption">
 										<div class="title-box">
-											<h6 class="product-title">
+											<h6 class="product-title limitLength">
 												<a
 													href="${pageContext.request.contextPath}/public/restaurant/${locationFavorite.location.locationId}"
 													class="text-light-black limitLength">${locationFavorite.location.locationName}</a>
