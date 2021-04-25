@@ -67,7 +67,7 @@ public class PublicOrderController extends PublicAbstractController {
 
 	@Autowired
 	private DiscountService discountService;
-	
+
 	@Autowired
 	MessageSource messageSource;
 
@@ -184,8 +184,7 @@ public class PublicOrderController extends PublicAbstractController {
 			for (Cookie cookie : cookies) {
 				if (cookie.getName().contains(user.getUsername())) {
 					productId = cookie.getName().substring(0, cookie.getName().lastIndexOf("-"));
-					if (!cookie.getValue().equals("")
-							&& !cookie.getName().contains("Discount-" + user.getUsername())) {
+					if (!cookie.getValue().equals("") && !cookie.getName().contains("Discount-" + user.getUsername())) {
 						OrderDTO product = null;
 						if (productId.substring(0, 1).equals("c")) {
 							String comboId = cookie.getName().substring(1, cookie.getName().lastIndexOf("-"));
@@ -206,11 +205,13 @@ public class PublicOrderController extends PublicAbstractController {
 				}
 			}
 			if (listOrderDTO.size() > 0) {
-				List<DiscountInfo> listDiscountInfo = discountService.findBylocationId(listOrderDTO.get(0).getLocationId());
-				List<DiscountLimitedUse> listDiscountLimitedUseByLocationId = discountService.findDiscountLimitedUseByLocationId(listOrderDTO.get(0).getLocationId(), user.getUserId());
+				List<DiscountInfo> listDiscountInfo = discountService
+						.findBylocationId(listOrderDTO.get(0).getLocationId());
+				List<DiscountLimitedUse> listDiscountLimitedUseByLocationId = discountService
+						.findDiscountLimitedUseByLocationId(listOrderDTO.get(0).getLocationId(), user.getUserId());
 				for (DiscountInfo discountInfo : listDiscountInfo) {
 					for (DiscountLimitedUse discountLimitedUse : listDiscountLimitedUseByLocationId) {
-						if(discountInfo.getDiscountId() == discountLimitedUse.getDiscountInfo().getDiscountId() 
+						if (discountInfo.getDiscountId() == discountLimitedUse.getDiscountInfo().getDiscountId()
 								&& discountInfo.getLimitedPerUser() == discountLimitedUse.getLimitedPerUser()) {
 							listDiscountInfo.remove(discountInfo);
 						}
@@ -229,8 +230,9 @@ public class PublicOrderController extends PublicAbstractController {
 	}
 
 	@PostMapping("/checkout/{typePay}")
-	public String checkout(@Valid @ModelAttribute("userAddress") UserAddress userAddress, @PathVariable String typePay, Model model,
-			HttpServletRequest request, BindingResult br, RedirectAttributes rd, HttpServletResponse response) throws PayPalRESTException {
+	public String checkout(@Valid @ModelAttribute("userAddress") UserAddress userAddress, @PathVariable String typePay,
+			Model model, HttpServletRequest request, BindingResult br, RedirectAttributes rd,
+			HttpServletResponse response) throws PayPalRESTException {
 		if (br.hasErrors()) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
 			return "redirect:/public/checkout";
@@ -254,6 +256,7 @@ public class PublicOrderController extends PublicAbstractController {
 		String productId = "";
 		List<OrderDTO> listOrderDTO = new ArrayList<>();
 		int rateDiscount = 0;
+		List<String> nameCookie = new ArrayList<String>();
 		for (Cookie cookie : cookies) {
 			if (cookie.getName().contains(user.getUsername())) {
 				productId = cookie.getName().substring(0, cookie.getName().lastIndexOf("-"));
@@ -270,12 +273,14 @@ public class PublicOrderController extends PublicAbstractController {
 						DiscountInfo discountInfo = discountService.findOne(Integer.valueOf(discountId));
 						discountInfo.setLimitedUse(discountInfo.getLimitedUse() - 1);
 						discountService.update(discountInfo);
-						if(discountService.findDiscountLimitedUse(discountId, user.getUserId()) != null) {
-							DiscountLimitedUse discountLimitedUse = discountService.findDiscountLimitedUse(discountId, user.getUserId());
+						if (discountService.findDiscountLimitedUse(discountId, user.getUserId()) != null) {
+							DiscountLimitedUse discountLimitedUse = discountService.findDiscountLimitedUse(discountId,
+									user.getUserId());
 							discountLimitedUse.setLimitedPerUser(discountLimitedUse.getLimitedPerUser() + 1);
 							discountService.updateDiscountLimitedUse(discountLimitedUse);
-						}else {
-							DiscountLimitedUse discountLimitedUse = new DiscountLimitedUse(0, Integer.valueOf(discountId), user.getUserId(), 1);
+						} else {
+							DiscountLimitedUse discountLimitedUse = new DiscountLimitedUse(0,
+									Integer.valueOf(discountId), user.getUserId(), 1);
 							discountService.saveDiscountLimitedUse(discountLimitedUse);
 						}
 					} else {
@@ -284,28 +289,29 @@ public class PublicOrderController extends PublicAbstractController {
 								GlobalsFunction.totalPriceCombo(product.getPrice(), product.getRateDiscount()));
 					}
 					double total = 0;
-					if(!cookie.getName().contains("Discount-" + user.getUsername())) {
+					if (!cookie.getName().contains("Discount-" + user.getUsername())) {
 						total = product.getPrice() * Integer.valueOf(cookie.getValue());
-					OrderDTO order = new OrderDTO(user.getUserId(), productId, product.getName(), product.getPrice(),
-							Integer.valueOf(cookie.getValue()), product.getLocationId());
-					listOrderDTO.add(order);
+						OrderDTO order = new OrderDTO(user.getUserId(), productId, product.getName(),
+								product.getPrice(), Integer.valueOf(cookie.getValue()), product.getLocationId());
+						listOrderDTO.add(order);
 					}
-					
 					totalCart += total;
-					// remote cookie
-					Cookie cookieDel = new Cookie(cookie.getName(), "");
-					cookieDel.setMaxAge(0);
-					System.out.println(cookie.getName());
-					response.addCookie(cookieDel);
 				}
+
+				if (cookie.getName() != null) {
+					String abc = cookie.getName();
+					nameCookie.add(abc);
+				}
+
 			}
 		}
-		if(rateDiscount > 100) {
+		request.getSession().setAttribute("nameCookie", nameCookie);
+		if (rateDiscount > 100) {
 			totalCart -= rateDiscount;
-		}else {
+		} else {
 			totalCart -= ((totalCart * rateDiscount) / 100);
 		}
-		//set free ship 
+		// set free ship
 		totalCart += 20000;
 		Orders order = new Orders(0, GlobalsFunction.getCurrentTime(), new OrderStatus(1, ""), user, totalCart,
 				userAddress.getNote(), "", GlobalsConstant.priceShip, GlobalsFunction.AddressUser(userAddress),
@@ -327,12 +333,13 @@ public class PublicOrderController extends PublicAbstractController {
 			}
 			orderDetailService.save(orderDetail);
 		}
-		if(typePay.equals("paypal")) {
+		if (typePay.equals("paypal")) {
 			PaymentServices paymentServices = new PaymentServices();
-			float price = (totalCart)/23000 - 1;
-			float tax = ((totalCart)*10/100)/23000;
+			float price = (totalCart) / 23000 - 1;
+			float tax = ((totalCart) * 10 / 100) / 23000;
 			float subPrice = price + tax + 1;
-			OrderDetailDTO orerDetail = new OrderDetailDTO("Chi tiết đơn hàng", String.valueOf(price) , "1", String.valueOf(tax) , String.valueOf(subPrice));
+			OrderDetailDTO orerDetail = new OrderDetailDTO("Chi tiết đơn hàng", String.valueOf(price), "1",
+					String.valueOf(tax), String.valueOf(subPrice));
 			String approvalLink = paymentServices.authorizePayment(orerDetail);
 			order.setOrderStatus(new OrderStatus(2, ""));
 			orderService.update(order);
@@ -343,7 +350,16 @@ public class PublicOrderController extends PublicAbstractController {
 
 	@GetMapping({ "/orderdetails", "/orderdetails/{orderId}" })
 	public String orderdetails(Model model, HttpServletRequest request,
-			@PathVariable(required = false, name = "orderId") Integer orderId) {
+			@PathVariable(required = false, name = "orderId") Integer orderId, HttpServletResponse response) {
+		if (request.getSession().getAttribute("nameCookie") != null) {
+			List<String> nameCookie = (List<String>) request.getSession().getAttribute("nameCookie");
+			for (String string : nameCookie) {
+				System.out.println(string);
+				Cookie cookieDel = new Cookie(string, "");
+				cookieDel.setMaxAge(0);
+				response.addCookie(cookieDel);
+			}
+		}
 		Users user = (Users) request.getSession().getAttribute("userSession");
 		List<Orders> listOrder = orderService.findByUserId(user.getUserId());
 		Orders order = null;
