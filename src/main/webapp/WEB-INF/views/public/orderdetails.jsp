@@ -77,9 +77,9 @@
 							</c:if>
 						</div>
 					</div>
-					<div class="tracking-map">
+					<!-- <div class="tracking-map">
 						<div id="pickupmap"></div>
-					</div>
+					</div> -->
 				</div>
 				<!-- recipt -->
 				<div class="recipt-sec padding-20">

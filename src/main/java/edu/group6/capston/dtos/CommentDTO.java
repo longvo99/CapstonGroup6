@@ -1,7 +1,5 @@
 package edu.group6.capston.dtos;
 
-import java.util.List;
-
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
@@ -14,8 +12,7 @@ import lombok.NoArgsConstructor;
 public class CommentDTO {
 	private String title;
 	private String content;
-	private List<MultipartFile> images;
-	private MultipartFile video;
+	private MultipartFile images;
 	private float location;
 	private float price;
 	private float quality;
@@ -27,13 +24,12 @@ public class CommentDTO {
 		this.content = content;
 		this.avgPoint = avgPoint;
 	}
-	public CommentDTO(String title, String content, List<MultipartFile> images, MultipartFile video, float location,
+	public CommentDTO(String title, String content, MultipartFile images, float location,
 			float price, float quality, float service, float space) {
 		super();
 		this.title = title;
 		this.content = content;
 		this.images = images;
-		this.video = video;
 		this.location = location;
 		this.price = price;
 		this.quality = quality;

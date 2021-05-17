@@ -8,8 +8,6 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import edu.group6.capston.models.DiscountInfo;
-import edu.group6.capston.models.Location;
 import edu.group6.capston.models.ProductCombo;
 
 @Repository
@@ -21,6 +19,7 @@ public class ProductComboDAO {
 	public List<ProductCombo> findAllByLocationId(int locationId) {
 		try (Session session = this.sessionFactory.openSession()) {
 			List<ProductCombo> list = session.createQuery("FROM ProductCombo WHERE location.locationId = " + locationId, ProductCombo.class).list();
+			session.close();
 			return list;
 		}
 	}
@@ -28,6 +27,7 @@ public class ProductComboDAO {
 	public ProductCombo findOneById(Integer productComboId) {
 		Session session = this.sessionFactory.openSession();
 		ProductCombo productCombo = session.find(ProductCombo.class, productComboId);
+		session.close();
 		return productCombo;
 	}
 

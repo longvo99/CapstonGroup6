@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.group6.capston.mail.CustomerNotFoundException;
-import edu.group6.capston.mail.Utility;
 import edu.group6.capston.models.Users;
 import edu.group6.capston.services.impls.UserServiceImpl;
 import net.bytebuddy.utility.RandomString;
@@ -34,7 +33,7 @@ public class ForgotPasswordController {
 		String token = RandomString.make(30);
 		try {
 			userServiceImpl.updateResetPasswordToken(token, email, username);
-			String resetPasswordLink = Utility.getSiteURL(request) + "/reset_password?token=" + token;
+			String resetPasswordLink = "http://ec2-13-212-172-107.ap-southeast-1.compute.amazonaws.com:8080/Capstone.Group6" + "/reset_password?token=" + token;
 			userServiceImpl.sendMailResetPassword(email, resetPasswordLink);
 			model.addAttribute("message", "Chúng tôi đã gửi link đổi mật khẩu thành công. Hãy kiểm tra email!");
 		} catch (CustomerNotFoundException ex) {

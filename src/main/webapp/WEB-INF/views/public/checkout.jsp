@@ -247,6 +247,7 @@
                                      </script>
 								</c:if>
 								<br>
+								<c:if test="${not empty listOrderDTO}">
 								<div class="section-header-left">
 									<h3 class="text-light-black header-title">Thông tin thanh
 										toán</h3>
@@ -288,6 +289,7 @@
 										</div>
 									</div>
 								</div>
+								</c:if>
 							</div>
 						</div>
 					</div>

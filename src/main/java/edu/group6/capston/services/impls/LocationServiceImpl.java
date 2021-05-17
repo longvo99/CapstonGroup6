@@ -86,7 +86,10 @@ public class LocationServiceImpl implements LocationService {
 
 	@Override
 	public List<Location> findAllByCategory(Integer categoryId) {
-		return LocationDAO.findAllByCategory(categoryId);}
+		return LocationDAO.findAllByCategory(categoryId);
+	}
+	
+	@Override
 	public List<LocationDTO> findLocationByCategoryId(int categoryId) {
 		return LocationDAO.findLocationByCategoryId(categoryId);
 	}

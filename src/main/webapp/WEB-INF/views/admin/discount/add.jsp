@@ -192,7 +192,7 @@
                     		<c:forEach var="location" items="${locationByUserIdList}" >
                     			<div class="form-check">
 					  				<label class="form-check-label">
-				      					<input type="checkbox" class="checkbox" name="check[]" value="${location.locationId}" style="zoom: 1.5;"> ${location.address}
+				      					<input type="checkbox" class="checkbox" name="check[]" value="${location.locationId}" style="zoom: 1.5;"> ${location.locationName} - ${location.address}
 									</label>
 								</div>
                     		</c:forEach>
@@ -226,7 +226,7 @@
                     	<ul id="myList">
                     	<c:if test="${not empty locationByUserIdList}">
                     		<c:forEach var="location" items="${locationByUserIdList}" >
-				      			<li><input type="checkbox" class="checkbox" name="check[]" value="${location.locationId}" style="zoom: 1.5;"> ${location.address}</li>
+				      			<li><input type="checkbox" class="checkbox" name="check[]" value="${location.locationId}" style="zoom: 1.5;"> ${location.locationName} - ${location.address}</li>
                     		</c:forEach>
                     	</c:if>
                     	</ul>

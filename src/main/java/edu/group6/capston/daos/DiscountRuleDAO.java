@@ -17,13 +17,17 @@ public class DiscountRuleDAO {
 	
 	public List<DiscountRule> findAll() {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("from DiscountRule", DiscountRule.class).list();
+			List<DiscountRule> list = session.createQuery("from DiscountRule", DiscountRule.class).list();
+			session.close();
+			return list;
 		}
 	}
 
 	public List<DiscountRule> findBylocationId(int locationId) {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("from DiscountRule WHERE locationId = " + locationId, DiscountRule.class).list();
+			List<DiscountRule> list = session.createQuery("from DiscountRule WHERE locationId = " + locationId, DiscountRule.class).list();
+			session.close();
+			return list;
 		}
 	}
 

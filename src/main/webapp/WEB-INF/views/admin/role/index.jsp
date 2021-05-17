@@ -5,9 +5,6 @@
 	<div class="d-sm-flex align-items-center justify-content-between mb-4">
 		<h2 class="m-0 font-weight-bold text-primary">Quản lý chức vụ</h2>
 		<ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="./">Home</a></li>
-			<li class="breadcrumb-item">Tables</li>
-			<li class="breadcrumb-item active" aria-current="page">DataTables</li>
 		</ol>
 	</div>
 	<!-- Row -->
@@ -43,9 +40,9 @@
 							id="dataTableHover">
 							<thead class="thead-light">
 								<tr>
-									<th>ID</th>
-									<th>Tên loại địa điểm</th>
-									<th>Chức năng</th>
+									<th class="center text-center">ID</th>
+									<th class="center text-center">Tên chức vụ</th>
+									<th class="center text-center">Chức năng</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -58,9 +55,7 @@
 										<td class="center text-center"><a href=""
 											data-toggle="modal"
 											data-target="#exampleModalCenter${role.roleId}"
-											class="btn btn-sm btn-success"><i class="fa fa-edit">Edit</i></a>
-											<a href="${urlDel}" title="Xóa" class="btn btn-danger"><span
-												class="glyphicon glyphicon-trash"></span> Xóa</a></td>
+											class="btn btn-sm btn-success" title="SỬA"><i class="fa fa-edit"></i></a>
 									</tr>
 									<!-- Modal Center -->
 									<div class="modal fade" id="exampleModalCenter${role.roleId}"
@@ -84,7 +79,7 @@
 														method="post" id="form">
 														<div class="comment-form">
 															<div class="form-group">
-																<label for="name">ID</label> <input
+																<label for="name">ID</label> <input readonly="readonly"
 																	class="form-control mb-3" type="text"
 																	value="${role.roleId}" id="roleId" name="roleId">
 															</div>

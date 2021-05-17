@@ -36,12 +36,10 @@ public class MainApp {
 		try {
 			mailSender.send(message);
 		} catch (Exception e) {
-			System.out.println("Error!");
 			context.close();
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
 			return "redirect:/admin/location/index";
 		}
-		System.out.println("Sending text done!");
 		context.close();
 		rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("success", null, Locale.getDefault()));
 		return "redirect:/admin/location/index";

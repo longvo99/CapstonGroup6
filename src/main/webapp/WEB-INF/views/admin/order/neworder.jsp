@@ -6,9 +6,6 @@
 		<h2 class="m-0 font-weight-bold text-primary">Đơn hàng đang chờ
 			xử lý</h2>
 		<ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="./">Trang chủ</a></li>
-			<li class="breadcrumb-item">Bảng</li>
-			<li class="breadcrumb-item active" aria-current="page">DataTables</li>
 		</ol>
 	</div>
 	<!-- Row -->
@@ -27,7 +24,7 @@
 							id="dataTableHover">
 							<thead class="thead-light">
 								<tr>
-									<th>ID</th>
+									<th data-orderable="false">ID</th>
 									<th>Người đặt hàng</th>
 									<th>Thời gian đặt hàng</th>
 									<th>Trạng thái</th>

@@ -7,10 +7,8 @@
 		<div class="container-fluid" id="container-wrapper">
 			<div
 				class="d-sm-flex align-items-center justify-content-between mb-4">
-				<h1 class="m-0 font-weight-bold text-primarys">Add Role</h1>
+				<h1 class="m-0 font-weight-bold text-primarys">Thêm chức vụ</h1>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="./">Home</a></li>
-					<li class="breadcrumb-item active" aria-current="page">Forms</li>
 				</ol>
 			</div>
 			<div class="row">

@@ -11,8 +11,6 @@
 				<h1 class="m-0 font-weight-bold text-primarys">Chi tiết đơn
 					hàng</h1>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="./">Trang chủ</a></li>
-					<li class="breadcrumb-item active" aria-current="page">Forms</li>
 				</ol>
 			</div>
 			<div class="row">
@@ -36,9 +34,9 @@
 											value="${obj.orders.orderId}" id="orderId" name="orderId"
 											readonly>
 									</div>
-									<input type="hidden" value="${obj.orders.users.userId}"
-										name="users.userId"> <input type="hidden"
-										value="${obj.orders.shipDistance}" name="shipDistance">
+									<input type="hidden" value="${obj.orders.users.userId}" name="users.userId">
+								    <input type="hidden" value="${obj.orders.shipDistance}" name="shipDistance">
+									<input type="hidden" value="${obj.orders.location.locationId}" name="location.locationId">
 									<div class="form-group">
 										<label for="name">Người đặt</label> <input
 											class="form-control mb-3" type="text"
@@ -54,13 +52,97 @@
 									<div class="form-group">
 										<label for="name">Địa chỉ giao hàng</label> <input
 											class="form-control mb-3" type="text"
-											value="${obj.orders.recieverAddress}" id="recieverAddress"
-											name="recieverAddress" readonly>
+											value="${userAddress.stress}" id="stress"
+											name="stress" readonly>
 									</div>
 									<div class="form-group">
-										<label for="name">Tổng tiền + ship</label> <input
+									<label for="city">Tỉnh/thành</label> <select name="city"
+										id="country" class="form-control input-lg" readonly>
+										<option value="000">-Chọn Tỉnh/Thành:-</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="district">Quận huyện</label> <select
+										name="district" id="state" class="form-control input-lg"
+										readonly>
+										<option value="000">-Chọn Quận/Huyện-</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="ward">Xã/phường</label> <select name="ward"
+										id="city" class="form-control input-lg" readonly>
+										<option value="000">-Chọn Phường/Xã-</option>
+									</select>
+								</div>
+								<script>
+					$(document).ready(function(){
+						  $.getJSON('${pageContext.request.contextPath}/resources/admin/assets/js/data.json', function(data){
+							  var country_id;
+							  var state_id;
+							  $.each(data, function (index, value) {
+								    var city_id;
+								    if('${userAddress.city}' == value.Id){
+								    	$("#country").append('<option selected="selected" rel="' + index + '" value="'+value.Id+'">'+value.Name+'</option>');
+								    } else {
+								    	$("#country").append('<option rel="' + index + '" value="'+value.Id+'">'+value.Name+'</option>');
+								    }
+								   /*  country_id = $("#country").find('option:selected').attr('rel');
+						            console.log("Country INDEX : " + country_id); */
+						            /* $.each(data[country_id].Districts, function (index1, value1) {
+						                 
+						            	if(${location.district} == value1.Id){
+						            		 $("#state").append('<option selected="selected" rel="' + index1 + '" value="'+value1.Id+'">'+value1.Name+'</option>');
+									    } else {
+									    	$("#state").append('<option rel="' + index1 + '" value="'+value1.Id+'">'+value1.Name+'</option>');
+									    }
+						               
+						            });   */
+						            country_id = $("#country").find('option:selected').attr('rel');
+								        $("#country").change(function () {
+								            $("#state, #city").find("option:gt(0)").remove();
+								            $("#state").find("option:first").text("Loading...");
+								            country_id = $(this).find('option:selected').attr('rel');
+								            console.log("Country INDEX : " + country_id);
+								            $.each(data[country_id].Districts, function (index1, value1) {
+								                $("#state").find("option:first").text("-Chọn Quận/Huyện-");
+								                $("#state").append('<option rel="' + index1 + '" value="'+value1.Id+'">'+value1.Name+'</option>');
+								            });
+								            
+								        });
+								        $("#state").change(function () {
+								            $("#city").find("option:gt(0)").remove();
+								            $("#city").find("option:first").text("Loading...");
+								            state_id = $(this).find('option:selected').attr('rel');
+								            console.log("State INDEX : " + state_id);
+								            $.each(data[country_id].Districts[state_id].Wards, function (index2, value2) {
+								                $("#city").find("option:first").text("-Chọn Phường/Xã-");
+								                $("#city").append('<option rel="' + index2 + '" value="'+value2.Id+'">'+value2.Name+'</option>');
+								            });
+								        });     
+								});
+							  $.each(data[country_id].Districts, function (index1, value1) {
+					            	if('${userAddress.district}' == value1.Id){
+					            		 $("#state").append('<option selected="selected" rel="' + index1 + '" value="'+value1.Id+'">'+value1.Name+'</option>');
+								    } else {
+								    	$("#state").append('<option rel="' + index1 + '" value="'+value1.Id+'">'+value1.Name+'</option>');
+								    }
+					            }); 
+							  state_id = $("#state").find('option:selected').attr('rel');
+							  $.each(data[country_id].Districts[state_id].Wards, function (index2, value2) {
+					            	if('${userAddress.ward}' == value2.Id){
+					            		$("#city").append('<option selected="selected" rel="' + index2 + '" value="'+value2.Id+'">'+value2.Name+'</option>');
+								    } else {
+								    	$("#city").append('<option rel="' + index2 + '" value="'+value2.Id+'">'+value2.Name+'</option>');
+								    }
+					            });
+						 });
+						});
+			</script>
+									<div class="form-group">
+										<label for="name">Tổng tiền + ship(VNĐ)</label>
+										<input
 											class="form-control mb-3" type="text"
-											value="${obj.orders.totalPrice}" id="orderTime"
+											value="${fn:substring(obj.orders.totalPrice, 0, fn:indexOf(obj.orders.totalPrice, '.'))}" id="orderTime"
 											name="totalPrice" readonly>
 									</div>
 									<div class="form-group">
@@ -70,7 +152,8 @@
 											name="orderTime" readonly>
 									</div>
 									<div class="form-group">
-										<label for="name">Phí ship</label> <input
+										<label for="name">Phí ship (VNĐ)</label> 
+										<input
 											class="form-control mb-3" type="text"
 											value="${obj.orders.shipPrice}" id="shipPrice"
 											name="shipPrice" readonly>
@@ -80,6 +163,7 @@
 											class="form-control mb-3" type="text"
 											value="${obj.orders.note}" id="note" name="note" readonly>
 									</div>
+									<div class="table-responsive p-3">
 									<table class="table align-items-center table-flush table-hover">
 										<thead class="thead-light">
 											<tr>
@@ -102,7 +186,7 @@
 															<td>Combo:${orderDetail.productCombo.comboName}</td>
 														</c:otherwise>
 													</c:choose>
-													<td>${orderDetail.currentPrice}</td>
+													<td>${fn:substring(orderDetail.currentPrice, 0, fn:indexOf(orderDetail.currentPrice, '.'))}</td>
 													<td>${orderDetail.quantity}</td>
 													<c:choose>
 														<c:when test="${not empty orderDetail.product.productId}">
@@ -120,10 +204,11 @@
 											</c:forEach>
 										</tbody>
 									</table>
+									</div>
 									<div class="form-group">
 										<label for="orderStatus.orderStatusId">Trạng thái</label>
 										<c:if
-											test="${obj.orders.orderStatus.orderStatusId eq 4 || obj.orders.orderStatus.orderStatusId eq 5}">
+											test="${obj.orders.orderStatus.orderStatusId eq 5 || obj.orders.orderStatus.orderStatusId eq 6}">
 											<c:set var="disabled" value="disabled='disabled'" />
 										</c:if>
 										<select ${disabled} class="form-control" id="orderStatus"
@@ -139,7 +224,7 @@
 															<c:set var="selected" value="" />
 														</c:otherwise>
 													</c:choose>
-													<c:choose>
+													<%-- <c:choose>
 														<c:when
 															test="${orderStatus.orderStatusId eq obj.orders.orderStatus.orderStatusId }">
 															<c:set var="selected" value="selected='selected'" />
@@ -147,14 +232,22 @@
 														<c:otherwise>
 															<c:set var="selected" value="" />
 														</c:otherwise>
+													</c:choose> --%>
+													<c:choose>
+														<c:when
+															test="${orderStatus.orderStatusId eq 2 }">
+															<option disabled="disabled" ${selected} value="${orderStatus.orderStatusId}">${orderStatus.statusName}</option>
+														</c:when>
+														<c:otherwise>
+															<option ${selected} value="${orderStatus.orderStatusId}">${orderStatus.statusName}</option>
+														</c:otherwise>
 													</c:choose>
-													<option ${selected} value="${orderStatus.orderStatusId}">${orderStatus.statusName}</option>
 												</c:forEach>
 											</c:if>
 										</select>
 									</div>
 									<c:if
-										test="${obj.orders.orderStatus.orderStatusId ne 4 && obj.orders.orderStatus.orderStatusId ne 5}">
+										test="${obj.orders.orderStatus.orderStatusId ne 5 && obj.orders.orderStatus.orderStatusId ne 6}">
 										<div class="form-group">
 											<button type="submit" class="btn btn-primary" name="submit">Cập
 												nhập</button>

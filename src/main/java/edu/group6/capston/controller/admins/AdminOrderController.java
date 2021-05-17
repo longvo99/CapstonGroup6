@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import edu.group6.capston.dtos.UserAddress;
 import edu.group6.capston.models.Orders;
 import edu.group6.capston.services.OrderDetailService;
 import edu.group6.capston.services.OrderService;
 import edu.group6.capston.utils.GlobalsConstant;
+import edu.group6.capston.utils.GlobalsFunction;
 
 @Controller
 @RequestMapping("admin/order")
@@ -50,16 +52,18 @@ public class AdminOrderController {
 	public String detail(@PathVariable Integer orderId, Model model) {
 		model.addAttribute("orderStatus" , OrderService.findAllOrderStatus());
 		model.addAttribute("orderDetailList" , OrderDetailService.findByOrderId(orderId));
+		model.addAttribute("userAddress", GlobalsFunction.AddressUser(OrderService.findByOrderId(orderId).getRecieverAddress()));
 		return "admin.order.orderDetail";
 	}
 	
 	@PostMapping(value ="/edit")
-	public String Edit(@Valid @ModelAttribute("orders") Orders Orders, BindingResult br, RedirectAttributes rd,
+	public String Edit(@Valid @ModelAttribute("orders") Orders Orders,@Valid @ModelAttribute("userAddress") UserAddress userAddress, BindingResult br, RedirectAttributes rd,
 			HttpServletRequest request, Model model) throws UnsupportedEncodingException {
 		if (br.hasErrors()) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
 			return "redirect:/admin/order/index";
 		}
+		Orders.setRecieverAddress((GlobalsFunction.AddressUser(userAddress)));
 		if (OrderService.update(Orders)) {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("success", null, Locale.getDefault()));
 			return "redirect:/admin/order/index";

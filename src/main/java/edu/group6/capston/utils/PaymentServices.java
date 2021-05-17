@@ -54,8 +54,8 @@ public class PaymentServices {
 
 	private RedirectUrls getRedirectURLs() {
 		RedirectUrls redirectUrls = new RedirectUrls();
-		redirectUrls.setCancelUrl("http://localhost:8080/PaypalTest/cancel.html");
-		redirectUrls.setReturnUrl("http://localhost:8080/Capston.Group6/public/orderdetails");
+		redirectUrls.setCancelUrl("http://ec2-13-212-172-107.ap-southeast-1.compute.amazonaws.com:8080/Capstone.Group6/PaypalTest/cancel.html");
+		redirectUrls.setReturnUrl("http://ec2-13-212-172-107.ap-southeast-1.compute.amazonaws.com:8080/Capstone.Group6/public/orderdetails");
 		return redirectUrls;
 	}
 

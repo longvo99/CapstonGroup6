@@ -11,8 +11,6 @@
 				<h1 class="m-0 font-weight-bold text-primarys">Thêm mới loại
 					địa điểm</h1>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="./">Trang chủ</a></li>
-					<li class="breadcrumb-item active" aria-current="page">Forms</li>
 				</ol>
 			</div>
 			<div class="row">
@@ -32,7 +30,7 @@
 										value="${locationTypes.locationTypeName}"
 										id="locationTypeName" name="locationTypeName">
 								</div>
-								<button type="submit" class="btn btn-primary" name="submit">Sửa</button>
+								<button type="submit" class="btn btn-primary" name="submit">Thêm</button>
 							</form>
 						</div>
 					</div>

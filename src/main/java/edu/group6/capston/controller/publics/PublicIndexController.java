@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.group6.capston.dtos.CommentDTO;
@@ -100,9 +99,6 @@ public class PublicIndexController extends PublicAbstractController {
 	
 	@GetMapping({"/restaurant/{locationId}" , "/restaurant/{locationId}/{commentId}"})
 	public String productdetail(@PathVariable Integer locationId, @PathVariable(required = false, name = "commentId") Integer commentId, Model model, HttpServletRequest request) {
-		if(commentId != null) {
-			commentService.update(commentId);
-		}
 		Location location = locationService.findLocationId(locationId);
 		String[] imagePath = GlobalsFunction.splitPathMedia(location.getMediaPath());
 		model.addAttribute("location", GlobalsFunction.formatTime(location));
@@ -135,8 +131,22 @@ public class PublicIndexController extends PublicAbstractController {
 				model.addAttribute("ratingList", ratingService.findAllRatingLocation());
 				model.addAttribute("locationNearYou", GlobalsFunction.changeImageLocation(locationService.findLocationNearYou(GlobalsFunction.AddressUser(user.getContactAddress()))));
 			}
+			if(commentId != null) {
+				commentService.update(commentId);
+				List<Comment> listComment = commentService.findCommentReply(user.getUserId());
+				int sizeNotification = 0;
+				if (listComment.size() > 0) {
+					for (Comment comment : listComment) {
+						if (!comment.isStatus()) {
+							sizeNotification++;
+						}
+					}
+					model.addAttribute("listNotification", listComment);
+					model.addAttribute("sizeNotification", sizeNotification);
+					model.addAttribute("commentIdNotifition", commentId);
+				}
+			}
 		}
-		
 		model.addAttribute("countRating", commentService.findCountCommentByLocationId(locationId));
 		model.addAttribute("pointRating", ratingService.findAVGRating(locationId));
 		return "public.restaurant";
@@ -169,8 +179,8 @@ public class PublicIndexController extends PublicAbstractController {
 		if(request.getSession().getAttribute("userSession") != null) {
 			Users user = (Users) request.getSession().getAttribute("userSession");
 			List<LocationFavorites> locationFavoriteList = locationFavoriteService.findLocationFavorite(user.getUserId());
-			model.addAttribute("nameCategory","Địa điểm yêu thích");
 			if(category.equals("favorite")) {
+				model.addAttribute("nameCategory", "Địa điểm yêu thích" );
 				model.addAttribute("listLocation2", GlobalsFunction.changeImageLocationFavorites(locationFavoriteList));
 			}else {
 				model.addAttribute("locationFavoriteList", GlobalsFunction.changeImageLocationFavorites(locationFavoriteList));
@@ -197,6 +207,13 @@ public class PublicIndexController extends PublicAbstractController {
 		return "success";
 	}
 	
+	@RequestMapping(value = "/delComment/{acommentId}", method = RequestMethod.GET, produces = "application/json")
+	public @ResponseBody String delComment( @PathVariable Integer acommentId, HttpServletRequest request) {
+		commentService.deleteParentID(acommentId);
+		commentService.delete(acommentId);
+		return "success";
+	}
+	
 	@PostMapping(value = "/restaurant/comment/{locationId}")
 	public String addComment(@Valid @ModelAttribute("commentDTO") CommentDTO commentDTO, @PathVariable Integer locationId, BindingResult br,
 			RedirectAttributes rd ,HttpServletRequest request, Model model) throws IllegalStateException, IOException {
@@ -204,23 +221,9 @@ public class PublicIndexController extends PublicAbstractController {
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
 			return "redirect:/public/restaurant/" + locationId;
 		}
-		String mediaPath = "";
-		List<MultipartFile> filesImage = commentDTO.getImages();
-		MultipartFile fileVideo = commentDTO.getVideo();
-		String video = UploadFile.upload(fileVideo, request);
-		if (filesImage != null && filesImage.size() > 0) {
-			for (MultipartFile multipartFile : filesImage) {
-				String filename = UploadFile.upload(multipartFile, request);
-				if (filesImage.indexOf(multipartFile) == 0) {
-					mediaPath = filename;
-				} else {
-					mediaPath = mediaPath + ";" + filename;
-				}
-			}
-		}
-		mediaPath += ";" + video;
+		String filename = UploadFile.upload(commentDTO.getImages(), request);
 		Users user = (Users) request.getSession().getAttribute("userSession");
-		Comment comment = new Comment(0, commentDTO.getTitle(), String.valueOf(GlobalsFunction.getCurrentTime()), commentDTO.getContent(), mediaPath, 0, new Location(locationId), new Users(user.getUserId()), false);
+		Comment comment = new Comment(0, commentDTO.getTitle(), String.valueOf(GlobalsFunction.getCurrentTime()), commentDTO.getContent(), filename, 0, new Location(locationId), new Users(user.getUserId()), false);
 		if (commentService.save(comment)) {
 			Rating rate1 = new Rating(0, commentDTO.getLocation() , "location", comment);
 			Rating rate2 = new Rating(0, commentDTO.getPrice() , "price", comment);

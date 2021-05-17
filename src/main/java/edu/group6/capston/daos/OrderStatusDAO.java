@@ -19,6 +19,7 @@ public class OrderStatusDAO {
 	public List<OrderStatus> findAll() {
 		try (Session session = this.sessionFactory.openSession()) {
 			List<OrderStatus> list = session.createQuery("from OrderStatus", OrderStatus.class).list();
+			session.close();
 			return list;
 		}
 	}

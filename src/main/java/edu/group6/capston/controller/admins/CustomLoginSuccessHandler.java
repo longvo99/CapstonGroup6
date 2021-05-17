@@ -29,10 +29,14 @@ public class CustomLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
         if (user.getFailedAttempt() > 0) {
             userService.resetFailedAttempts(user.getUsername());
         }
-         System.out.println("success");
-         response.sendRedirect(request.getContextPath() + "/admin/index");
-        super.onAuthenticationSuccess(request, response, authentication);
-        
+        if(user.getRole().getRoleId().equals("CUSTOMER")) {
+        	user = userService.findByUsername(user.getUsername());
+			request.getSession().setAttribute("userSession", user);
+        	response.sendRedirect(request.getContextPath() + "/public/index");
+        }else {
+        	response.sendRedirect(request.getContextPath() + "/admin/index");
+            super.onAuthenticationSuccess(request, response, authentication);
+        }
     }
      
 }

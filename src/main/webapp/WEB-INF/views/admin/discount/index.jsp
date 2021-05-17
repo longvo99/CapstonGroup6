@@ -30,8 +30,6 @@
 				<c:set var="actionIndex"
 					value="${pageContext.request.contextPath}/public/index" />
 			</c:if>
-			<li class="breadcrumb-item"><a href="${actionIndex}">Trang
-					chủ</a></li>
 		</ol>
 	</div>
 	<!-- Row -->
@@ -161,18 +159,21 @@
 					                      <label for="address">Mã giảm giá</label>
 					                      <input disabled="disabled" class="form-control mb-3" type="text" value="${discount.code}">
 					                    </div> --%>
+					                    					<c:if test="${discount.users.role.roleId eq 'ADMIN'}">
 															<div class="form-group">
 																<label for="address">Áp dụng cho</label>
 																<textarea disabled="disabled" class="form-control mb-3"
 																	rows="3">${discount.value}</textarea>
 															</div>
+															</c:if>
 															<div class="form-group">
 																<label for="opentime">Giảm bao nhiêu</label>
 																<c:if test="${discount.rateDiscount le 100}">
 																	<c:set var="rd" value="${discount.rateDiscount}%"></c:set>
 																</c:if>
 																<c:if test="${discount.rateDiscount gt 100}">
-																	<c:set var="rd" value="${discount.rateDiscount} VNĐ"></c:set>
+																	<fmt:formatNumber var="rateDiscounta" value="${discount.rateDiscount}" type="number"/>
+																	<c:set var="rd" value="${rateDiscounta} VNĐ"></c:set>
 																</c:if>
 																<input disabled="disabled" class="form-control mb-3"
 																	type="text" value="${rd}">
@@ -186,10 +187,9 @@
 																			value="${discount.discountRule.ruleContent}">
 																	</div>
 																	<div class="form-group">
-																		<label for="opentime">Giá trị tối thiểu của
-																			điều kiện giảm</label> <input disabled="disabled"
-																			class="form-control mb-3" type="text"
-																			value="${discount.valueRule}">
+																		<label for="opentime">Giá trị tối thiểu của điều kiện giảm</label> 
+																		<fmt:formatNumber var="valueRulea" value="${discount.valueRule}" type="number"/>
+																		<input disabled="disabled" class="form-control mb-3" type="text" value="${valueRulea} VNĐ">
 																	</div>
 																</c:if>
 															</c:if>

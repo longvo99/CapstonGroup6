@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import edu.group6.capston.dtos.LocationDTO2;
-import edu.group6.capston.dtos.ProductDTO2;
 import edu.group6.capston.models.OrderStatus;
 import edu.group6.capston.models.Orders;
 
@@ -24,6 +23,7 @@ public class OrderDAO {
 	public List<Orders> findAll() {
 		try (Session session = this.sessionFactory.openSession()) {
 			List<Orders> list = session.createQuery("from Orders ", Orders.class).list();
+			session.close();
 			return list;
 		}
 	}
@@ -73,12 +73,14 @@ public class OrderDAO {
 	public Orders findByOrderId(int orderId) {
 		Session session = this.sessionFactory.openSession();
 		Orders order = session.find(Orders.class, orderId);
+		session.close();
 		return order;
 	}
 
 	public List<OrderStatus> findAllOrderStatus() {
 		try (Session session = this.sessionFactory.openSession()) {
 			List<OrderStatus> list = session.createQuery("from OrderStatus ", OrderStatus.class).list();
+			session.close();
 			return list;
 		}
 	}
@@ -86,6 +88,7 @@ public class OrderDAO {
 	public List<Orders> findByUserId(int userId) {
 		try (Session session = this.sessionFactory.openSession()) {
 			List<Orders> list = session.createQuery("from Orders WHERE userId = " + userId + " ORDER BY OrderId DESC", Orders.class).list();
+			session.close();
 			return list;
 		}
 	}
@@ -93,13 +96,17 @@ public class OrderDAO {
 	public long newOrderCount() {
 		try (Session session = this.sessionFactory.openSession()) {
 			long count = (long) session.createQuery("select count(*) from Orders where orderStatus.orderStatusId = 1").uniqueResult();
+			session.close();
 			return count;
 		}
 	}
 
 	public List<Orders> findAllByStatusId(int statusId) {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("from Orders WHERE orderStatus.orderStatusId = " + statusId, Orders.class).list();
+			List<Orders> list = session.createQuery("from Orders WHERE orderStatus.orderStatusId = " + statusId +
+					" ORDER BY orderId DESC", Orders.class).list();
+			session.close();
+			return list;
 		}
 	}
 
@@ -107,10 +114,11 @@ public class OrderDAO {
 		try (Session session = this.sessionFactory.openSession()) {
 			session.beginTransaction();
 			String hql = "SELECT MONTH(orderTime), SUM(totalPrice) from Orders "
-					   + "WHERE YEAR(orderTime) = " + year + " AND orderStatus.orderStatusId = 4"
+					   + "WHERE YEAR(orderTime) = " + year + " AND orderStatus.orderStatusId = 5"
 					   + " GROUP BY MONTH(orderTime) ORDER BY MONTH(orderTime)";
 			Query query = session.createQuery(hql);
 			List<Object[]> listResult = query.getResultList();
+			session.close();
 			return listResult;
 		}
 	}
@@ -119,10 +127,12 @@ public class OrderDAO {
 		try (Session session = this.sessionFactory.openSession()) {
 			session.beginTransaction();
 			String hql = "SELECT SUM(totalPrice) from Orders "
-					   + "WHERE YEAR(orderTime) = " + year + " AND orderStatus.orderStatusId = 4"
+					   + "WHERE YEAR(orderTime) = " + year + " AND orderStatus.orderStatusId = 5"
 					   + " GROUP BY MONTH(orderTime) "
 					   + "ORDER BY SUM(totalPrice) DESC";
-			return (double) session.createQuery(hql).setMaxResults(1).uniqueResult();
+			double i = (double) session.createQuery(hql).setMaxResults(1).uniqueResult();
+			session.close();
+			return i; 
 		}
 	}
 
@@ -132,11 +142,12 @@ public class OrderDAO {
 			String hql = "SELECT SUM(totalPrice) from Orders "
 					   + "WHERE locationId = " + locationId
 					   + " AND userId = " + userId
-					   + " AND OrderStatusId = 4";
+					   + " AND OrderStatusId = 5";
 			double result = 0;
 			if(session.createQuery(hql).setMaxResults(1).uniqueResult() != null) {
 				result = (double) session.createQuery(hql).setMaxResults(1).uniqueResult();
 			}
+			session.close();
 			return result;
 		}
 	}
@@ -147,6 +158,7 @@ public class OrderDAO {
 			String hql = "select YEAR(orderTime) from Orders GROUP BY YEAR(orderTime)";
 			Query query = session.createQuery(hql);
 			List<Integer> listResult = query.getResultList();
+			session.close();
 			return listResult;
 		}
 	}
@@ -169,7 +181,7 @@ public class OrderDAO {
 			String hql = "SELECT o.location.locationName, o.location.address, "
 					+ "COUNT(o.location.locationId), SUM(o.totalPrice), SUM(o.shipPrice) "
 					+ "FROM Orders o RIGHT OUTER JOIN o.location "
-					+ "ON YEAR(o.orderTime) = " + year + " AND o.orderStatus.orderStatusId = 4 "
+					+ "ON YEAR(o.orderTime) = " + year + " AND o.orderStatus.orderStatusId = 5 "
 					+ "GROUP BY o.location.locationId, o.location.locationName, o.location.address "
 					+ "ORDER BY SUM(o.totalPrice) DESC";
 			@SuppressWarnings("rawtypes")
@@ -182,6 +194,7 @@ public class OrderDAO {
 								object[4]==null? 0:Double.valueOf(((String)object[4]))));
 				//.substring(0,((String)object[4]).indexOf("."))
 			}
+			session.close();
 			return listLocations;
 		}
 	}

@@ -13,8 +13,6 @@
               <c:if test="${not empty sessionScope.userSession}">
               		<c:set var="actionIndex" value="${pageContext.request.contextPath}/public/index" />
               </c:if>
-              <li class="breadcrumb-item"><a href="${actionIndex}">Trang chủ</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Forms</li>
             </ol>
           </div>
           <div class="row">
@@ -84,7 +82,7 @@
                     	<label for="image1">Hình ảnh</label>
                     	<input type="file" id="image1" name="image" class="file" accept="image/*">
 					    <div class="input-group my-3">
-					      <input type="text" class="form-control" disabled placeholder="Upload File" id="file">
+					      <input type="text" class="form-control" readonly="readonly" placeholder="Upload File" id="file">
 					      <div class="input-group-append">
 					        <button type="button" class="browse btn btn-primary">Chọn ảnh</button>
 					      </div>

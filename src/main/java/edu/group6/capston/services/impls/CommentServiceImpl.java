@@ -51,5 +51,15 @@ public class CommentServiceImpl implements CommentService {
 		return false;
 	}
 
+	@Override
+	public int deleteParentID(Integer commentId) {
+		return commentDAO.deleteParentID(commentId);
+	}
+
+	@Override
+	public int delete(Integer commentId) {
+		return commentDAO.delete(commentId);
+	}
+
 	
 }

@@ -15,8 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import edu.group6.capston.models.DiscountInfo;
-import edu.group6.capston.models.DiscountLimitedUse;
-import edu.group6.capston.models.Location;;
+import edu.group6.capston.models.DiscountLimitedUse;;
 
 @Repository
 public class DiscountDAO {
@@ -27,6 +26,7 @@ public class DiscountDAO {
 	public List<DiscountInfo> findAll() {
 		try (Session session = this.sessionFactory.openSession()) {
 			List<DiscountInfo> list = session.createQuery("from DiscountInfo ORDER BY discountId DESC", DiscountInfo.class).list();
+			session.close();
 			return list;
 		}
 	}
@@ -92,18 +92,23 @@ public class DiscountDAO {
 	public List<DiscountInfo> findTopNewDiscountInfo() {
 		try (Session session = this.sessionFactory.openSession()) {
 			List<DiscountInfo> list = session.createQuery("SELECT DISTINCT a from DiscountInfo a ORDER BY DiscountId DESC", DiscountInfo.class).setMaxResults(3).getResultList();
+			session.close();
 			return list;
 		}
 	}
 	public List<DiscountInfo> findAllByUserId(int userId) {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("FROM DiscountInfo WHERE userId = " + userId, DiscountInfo.class).list();
+			List<DiscountInfo> list = session.createQuery("FROM DiscountInfo WHERE userId = " + userId, DiscountInfo.class).list();
+			session.close();
+			return list;
 		}
 	}
 
 	public DiscountInfo findOne(Integer discountId) {
 		Session session = this.sessionFactory.openSession();
-		return session.find(DiscountInfo.class, discountId);
+		DiscountInfo discountInfo = session.find(DiscountInfo.class, discountId);
+		session.close();
+		return discountInfo;
 	}
 
 	public int delete(List<Integer> listDiscountId1) {
@@ -114,26 +119,32 @@ public class DiscountDAO {
 			query.setParameter("list", listDiscountId1); 
 			int i = query.executeUpdate();
 			tx.commit();
+			session.close();
 			return i;
 		}
 	}
 
 	public List<DiscountInfo> findBylocationId(int locationId) {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("FROM DiscountInfo WHERE locationId = " + locationId + " AND limitedPerUser > 0 AND Convert(date, getdate()) <= Convert(date, endDate)", DiscountInfo.class).list();
+			List<DiscountInfo> list = session.createQuery("FROM DiscountInfo WHERE locationId = " + locationId + " AND limitedPerUser > 0 AND CURRENT_DATE() <= endDate", DiscountInfo.class).list();
+			session.close();
+			return list;
 		}
 	}
 
 	public int limitedPerUser(String discountId) {
 		try (Session session = this.sessionFactory.openSession()) {
 			int count = (int) session.createQuery("select limitedPerUser from DiscountInfo WHERE discountId = " + discountId).uniqueResult();
+			session.close();
 			return count;
 		}
 	}
 
 	public DiscountLimitedUse findDiscountLimitedUse(String discountId, int userId) {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("FROM DiscountLimitedUse WHERE discountId = " + discountId + " AND userId = " + userId, DiscountLimitedUse.class).uniqueResult();
+			DiscountLimitedUse discountLimitedUse = session.createQuery("FROM DiscountLimitedUse WHERE discountId = " + discountId + " AND userId = " + userId, DiscountLimitedUse.class).uniqueResult();
+			session.close();
+			return discountLimitedUse;
 		}
 	}
 

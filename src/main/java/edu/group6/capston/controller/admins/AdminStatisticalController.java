@@ -43,7 +43,7 @@ public class AdminStatisticalController {
 		for (int i = 0; i < 12; i++) {
 			totalPriceList.add("0");
 		}
-		if (listResult.size() < 12) {
+		if (listResult.size() <= 12) {
 			for (int i = 1; i <= 12; i++) {
 				for (Object[] obj : listResult) {
 					if (obj[0].equals(i)) {

@@ -6,9 +6,6 @@
 		<h2 class="m-0 font-weight-bold text-primary">Quản lý loại địa
 			điểm</h2>
 		<ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="./">Trang chủ</a></li>
-			<li class="breadcrumb-item">Bảng</li>
-			<li class="breadcrumb-item active" aria-current="page">DataTables</li>
 		</ol>
 	</div>
 	<!-- Row -->
@@ -60,12 +57,11 @@
 										<td class="center text-center"><a href=""
 											data-toggle="modal"
 											data-target="#exampleModalCenter${locationType.locationTypeId}"
-											class="btn btn-sm btn-success"><i class="fa fa-edit">Detail</i></a>
+											class="btn btn-sm btn-success" title="CHI TIẾT"><i class="fas fa-info-circle"></i></a>
 											<a href="" data-toggle="modal"
 											data-target="#exampleModalCenter${locationType.locationTypeId}"
-											class="btn btn-sm btn-primary"><i class="fa fa-edit">Edit</i></a>
-											<a href="${urlDel}" title="Xóa" class="btn btn-danger"><span
-												class="glyphicon glyphicon-trash"></span> Xóa</a></td>
+											class="btn btn-sm btn-primary" title="SỬA"><i class="fa fa-edit"></i></a>
+											</td>
 									</tr>
 									<!-- Modal Center -->
 									<div class="modal fade"

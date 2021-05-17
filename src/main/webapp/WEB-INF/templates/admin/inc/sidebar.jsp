@@ -6,7 +6,7 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
+   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
@@ -28,6 +28,8 @@
   <script src="${pageContext.request.contextPath}/resources/admin/assets/vendor/jquery/jquery.min.js"></script>
   <!-- VALIDATE -->  	
   <script src="${pageContext.request.contextPath}/resources/admin/assets/js/jquery.validate.min.js"></script>
+  <!-- CKEDITOR -->  	
+  <script src="${pageContext.request.contextPath}/resources/admin/assets/ckeditor/ckeditor.js"></script>
   <style type="text/css">
 		#form .form-group label span.error {color: red; font-size: 20px;} 
 		#form .form-group label span.label {
@@ -73,7 +75,7 @@
 </head>
 
 <body id="page-top">
-  <div id="wrapper">
+ <div id="wrapper">
     <!-- Sidebar -->
     
     <c:set var="urlHomePage" value="${pageContext.request.contextPath}/admin/index" />
@@ -83,10 +85,15 @@
     <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${urlHomePage}">
         <div class="sidebar-brand-icon">
-          <img src="${pageContext.request.contextPath}/resources/admin/assets/img/logo/logo3.png" width="50px">
+          <img src="${pageContext.request.contextPath}/resources/public/assets/img/logo.png" width="120px" height="40px;">
         </div>
-        <div class="sidebar-brand-text mx-3">LHTMP</div>
+        <!-- <div class="sidebar-brand-text mx-3">LHTMP</div> -->
       </a>
+      <%-- <a href="${pageContext.request.contextPath}/public/index"> <img
+								style="width: 106px; height: 30px;"
+								src="${pageContext.request.contextPath}/resources/public/assets/img/logo.png"
+								class="img-fluid" alt="Logo">
+							</a> --%>
       <hr class="sidebar-divider my-0">
       <li class="nav-item active">
         <a class="nav-link" href="${urlHomePage}">
@@ -101,12 +108,12 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
           aria-expanded="true" aria-controls="collapseBootstrap">
-          <i class="far fa-fw fa-window-maximize"></i>
+          <i class="fa fa-fw fa-map-marker-alt"></i>
           <span>Địa điểm</span>
         </a>
         <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Quản lý Địa điểm</h6>
+            <h6 class="collapse-header">Danh sách</h6>
             <c:set var="urlL" value="${pageContext.request.contextPath}/public/location/index" />
 	      	<c:if test="${sessionScope.userSession.role.roleId ne 'CUSTOMER' }">
 	      		<c:set var="urlL" value="${pageContext.request.contextPath}/admin/location/index" />
@@ -115,7 +122,6 @@
             <c:if test="${empty sessionScope.userSession}">
      		<c:if test="${userDetail.user.role.roleId eq 'ADMIN'}">
             <a class="collapse-item" href="${pageContext.request.contextPath}/admin/locationType/index">Loại địa điểm</a>
-            <a class="collapse-item" href="${pageContext.request.contextPath}/admin/locationCategory/index">Phân loại địa điểm</a>
           	</c:if></c:if>
           </div>
         </div>
@@ -124,7 +130,7 @@
       <c:if test="${userDetail.user.role.roleId eq 'ADMIN'}">
       <li class="nav-item">
         <a class="nav-link" href="${pageContext.request.contextPath}/admin/order/index">
-          <i class="fab fa-fw fa-wpforms"></i>
+          <i class="fa fa-fw fa-shopping-bag"></i>
           <span>Đặt hàng</span>
         </a>
       </li>
@@ -135,23 +141,17 @@
       		<c:set var="urlD" value="${pageContext.request.contextPath}/admin/discount/index" />
       	</c:if>
         <a class="nav-link" href="${urlD}">
-          <i class="fab fa-fw fa-wpforms"></i>
+          <i class="fa fa-fw fa-gift"></i>
           <span>Giảm giá</span>
         </a>
       </li>
       <c:if test="${sessionScope.userSession.role.roleId ne 'CUSTOMER' }">
-      <li class="nav-item">
-        <a class="nav-link" href="${pageContext.request.contextPath}/admin/contact/index">
-          <i class="fab fa-fw fa-wpforms"></i>
-          <span>Liên hệ</span>
-        </a>
-      </li>
       <c:if test="${empty sessionScope.userSession}">
       <c:if test="${userDetail.user.role.roleId eq 'ADMIN'}">
       <li class="nav-item">
         <a class="nav-link" href="${pageContext.request.contextPath}/admin/statistical/index">
           <i class="fas fa-fw fa-chart-area"></i>
-          <span>Bảng thống kê</span>
+          <span>Thống kê</span>
         </a>
       </li>
       </c:if></c:if>
@@ -162,12 +162,12 @@
        <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage" aria-expanded="true"
           aria-controls="collapsePage">
-          <i class="fas fa-fw fa-columns"></i>
-          <span>Quản lý Thông tin</span>
+          <i class="fas fa-address-book"></i>
+          <span>Nhân sự</span>
         </a>
         <div id="collapsePage" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Nhân sự</h6>
+            <h6 class="collapse-header">Chung</h6>
             <%@include file="/WEB-INF/templates/tags/taglib.jsp" %>
             <sec:authentication var="userDetail" property="principal" />
             <c:if test="${not empty sessionScope.roleList}">
@@ -175,19 +175,18 @@
             		<c:forEach items="${sessionScope.roleList}" var="role">
             			<c:choose>
             				<c:when test="${userDetail.user.role.roleId eq role.roleId}">
-            					<a class="collapse-item" href="${pageContext.request.contextPath}/admin/user/${role.roleId}">Quản lý hồ sơ cá nhân</a>
+            					<a class="collapse-item" href="${pageContext.request.contextPath}/admin/user/${role.roleId}">Hồ sơ cá nhân</a>
             				</c:when>
             				<c:otherwise>
             					<a class="collapse-item" href="${pageContext.request.contextPath}/admin/user/${role.roleId}">${role.roleName}</a>
             				</c:otherwise>
             			</c:choose>
             		</c:forEach>
-            		<a class="collapse-item" href="${pageContext.request.contextPath}/admin/role/index">Quản lý Chức vụ</a>
             	</c:if>
             	<c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
             		<c:forEach items="${sessionScope.roleList}" var="role">
             			<c:if test="${userDetail.user.role.roleId eq role.roleId}">
-            				<a class="collapse-item" href="${pageContext.request.contextPath}/admin/user/${role.roleId}">Quản lý hồ sơ cá nhân</a>
+            				<a class="collapse-item" href="${pageContext.request.contextPath}/admin/user/${role.roleId}">Hồ sơ cá nhân</a>
             			</c:if>
             		</c:forEach>
             	</c:if>
@@ -195,8 +194,16 @@
           </div>
         </div>
       </li>
+       <c:if test="${empty sessionScope.userSession}">
+      <c:if test="${userDetail.user.role.roleId eq 'ADMIN'}">
+      <li class="nav-item">
+        <a class="nav-link" href="${pageContext.request.contextPath}/admin/role/index">
+          <i class="fas fa-copyright"></i>
+          <span>Chức vụ</span>
+        </a>
+      </li>
+      </c:if></c:if>
       <hr class="sidebar-divider">
-      <div class="version" id="version-ruangadmin"></div>
       </c:if>
     </ul>
     

@@ -40,6 +40,8 @@ public class Location{
 	@Column
 	private String address;
 	@Column
+	private String srciframe;
+	@Column
 	private String mediaPath;
 	@Column
 	private String openTime;

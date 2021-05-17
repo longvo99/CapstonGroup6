@@ -35,6 +35,7 @@ public class ProductDAO {
 		try (Session session = this.sessionFactory.openSession()) {
 			List<Product> list = session.createQuery("from Product Where locationId = " + locationId, Product.class)
 					.list();
+			session.close();
 			return list;
 		}
 	}
@@ -81,6 +82,7 @@ public class ProductDAO {
 	public Product findByProductId(Integer productId) {
 		Session session = this.sessionFactory.openSession();
 		Product product = session.find(Product.class, productId);
+		session.close();
 		return product;
 	}
 
@@ -109,6 +111,7 @@ public class ProductDAO {
 			Query query = session.createQuery(hql);
 			@SuppressWarnings("unchecked")
 			List<String> listProducts = query.getResultList();
+			session.close();
 			return listProducts;
 		}
 	}
@@ -203,6 +206,7 @@ public class ProductDAO {
 			query.setParameter("list", locationIdList);
 			@SuppressWarnings("unchecked")
 			List<String> listProducts = query.getResultList();
+			session.close();
 			return listProducts;
 		}
 	}
@@ -220,6 +224,7 @@ public class ProductDAO {
 			for (Object[] object : listObj) {
 				listProducts.add(new ProductDTO2((int) object[0], (String) object[1]));
 			}
+			session.close();
 			return listProducts;
 		}
 	}
@@ -238,6 +243,7 @@ public class ProductDAO {
 			for (Object[] object : listObj) {
 				listProducts.add(new ProductDTO2((int) object[0], (String) object[1]));
 			}
+			session.close();
 			return listProducts;
 		}
 	}
@@ -247,6 +253,7 @@ public class ProductDAO {
 			long count = (long) session
 					.createQuery("select count(*) from Product where location.locationId = " + locationId)
 					.uniqueResult();
+			session.close();
 			return count;
 		}
 	}

@@ -14,8 +14,6 @@
               <c:if test="${not empty sessionScope.userSession}">
               		<c:set var="actionIndex" value="${pageContext.request.contextPath}/public/index" />
               </c:if>
-              <li class="breadcrumb-item"><a href="${actionIndex}">Trang chủ</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Forms</li>
             </ol>
           </div>
           <div class="row">

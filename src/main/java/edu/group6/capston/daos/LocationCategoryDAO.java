@@ -18,8 +18,11 @@ public class LocationCategoryDAO {
 	
 	@SuppressWarnings("unchecked")
 	public List<LocationCategory> findAll() {
-		List<LocationCategory> list = sessionFactory.getCurrentSession().createQuery("from LocationCategory").list();
-		return list;
+		try (Session session = this.sessionFactory.openSession()) {
+			List<LocationCategory> list = sessionFactory.getCurrentSession().createQuery("from LocationCategory").list();
+			session.close();
+			return list;
+		}
 	}
 
 	public LocationCategory findNameCategory(Integer valueOf) {
@@ -28,6 +31,7 @@ public class LocationCategoryDAO {
 			String hql = "from LocationCategory WHERE CategoryId = " + valueOf;
 			Query query = session.createQuery(hql);
 			LocationCategory categoryName = (LocationCategory) query.uniqueResult();
+			session.close();
 			return categoryName;
 		}
 	}

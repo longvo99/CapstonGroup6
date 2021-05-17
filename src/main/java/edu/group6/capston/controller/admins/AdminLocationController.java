@@ -220,7 +220,7 @@ public class AdminLocationController {
 		String mediapathOld = locationService.findLocationId(location.getLocationId()).getMediaPath();
 //		location.setMediaPath(mediapath);
 		String[] mediaPathArr = GlobalsFunction.splitPathMedia(mediapathOld);
-		location.setUsers(new Users(GlobalsFunction.getUsers().getUserId()));
+	//	location.setUsers(new Users(GlobalsFunction.getUsers().getUserId()));
 		String mediaPath = "";
 		for (MultipartFile file : filess) {
 			String fileName = UploadFile.upload(file, request);

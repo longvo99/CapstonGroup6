@@ -6,9 +6,6 @@
 		<h2 class="m-0 font-weight-bold text-primary">Quản lý đơn đặt
 			hàng</h2>
 		<ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="./">Trang chủ</a></li>
-			<li class="breadcrumb-item">Bảng</li>
-			<li class="breadcrumb-item active" aria-current="page">DataTables</li>
 		</ol>
 	</div>
 	<!-- Row -->
@@ -45,22 +42,27 @@
 											<c:when test="${order.orderStatus.orderStatusId eq 1}">
 												<td style="color: red; font-weight: bold;">${order.orderStatus.statusName}...</td>
 											</c:when>
-											<c:when test="${order.orderStatus.orderStatusId eq 2}">
+											<c:when test="${order.orderStatus.orderStatusId eq 3}">
 												<td style="color: #0000b3; font-weight: bold;">${order.orderStatus.statusName}</td>
 											</c:when>
-											<c:when test="${order.orderStatus.orderStatusId eq 3}">
+											<c:when test="${order.orderStatus.orderStatusId eq 4}">
 												<td style="color: #0000b3; font-weight: bold;">${order.orderStatus.statusName}
 													<i style='font-size: 24px' class='fas'>&#xf21c;</i>
 												</td>
 											</c:when>
-											<c:when test="${order.orderStatus.orderStatusId eq 4}">
+											<c:when test="${order.orderStatus.orderStatusId eq 5}">
 												<td style="color: #258e25; font-weight: bold;">${order.orderStatus.statusName}
 													<i class="fa fa-check" style="font-size: 24px"></i>
 												</td>
 											</c:when>
-											<c:otherwise>
+											<c:when test="${order.orderStatus.orderStatusId eq 6}">
 												<td
 													style="font-weight: bold; text-decoration: line-through; font-weight: bold;">${order.orderStatus.statusName}</td>
+											</c:when>
+											<c:otherwise>
+												<td style="color: #cc33ff; font-weight: bold;">${order.orderStatus.statusName}
+												<i class="bi bi-credit-card-2-back"></i>
+												</td>
 											</c:otherwise>
 										</c:choose>
 										<td class="center text-center"><a

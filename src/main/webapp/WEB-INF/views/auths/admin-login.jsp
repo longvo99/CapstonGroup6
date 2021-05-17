@@ -33,7 +33,10 @@
 <body class="bg-gradient-login">
 	<!-- Login Content -->
 	<div class="container-login">
+	<div class="row justify-content-center">
+      <div class="col-xl-6 col-lg-12 col-md-9">
 		<div class="card shadow-sm my-5">
+		<div class="card-body p-0">
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="login-form">
@@ -44,7 +47,7 @@
 							<p style="color: red;">Sai tên đăng nhập hoặc mật khẩu</p>
 						</c:if>
 						<c:if test="${not empty changepass}">
-							<p style="color: red;">Bạn đã đổi mật khẩu thành công!</p>
+							<p style="color: green;">Bạn đã đổi mật khẩu thành công!</p>
 						</c:if>
 						<c:if test="${not empty param['error']}">
 							<p class="text-danger">${SPRING_SECURITY_LAST_EXCEPTION.message}</p>
@@ -61,14 +64,6 @@
 									id="password" placeholder="Mật khẩu">
 							</div>
 							<div class="form-group">
-								<div class="custom-control custom-checkbox small"
-									style="line-height: 1.5rem;">
-									<input type="checkbox" class="custom-control-input"
-										id="customCheck"> <label class="custom-control-label"
-										for="customCheck">Remember Me</label>
-								</div>
-							</div>
-							<div class="form-group">
 								<button type="submit" class="btn btn-primary btn-block">Đăng
 									nhập</button>
 							</div>
@@ -78,7 +73,7 @@
 							</div>
 							<hr>
 							<a
-								href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/Capston.Group6/public/login-google&response_type=code&client_id=620272103683-kgo588qtq63in5a2orb96nq10tlbskld.apps.googleusercontent.com&approval_prompt=force"
+								href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://ec2-13-212-172-107.ap-southeast-1.compute.amazonaws.com:8080/Capstone.Group6/public/login-google&response_type=code&client_id=620272103683-kgo588qtq63in5a2orb96nq10tlbskld.apps.googleusercontent.com&approval_prompt=force"
 								class="btn btn-google btn-block"> <i
 								class="fab fa-google fa-fw"></i> Đăng nhập tài khoản Google
 							</a>

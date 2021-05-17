@@ -54,6 +54,7 @@ public class LocationDAO {
 	public List<Location> findAll() {
 		try (Session session = this.sessionFactory.openSession()) {
 			List<Location> list = session.createQuery("from Location", Location.class).list();
+			session.close();
 			return list;
 		}
 	}
@@ -61,6 +62,7 @@ public class LocationDAO {
 	public Location findById(int id) {
 		Session session = this.sessionFactory.openSession();
 		Location location = session.find(Location.class, id);
+		session.close();
 		return location;
 	}
 
@@ -81,15 +83,17 @@ public class LocationDAO {
 	public long locationCount() {
 		try (Session session = this.sessionFactory.openSession()) {
 			long count = (long) session.createQuery("select count(*) from Location").uniqueResult();
+			session.close();
 			return count;
 		}
 	}
 
 	public List<String> search(String keyword) {
 		try (Session session = this.sessionFactory.openSession()) {
-			String hql = "SELECT locationName from Location WHERE locationName LIKE '%" + keyword + "%'";
+			String hql = "SELECT locationName from Location WHERE locationName LIKE '%" + keyword + "%' AND status = true";
 			@SuppressWarnings("unchecked")
 			List<String> listResult = session.createQuery(hql).getResultList();
+			session.close();
 			return listResult;
 		}
 	}
@@ -105,9 +109,11 @@ public class LocationDAO {
 		query.multiselect(root.get("comment").get("location").get("locationId"),
 				root.get("comment").get("location").get("locationName"),
 				root.get("comment").get("location").get("mediaPath"), builder.avg(root.get("point")));
+		query.where(builder.equal(root.get("comment").get("location").get("status"), true));
 		query.groupBy(root.get("comment").get("location").get("locationId"),
 				root.get("comment").get("location").get("locationName"),
 				root.get("comment").get("location").get("mediaPath"));
+		query.where(builder.equal(root.get("comment").get("location").get("status"), true));
 		query.orderBy(builder.desc(builder.avg(root.get("point"))));
 		locationList = session.createQuery(query).setMaxResults(4).getResultList();
 		transaction.commit();
@@ -130,6 +136,7 @@ public class LocationDAO {
 				root.get("location").get("locationCategory").get("locationCategoryName"),
 				root.get("location").get("locationType").get("locationTypeName"),
 				root.get("location").get("mediaPath"));
+		query.where(builder.equal(root.get("location").get("status"), true));
 		locationList = session.createQuery(query).setMaxResults(6).getResultList();
 		transaction.commit();
 		session.close();
@@ -148,7 +155,7 @@ public class LocationDAO {
 		query.multiselect(root.get("locationId"), root.get("locationName"), root.get("openTime"), root.get("closeTime"),
 				root.get("reviewCount"), root.get("locationCategory").get("locationCategoryName"),
 				root.get("locationType").get("locationTypeName"), root.get("mediaPath"));
-		query.where(builder.equal(root.get("locationCategory").get("categoryId"), categoryId));
+		query.where(builder.equal(root.get("locationCategory").get("categoryId"), categoryId) , builder.equal(root.get("status"), true));
 		query.orderBy(builder.desc(root.get("locationId")));
 		locationList = session.createQuery(query).getResultList();
 		transaction.commit();
@@ -168,6 +175,7 @@ public class LocationDAO {
 		query.multiselect(root.get("locationId"), root.get("locationName"), root.get("openTime"), root.get("closeTime"),
 				root.get("reviewCount"), root.get("locationCategory").get("locationCategoryName"),
 				root.get("locationType").get("locationTypeName"), root.get("mediaPath"));
+		query.where(builder.equal(root.get("status"), true));
 		query.orderBy(builder.desc(root.get("locationId")));
 		locationList = session.createQuery(query).setMaxResults(maxResults).getResultList();
 		transaction.commit();
@@ -177,7 +185,9 @@ public class LocationDAO {
 
 	public List<Location> findAllByUserId(int userId) {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("FROM Location WHERE users.userId = " + userId, Location.class).list();
+			List<Location> list = session.createQuery("FROM Location WHERE users.userId = " + userId, Location.class).list();
+			session.close();
+			return list;
 		}
 	}
 
@@ -185,13 +195,17 @@ public class LocationDAO {
 		try (Session session = this.sessionFactory.openSession()) {
 			String hql = "update Location set mediaPath = '"+ location.getMediaPath() +"' where locationId = " + location.getLocationId();
 			Query query = session.createQuery(hql);
-			return query.executeUpdate(); 
+			int i = query.executeUpdate(); 
+			session.close();
+			return i;
 		}
 	}
 
 	public List<Location> findAllByCategory(Integer categoryId) {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("FROM Location WHERE locationCategory.categoryId = " + categoryId, Location.class).list();
+			List<Location> list = session.createQuery("FROM Location WHERE locationCategory.categoryId = " + categoryId, Location.class).list();
+			session.close();
+			return list;
 		}
 	}
 	
@@ -233,13 +247,17 @@ public class LocationDAO {
 
 	public List<Location> unapprovedLocationList() {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("FROM Location WHERE status = false", Location.class).list();
+			List<Location> list = session.createQuery("FROM Location WHERE status = false ORDER BY locationId DESC", Location.class).list();
+			session.close();
+			return list;
 		}
 	}
 
 	public List<Location> findLocationNearYou(String ward, String district, String city) {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("FROM Location WHERE ward = " + ward + " or district = " + district + " or City = " + city, Location.class).setMaxResults(5).list();
+			List<Location> list = session.createQuery("FROM Location WHERE ward = " + ward + " or district = " + district + " or City = " + city, Location.class).setMaxResults(5).list();
+			session.close();
+			return list;
 		}
 	}
 }

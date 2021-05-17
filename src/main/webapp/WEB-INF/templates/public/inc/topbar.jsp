@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="keywords" content="#">
 <meta name="description" content="#">
-<title>foodmart | Food Delivery Hub</title>
+<title>Capstone Project Group 6</title>
 <!-- Fav and touch icons -->
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="#">
 <link rel="apple-touch-icon-precomposed" sizes="114x114" href="#">
@@ -230,47 +230,47 @@ input[type="file"] {
 											</ul>
 										</div>
 										<style type="text/css">
-.create-location li {
-	display: block;
-	width: 200px;
-	height: calc(1.5em + .75rem + 2px);
-	padding: .375rem .75rem;
-	font-size: 1rem;
-	font-weight: 400;
-	line-height: 1.5;
-	color: #495057;
-	background-color: #fff;
-	background-clip: padding-box;
-	border: 1px solid #ced4da;
-	border-radius: .25rem;
-	transition: border-color .15s
-}
-</style>
+										.create-location li {
+											display: block;
+											width: 200px;
+											height: calc(1.5em + .75rem + 2px);
+											padding: .375rem .75rem;
+											font-size: 1rem;
+											font-weight: 400;
+											line-height: 1.5;
+											color: #495057;
+											background-color: #fff;
+											background-clip: padding-box;
+											border: 1px solid #ced4da;
+											border-radius: .25rem;
+											transition: border-color .15s
+										}
+										</style>
 									</div>
 									<!-- location picker -->
 									<!-- search -->
 									<div class="col-lg-6 col-md-7">
 										<div class="search-box padding-10">
 											<input class="form-control mb-3" type="text" name="search"
-												id="productName" placeholder="Nhà hàng...">
+												id="searchRestaurant" placeholder="Văn hóa, du lịch, ẩm thực,...">
 										</div>
 										<style type="text/css">
-.ui-autocomplete {
-	max-height: 200px;
-	overflow-y: auto;
-	/* prevent horizontal scrollbar */
-	overflow-x: hidden;
-}
-/* IE 6 doesn't support max-height
-										 * we use height instead, but this forces the menu to always be this tall
-										 */
-* html .ui-autocomplete {
-	height: 200px;
-}
-</style>
+											.ui-autocomplete {
+												max-height: 200px;
+												overflow-y: auto;
+												/* prevent horizontal scrollbar */
+												overflow-x: hidden;
+											}
+											/* IE 6 doesn't support max-height
+																					 * we use height instead, but this forces the menu to always be this tall
+																					 */
+											* html .ui-autocomplete {
+												height: 200px;
+											}
+											</style>
 										<script type="text/javascript">
 										$(document).ready(function () {
-									        $('#productName').autocomplete({
+									        $('#searchRestaurant').autocomplete({
 									            source: function (request, response) {
 									                $.ajax({
 									                    url: "${pageContext.request.contextPath}/public/search",
@@ -443,8 +443,8 @@ input[type="file"] {
 									<c:when test="${not empty sessionScope.userSession}">
 										<a
 											href="${pageContext.request.contextPath}/user/profile/${sessionScope.userSession.username}"
-											class="text-light-white fw-500"> <c:set var="avatarPath"
-												value="" /> <c:choose>
+											class="text-light-white fw-500"> 
+											<c:set var="avatarPath" value="" /> <c:choose>
 												<c:when
 													test="${not empty sessionScope.userSession.avatarPath}">
 													<c:set var="avatarPath"
@@ -454,7 +454,9 @@ input[type="file"] {
 													<c:set var="avatarPath"
 														value="https://via.placeholder.com/30" />
 												</c:otherwise>
-											</c:choose> <c:set var="nameUser" value="" /> <c:choose>
+											</c:choose> 
+											<c:set var="nameUser" value="" /> 
+											<c:choose>
 												<c:when
 													test="${not empty sessionScope.userSession.contactName}">
 													<c:set var="nameUser"
@@ -593,17 +595,17 @@ input[type="file"] {
 								</c:if>
 							</div>
 							<style type="text/css">
-.notification-dropdown {
-	width: 400px;
-	max-height: 250px;
-	overflow-y: auto;
-	overflow-x: hidden;
-}
-
-.product-detail {
-	width: 400px;
-}
-</style>
+							.notification-dropdown {
+								width: 400px;
+								max-height: 250px;
+								overflow-y: auto;
+								overflow-x: hidden;
+							}
+							
+							.product-detail {
+								width: 400px;
+							}
+							</style>
 
 							<!-- user notification -->
 							<!-- user cart -->
@@ -665,19 +667,21 @@ input[type="file"] {
 												class="btn-first green-btn text-custom-white full-width fw-500">Thanh
 												toán</a>
 										</div>
+										<c:if test="${not empty sessionScope.userSession}">
 										<div class="card-footer padding-15">
 											<a
 												href="${pageContext.request.contextPath}/public/orderdetails"
 												class="btn-first green-btn text-custom-white full-width fw-500">Đơn
 												hàng đã đặt</a>
 										</div>
+										</c:if>
 									</div>
 								</div>
 							</div>
 							<!-- user cart -->
 						</div>
 					</div>
-					<div class="col-sm-12 mobile-search">
+					<!-- <div class="col-sm-12 mobile-search">
 						<div class="mobile-address">
 							<a href="#" class="delivery-add" data-toggle="modal"
 								data-target="#address-box"> <span class="address">Brooklyn,
@@ -702,7 +706,7 @@ input[type="file"] {
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</header>

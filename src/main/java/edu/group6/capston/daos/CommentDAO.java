@@ -85,5 +85,19 @@ public class CommentDAO{
 			return false;
 		}
 	}
+
+	public int deleteParentID(Integer commentId) {
+		try (Session session = this.sessionFactory.openSession()) {
+		    int	list = session.createQuery("DELETE FROM Comment WHERE parentCommentId = " + commentId).executeUpdate();
+			return list;
+		}
+	}
+
+	public int delete(Integer commentId) {
+		try (Session session = this.sessionFactory.openSession()) {
+		    int	list = session.createQuery("DELETE FROM Comment WHERE commentId = " + commentId).executeUpdate();
+			return list;
+		}
+	}
 	
 }

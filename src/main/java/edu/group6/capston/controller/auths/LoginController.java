@@ -33,7 +33,7 @@ public class LoginController {
 	private UserService userService;
 
 	@RequestMapping(value = "/auth/login")
-	public String LoginAdmin() {
+	public String LoginAdmin(HttpServletRequest request, Model model) {
 		return "auths.admin.login";
 	}
 
@@ -56,11 +56,10 @@ public class LoginController {
 	@RequestMapping("/public/login-google")
 	public String loginGoogle(HttpServletRequest request) throws ClientProtocolException, IOException {
 		String code = request.getParameter("code");
-
 		if (code == null || code.isEmpty()) {
 			return "redirect:/public/login?message=google_error";
 		}
-		String accessToken = googleUtils.getToken(code);
+		String accessToken = googleUtils.getToken(code, request);
 		GooglePojo googlePojo = googleUtils.getUserInfo(accessToken);
 		UserDetails userDetail = googleUtils.buildUser(googlePojo);
 		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetail, null,

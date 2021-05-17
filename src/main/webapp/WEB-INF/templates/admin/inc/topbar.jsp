@@ -166,9 +166,18 @@
 		<li class="nav-item dropdown no-arrow"><a
 			class="nav-link dropdown-toggle" href="#" id="userDropdown"
 			role="button" data-toggle="dropdown" aria-haspopup="true"
-			aria-expanded="false"> <img class="img-profile rounded-circle"
-				src="${pageContext.request.contextPath}/resources/admin/assets/img/boy.png"
-				style="max-width: 60px"> <%-- <span class="ml-2 d-none d-lg-inline text-white small"><%=objUser.getFullname() %></span> --%>
+			aria-expanded="false"> 
+			<c:if test="${empty sessionScope.userSession}">
+			<img class="img-profile rounded-circle" src="${pageContext.request.contextPath}/resources/admin/assets/img/boy.png" style="max-width: 60px"> 
+			</c:if>
+			<c:if test="${not empty sessionScope.userSession}">
+				<c:if test="${not empty sessionScope.userSession.avatarPath}">
+				<img class="img-profile rounded-circle" src="${pageContext.request.contextPath}/resources/admin/assets/img/uploads/${sessionScope.userSession.avatarPath}" style="max-width: 60px"> 
+				</c:if>
+				<c:if test="${empty sessionScope.userSession.avatarPath}">
+				<img class="img-profile rounded-circle" src="${pageContext.request.contextPath}/resources/admin/assets/img/boy.png" style="max-width: 60px"> 
+				</c:if>
+			</c:if>
 				<span class="ml-2 d-none d-lg-inline text-white small">${pageContext.request.userPrincipal.name}</span>
 		</a>
 			<div
@@ -181,13 +190,13 @@
 						value="${pageContext.request.contextPath}/admin/user/${userDetail.user.role.roleId}" />
 				</c:if>
 				<a class="dropdown-item" href="${urlA}"> <i
-					class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile
+					class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Hồ sơ cá nhân
 				</a>
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item"
 					href="${pageContext.request.contextPath}/auth/logout"> <i
 					class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-					Logout
+					Đăng xuất
 				</a>
 			</div></li>
 	</ul>

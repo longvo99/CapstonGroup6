@@ -33,7 +33,7 @@ public abstract class PublicAbstractController {
 
 	@Autowired
 	private CommentService commentService;
-
+	
 	@ModelAttribute
 	public void addCommonObjects(Model model, HttpServletRequest request) {
 		List<LocationCategory> locationCategoriesList = locationCategoriesService.findAll();
@@ -90,9 +90,7 @@ public abstract class PublicAbstractController {
 				model.addAttribute("listNotification", listComment);
 				model.addAttribute("sizeNotification", sizeNotification);
 			}
-
 		}
-
 		model.addAttribute("imageLocation", GlobalsFunction.changeImageLocation(locationService.findImageLocation()));
 		model.addAttribute("locationCategoriesList1", locationCategoriesList1);
 		model.addAttribute("locationCategoriesList2", locationCategoriesList2);

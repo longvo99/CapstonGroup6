@@ -10,7 +10,7 @@
 	<div class="swiper-wrapper">
 		<c:forEach items="${DiscountTopList}" var="discountTop">
 			<div class="swiper-slide slide-item">
-				<img
+				<img style="width: 1519px;height: 400px"
 					src="${pageContext.request.contextPath}/resources/admin/assets/img/uploads/${discountTop.mediaPath}"
 					class="img-fluid full-width" alt="Banner">
 				<div class="transform-center">

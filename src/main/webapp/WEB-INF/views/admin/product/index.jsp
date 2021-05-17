@@ -30,10 +30,6 @@
 				<c:set var="actionIndex"
 					value="${pageContext.request.contextPath}/public/index" />
 			</c:if>
-			<li class="breadcrumb-item"><a href="${actionIndex}">Trang
-					chủ</a></li>
-			<li class="breadcrumb-item">Bảng</li>
-			<li class="breadcrumb-item active" aria-current="page">DataTables</li>
 		</ol>
 	</div>
 	<!-- Row -->
@@ -70,7 +66,7 @@
 								<tr>
 									<th>ID</th>
 									<th>Tên sản phẩm</th>
-									<th>Giá</th>
+									<th>Giá (VNĐ)</th>
 									<th>Loại sản phẩm</th>
 									<th>Chức năng</th>
 								</tr>
@@ -80,7 +76,8 @@
 									<tr class="odd gradeX">
 										<td>${product.productId}</td>
 										<td>${product.name}</td>
-										<td>${product.price}</td>
+										<td><fmt:formatNumber value="${fn:substring(product.price, 0, fn:indexOf(product.price, '.'))}" type="number"/></td>
+										<%-- <td>${fn:substring(product.price, 0, fn:indexOf(product.price, '.'))}</td> --%>
 										<td>${product.productCategory.productCategoryName}</td>
 										<td class="center text-center"><a href=""
 											data-toggle="modal"
@@ -93,7 +90,7 @@
 													<a href="${editUrl}/${product.productId}"
 														class="btn btn-sm btn-primary" title="SỬA"><i
 														class="fa fa-edit"></i></a>
-													<a href="${deleteUrl}/${product.productId}"
+													<a href="${deleteUrl}/${product.productId}" onclick="return confirm('Bạn có chắc muốn xóa không?')"
 														class="btn btn-sm btn-danger" title="XÓA"><i
 														class="fas fa-trash"></i></a>
 												</c:if>
@@ -128,10 +125,11 @@
 																	class="form-control mb-3" type="text"
 																	value="${product.name}" id="name" name="name" readonly>
 															</div>
+															<fmt:formatNumber var="product1" value="${fn:substring(product.price, 0, fn:indexOf(product.price, '.'))}" type="number"/>
 															<div class="form-group">
-																<label for="name">Tên giá</label> <input
+																<label for="name">Giá (VNĐ)</label> <input
 																	class="form-control mb-3" type="text"
-																	value="${product.price}" id="price" name="price"
+																	value="${product1}" id="price" name="price"
 																	readonly>
 															</div>
 															<div class="form-group">

@@ -250,8 +250,7 @@
 												<span class="text-light-black time">${locationFavorite.location.openTime}-${locationFavorite.location.closeTime}</span>
 												<c:set var="minMaxPrice" value="--.--" />
 												<c:forEach items="${minMaxLocation}" var="minMax">
-													<c:if
-														test="${minMax.locationId == locationFavorite.location.locationId}">
+													<c:if test="${minMax.locationId == locationFavorite.location.locationId}">
 														<c:set var="minMaxPrice"
 															value="${minMax.minPrice}VNĐ - ${minMax.maxPrice}VNĐ" />
 													</c:if>

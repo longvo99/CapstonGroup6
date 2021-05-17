@@ -25,9 +25,6 @@
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h2 class="m-0 font-weight-bold text-primary">Quản lý địa điểm</h2>
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="./">Home</a></li>
-              <li class="breadcrumb-item">Tables</li>
-              <li class="breadcrumb-item active" aria-current="page">DataTables</li>	
             </ol>
           </div>
           <!-- Row -->
@@ -80,7 +77,7 @@
 			                  	</c:if> --%>
                                 <a href="${productUrl}/${location.locationId}" class="btn btn-sm btn-warning" title="SẢN PHẨM"><i class="fab fa-product-hunt"></i></a>
                                 <a href="${comboUrl}/${location.locationId}" class="btn btn-sm btn-info" title="COMBO"><i class="fas fa-certificate"></i></a>
-                                <a href="${deleteUrl}"  class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa không');" title="XÓA"><i class="fas fa-trash"></i></a>
+                                <%-- <a href="${deleteUrl}"  class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa không');" title="XÓA"><i class="fas fa-trash"></i></a> --%>
                                 <c:if test="${empty sessionScope.userSession}">
                                 <c:if test="${userDetail.user.role.roleId eq 'ADMIN'}">
 			                  		<a href="" data-toggle="modal" data-target="#exampleModalCenter${location.locationId}" title="LIÊN HỆ" class="btn btn-sm btn-info"><i class="fas fa-comment-dots"></i></a>
@@ -109,6 +106,10 @@
 														<div class="form-group">
 															<textarea class="form-control mb-10" id="message" rows="5" name="message" placeholder="Nội dung" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nội dung'" required=""></textarea>
 														</div>
+														<div class="form-group">
+											<button type="submit" class="btn btn-primary" name="submit">Gửi</button>
+										</div>
+														</form>
 													</div>
 													<!-- Modal Center -->
 												</c:if>

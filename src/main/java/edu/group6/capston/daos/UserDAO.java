@@ -41,6 +41,7 @@ public class UserDAO {
 	public List<Users> findAll() {
 		try (Session session = this.sessionFactory.openSession()) {
 			List<Users> list = session.createQuery("from Users", Users.class).list();
+			session.close();
 			return list;
 		}
 	}
@@ -48,6 +49,7 @@ public class UserDAO {
 	public List<Users> findByRoleId(String roleId) {
 		try (Session session = this.sessionFactory.openSession()) {
 			List<Users> list = session.createQuery("from Users WHERE roleId = '" + roleId + "'", Users.class).list();
+			session.close();
 			return list;
 		}
 	}
@@ -72,6 +74,7 @@ public class UserDAO {
 		List<Users> users = new ArrayList<>();
 		Session session = this.sessionFactory.openSession();
 		users = session.createQuery("from Users where username='" + username + "'", Users.class).list();
+		session.close();
 		if (users.size() > 0) {
 			return users.get(0);
 		} else {
@@ -83,6 +86,7 @@ public class UserDAO {
 		List<Users> users = new ArrayList<>();
 		Session session = this.sessionFactory.openSession();
 		users = session.createQuery("from Users where userId='" + i + "'", Users.class).list();
+		session.close();
 		if (users.size() > 0) {
 			return users.get(0);
 		} else {
@@ -92,19 +96,25 @@ public class UserDAO {
 
 	public Users findByEmail(String email) {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("FROM Users WHERE contactEmail = '" + email + "'", Users.class).uniqueResult();
+			Users users = session.createQuery("FROM Users WHERE contactEmail = '" + email + "'", Users.class).uniqueResult();
+			session.close();
+			return users; 
 		}
 	}
 	
 	public Users findByResetPasswordToken(String token) {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("FROM Users WHERE resetPasswordToken = '" + token + "'", Users.class).uniqueResult();
+			Users users = session.createQuery("FROM Users WHERE resetPasswordToken = '" + token + "'", Users.class).uniqueResult();
+			session.close();
+			return users;
 		}
 	}
 
 	public Users findOneByUserId(Integer userId) {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("FROM Users WHERE userId = " + userId, Users.class).uniqueResult();
+			Users users = session.createQuery("FROM Users WHERE userId = " + userId, Users.class).uniqueResult();
+			session.close();
+			return users;
 		}
 	}
 
@@ -132,6 +142,7 @@ public class UserDAO {
 			query.setParameter("username", username);
 			query.executeUpdate();
 			tx.commit();
+			session.close();
 		}
 	}
 
@@ -145,6 +156,7 @@ public class UserDAO {
 			query.setParameter("username", user.getUsername());
 			query.executeUpdate();
 			tx.commit();
+			session.close();
 		}
 	}
 
@@ -159,20 +171,25 @@ public class UserDAO {
 			query.setParameter("username", user.getUsername());
 			query.executeUpdate();
 			tx.commit();
+			session.close();
 		}
 	}
 
 	public boolean checkUserExist(String username) {
 		try (Session session = this.sessionFactory.openSession()) {
 			if(session.createQuery("FROM Users WHERE username = '" + username + "'", Users.class).uniqueResult() != null) {
+				session.close();
 				return true;
 			};
+			session.close();
 			return false;
 		}
 	}
 	public Users findByEmailAndUserName(String email, String username) {
 		try (Session session = this.sessionFactory.openSession()) {
-			return session.createQuery("FROM Users WHERE contactEmail = '" + email + "' AND username = '" + username + "'" , Users.class).uniqueResult();
+			Users users = session.createQuery("FROM Users WHERE contactEmail = '" + email + "' AND username = '" + username + "'" , Users.class).uniqueResult();
+			session.close();
+			return users;
 		}
 	}
 	public boolean setStatusByUserId(int id, Boolean status) {
@@ -184,6 +201,7 @@ public class UserDAO {
 			query.setParameter("userId", id);
 			int i = query.executeUpdate();
 			tx.commit();
+			session.close();
 			if(i > 0) {
 				return true;
 			} return false;

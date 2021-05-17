@@ -54,13 +54,7 @@
 					</p>
 					<div class="head-rating">
 						<div class="rating">
-							<span class="fs-16 text-yellow"> <i class="fas fa-star"></i>
-							</span> <span class="fs-16 text-yellow"> <i class="fas fa-star"></i>
-							</span> <span class="fs-16 text-yellow"> <i class="fas fa-star"></i>
-							</span> <span class="fs-16 text-yellow"> <i class="fas fa-star"></i>
-							</span> <span class="fs-16 text-dark-white"> <i
-								class="fas fa-star"></i>
-							</span> <span class="text-light-black fs-14 rate-data">${countRating}
+							</span> <span class="text-success">${countRating}
 								đánh giá</span>
 						</div>
 						<div class="product-review">
@@ -139,24 +133,40 @@
 <div class="restaurent-address u-line">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12">
-				<!-- <div class="address-details">
-                        <div class="address">
-                            <div class="delivery-address"> <a href="order-details.html" class="text-light-black">Delivery, ASAP (45–55m)</a>
-                                <div class="delivery-type"> <span class="text-success fs-14 fw-500">No minimun</span><span class="text-light-white">, Free Delivery</span>
-                                </div>
-                            </div>
-                            <div class="change-address"> <a href="checkout.html" class="fw-500">Change</a>
-                            </div>
-                        </div>
-                        <p class="text-light-white no-margin">description</p>
-                    </div> -->
-			</div>
+			<script src="${pageContext.request.contextPath}/resources/public/assets/js/jquery.slim.min.js"></script>
+			<script src="${pageContext.request.contextPath}/resources/public/assets/js/showmoreless.min.js"></script>
+			<div class="col-lg-12 col-md-12 show-less-div">
+                ${location.description}
+            </div>
+            <script type="text/javascript">
+            $(function(){
+            	  $('.show-less-div').myOwnLineShowMoreLess({
+            	    showLessLine: 10
+            	  });
+            	})
+            $(function(){
+			  $('.show-less-div').myOwnLineShowMoreLess({
+			    showLessText:'Rút gọn',
+			    showMoreText:'Xem Thêm'
+			  });
+			})
+			$(function(){
+			  $('.show-less-div').myOwnLineShowMoreLess({
+			    lessAtInitial: false
+			  });
+			})
+			$(function(){
+			  $('.show-less-div').myOwnLineShowMoreLess({
+			    showLessAfterMore: false
+			  });
+			})
+            </script>
 		</div>
 	</div>
 </div>
 <!-- restaurent address -->
 <!-- restaurent meals -->
+<c:if test="${not empty product}">
 <section class="section-padding restaurent-meals bg-light-theme">
 	<div class="container-fluid">
 		<div class="row">
@@ -603,6 +613,7 @@
 		</div>
 	</div>
 </section>
+</c:if>
 <!-- restaurent meals -->
 <!-- restaurent about -->
 <section class="section-padding restaurent-about smoothscroll"
@@ -685,11 +696,15 @@
 			<div class="col-12">
 				<div class="main-box">
 					<div class="row">
-						<div class="col-md-6 map-pr-0">
-							<iframe id="locmap"
-								src="https://maps.google.com/maps?q=university%20of%20san%20francisco&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+						<div class="col-md-12">
+							<c:set var="srciframe" value="${location.srciframe}" />
+							<c:if test="${empty location.srciframe}">
+								<c:set var="srciframe" value="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d245368.26104938771!2d107.93803986190554!3d16.071763492763544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219c792252a13%3A0x1df0cb4b86727e06!2sDa%20Nang%2C%20Vietnam!5e0!3m2!1sen!2s!4v1619529493304!5m2!1sen!2s" />
+							</c:if>
+							<iframe id="locmap" style="height:400px;"
+								src="${srciframe}"></iframe>
 						</div>
-						<div class="col-md-6 map-pl-0">
+						<!-- <div class="col-md-6 map-pl-0">
 							<div class="gallery-box padding-10">
 								<ul class="gallery-img">
 									<li><a class="image-popup"
@@ -724,7 +739,7 @@
 									</a></li>
 								</ul>
 							</div>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>
@@ -739,23 +754,10 @@
 		<div class="row">
 			<div class="col-12">
 				<div class="section-header-left">
-					<h3 class="text-light-black header-title title">Đánh giá
-						${location.locationName}</h3>
+					<h2>Đánh giá <span class="text-success">${location.locationName}</span>
+						</h2>
 				</div>
-				<div class="restaurent-rating mb-xl-20">
-					<div class="star">
-						<span class="text-yellow fs-16"> <i class="fas fa-star"></i>
-						</span> <span class="text-yellow fs-16"> <i class="fas fa-star"></i>
-						</span> <span class="text-yellow fs-16"> <i class="fas fa-star"></i>
-						</span> <span class="text-dark-white fs-16"> <i
-							class="fas fa-star"></i>
-						</span> <span class="text-dark-white fs-16"> <i
-							class="fas fa-star"></i>
-						</span>
-					</div>
-					<span class="fs-14 text-light-black">${countRating} đánh giá</span>
-				</div>
-				<h4 class="text-light-black mb-xl-20">Đánh giá từ mọi người</h4>
+				<h5 class="text-light-black mb-xl-20">Đánh giá từ mọi người <span class="text-success">(${countRating} đánh giá)</span></h5>
 				<ul>
 					<c:forEach items="${pointRating}" var="pointRating">
 						<li>
@@ -781,40 +783,43 @@
                             <span class="text-light-black fs-14 fw-400">Price</span>
                         </li> -->
 				</ul>
-				<div class="u-line"></div>
 			</div>
 			<div style="margin-left: 15px;" class="section-header-left">
 				<h3 class="text-light-black header-title title">DANH SÁCH BÌNH
 					LUẬN</h3>
 			</div>
+			<c:if test="${not empty commentListParent}">
 			<div class="container bootdey comments">
 				<div class="col-md-12 bootstrap snippets">
 					<div class="panel">
 						<div class="panel-body">
-							<!-- Newsfeed Content -->
-							<!--===================================================-->
 							<c:if test="${not empty commentListParent}">
 								<c:forEach items="${commentListParent}" var="comment">
-									<div class="media-block">
+									<div class="media-block" id="delComment${comment.commentId}">
 										<a class="media-left" href="#"><img
 											class="img-circle img-sm" alt="Profile Picture"
 											src="${pageContext.request.contextPath}/resources/admin/assets/img/uploads/${comment.users.avatarPath}"></a>
 										<div class="media-body">
 											<div class="mar-btm">
 												<a href="#"
-													class="btn-link text-semibold media-heading box-inline">
+													class="btn-link text-semibold media-heading box-inline" style="float: left;">
 													<c:choose>
 														<c:when test="${not empty comment.users.contactName}">${comment.users.contactName}</c:when>
 														<c:otherwise>${comment.users.username}</c:otherwise>
 													</c:choose>
 												</a>
-												<p class="text-muted text-sm">
+												<c:if test="${comment.users.userId eq sessionScope.userSession.userId}">
+												<div class="delete-btn" style="float: right;"><a href="javascript:void(0)" onclick="deleteComment('${comment.commentId}')" class="text-dark-white"> <i class="far fa-trash-alt"></i></a></div>
+												</c:if>
+												<p class="text-muted text-sm" style="clear:both;">
 													<i class="fa fa-mobile fa-lg"></i> ${comment.currentTime}
 												</p>
 											</div>
 											<p>${comment.textContent}</p>
-											<img class="img-responsive thumbnail"
-												src="https://via.placeholder.com/400x300" alt="Image">
+											<c:if test="${'' ne comment.mediaPath}">
+											<img class="img-responsive thumbnail" style="width: 400px; height: 300px;"
+												src="${pageContext.request.contextPath}/resources/admin/assets/img/uploads/${comment.mediaPath}" alt="Image">
+											</c:if>
 											<div class="pad-ver">
 												<!-- <span class="tag tag-sm"><i class="fa fa-heart text-danger"></i> 250 Likes</span>
 												<div class="btn-group">
@@ -823,7 +828,7 @@
 												</div> -->
 												<a class="btn btn-sm btn-default btn-hover-primary cmt"
 													onclick="fn(${comment.commentId})"
-													href="javascript:void(0)">Comment</a>
+													href="#demo${comment.commentId}">Comment</a>
 											</div>
 											<hr>
 
@@ -834,11 +839,11 @@
 														<div class="media-block">
 															<a class="media-left" href="#"> <img
 																class="img-circle img-sm" alt="Profile Picture"
-																src="${pageContext.request.contextPath}/resources/admin/assets/img/uploads/${comment.users.avatarPath}">
+																src="${pageContext.request.contextPath}/resources/admin/assets/img/uploads/${commentChild.users.avatarPath}">
 															</a>
 															<div class="media-body">
 																<div class="mar-btm">
-																	<a href="#"
+																	<a href="#"  style="float: left;"
 																		class="btn-link text-semibold media-heading box-inline">
 																		<c:choose>
 																			<c:when
@@ -846,7 +851,10 @@
 																			<c:otherwise>${commentChild.users.username}</c:otherwise>
 																		</c:choose>
 																	</a>
-																	<p class="text-muted text-sm">
+																	<c:if test="${commentChild.users.userId eq sessionScope.userSession.userId}">
+																	<div class="delete-btn" style="float: right;"><a href="javascript:void(0)" onclick="deleteCommentChild(${commentChild.commentId})" class="text-dark-white"> <i class="far fa-trash-alt"></i></a></div>
+																	</c:if>
+																	<p class="text-muted text-sm" style="clear:both;">
 																		<i class="fa fa-mobile fa-lg"></i>
 																		${commentChild.currentTime}
 																	</p>
@@ -859,7 +867,7 @@
 															</div> -->
 																	<a class="btn btn-sm btn-default btn-hover-primary cmt"
 																		onclick="fn(${comment.commentId})"
-																		href="javascript:void(0)">Comment</a>
+																		href="#demo${comment.commentId}">Comment</a>
 																</div>
 																<hr>
 															</div>
@@ -868,10 +876,10 @@
 												</c:forEach>
 												<div id='replyComment${comment.commentId}'></div>
 												<div id="demo${comment.commentId}"
-													class="media-block collapse">
+													class="hideCommentParent smoothCommentParent">
 													<a class="media-left" href="#"> <img
 														class="img-circle img-sm" alt="Profile Picture"
-														src="https://bootdey.com/img/Content/avatar/avatar3.png">
+														src="${pageContext.request.contextPath}/resources/admin/assets/img/uploads/${comment.users.avatarPath}">
 													</a>
 													<div class="media-body">
 														<div class="mar-btm">
@@ -883,9 +891,9 @@
 														</div>
 														<div class="pad-ver">
 															<div>
-																<textarea id="focu${comment.commentId}"
+																<textarea id="focu${comment.commentId}" name="focu${comment.commentId}"
 																	class="form-control" rows="2" cols="80"
-																	placeholder="Nhập bình luận..."></textarea>
+																	placeholder="Nhập bình luận..." required="true"></textarea>
 																<br />
 																<button class="btn btn-primary btn-sm shadow-none"
 																	onclick="addParentComment(${comment.commentId})"
@@ -904,75 +912,29 @@
 									</div>
 								</c:forEach>
 							</c:if>
-							<!--===================================================-->
-							<!-- End Newsfeed Content -->
-
-
-							<!-- Newsfeed Content -->
-							<!--===================================================-->
-
-							<!-- <div class="media-block pad-all">
-									<a class="media-left" href="#">
-										<img class="img-circle img-sm" alt="Profile Picture" src="https://bootdey.com/img/Content/avatar/avatar1.png">
-									</a>
-									<div class="media-body">
-										<div class="mar-btm">
-											<a href="#" class="btn-link text-semibold media-heading box-inline">Thanh Hải</a>
-											<p class="text-muted text-sm">
-												<i class="fa fa-mobile fa-lg"></i> - From Mobile - 11 min ago
-											</p>
-										</div>
-										<p>Nhà hàng sạch sẽ và giá cả hợp lí</p>
-										<img class="img-responsive thumbnail" src="https://via.placeholder.com/400x300" alt="Image">
-										<div class="pad-ver">
-											<span class="tag tag-sm"><i class="fa fa-heart text-danger"></i> 250 Likes</span>
-											<div class="btn-group">
-												<a class="btn btn-sm btn-default btn-hover-success" href="#"><i class="fa fa-thumbs-up"></i></a> 
-												<a class="btn btn-sm btn-default btn-hover-danger" href="#"><i class="fa fa-thumbs-down"></i></a>
-											</div>
-											<a class="btn btn-sm btn-default btn-hover-primary" href="#">Comment</a>
-										</div>
-										<hr>
-
-										<div>
-											<div class="media-block pad-all">
-												<a class="media-left" href="#">
-													<img class="img-circle img-sm" alt="Profile Picture" src="https://bootdey.com/img/Content/avatar/avatar2.png">
-												</a>
-												<div class="media-body">
-													<div class="mar-btm">
-														<a href="#" class="btn-link text-semibold media-heading box-inline">Long</a>
-														<p class="text-muted text-sm">
-															<i class="fa fa-globe fa-lg"></i> - From Web - 2 min ago
-														</p>
-													</div>
-													<p>Ok</p>
-													<div>
-														<div class="btn-group">
-															<a class="btn btn-sm btn-default btn-hover-success" href="#"><i class="fa fa-thumbs-up"></i></a> 
-															<a class="btn btn-sm btn-default btn-hover-danger" href="#"><i class="fa fa-thumbs-down"></i></a>
-														</div>
-														<a class="btn btn-sm btn-default btn-hover-primary">Comment</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								 -->
-							<!--===================================================-->
-							<!-- End Newsfeed Content -->
 						</div>
 					</div>
 				</div>
 			</div>
+			</c:if>
+			<c:if test="${empty commentListParent}">
+				<div class="container bootdey">
+				<div class="col-md-12 bootstrap snippets">
+					<div class="panel">
+						<div class="panel-body">
+							<span>Chưa có bình luận nào, bạn hãy là người đầu tiên bình luận nhé!</span>
+						</div>
+					</div>
+				</div>
+				</div>
+			</c:if>
 			<!-- Comment  -->
 			<hr />
 			<div
 				style="width: 100%; border: 1px solid black; padding: 15px; margin: 15px; background-color: #ffffcc;"
 				id="reviews">
 				<p>
-					<b>Write Your Review</b>
+					<b>Viết đánh giá của bạn</b>
 				</p>
 				<form role="form"
 					action="${pageContext.request.contextPath}/public/restaurant/comment/${location.locationId}"
@@ -990,54 +952,77 @@
 					</div>
 					<hr />
 					<div class="input-field">
-						<label class="active">Photos</label>
-						<div class="input-images" style="padding-top: .5rem;"></div>
-					</div>
+                    	<label for="image1">Hình ảnh</label>
+                    	<input type="file" name="images" id="image1" class="file" accept="image/*">
+					    <div class="input-group my-3">
+					      <input type="text" class="form-control" readonly="readonly" placeholder="Upload File" id="file">
+					      <div class="input-group-append">
+					        <button type="button" class="browse btn btn-primary">Chọn ảnh</button>
+					      </div>
+				    	</div>
+				    	<div class="ml-2 col-sm-6">
+						  <img src="https://via.placeholder.com/150x150" id="preview" class="img-thumbnail">
+						</div>
+					
+								</div>
+								<style type="text/css">
+									.file {
+										visibility: hidden;
+										position: absolute;
+									}
+									
+									.img-thumbnail {
+										width: 400px;
+										height: 300px;
+									}
+								</style>
+								<script type="text/javascript">
+                    $(document).on("click", ".browse", function() {
+                    	  var file = $(this).parents().find(".file");
+                    	  file.trigger("click");
+                    	});
+                    	$('input[type="file"]').change(function(e) {
+                    	  var fileName = e.target.files[0].name;
+                    	  $("#file").val(fileName);
+
+                    	  var reader = new FileReader();
+                    	  reader.onload = function(e) {
+                    	    // get loaded data and render thumbnail.
+                    	    document.getElementById("preview").src = e.target.result;
+                    	  };
+                    	  // read the image file as a data URL.
+                    	  reader.readAsDataURL(this.files[0]);
+                    	});
+                    </script>
 					<!-- <div class="input-field">
 					        <label class="active">Photos</label>
 					        <div class="input-images-2" style="padding-top: .5rem;"></div>
 					    </div> -->
 					<hr />
 					<div>
-						<h5>Videos</h5>
-						<video id="myVideo" width="400" controls>
-							<source src="" id="video_here">
-						</video>
-						<br /> <input style="display: inline-block;" type="file"
-							name="video" class="file_multi_video" accept="video/*">
-						<button style="display: inline-block;" id="btn-file-reset-id"
-							type="button">Reset file</button>
-					</div>
-					<hr />
-					<div>
-						<h5>Rating</h5>
+						<h5>Đánh giá</h5>
 						<p>
-							<label style="display: inline-block; width: 80px;">Nhà
-								hàng:</label> <input style="display: inline-block;" type="range"
+							<label style="display: inline-block; width: 80px;">Location:</label> <input style="display: inline-block;" type="range"
 								name="location" class="slider" min="1" max="10" value="5">
 							<span style="display: inline-block;" class="slider_label"></span>
 						</p>
 						<p>
-							<label style="display: inline-block; width: 80px;">Giá
-								cả:</label> <input style="display: inline-block;" type="range"
+							<label style="display: inline-block; width: 80px;">Price:</label> <input style="display: inline-block;" type="range"
 								name="price" class="slider" min="1" max="10" value="5">
 							<span style="display: inline-block;" class="slider_label"></span>
 						</p>
 						<p>
-							<label style="display: inline-block; width: 80px;">Chất
-								lượng:</label> <input style="display: inline-block;" type="range"
+							<label style="display: inline-block; width: 80px;">Quality:</label> <input style="display: inline-block;" type="range"
 								name="quality" class="slider" min="1" max="10" value="5">
 							<span style="display: inline-block;" class="slider_label"></span>
 						</p>
 						<p>
-							<label style="display: inline-block; width: 80px;">Dịch
-								vụ:</label> <input style="display: inline-block;" type="range"
+							<label style="display: inline-block; width: 80px;">Service:</label> <input style="display: inline-block;" type="range"
 								name="service" class="slider" min="1" max="10" value="5">
 							<span style="display: inline-block;" class="slider_label"></span>
 						</p>
 						<p>
-							<label style="display: inline-block; width: 80px;">Không
-								gian: </label> <input style="display: inline-block;" type="range"
+							<label style="display: inline-block; width: 80px;">Space: </label> <input style="display: inline-block;" type="range"
 								name="space" class="slider" min="1" max="10" value="5">
 							<span style="display: inline-block;" class="slider_label"></span>
 						</p>
@@ -1124,7 +1109,6 @@
                                         </div>
                                     </div> -->
 									</div>
-
 								</div>
 							</c:forEach>
 						</div>
@@ -1336,14 +1320,14 @@
 	</div>
 </c:forEach>
 <!-- upload multi image -->
-<script type="text/javascript"
+<%-- <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/public/assets/js/image-uploader.min.js"></script>
 <!-- comment -->
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
+ --%>
 <script>
 var filelist = new Array();
   $(document).ready(function() {
@@ -1391,25 +1375,41 @@ $(document).on("change", ".file_multi_video", function(evt) {
         });
     });
 </script>
+<style>
+	.smoothCommentParent{
+		scroll-behavior: smooth;
+	}
+</style>
 <script>
 	function fn(commentId) {
-		  $('#demo' + commentId).collapse('show');
-		 /*  window.location = "#demo" + commentId;
-		  document.getElementById("focu" + commentId).focus() */
+		  $('#demo' + commentId).show();
 	}
 	
+	/* $('#demo' + ${commentIdNotifition}).ready(function() {
+		alert("aaaa");
+		$('#demo' + ${commentIdNotifition}).focus();
+	}); */
+	
 	function fnClose(commentId) {
-		  $('#demo' + commentId).collapse('hide');
+		  $("#demo" + commentId).hide();
 	}
+	
+	$(".hideCommentParent").ready(function() {
+		$(".hideCommentParent").hide();
+	});
 	
 	function addParentComment(commentId) {
 		var content = $('#focu' + commentId).val();
+		if(content == ''){
+			alert("Vui lòng nhận dữ liệu");
+			return;
+		}
 		var locationId = ${location.locationId};
 		$.ajax({
 			type : "POST",
 			contentType : "application/json",
 			url : "${pageContext.request.contextPath}/public/restaurant/parentComment/" + commentId + "/" + locationId,
-			data : JSON.stringify(content),
+			data : content,
 			dataType : 'text',
 			success: function (data) {
 				$('#demo' + commentId).collapse('hide');
@@ -1439,19 +1439,24 @@ $(document).on("change", ".file_multi_video", function(evt) {
             	alert("Bạn cần phải đăng nhập để thực hiện thao tác này");
             }
 		});
+		$("#demo" + commentId).hide();
 	}
+	
+	
+	
+				
+			
 </script>
 <script type="text/javascript">
-	$('.input-images').imageUploader();
+	function deleteComment(commentId) {
+	$.ajax({
+		type : "GET",
+		contentType : "application/json",
+		url : "${pageContext.request.contextPath}/public/delComment",
+		data : {'acommentId': commentId },
+		success: function (data) {
+			$("#delComment" + commentId).hide();
+		}
+	});
+	} 
 </script>
-<!-- <script>
-let preloaded = [
-    {id: 1, src: '${pageContext.request.contextPath}/uploads/${linkanh}'},
-];
-
-$('.input-images-2').imageUploader({
-    preloaded: preloaded,
-    imagesInputName: 'images',
-    preloadedInputName: 'images'
-});
-</script> -->

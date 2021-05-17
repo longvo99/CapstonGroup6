@@ -71,13 +71,11 @@ public class AdminUserController {
 	public String add(@Valid @ModelAttribute Users users, BindingResult br, RedirectAttributes rd,
 			HttpServletRequest request, Model model) {
 		if (br.hasErrors()) {
-			System.out.println(br.getFieldError());
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));
 			return "redirect:/admin/user/add";
 		}
 		if (userService.checkUserExist(users.getUsername())) {
-			rd.addFlashAttribute(GlobalsConstant.MESSAGE,
-					messageSource.getMessage("errorUsername", null, Locale.getDefault()));
+			rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("errorUsername", null, Locale.getDefault()));
 			rd.addFlashAttribute("users", users);
 			return "redirect:/admin/user/add";
 		}
@@ -85,8 +83,7 @@ public class AdminUserController {
 		users.setJoinDate(new Timestamp(new Date().getTime()));
 		if (userService.save(users)) {
 			userService.sendMailNewAccount(users.getContactEmail(), users.getUsername());
-			rd.addFlashAttribute(GlobalsConstant.MESSAGE,
-					messageSource.getMessage("success", null, Locale.getDefault()));
+			rd.addFlashAttribute(GlobalsConstant.MESSAGE,messageSource.getMessage("success", null, Locale.getDefault()));
 			return "redirect:/admin/user/" + users.getRole().getRoleId();
 		}
 		rd.addFlashAttribute(GlobalsConstant.MESSAGE, messageSource.getMessage("error", null, Locale.getDefault()));

@@ -354,11 +354,14 @@ public class PublicOrderController extends PublicAbstractController {
 		if (request.getSession().getAttribute("nameCookie") != null) {
 			List<String> nameCookie = (List<String>) request.getSession().getAttribute("nameCookie");
 			for (String string : nameCookie) {
-				System.out.println(string);
 				Cookie cookieDel = new Cookie(string, "");
 				cookieDel.setMaxAge(0);
 				response.addCookie(cookieDel);
 			}
+			model.addAttribute("sizeCart", null);
+			model.addAttribute("totalCart", null);
+			model.addAttribute("listOrderDTO", null);
+			
 		}
 		Users user = (Users) request.getSession().getAttribute("userSession");
 		List<Orders> listOrder = orderService.findByUserId(user.getUserId());

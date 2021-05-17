@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	public static final int MAX_FAILED_ATTEMPTS = 3;
 
-	private static final long LOCK_TIME_DURATION = 60 * 1000; // 24 hours
+	private static final long LOCK_TIME_DURATION = 10 * 1000; // 24 hours
 
 	@Autowired
 	private UserDAO UserDAO;
@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		try {
 			mailSender.send(message);
 		} catch (Exception e) {
-			System.out.println("Error!");
+			System.out.println(e.getMessage());
 			context.close();
 		}
 		System.out.println("Sending text done!");

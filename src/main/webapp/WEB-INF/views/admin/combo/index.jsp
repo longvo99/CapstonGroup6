@@ -28,7 +28,6 @@
               <c:if test="${not empty sessionScope.userSession}">
               		<c:set var="actionIndex" value="${pageContext.request.contextPath}/public/index" />
               </c:if>
-              <li class="breadcrumb-item"><a href="${actionIndex}">Trang chủ</a></li>
             </ol>
           </div>
           <!-- Row -->
@@ -85,11 +84,11 @@
 								<a href="${editUrl}/${productCombo.productComboId}/${locationId}" title="SỬA" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
 								<c:if test="${empty sessionScope.userSession}">
 								<c:if test="${userDetail.user.role.roleId ne 'ADMIN'}">
-									<a href="${deleteUrl}/${productCombo.productComboId}" title="XÓA" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+									<a href="${deleteUrl}/${productCombo.productComboId}" onclick="return confirm('Bạn có chắc muốn xóa không?')" title="XÓA" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
 								</c:if>	
 								</c:if>
 								<c:if test="${not empty sessionScope.userSession}">
-									<a href="${deleteUrl}/${productCombo.productComboId}" title="XÓA" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+									<a href="${deleteUrl}/${productCombo.productComboId}" onclick="return confirm('Bạn có chắc muốn xóa không?')" title="XÓA" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
 								</c:if>
 
 										</td>

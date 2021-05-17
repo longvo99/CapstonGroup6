@@ -12,8 +12,6 @@
 				<h1 class="m-0 font-weight-bold text-primarys">Cập nhập tài
 					khoản</h1>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="./">Home</a></li>
-					<li class="breadcrumb-item active" aria-current="page">Forms</li>
 				</ol>
 			</div>
 			<c:if test="${not empty msg}">

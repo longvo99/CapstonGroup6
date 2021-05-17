@@ -13,4 +13,6 @@ public interface CommentService {
 	List<Comment> findAllCommentByParentCommentId(Integer locationId);
 	Long findCountCommentByLocationId(Integer locationId);
 	List<Comment> findCommentReply(int userId);
+	int deleteParentID(Integer commentId);
+	int delete(Integer commentId);
 }

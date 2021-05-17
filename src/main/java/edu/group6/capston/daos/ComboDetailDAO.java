@@ -78,6 +78,7 @@ public class ComboDetailDAO{
 			query.setParameter("productComboId", productComboId); 
 			query.executeUpdate();
 			tx.commit();
+			session.close();
 		}
 	}
 

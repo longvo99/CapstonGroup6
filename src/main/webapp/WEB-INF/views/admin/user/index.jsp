@@ -10,6 +10,15 @@
 					<h2 class="m-0 font-weight-bold text-primary">Quản lý hồ sơ cá
 						nhân</h2>
 				</c:when>
+				<c:when test="${roleName eq 'CUSTOMER'}">
+					<h2 class="m-0 font-weight-bold text-primary">Quản lý khách hàng</h2>
+				</c:when>
+				<c:when test="${roleName eq 'POSTER'}">
+					<h2 class="m-0 font-weight-bold text-primary">Quản lý người đăng</h2>
+				</c:when>
+				<c:when test="${roleName eq 'STAFF'}">
+					<h2 class="m-0 font-weight-bold text-primary">Quản lý nhân viên</h2>
+				</c:when>
 				<c:otherwise>
 					<h2 class="m-0 font-weight-bold text-primary">Quản lý
 						${roleName}</h2>
@@ -21,9 +30,6 @@
 				nhân</h2>
 		</c:if>
 		<ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="./">Home</a></li>
-			<li class="breadcrumb-item">Tables</li>
-			<li class="breadcrumb-item active" aria-current="page">DataTables</li>
 		</ol>
 	</div>
 	<!-- Row -->
@@ -76,13 +82,11 @@
 											<td class="center text-center"><a href=""
 												data-toggle="modal"
 												data-target="#exampleModalCenter${user.userId}"
-												class="btn btn-sm btn-success"><i class="fa fa-edit">
-														Detail </i></a> <c:if test="${user.role.roleId eq 'ADMIN'}">
-													<a href="${urlEdit}" class="btn btn-sm btn-primary"><i
-														class="fa fa-edit">Edit</i></a>
-												</c:if> <a href="${urlDel}" title="Xóa"
-												class="btn btn-sm btn-danger"><i class="fa fa-trash">
-														Xóa </i></a></td>
+												class="btn btn-sm btn-success" title="CHI TIẾT"><i class="fas fa-info-circle">
+														 </i></a> <c:if test="${user.role.roleId eq 'ADMIN'}">
+													<a href="${urlEdit}" title="SỬA" class="btn btn-sm btn-primary"><i
+														class="fa fa-edit"></i></a>
+												</c:if> </td>
 										</tr>
 										<!-- Modal Center -->
 										<div class="modal fade" id="exampleModalCenter${user.userId}"
@@ -215,12 +219,10 @@
 												<td class="center text-center"><a href=""
 													data-toggle="modal"
 													data-target="#exampleModalCenter${user.userId}"
-													class="btn btn-sm btn-success"><i class="fa fa-edit">
-															Detail </i></a> <a href="${urlEdit}"
-													class="btn btn-sm btn-primary"><i class="fa fa-edit">Edit</i></a>
-													<a href="${urlDel}" title="Xóa"
-													class="btn btn-sm btn-danger"><i class="fa fa-trash">
-															Xóa </i></a></td>
+													class="btn btn-sm btn-success" title="CHI TIẾT"><i class="fas fa-info-circle">
+															 </i></a> <a href="${urlEdit}"
+													class="btn btn-sm btn-primary" title="SỬA"><i class="fa fa-edit"></i></a>
+													</td>
 											</tr>
 											<!-- Modal Center -->
 											<div class="modal fade" id="exampleModalCenter${user.userId}"

@@ -31,12 +31,6 @@ a:focus {
 	overflow-x: hidden
 }
 
-@media ( max-width :768px) {
-	#wrapper #content-wrapper {
-		z-index: 2 !important
-	}
-}
-
 #wrapper #content-wrapper #content {
 	-webkit-box-flex: 1;
 	-ms-flex: 1 0 auto;
@@ -46,13 +40,6 @@ a:focus {
 .container, .container-fluid, .container-login {
 	padding-left: 1.5rem;
 	padding-right: 1.5rem
-}
-
-@media ( min-width :768px) {
-	.container-login {
-		margin-left: 25rem;
-		margin-right: 25rem
-	}
 }
 
 .scroll-to-top {
@@ -621,7 +608,7 @@ opacity
 }
 
 .bg-navbar {
-	background-color: #6777ef
+	background-color: #FF8D00
 }
 
 .sidebar {
@@ -1095,7 +1082,7 @@ opacity
 
 .sidebar-light .sidebar-brand {
 	color: #fafafa;
-	background-color: #4c60da
+	background-color: #fd6900
 }
 
 .sidebar-light hr.sidebar-divider {

@@ -81,9 +81,9 @@ public class PublicUserController {
 			user.setPassword(request.getParameter("passwordUser"));
 		}
 		if (userService.update(user)) {
-			System.out.println(UploadFile.getDirPath(request));
 			rd.addFlashAttribute(GlobalsConstant.MESSAGE,
 					messageSource.getMessage("success", null, Locale.getDefault()));
+			request.getSession().setAttribute("userSession", user);
 			return "redirect:/user/profile/" + user.getUsername();
 		}
 		if (!"".equals(avatarPath)) {
